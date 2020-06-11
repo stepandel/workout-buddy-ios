@@ -1,0 +1,97 @@
+[
+    {
+        "wlId": "0FA91414-C6DE-490E-A3C4-FD88229F7EB5",
+        "workout": {
+            "focus": "pull",
+            "sets": [
+                {
+                    "exId": "pullups:pullup_bar:exp",
+                    "reps": 10,
+                    "time": 0,
+                    "sets": 0
+                },
+                {
+                    "exId": "archer_pullups:pullup_bar:pow",
+                    "reps": 10,
+                    "time": 0,
+                    "sets": 0
+                },
+                {
+                    "exId": "single_arm_locks:pullup_bar:pow",
+                    "reps": 0,
+                    "time": 5,
+                    "sets": 0
+                }
+            ],
+            "id": "57C77A9A-B957-492B-89AC-97A6127CFC88",
+            "name": "Pull Workout",
+            "type": "Power",
+            "rounds": [
+                {
+                    "sets": [
+                        {
+                            "exId": "pullups:pullup_bar:exp",
+                            "reps": 10,
+                            "time": 0,
+                            "sets": 0
+                        },
+                        {
+                            "exId": "archer_pullups:pullup_bar:pow",
+                            "reps": 10,
+                            "time": 0,
+                            "sets": 0
+                        },
+                        {
+                            "exId": "single_arm_locks:pullup_bar:pow",
+                            "reps": 0,
+                            "time": 5,
+                            "sets": 0
+                        }
+                    ],
+                    "id": 0
+                },
+                {
+                    "sets": [
+                        {
+                            "exId": "pullups:pullup_bar:exp",
+                            "reps": 10,
+                            "time": 0,
+                            "sets": 0
+                        },
+                        {
+                            "exId": "archer_pullups:pullup_bar:pow",
+                            "reps": 10,
+                            "time": 0,
+                            "sets": 0
+                        },
+                        {
+                            "exId": "single_arm_locks:pullup_bar:pow",
+                            "reps": 0,
+                            "time": 5,
+                            "sets": 0
+                        }
+                    ],
+                    "id": 1
+                }
+            ]
+        },
+        "time": 17,
+        "completionTs": 1589891520.212856
+    },
+    {
+        "wlId": "fake1",
+        "workout": {
+            "sets": [
+                {
+                    "sets": 3,
+                    "exId": "scull_crushes:table:pow"
+                }
+            ],
+            "id": "fake2",
+            "name": "fake workout",
+            "type": "rounds"
+        },
+        "time": 3245,
+        "completionTs": 1589827970
+    }
+]

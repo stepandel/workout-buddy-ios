@@ -1,0 +1,86 @@
+[
+    {
+        "id": "pistol_squats::iso",
+        "bodyPart": "legs"
+    },
+    {
+        "id": "switching_lunges::exp",
+        "bodyPart": "legs"
+    },
+    {
+        "id": "bulgarial_squats:chair:iso",
+        "bodyPart": "legs"
+    },
+    {
+        "id": "split_squats::iso",
+        "bodyPart": "legs"
+    },
+    {
+        "id": "wall_sits:wall:sta",
+        "bodyPart": "legs"
+    },
+    {
+        "id": "mountain_climbers::exp",
+        "bodyPart": "core"
+    },
+    {
+        "id": "reverse_row_pushups::pow",
+        "bodyPart": "shoulders"
+    },
+    {
+        "id": "archer_pushups::iso",
+        "bodyPart": "chest"
+    },
+    {
+        "id": "close_tricep_extensions::pow",
+        "bodyPart": "arms"
+    },
+    {
+        "id": "scull_crushes:table:pow",
+        "bodyPart": "arms"
+    },
+    {
+        "id": "half_burpees::exp",
+        "bodyPart": "core"
+    },
+    {
+        "id": "dimoond_pushups::pow",
+        "bodyPart": "chest"
+    },
+    {
+        "id": "dips:dip_bars:pow",
+        "bodyPart": "chest"
+    },
+    {
+        "id": "explosive_pushups::exp",
+        "bodyPart": "chest"
+    },
+    {
+        "id": "archer_pullups:pullup_bar:iso",
+        "bodyPart": "back"
+    },
+    {
+        "id": "w_r_c_pullups:pullup_bar:pow",
+        "bodyPart": "back"
+    },
+    {
+        "id": "tuck_front_level_raises:pullup_bar:pow",
+        "bodyPart": "back"
+    },
+    {
+        "id": "chinups:pullup_bar:pow",
+        "bodyPart": "back"
+    },
+    {
+        "id": "australian_pullups:low_set_pullup_bar:pow",
+        "bodyPart": "shoulders"
+    },
+    {
+        "id": "bicep_curls:low_set_pullup_bar:pow",
+        "bodyPart": "arms"
+    },
+    {
+        "id": "knee_raises:pullup_bar:pow",
+        "bodyPart": "core"
+    }
+]
