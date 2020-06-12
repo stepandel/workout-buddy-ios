@@ -105,6 +105,7 @@ struct TrackWorkoutView: View {
         }
         .onAppear {
             print("\(self.trackWorkoutViewModel.workout)")
+            UIApplication.shared.isIdleTimerDisabled = true
         }
         .sheet(isPresented: $showingWorkoutPicker) {
             PickWorkoutView(workouts: self.userData.workouts, trackWorkoutViewModel: self.trackWorkoutViewModel)
