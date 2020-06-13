@@ -20,7 +20,7 @@ struct TrackWorkoutView: View {
     
     @ObservedObject var trackWorkoutViewModel = TrackWorkoutViewModel()
     
-    @State var showingWorkoutPicker = false
+    @State var showingWorkoutPicker = true
     @State var workoutStarted = false
     @State var currentRound = 1
     @State var showingEndWorkoutAlert = false
