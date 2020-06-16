@@ -117,12 +117,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D95541DC248E6B57005ED239 /* Helpers */ = {
+		D95541DC248E6B57005ED239 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				D95541DA248E6B4B005ED239 /* StopWatch.swift */,
 			);
-			path = Helpers;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		D9A2FFA2243A380F00352747 = {
@@ -167,7 +167,7 @@
 				D9E2CE732476B0A90043C698 /* ExercisesView.swift */,
 				D95541D8248E6993005ED239 /* StopWatchView.swift */,
 				D9E2CE752478005F0043C698 /* NewExerciseView.swift */,
-				D95541DC248E6B57005ED239 /* Helpers */,
+				D95541DC248E6B57005ED239 /* Utils */,
 				D9A2FFC7243A38CA00352747 /* Models */,
 				D9A2FFC6243A38B300352747 /* Resources */,
 				D9A2FFB4243A381200352747 /* Assets.xcassets */,

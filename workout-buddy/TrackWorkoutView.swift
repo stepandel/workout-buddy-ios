@@ -31,6 +31,7 @@ struct TrackWorkoutView: View {
         VStack {
             if (trackWorkoutViewModel.isWorkoutSelected) {
                 VStack {
+                    Spacer(minLength: 32)
                     HStack {
                         Button(action: {
                             self.cancelWorkout()
@@ -39,6 +40,10 @@ struct TrackWorkoutView: View {
                                 .foregroundColor(.red)
                         }.padding(.leading)
                         Spacer()
+                    }
+                    Spacer(minLength: 64)
+                    HStack {
+                        StopWatchView()
                     }
                     HStack {
                         VStack {
@@ -49,38 +54,11 @@ struct TrackWorkoutView: View {
                                 Spacer()
                             }
                             HStack {
-                                Text("Focus: \(self.trackWorkoutViewModel.workout.focus ?? "")")
-                                    .padding()
-                                Spacer()
-                            }
-                            HStack {
                                 Text("Round \(currentRound)")
                                     .padding()
                                 Spacer()
                             }
                         }
-                        Button(action: {
-                            if (!self.workoutStarted) {
-                                self.startWorkout()
-                            } else {
-                                self.showingToStopAlert.toggle()
-                                self.showingEndWorkoutAlert.toggle()
-                            }
-                        }) {
-                            if(self.workoutStarted) {
-                                Image(systemName: "stop.circle.fill")
-                                    .font(.largeTitle)
-                                    .foregroundColor(.black)
-                                    .imageScale(.large)
-                                    .padding()
-                            } else {
-                                Image(systemName: "play.circle.fill")
-                                    .font(.largeTitle)
-                                    .foregroundColor(.black)
-                                    .imageScale(.large)
-                                    .padding()
-                            }
-                        }.padding(32)
                         
                     }
                     List {
@@ -96,7 +74,9 @@ struct TrackWorkoutView: View {
                             }
                         }.onDelete(perform: delete)
                     }
+                    .listStyle(GroupedListStyle())
                 }
+                .background(Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 1)))
             } else {
                 Button(action: { self.showingWorkoutPicker.toggle() }) {
                     Text("Select Workout")
@@ -121,6 +101,9 @@ struct TrackWorkoutView: View {
                 }))
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 1)))
+        .edgesIgnoringSafeArea(.all)
     }
     
     func delete(at offsets: IndexSet) {
