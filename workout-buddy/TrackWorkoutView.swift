@@ -13,6 +13,7 @@ class TrackWorkoutViewModel: ObservableObject {
     @Published var rounds: [Round] = []
     @Published var exercises: [ExSet] = []
     @Published var isWorkoutSelected = false
+    @Published var currentExercise: ExSet?
 }
 
 struct TrackWorkoutView: View {
@@ -45,6 +46,11 @@ struct TrackWorkoutView: View {
                     HStack {
                         StopWatchView()
                     }
+                    if (self.trackWorkoutViewModel.currentExercise != nil) {
+                        HStack {
+                            CurrentExerciseView(exSet: self.trackWorkoutViewModel.currentExercise!)
+                        }
+                    }
                     HStack {
                         VStack {
                             HStack {
@@ -72,7 +78,7 @@ struct TrackWorkoutView: View {
                                     Text("\(exercise.time!)sec")
                                 }
                             }
-                        }.onDelete(perform: delete)
+                        }.onDelete(perform: completeExercise)
                     }
                     .listStyle(GroupedListStyle())
                 }
@@ -106,7 +112,7 @@ struct TrackWorkoutView: View {
         .edgesIgnoringSafeArea(.all)
     }
     
-    func delete(at offsets: IndexSet) {
+    func completeExercise(at offsets: IndexSet) {
         self.trackWorkoutViewModel.exercises.remove(atOffsets: offsets)
         
         if (!self.workoutStarted) { self.startWorkout() }
@@ -120,6 +126,7 @@ struct TrackWorkoutView: View {
                     self.trackWorkoutViewModel.exercises = self.trackWorkoutViewModel.rounds[0].sets ?? []
                     self.currentRound = self.trackWorkoutViewModel.rounds[0].id + 1
                     self.trackWorkoutViewModel.rounds.removeFirst()
+                    self.trackWorkoutViewModel.currentExercise = self.trackWorkoutViewModel.exercises[0]
                 } else {
                     // prompt to finish workout
                     print("End workout alert!")
@@ -129,7 +136,10 @@ struct TrackWorkoutView: View {
 //                // prompt to finish workout
 //                self.showingEndWorkoutAlert.toggle()
 //            }
+        } else {
+            self.trackWorkoutViewModel.currentExercise = self.trackWorkoutViewModel.exercises[0]
         }
+        print(self.trackWorkoutViewModel.currentExercise)
     }
     
     func startWorkout() {

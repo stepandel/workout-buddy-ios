@@ -29,6 +29,7 @@ struct PickWorkoutView: View {
                 } else {
                     self.trackWorkoutViewModel.exercises = workout.sets
                 }
+                self.trackWorkoutViewModel.currentExercise = self.trackWorkoutViewModel.exercises[0]
                 
                 self.isPresentationMode.wrappedValue.dismiss()
             }){

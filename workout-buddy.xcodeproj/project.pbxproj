@@ -19,6 +19,8 @@
 		D94EDBB424643C3400EBF1D2 /* AddNewExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94EDBB324643C3400EBF1D2 /* AddNewExercise.swift */; };
 		D95541D9248E6993005ED239 /* StopWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95541D8248E6993005ED239 /* StopWatchView.swift */; };
 		D95541DB248E6B4B005ED239 /* StopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95541DA248E6B4B005ED239 /* StopWatch.swift */; };
+		D98A73BD2498F6FB009B190C /* CurrentExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98A73BC2498F6FB009B190C /* CurrentExerciseView.swift */; };
+		D98A73BF2498FDAC009B190C /* StringFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98A73BE2498FDAC009B190C /* StringFormatter.swift */; };
 		D9A2FFAF243A380F00352747 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A2FFAE243A380F00352747 /* AppDelegate.swift */; };
 		D9A2FFB1243A380F00352747 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A2FFB0243A380F00352747 /* SceneDelegate.swift */; };
 		D9A2FFB3243A380F00352747 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A2FFB2243A380F00352747 /* ContentView.swift */; };
@@ -61,6 +63,8 @@
 		D94EDBB324643C3400EBF1D2 /* AddNewExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewExercise.swift; sourceTree = "<group>"; };
 		D95541D8248E6993005ED239 /* StopWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchView.swift; sourceTree = "<group>"; };
 		D95541DA248E6B4B005ED239 /* StopWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatch.swift; sourceTree = "<group>"; };
+		D98A73BC2498F6FB009B190C /* CurrentExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentExerciseView.swift; sourceTree = "<group>"; };
+		D98A73BE2498FDAC009B190C /* StringFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringFormatter.swift; sourceTree = "<group>"; };
 		D9A2FFAB243A380F00352747 /* workout-buddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "workout-buddy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9A2FFAE243A380F00352747 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9A2FFB0243A380F00352747 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				D95541DA248E6B4B005ED239 /* StopWatch.swift */,
+				D98A73BE2498FDAC009B190C /* StringFormatter.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -150,6 +155,7 @@
 				D9A2FFB0243A380F00352747 /* SceneDelegate.swift */,
 				D9A2FFB2243A380F00352747 /* ContentView.swift */,
 				D9147666246B7F5B00447A55 /* TrackWorkoutView.swift */,
+				D98A73BC2498F6FB009B190C /* CurrentExerciseView.swift */,
 				D9147668246B8D6800447A55 /* PickWorkoutView.swift */,
 				D9A2FFC2243A384B00352747 /* ActivitiesView.swift */,
 				D9A2FFD6243A8E8900352747 /* WorkoutsView.swift */,
@@ -334,6 +340,7 @@
 				D9147669246B8D6800447A55 /* PickWorkoutView.swift in Sources */,
 				D95541DB248E6B4B005ED239 /* StopWatch.swift in Sources */,
 				D9EA692C244522A000371DEB /* UserData.swift in Sources */,
+				D98A73BF2498FDAC009B190C /* StringFormatter.swift in Sources */,
 				D9A2FFC3243A384B00352747 /* ActivitiesView.swift in Sources */,
 				D94EDB8A245DCD5C00EBF1D2 /* NetworkManager.swift in Sources */,
 				D9BF9BEB247DEE4300213DB2 /* SelectExerciseView.swift in Sources */,
@@ -354,6 +361,7 @@
 				D9BBB80E245493B60001F9E1 /* ExSet.swift in Sources */,
 				D9EA692A24451FD400371DEB /* NewWorkoutView.swift in Sources */,
 				D9147661246711EF00447A55 /* EditWorkoutView.swift in Sources */,
+				D98A73BD2498F6FB009B190C /* CurrentExerciseView.swift in Sources */,
 				D9A2FFCB243A3EBE00352747 /* Exercise.swift in Sources */,
 				D914766B24740BB500447A55 /* ActivityRow.swift in Sources */,
 				D9A2FFD5243A6C9900352747 /* RoundBlock.swift in Sources */,
