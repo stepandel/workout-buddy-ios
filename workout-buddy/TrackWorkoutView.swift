@@ -47,9 +47,85 @@ struct TrackWorkoutView: View {
                         StopWatchView()
                     }
                     if (self.trackWorkoutViewModel.currentExercise != nil) {
-                        HStack {
-                            CurrentExerciseView(exSet: self.trackWorkoutViewModel.currentExercise!)
+                        VStack {
+                            Button(action: {
+                                if let exIdx = self.trackWorkoutViewModel.exercises.firstIndex(of: self.trackWorkoutViewModel.currentExercise!) {
+                                    let indexSet = IndexSet.init(integer: exIdx)
+                                    self.completeExercise(at: indexSet)
+                                }
+                            }) {
+                                Text("\(self.trackWorkoutViewModel.currentExercise!.exId.components(separatedBy: ":")[0].formatId())")
+                                    .font(.system(size: 20, weight: .semibold))
+                                    .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+                                    .frame(width: 240, height: 40)
+                                    .background(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
+                                    .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                                    .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 2, x: -2, y: -2)
+                                    .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 2, x: 2, y: 2)
+                            }
+                            .padding(.init(top: 0, leading: 0, bottom: 32, trailing: 0))
+                            
+                            HStack {
+                                Button(action: {
+                                    if let exIdx = self.trackWorkoutViewModel.exercises.firstIndex(of: self.trackWorkoutViewModel.currentExercise!) {
+                                        if self.trackWorkoutViewModel.currentExercise!.reps! > 0 {
+                                            self.trackWorkoutViewModel.exercises[exIdx].reps! -= 1
+                                            self.trackWorkoutViewModel.currentExercise!.reps! -= 1
+                                        } else if self.trackWorkoutViewModel.currentExercise!.time != nil {
+                                            self.trackWorkoutViewModel.exercises[exIdx].time! -= 1
+                                            self.trackWorkoutViewModel.currentExercise!.time! -= 1
+                                        }
+                                    }
+                                }) {
+                                    Image(systemName: "minus")
+                                        .frame(width: 60, height: 60)
+                                        .background(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
+                                        .clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
+                                        .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 2, x: -2, y: -2)
+                                        .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 2, x: 2, y: 2)
+                                }.padding(.trailing)
+                                if self.trackWorkoutViewModel.currentExercise!.reps! > 0 {
+                                    Text("\(self.trackWorkoutViewModel.currentExercise!.reps!)x")
+                                        .font(.system(size: 20, weight: .semibold))
+                                        .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+                                        .frame(width: 60, height: 40)
+                                        .background(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
+                                        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                                        .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 0.5, x: 0.5, y: 0.5)
+                                        .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 0.5, x: -0.5, y: -0.5)
+                                        .padding(.init(top: 0, leading: 16, bottom: 0, trailing: 16))
+                                } else if self.trackWorkoutViewModel.currentExercise!.time != nil {
+                                    Text("\(self.trackWorkoutViewModel.currentExercise!.time!)sec")
+                                        .font(.system(size: 20, weight: .semibold))
+                                        .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+                                        .frame(width: 60, height: 40)
+                                        .background(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
+                                        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                                        .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 0.5, x: 0.5, y: 0.5)
+                                        .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 0.5, x: -0.5, y: -0.5)
+                                        .padding(.init(top: 0, leading: 16, bottom: 0, trailing: 16))
+                                }
+                                Button(action: {
+                                    if let exIdx = self.trackWorkoutViewModel.exercises.firstIndex(of: self.trackWorkoutViewModel.currentExercise!) {
+                                        if self.trackWorkoutViewModel.currentExercise!.reps! > 0 {
+                                            self.trackWorkoutViewModel.exercises[exIdx].reps! += 1
+                                            self.trackWorkoutViewModel.currentExercise!.reps! += 1
+                                        } else if self.trackWorkoutViewModel.currentExercise!.time != nil {
+                                            self.trackWorkoutViewModel.exercises[exIdx].time! += 1
+                                            self.trackWorkoutViewModel.currentExercise!.time! += 1
+                                        }
+                                    }
+                                }) {
+                                    Image(systemName: "plus")
+                                        .frame(width: 60, height: 60)
+                                        .background(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
+                                        .clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
+                                        .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 2, x: -2, y: -2)
+                                        .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 2, x: 2, y: 2)
+                                }.padding(.leading)
+                            }
                         }
+                        .padding(.init(top: 32, leading: 32, bottom: 16, trailing: 32))
                     }
                     HStack {
                         VStack {
@@ -80,7 +156,7 @@ struct TrackWorkoutView: View {
                             }
                         }.onDelete(perform: completeExercise)
                     }
-                    .listStyle(GroupedListStyle())
+//                    .listStyle(GroupedListStyle())
                 }
                 .background(Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 1)))
             } else {
