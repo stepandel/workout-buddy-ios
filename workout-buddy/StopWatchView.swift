@@ -42,7 +42,7 @@ struct StopWatchView: View {
                 }
             )
             .clipShape(RoundedRectangle(cornerRadius: 48, style: .continuous))
-                .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: CGFloat(self.shadowRad), x: CGFloat(self.shadowRad), y: CGFloat(self.shadowRad))
+            .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: CGFloat(self.shadowRad), x: CGFloat(self.shadowRad), y: CGFloat(self.shadowRad))
             .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: CGFloat(self.shadowRad), x: CGFloat(-self.shadowRad), y: CGFloat(-self.shadowRad))
             .scaleEffect(tap ? 1.02 : 1)
             .gesture(
