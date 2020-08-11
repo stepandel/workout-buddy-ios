@@ -10,13 +10,18 @@ import SwiftUI
 import UIKit
 
 class StopWatch: ObservableObject {
-    @Published var timeString = "00:00.00"
+    @Published var timeString: String
 //    @Published var fractionString = ".000"
-    var (hours, minutes, seconds, fractions) = (0, 0, 0, 0)
+    private var (hours, minutes, seconds, fractions): (Int, Int, Int, Int)
     private var timer = Timer()
     
     let timeFormatter = NumberFormatter()
 //    let fractionsFormatter = NumberFormatter()
+    
+    init() {
+        timeString = "00:00.00"
+        (hours, minutes, seconds, fractions) = (0, 0, 0, 0)
+    }
     
     func start() {
         timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(StopWatch.keepTimer), userInfo: nil, repeats: true)

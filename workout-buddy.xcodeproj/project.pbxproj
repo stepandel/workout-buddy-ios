@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		D9147661246711EF00447A55 /* EditWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9147660246711EF00447A55 /* EditWorkoutView.swift */; };
-		D91476632469879500447A55 /* AddNewExerciseEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91476622469879500447A55 /* AddNewExerciseEdit.swift */; };
 		D9147665246B7DF900447A55 /* CompletedWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9147664246B7DF900447A55 /* CompletedWorkout.swift */; };
 		D9147667246B7F5B00447A55 /* TrackWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9147666246B7F5B00447A55 /* TrackWorkoutView.swift */; };
 		D9147669246B8D6800447A55 /* PickWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9147668246B8D6800447A55 /* PickWorkoutView.swift */; };
 		D914766B24740BB500447A55 /* ActivityRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D914766A24740BB500447A55 /* ActivityRow.swift */; };
 		D914766D24740ECA00447A55 /* workoutLog.json in Resources */ = {isa = PBXBuildFile; fileRef = D914766C24740ECA00447A55 /* workoutLog.json */; };
 		D914766F24740FB500447A55 /* CompletedWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D914766E24740FB500447A55 /* CompletedWorkoutView.swift */; };
+		D9294D7D24DEE92D00AA5211 /* SelectTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9294D7C24DEE92D00AA5211 /* SelectTrackingView.swift */; };
+		D94CE25724E19CA0009AF605 /* NavigateModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94CE25624E19CA0009AF605 /* NavigateModifier.swift */; };
 		D94EDB8A245DCD5C00EBF1D2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94EDB89245DCD5C00EBF1D2 /* NetworkManager.swift */; };
 		D94EDBB424643C3400EBF1D2 /* AddNewExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94EDBB324643C3400EBF1D2 /* AddNewExercise.swift */; };
 		D95541D9248E6993005ED239 /* StopWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95541D8248E6993005ED239 /* StopWatchView.swift */; };
@@ -52,13 +53,14 @@
 		104B72D14B3F6C76C719C813 /* Pods-workout-buddy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-workout-buddy.debug.xcconfig"; path = "Target Support Files/Pods-workout-buddy/Pods-workout-buddy.debug.xcconfig"; sourceTree = "<group>"; };
 		6E13BEB2BCD0ABBDD678A34B /* Pods_workout_buddy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_workout_buddy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9147660246711EF00447A55 /* EditWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWorkoutView.swift; sourceTree = "<group>"; };
-		D91476622469879500447A55 /* AddNewExerciseEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewExerciseEdit.swift; sourceTree = "<group>"; };
 		D9147664246B7DF900447A55 /* CompletedWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedWorkout.swift; sourceTree = "<group>"; };
 		D9147666246B7F5B00447A55 /* TrackWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackWorkoutView.swift; sourceTree = "<group>"; };
 		D9147668246B8D6800447A55 /* PickWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickWorkoutView.swift; sourceTree = "<group>"; };
 		D914766A24740BB500447A55 /* ActivityRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRow.swift; sourceTree = "<group>"; };
 		D914766C24740ECA00447A55 /* workoutLog.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = workoutLog.json; sourceTree = "<group>"; };
 		D914766E24740FB500447A55 /* CompletedWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedWorkoutView.swift; sourceTree = "<group>"; };
+		D9294D7C24DEE92D00AA5211 /* SelectTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTrackingView.swift; sourceTree = "<group>"; };
+		D94CE25624E19CA0009AF605 /* NavigateModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigateModifier.swift; sourceTree = "<group>"; };
 		D94EDB89245DCD5C00EBF1D2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		D94EDBB324643C3400EBF1D2 /* AddNewExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewExercise.swift; sourceTree = "<group>"; };
 		D95541D8248E6993005ED239 /* StopWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchView.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			children = (
 				D95541DA248E6B4B005ED239 /* StopWatch.swift */,
 				D98A73BE2498FDAC009B190C /* StringFormatter.swift */,
+				D94CE25624E19CA0009AF605 /* NavigateModifier.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 				D9A2FFB0243A380F00352747 /* SceneDelegate.swift */,
 				D9A2FFB2243A380F00352747 /* ContentView.swift */,
 				D9147666246B7F5B00447A55 /* TrackWorkoutView.swift */,
+				D9294D7C24DEE92D00AA5211 /* SelectTrackingView.swift */,
 				D98A73BC2498F6FB009B190C /* CurrentExerciseView.swift */,
 				D9147668246B8D6800447A55 /* PickWorkoutView.swift */,
 				D9A2FFC2243A384B00352747 /* ActivitiesView.swift */,
@@ -164,7 +168,6 @@
 				D94EDBB324643C3400EBF1D2 /* AddNewExercise.swift */,
 				D9BF9BEA247DEE4300213DB2 /* SelectExerciseView.swift */,
 				D9BF9BE8247D45DA00213DB2 /* SearchBar.swift */,
-				D91476622469879500447A55 /* AddNewExerciseEdit.swift */,
 				D9A2FFD0243A4D0D00352747 /* WorkoutRow.swift */,
 				D914766A24740BB500447A55 /* ActivityRow.swift */,
 				D9A2FFD2243A69AB00352747 /* WorkoutView.swift */,
@@ -335,6 +338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9A2FFCF243A42EC00352747 /* Data.swift in Sources */,
+				D9294D7D24DEE92D00AA5211 /* SelectTrackingView.swift in Sources */,
 				D9A2FFAF243A380F00352747 /* AppDelegate.swift in Sources */,
 				D9147667246B7F5B00447A55 /* TrackWorkoutView.swift in Sources */,
 				D9147669246B8D6800447A55 /* PickWorkoutView.swift in Sources */,
@@ -348,7 +352,6 @@
 				D9147665246B7DF900447A55 /* CompletedWorkout.swift in Sources */,
 				D914766F24740FB500447A55 /* CompletedWorkoutView.swift in Sources */,
 				D9A2FFD1243A4D0D00352747 /* WorkoutRow.swift in Sources */,
-				D91476632469879500447A55 /* AddNewExerciseEdit.swift in Sources */,
 				D94EDBB424643C3400EBF1D2 /* AddNewExercise.swift in Sources */,
 				D9BF9BE9247D45DA00213DB2 /* SearchBar.swift in Sources */,
 				D95541D9248E6993005ED239 /* StopWatchView.swift in Sources */,
@@ -357,6 +360,7 @@
 				D9A2FFD7243A8E8900352747 /* WorkoutsView.swift in Sources */,
 				D9A2FFB1243A380F00352747 /* SceneDelegate.swift in Sources */,
 				D9A2FFC9243A38E700352747 /* Workout.swift in Sources */,
+				D94CE25724E19CA0009AF605 /* NavigateModifier.swift in Sources */,
 				D9A2FFB3243A380F00352747 /* ContentView.swift in Sources */,
 				D9BBB80E245493B60001F9E1 /* ExSet.swift in Sources */,
 				D9EA692A24451FD400371DEB /* NewWorkoutView.swift in Sources */,

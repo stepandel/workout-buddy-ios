@@ -29,15 +29,12 @@ struct CompletedWorkoutView: View {
             HStack {
                 if(completedWorkout.workout.rounds != nil) {
                     Text("Rounds: \(completedWorkout.workout.rounds!.count)x")
-                } else {
-                    Text("\(completedWorkout.workout.type): \(completedWorkout.workout.sets[0].sets)x")
-                        .font(.headline)
                 }
                 Spacer()
             }
             .padding()
             
-            RoundBlock(sets: completedWorkout.workout.sets, rounds: completedWorkout.workout.rounds)
+            RoundBlock(rounds: completedWorkout.workout.rounds ?? [])
             
             Spacer()
         }.onAppear {

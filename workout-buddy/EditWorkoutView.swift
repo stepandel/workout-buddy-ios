@@ -156,7 +156,7 @@ struct EditWorkoutView: View {
 
 struct EditWorkout_Previews: PreviewProvider {
     static var previews: some View {
-        EditWorkoutView(editWorkoutViewModel: EditWorkoutViewModel(workout: Workout(name: "Random", sets: [])), workoutIdx: 0)
+        EditWorkoutView(editWorkoutViewModel: EditWorkoutViewModel(workout: Workout(name: "Random")), workoutIdx: 0)
         .environmentObject(UserData())
     }
 }

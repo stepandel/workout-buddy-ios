@@ -12,6 +12,8 @@ extension String {
     func capitalizingFirstLetter() -> String {
         return prefix(1).capitalized + dropFirst()
     }
+    
+    // TODO: - Try combining these 2 functions into one
 
     mutating func capitalizeFirstLetter() {
         self = self.capitalizingFirstLetter()

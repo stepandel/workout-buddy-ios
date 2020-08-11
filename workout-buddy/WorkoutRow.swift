@@ -23,9 +23,6 @@ struct WorkoutRow: View {
                     if (workout.rounds != nil) {
                         Text("\(workout.rounds!.count) rounds")
                             .font(.caption)
-                    } else {
-                        Text("\(workout.sets[0].sets) \(workout.type)")
-                            .font(.caption)
                     }
                 }
             }

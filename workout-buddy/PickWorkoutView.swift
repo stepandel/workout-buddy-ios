@@ -22,12 +22,12 @@ struct PickWorkoutView: View {
                 self.trackWorkoutViewModel.isWorkoutSelected = true
                 if let rounds = workout.rounds {
                     self.trackWorkoutViewModel.rounds = rounds
-                    self.trackWorkoutViewModel.exercises = rounds[0].sets ?? workout.sets
-                    if (rounds.count != 0 ) {
-                        self.trackWorkoutViewModel.rounds.removeFirst()
-                    }
+
+                    self.trackWorkoutViewModel.exercises = rounds[0].sets ?? []
+                    self.trackWorkoutViewModel.numOfRounds = rounds.count
+                    
                 } else {
-                    self.trackWorkoutViewModel.exercises = workout.sets
+                    // TODO: - handle empty workout
                 }
                 self.trackWorkoutViewModel.currentExercise = self.trackWorkoutViewModel.exercises[0]
                 

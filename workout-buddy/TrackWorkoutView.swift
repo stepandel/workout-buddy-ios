@@ -9,40 +9,55 @@
 import SwiftUI
 
 class TrackWorkoutViewModel: ObservableObject {
-    @Published var workout: Workout = Workout(name: "", sets: [])
-    @Published var rounds: [Round] = []
-    @Published var exercises: [ExSet] = []
-    @Published var isWorkoutSelected = false
+    @Published var workout: Workout
+    @Published var rounds: [Round]
+    @Published var exercises: [ExSet]
+    @Published var isWorkoutSelected: Bool
     @Published var currentExercise: ExSet?
+    @Published var numOfRounds: Int
+    
+    init() {
+        workout = Workout(name: "")
+        rounds = []
+        exercises = []
+        isWorkoutSelected = false
+        numOfRounds = 0
+    }
+}
+
+enum ModalView {
+    case workouts
+    case exercises
 }
 
 struct TrackWorkoutView: View {
     @EnvironmentObject var userData: UserData
     
+    @Environment(\.presentationMode) var presentaionMode: Binding<PresentationMode>
+    
     @ObservedObject var trackWorkoutViewModel = TrackWorkoutViewModel()
     
-    @State var showingWorkoutPicker = true
+    @State var showingModalView: Bool
+    @State var modalView: ModalView = .workouts
     @State var workoutStarted = false
     @State var currentRound = 1
     @State var showingEndWorkoutAlert = false
     @State var showingToStopAlert = false
     @State var startTime: Double = 0
     
+    var btnCancel: some View {
+        Button(action: {
+            self.cancelWorkout()
+        }) {
+            Text("Cancel")
+            .foregroundColor(.red)
+        }
+    }
+    
     var body: some View {
         VStack {
-            if (trackWorkoutViewModel.isWorkoutSelected) {
                 VStack {
-                    Spacer(minLength: 32)
-                    HStack {
-                        Button(action: {
-                            self.cancelWorkout()
-                        }) {
-                            Text("Cancel")
-                                .foregroundColor(.red)
-                        }.padding(.leading)
-                        Spacer()
-                    }
-                    Spacer(minLength: 64)
+                    Spacer(minLength: 160)
                     HStack {
                         StopWatchView()
                     }
@@ -126,6 +141,31 @@ struct TrackWorkoutView: View {
                             }
                         }
                         .padding(.init(top: 32, leading: 32, bottom: 16, trailing: 32))
+                    } else {
+                        VStack {
+                            Button(action: {
+                                self.modalView = .exercises
+                                self.showingModalView.toggle()
+                            }) {
+                                Image(systemName: "plus")
+                                        .frame(width: 60, height: 60)
+                                        .background(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
+                                        .clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
+                                        .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 2, x: -2, y: -2)
+                                        .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 2, x: 2, y: 2)
+                            }.padding(.bottom)
+                            Button(action: {
+                                //TODO: - Add Round
+                            }) {
+                                Text("Add Round")
+                                        .frame(width: 120, height: 60)
+                                        .background(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
+                                        .clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
+                                        .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 2, x: -2, y: -2)
+                                        .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 2, x: 2, y: 2)
+                                }
+                        }
+//                        .padding(.init(top: 32, leading: 32, bottom: 16, trailing: 32))
                     }
                     HStack {
                         VStack {
@@ -136,7 +176,7 @@ struct TrackWorkoutView: View {
                                 Spacer()
                             }
                             HStack {
-                                Text("Round \(currentRound)")
+                                Text("Round \(currentRound) of \(trackWorkoutViewModel.numOfRounds)")
                                     .padding()
                                 Spacer()
                             }
@@ -159,19 +199,20 @@ struct TrackWorkoutView: View {
 //                    .listStyle(GroupedListStyle())
                 }
                 .background(Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 1)))
-            } else {
-                Button(action: { self.showingWorkoutPicker.toggle() }) {
-                    Text("Select Workout")
-                }
-            }
         }
         .onAppear {
             print("\(self.trackWorkoutViewModel.workout)")
             UIApplication.shared.isIdleTimerDisabled = true
         }
-        .sheet(isPresented: $showingWorkoutPicker) {
-            PickWorkoutView(workouts: self.userData.workouts, trackWorkoutViewModel: self.trackWorkoutViewModel)
-        }
+        .sheet(isPresented: $showingModalView, onDismiss: {
+            self.showingModalView = false
+        }, content: {
+            if self.modalView == .workouts {
+                PickWorkoutView(workouts: self.userData.workouts, trackWorkoutViewModel: self.trackWorkoutViewModel)
+            } else if self.modalView == .exercises {
+                 AddNewExerciseTracking(trackWorkoutViewModel: self.trackWorkoutViewModel, roundNumber: self.currentRound).environmentObject(self.userData)
+            }
+        })
         .alert(isPresented: $showingEndWorkoutAlert) {
             if (self.showingToStopAlert) {
                 return Alert(title: Text("Stop Workout"), message: Text("Are you sure you want to end workout?"), primaryButton: .default(Text("Yes, I'm done!"), action: {
@@ -186,6 +227,9 @@ struct TrackWorkoutView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 1)))
         .edgesIgnoringSafeArea(.all)
+//        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnCancel)
     }
     
     func completeExercise(at offsets: IndexSet) {
@@ -195,13 +239,19 @@ struct TrackWorkoutView: View {
         
         if (self.trackWorkoutViewModel.exercises.count == 0) {
             print("Rounds \(self.trackWorkoutViewModel.rounds)")
+            
+            self.trackWorkoutViewModel.rounds.removeFirst()
+            
             // Select the next ex set
 //            if let rounds = self.trackWorkoutViewModel.rounds {
                 if (self.trackWorkoutViewModel.rounds.count != 0) {
-                    print("Rounds: \(self.trackWorkoutViewModel.rounds)")
+                    
+                    self.trackWorkoutViewModel.rounds.forEach { (round) in
+                        print("Round: \(round.id)")
+                    }
+                    
                     self.trackWorkoutViewModel.exercises = self.trackWorkoutViewModel.rounds[0].sets ?? []
                     self.currentRound = self.trackWorkoutViewModel.rounds[0].id + 1
-                    self.trackWorkoutViewModel.rounds.removeFirst()
                     self.trackWorkoutViewModel.currentExercise = self.trackWorkoutViewModel.exercises[0]
                 } else {
                     // prompt to finish workout
@@ -241,7 +291,7 @@ struct TrackWorkoutView: View {
         
         // Reset workout data
         self.workoutStarted = false
-        self.trackWorkoutViewModel.workout = Workout(name: "", sets: [])
+        self.trackWorkoutViewModel.workout = Workout(name: "")
         self.trackWorkoutViewModel.rounds = []
         self.trackWorkoutViewModel.exercises = []
         self.trackWorkoutViewModel.isWorkoutSelected = false
@@ -252,15 +302,17 @@ struct TrackWorkoutView: View {
         
         // Reset workout data
         self.workoutStarted = false
-        self.trackWorkoutViewModel.workout = Workout(name: "", sets: [])
+        self.trackWorkoutViewModel.workout = Workout(name: "")
         self.trackWorkoutViewModel.rounds = []
         self.trackWorkoutViewModel.exercises = []
         self.trackWorkoutViewModel.isWorkoutSelected = false
+        
+        self.presentaionMode.wrappedValue.dismiss()
     }
 }
 
 struct TrackWorkoutView_Previews: PreviewProvider {
     static var previews: some View {
-        TrackWorkoutView().environmentObject(UserData())
+        TrackWorkoutView(showingModalView: false).environmentObject(UserData())
     }
 }

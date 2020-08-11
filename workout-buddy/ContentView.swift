@@ -24,8 +24,8 @@ struct ContentView: View {
                         Text("Feed")
                     }
                 }
-                .tag(0)
-            TrackWorkoutView()
+                .tag(1)
+            SelectTrackingView()
                 .environmentObject(self.userData)
                 .tabItem {
                     VStack {
@@ -33,25 +33,17 @@ struct ContentView: View {
                         Text("Track")
                     }
                 }
-                .tag(1)
-            WorkoutsView()
-                .environmentObject(self.userData)
-                .tabItem {
-                    VStack {
-                        Image(systemName: "tray.fill")
-                        Text("Workouts")
-                    }
-                }
-                .tag(2)
-            ExercisesView()
-            .environmentObject(self.userData)
-            .tabItem {
-                VStack {
-                    Image(systemName: "archivebox.fill")
-                    Text("Exercises")
-                }
-            }
-            .tag(3)
+                .tag(0)
+//            WorkoutsView()
+//                .environmentObject(self.userData)
+//                .tabItem {
+//                    VStack {
+//                        Image(systemName: "tray.fill")
+//                        Text("Workouts")
+//                    }
+//                }
+//                .tag(2)
+            // TODO: - Add Profile View
         }
     }
 }

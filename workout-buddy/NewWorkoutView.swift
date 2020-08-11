@@ -9,7 +9,7 @@
 import SwiftUI
 
 class NewWorkoutViewModel: ObservableObject {
-    @Published var workout: Workout = Workout(name: "New Workout", sets: [])
+    @Published var workout: Workout = Workout(name: "New Workout")
 }
 
 struct NewWorkoutView: View {

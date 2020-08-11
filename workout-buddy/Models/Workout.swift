@@ -13,15 +13,15 @@ struct Workout: Hashable, Codable, Identifiable {
     var name: String
     var focus: String?
     var type: String
-    var sets: [ExSet]
+//    var sets: [ExSet]?
     var rounds: [Round]?
     
-    init(name: String, focus: String = "", type: String = "", sets: [ExSet]) {
+    init(name: String, focus: String = "", type: String = "") { //}, sets: [ExSet]) {
         self.id = UUID().uuidString
         self.name = name
         self.focus = focus
         self.type = type
-        self.sets = sets
+//        self.sets = sets
         
         let newRound = Round(id: 0)
         
