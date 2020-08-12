@@ -11,17 +11,15 @@ import SwiftUI
 struct Workout: Hashable, Codable, Identifiable {
     var id: String
     var name: String
-    var focus: String?
+    var focus: String
     var type: String
-//    var sets: [ExSet]?
-    var rounds: [Round]?
+    var rounds: [Round]
     
-    init(name: String, focus: String = "", type: String = "") { //}, sets: [ExSet]) {
+    init(name: String, focus: String = "", type: String = "") {
         self.id = UUID().uuidString
         self.name = name
         self.focus = focus
         self.type = type
-//        self.sets = sets
         
         let newRound = Round(id: 0)
         
@@ -31,7 +29,7 @@ struct Workout: Hashable, Codable, Identifiable {
 
 struct Round: Hashable, Codable, Identifiable {
     var id: Int
-    var sets: [ExSet]?
+    var sets: [ExSet]
     
     init(id: Int){
         self.id = id

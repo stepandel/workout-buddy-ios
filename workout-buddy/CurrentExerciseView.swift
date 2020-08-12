@@ -79,7 +79,7 @@ struct CurrentExerciseView: View {
 
 struct CurrentExerciseView_Previews: PreviewProvider {
     static var previews: some View {
-        CurrentExerciseView(trackWorkoutViewModel: TrackWorkoutViewModel(), exSet: (sampleWorkouts[0].rounds?[0].sets?[0])!)
+        CurrentExerciseView(trackWorkoutViewModel: TrackWorkoutViewModel(), exSet: (sampleWorkouts[0].rounds[0].sets[0]))
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 1)))
         .edgesIgnoringSafeArea(.all)

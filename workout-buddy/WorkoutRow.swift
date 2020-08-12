@@ -17,13 +17,11 @@ struct WorkoutRow: View {
                 Text(workout.name)
                     .font(.title)
                 HStack {
-                    Text("\(workout.focus ?? "")")
+                    Text("\(workout.focus)")
                         .font(.subheadline)
                     Spacer()
-                    if (workout.rounds != nil) {
-                        Text("\(workout.rounds!.count) rounds")
-                            .font(.caption)
-                    }
+                    Text("\(workout.rounds.count) rounds")
+                        .font(.caption)
                 }
             }
             .padding()

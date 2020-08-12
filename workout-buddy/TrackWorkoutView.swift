@@ -15,6 +15,7 @@ class TrackWorkoutViewModel: ObservableObject {
     @Published var isWorkoutSelected: Bool
     @Published var currentExercise: ExSet?
     @Published var numOfRounds: Int
+    @Published var completedWorkout: Workout
     
     init() {
         workout = Workout(name: "")
@@ -22,6 +23,7 @@ class TrackWorkoutViewModel: ObservableObject {
         exercises = []
         isWorkoutSelected = false
         numOfRounds = 0
+        completedWorkout = Workout(name: "")
     }
 }
 
@@ -51,6 +53,14 @@ struct TrackWorkoutView: View {
         }) {
             Text("Cancel")
             .foregroundColor(.red)
+        }
+    }
+    
+    var btnFinish: some View {
+        Button(action: {
+            self.showingEndWorkoutAlert.toggle()
+        }) {
+            Text("Finish")
         }
     }
     
@@ -210,30 +220,33 @@ struct TrackWorkoutView: View {
             if self.modalView == .workouts {
                 PickWorkoutView(workouts: self.userData.workouts, trackWorkoutViewModel: self.trackWorkoutViewModel)
             } else if self.modalView == .exercises {
-                 AddNewExerciseTracking(trackWorkoutViewModel: self.trackWorkoutViewModel, roundNumber: self.currentRound).environmentObject(self.userData)
+                 AddNewExerciseTracking(trackWorkoutViewModel: self.trackWorkoutViewModel, roundNumber: self.currentRound - 1).environmentObject(self.userData)
             }
         })
         .alert(isPresented: $showingEndWorkoutAlert) {
-            if (self.showingToStopAlert) {
-                return Alert(title: Text("Stop Workout"), message: Text("Are you sure you want to end workout?"), primaryButton: .default(Text("Yes, I'm done!"), action: {
-                    self.completeWorkout()
-                }), secondaryButton: .cancel())
-            } else {
-                return Alert(title: Text("Workout Complete"), message: Text("Finish now?"), dismissButton: .default(Text("Yes"), action: {
-                    self.completeWorkout()
-                }))
-            }
+            return Alert(title: Text("Stop Workout"), message: Text("Are you sure you want to end workout?"), primaryButton: .default(Text("Yes, I'm done!"), action: {
+                self.completeWorkout()
+            }), secondaryButton: .cancel())
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 1)))
         .edgesIgnoringSafeArea(.all)
-//        .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: btnCancel)
+        .navigationBarItems(leading: btnCancel, trailing: btnFinish)
     }
     
     func completeExercise(at offsets: IndexSet) {
         self.trackWorkoutViewModel.exercises.remove(atOffsets: offsets)
+        
+        // Save completed exercise
+        if (!self.trackWorkoutViewModel.completedWorkout.rounds.indices.contains(currentRound - 1)) {
+            let newRound = Round(id: currentRound - 1)
+            self.trackWorkoutViewModel.completedWorkout.rounds.append(newRound)
+        }
+        if let currentExercise = self.trackWorkoutViewModel.currentExercise {
+            self.trackWorkoutViewModel.completedWorkout.rounds[currentRound - 1].sets.append(currentExercise)
+        }
+        
         
         if (!self.workoutStarted) { self.startWorkout() }
         
@@ -242,8 +255,7 @@ struct TrackWorkoutView: View {
             
             self.trackWorkoutViewModel.rounds.removeFirst()
             
-            // Select the next ex set
-//            if let rounds = self.trackWorkoutViewModel.rounds {
+                // Continue to the next round
                 if (self.trackWorkoutViewModel.rounds.count != 0) {
                     
                     self.trackWorkoutViewModel.rounds.forEach { (round) in
@@ -254,14 +266,11 @@ struct TrackWorkoutView: View {
                     self.currentRound = self.trackWorkoutViewModel.rounds[0].id + 1
                     self.trackWorkoutViewModel.currentExercise = self.trackWorkoutViewModel.exercises[0]
                 } else {
-                    // prompt to finish workout
-                    print("End workout alert!")
-                    self.showingEndWorkoutAlert.toggle()
+                  
+                    // Reset current exercise
+                    self.trackWorkoutViewModel.currentExercise = nil
                 }
-//            } else {
-//                // prompt to finish workout
-//                self.showingEndWorkoutAlert.toggle()
-//            }
+            
         } else {
             self.trackWorkoutViewModel.currentExercise = self.trackWorkoutViewModel.exercises[0]
         }
@@ -284,7 +293,7 @@ struct TrackWorkoutView: View {
         let workoutTime = Int(round(currentTime - self.startTime))
         
         // Save workout to log
-        let completedWorkout = CompletedWorkout(workout: self.trackWorkoutViewModel.workout, completionTs: Date().timeIntervalSince1970, time: workoutTime)
+        let completedWorkout = CompletedWorkout(workout: self.trackWorkoutViewModel.completedWorkout, completionTs: Date().timeIntervalSince1970, time: workoutTime)
         print("Completed workout: \(completedWorkout)")
         self.userData.workoutLog.append(completedWorkout)
         self.userData.saveCompletedWorkout(completedWorkout: completedWorkout)
@@ -295,6 +304,9 @@ struct TrackWorkoutView: View {
         self.trackWorkoutViewModel.rounds = []
         self.trackWorkoutViewModel.exercises = []
         self.trackWorkoutViewModel.isWorkoutSelected = false
+        self.trackWorkoutViewModel.currentExercise = nil
+        self.trackWorkoutViewModel.numOfRounds = 0
+        self.trackWorkoutViewModel.completedWorkout = self.trackWorkoutViewModel.workout
     }
     
     func cancelWorkout() {

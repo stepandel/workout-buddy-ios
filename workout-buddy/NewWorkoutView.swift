@@ -94,7 +94,7 @@ struct NewWorkoutView: View {
                         }
                     }
                     HStack {
-                        TextField("Focus", text: self.$newWorkoutViewModel.workout.focus.bound)
+                        TextField("Focus", text: self.$newWorkoutViewModel.workout.focus)
 //                            .onTapGesture {
 //                                self.isFocused = true
 //                        }
@@ -104,10 +104,10 @@ struct NewWorkoutView: View {
                         }
                     }
                 }
-                ForEach(self.newWorkoutViewModel.workout.rounds!, id:\.self) { round in
+                ForEach(self.newWorkoutViewModel.workout.rounds, id:\.self) { round in
                     Section(header: Text("Round \(round.id + 1)")){
                         
-                        List(round.sets ?? [], id:\.exId) { set in
+                        List(round.sets, id:\.exId) { set in
                             HStack {
                                 Text(set.exId)
                                 Spacer()
@@ -120,7 +120,7 @@ struct NewWorkoutView: View {
                         }
                         HStack {
                             Button(action: {
-                                self.roundNumber = self.newWorkoutViewModel.workout.rounds!.firstIndex(of: round)!
+                                self.roundNumber = self.newWorkoutViewModel.workout.rounds.firstIndex(of: round)!
                                 print("Round number: \(self.roundNumber)")
                                 self.showingAddNewExercise.toggle()
                                 print("Workout: \(self.newWorkoutViewModel.workout)")
@@ -147,14 +147,14 @@ struct NewWorkoutView: View {
     
     func addRound(copy: Bool) {
         
-        let numberOfRounds = self.newWorkoutViewModel.workout.rounds?.count ?? 0
+        let numberOfRounds = self.newWorkoutViewModel.workout.rounds.count
         var newRound = Round(id: numberOfRounds)
         if copy {
-            newRound.sets = self.newWorkoutViewModel.workout.rounds?[0].sets ?? []
+            newRound.sets = self.newWorkoutViewModel.workout.rounds[0].sets ?? []
         }
         print("New Round: \(newRound)")
         
-        self.newWorkoutViewModel.workout.rounds?.append(newRound)
+        self.newWorkoutViewModel.workout.rounds.append(newRound)
         
         print("New Workout Model: \(self.newWorkoutViewModel)")
 //        self.newWorkoutViewModel.workout.sets = self.newWorkoutViewModel.workout.sets.map({ (exSet) -> ExSet in

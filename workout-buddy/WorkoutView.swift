@@ -31,9 +31,7 @@ struct WorkoutView: View {
             }
             
             HStack {
-                if(workout.rounds != nil) {
-                    Text("Rounds: \(workout.rounds!.count)x")
-                }
+                Text("Rounds: \(workout.rounds.count)x")
                 Spacer()
             }
             .padding()

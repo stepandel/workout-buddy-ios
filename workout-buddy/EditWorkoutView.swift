@@ -74,7 +74,7 @@ struct EditWorkoutView: View {
                 List {
                     TextField("Name", text: self.$editWorkoutViewModel.workout.name)
                     HStack {
-                        TextField("Focus", text: self.$editWorkoutViewModel.workout.focus.bound)
+                        TextField("Focus", text: self.$editWorkoutViewModel.workout.focus)
                         Button(action: {}) {
                             Image(systemName: "info.circle")
                                 .accessibility(label: Text("Help"))
@@ -89,9 +89,9 @@ struct EditWorkoutView: View {
                     }
                 }
                 
-                ForEach(self.editWorkoutViewModel.workout.rounds ?? [Round(id: 0)], id:\.self) { round in
+                ForEach(self.editWorkoutViewModel.workout.rounds, id:\.self) { round in
                     Section(header: Text("Round \(round.id + 1)"))  {
-                        ForEach(round.sets ?? [], id:\.exId) { set in
+                        ForEach(round.sets, id:\.exId) { set in
                             HStack {
                                 Text(set.exId)
                                 Spacer()
@@ -102,20 +102,15 @@ struct EditWorkoutView: View {
                                 }
                             }.padding(.horizontal)
                         }.onDelete { (indexSet) in
-                            if let round = self.editWorkoutViewModel.workout.rounds?.firstIndex(of: round) {
-                                var roundSet = self.editWorkoutViewModel.workout.rounds![round].sets ?? []
+                            if let round = self.editWorkoutViewModel.workout.rounds.firstIndex(of: round) {
+                                var roundSet = self.editWorkoutViewModel.workout.rounds[round].sets
                                 roundSet.remove(atOffsets: indexSet)
-                                self.editWorkoutViewModel.workout.rounds![round].sets = roundSet
+                                self.editWorkoutViewModel.workout.rounds[round].sets = roundSet
                             }
                         }
                         HStack {
                             Button(action: {
-                                if let rounds = self.editWorkoutViewModel.workout.rounds {
-                                    self.roundNumber = rounds.firstIndex(of: round)!
-                                } else {
-                                    self.addRound(copy: false)
-                                    self.roundNumber = 0
-                                }
+                                self.roundNumber = self.editWorkoutViewModel.workout.rounds.firstIndex(of: round)!
                                 self.showingAddNewExercise.toggle()
                             }) {
                                 Image(systemName: "plus.circle")
@@ -134,17 +129,14 @@ struct EditWorkoutView: View {
     }
     
     func addRound(copy: Bool) {
-        let numberOfRounds = self.editWorkoutViewModel.workout.rounds?.count ?? 0
+        let numberOfRounds = self.editWorkoutViewModel.workout.rounds.count
         var newRound = Round(id: numberOfRounds)
         if copy {
-            newRound.sets = self.editWorkoutViewModel.workout.rounds?[0].sets ?? []
+            newRound.sets = self.editWorkoutViewModel.workout.rounds[0].sets
         }
         print("New Round: \(newRound)")
         
-        if self.editWorkoutViewModel.workout.rounds == nil {
-            self.editWorkoutViewModel.workout.rounds = []
-        }
-        self.editWorkoutViewModel.workout.rounds?.append(newRound)
+        self.editWorkoutViewModel.workout.rounds.append(newRound)
         
         print("New Workout: \(self.editWorkoutViewModel.workout)")
     }
