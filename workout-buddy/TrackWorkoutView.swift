@@ -10,20 +10,12 @@ import SwiftUI
 
 class TrackWorkoutViewModel: ObservableObject {
     @Published var workout: Workout
-    @Published var rounds: [Round]
-    @Published var exercises: [ExSet]
     @Published var isWorkoutSelected: Bool
     @Published var currentExercise: ExSet?
-    @Published var numOfRounds: Int
-    @Published var completedWorkout: Workout
     
     init() {
         workout = Workout(name: "")
-        rounds = []
-        exercises = []
         isWorkoutSelected = false
-        numOfRounds = 0
-        completedWorkout = Workout(name: "")
     }
 }
 
@@ -43,6 +35,7 @@ struct TrackWorkoutView: View {
     @State var modalView: ModalView = .workouts
     @State var workoutStarted = false
     @State var currentRound = 1
+    @State var curExIdx = 0
     @State var showingEndWorkoutAlert = false
     @State var showingToStopAlert = false
     @State var startTime: Double = 0
@@ -68,16 +61,20 @@ struct TrackWorkoutView: View {
         VStack {
                 VStack {
                     Spacer(minLength: 160)
-                    HStack {
-                        StopWatchView()
-                    }
+                    
+                    // TODO: Update StopWatch placement - taking too much space
+//                    HStack {
+//                        StopWatchView()
+//                    }
+                    
                     if (self.trackWorkoutViewModel.currentExercise != nil) {
                         VStack {
                             Button(action: {
-                                if let exIdx = self.trackWorkoutViewModel.exercises.firstIndex(of: self.trackWorkoutViewModel.currentExercise!) {
-                                    let indexSet = IndexSet.init(integer: exIdx)
-                                    self.completeExercise(at: indexSet)
-                                }
+                                // Mark exercise as complete
+                                self.trackWorkoutViewModel.workout.rounds[self.currentRound - 1].sets[self.curExIdx].completed = true
+                                
+                                let indexSet = IndexSet.init(integer: self.curExIdx)
+                                self.completeExercise(at: indexSet)
                             }) {
                                 Text("\(self.trackWorkoutViewModel.currentExercise!.exId.components(separatedBy: ":")[0].formatId())")
                                     .font(.system(size: 20, weight: .semibold))
@@ -92,14 +89,12 @@ struct TrackWorkoutView: View {
                             
                             HStack {
                                 Button(action: {
-                                    if let exIdx = self.trackWorkoutViewModel.exercises.firstIndex(of: self.trackWorkoutViewModel.currentExercise!) {
-                                        if self.trackWorkoutViewModel.currentExercise!.reps! > 0 {
-                                            self.trackWorkoutViewModel.exercises[exIdx].reps! -= 1
-                                            self.trackWorkoutViewModel.currentExercise!.reps! -= 1
-                                        } else if self.trackWorkoutViewModel.currentExercise!.time != nil {
-                                            self.trackWorkoutViewModel.exercises[exIdx].time! -= 1
-                                            self.trackWorkoutViewModel.currentExercise!.time! -= 1
-                                        }
+                                    if self.trackWorkoutViewModel.currentExercise!.reps! > 0 {
+                                        self.trackWorkoutViewModel.workout.rounds[self.currentRound - 1].sets[self.curExIdx].reps! -= 1
+                                        self.trackWorkoutViewModel.currentExercise!.reps! -= 1
+                                    } else if self.trackWorkoutViewModel.currentExercise!.time != nil {
+                                        self.trackWorkoutViewModel.workout.rounds[self.currentRound - 1].sets[self.curExIdx].time! -= 1
+                                        self.trackWorkoutViewModel.currentExercise!.time! -= 1
                                     }
                                 }) {
                                     Image(systemName: "minus")
@@ -131,14 +126,12 @@ struct TrackWorkoutView: View {
                                         .padding(.init(top: 0, leading: 16, bottom: 0, trailing: 16))
                                 }
                                 Button(action: {
-                                    if let exIdx = self.trackWorkoutViewModel.exercises.firstIndex(of: self.trackWorkoutViewModel.currentExercise!) {
-                                        if self.trackWorkoutViewModel.currentExercise!.reps! > 0 {
-                                            self.trackWorkoutViewModel.exercises[exIdx].reps! += 1
-                                            self.trackWorkoutViewModel.currentExercise!.reps! += 1
-                                        } else if self.trackWorkoutViewModel.currentExercise!.time != nil {
-                                            self.trackWorkoutViewModel.exercises[exIdx].time! += 1
-                                            self.trackWorkoutViewModel.currentExercise!.time! += 1
-                                        }
+                                    if self.trackWorkoutViewModel.currentExercise!.reps! > 0 {
+                                        self.trackWorkoutViewModel.workout.rounds[self.currentRound - 1].sets[self.curExIdx].reps! += 1
+                                        self.trackWorkoutViewModel.currentExercise!.reps! += 1
+                                    } else if self.trackWorkoutViewModel.currentExercise!.time != nil {
+                                        self.trackWorkoutViewModel.workout.rounds[self.currentRound - 1].sets[self.curExIdx].time! += 1
+                                        self.trackWorkoutViewModel.currentExercise!.time! += 1
                                     }
                                 }) {
                                     Image(systemName: "plus")
@@ -165,7 +158,7 @@ struct TrackWorkoutView: View {
                                         .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 2, x: 2, y: 2)
                             }.padding(.bottom)
                             Button(action: {
-                                //TODO: - Add Round
+                                self.addRound()
                             }) {
                                 Text("Add Round")
                                         .frame(width: 120, height: 60)
@@ -180,13 +173,8 @@ struct TrackWorkoutView: View {
                     HStack {
                         VStack {
                             HStack {
-                                Text("\(self.trackWorkoutViewModel.workout.name)")
-                                    .font(.title)
-                                    .padding()
-                                Spacer()
-                            }
-                            HStack {
-                                Text("Round \(currentRound) of \(trackWorkoutViewModel.numOfRounds)")
+                                Text("Round \(currentRound) of \(trackWorkoutViewModel.workout.rounds.count)")
+                                    .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
                                     .padding()
                                 Spacer()
                             }
@@ -194,19 +182,39 @@ struct TrackWorkoutView: View {
                         
                     }
                     List {
-                        ForEach(self.trackWorkoutViewModel.exercises, id:\.exId) { exercise in
-                            HStack {
-                                Text("\(exercise.exId)")
-                                Spacer()
-                                if exercise.reps! > 0 {
-                                    Text("\(exercise.reps!)x")
-                                } else if exercise.time != nil {
-                                    Text("\(exercise.time!)sec")
-                                }
+                        ForEach(self.trackWorkoutViewModel.workout.rounds) { round in
+                            Section(header: Text("Round \(round.id + 1)")) {
+                                ForEach(round.sets, id:\.exId) { exercise in
+                                    HStack {
+                                        VStack {
+                                            Text("\(exercise.exId.components(separatedBy: ":")[0].formatId())")
+                                            if (exercise.completed ?? false) {
+                                                Text("Completed")
+                                                    .font(.footnote)
+                                                    .multilineTextAlignment(.leading)
+                                            } else if (exercise.skipped ?? false) {
+                                                Text("Skipped")
+                                                    .font(.footnote)
+                                                    .multilineTextAlignment(.leading)
+                                            }
+                                        }
+                                        Spacer()
+                                        if exercise.reps! > 0 {
+                                            Text("\(exercise.reps!)x")
+                                        } else if exercise.time != nil {
+                                            Text("\(exercise.time!)sec")
+                                        }
+                                    }.onTapGesture {
+                                        self.trackWorkoutViewModel.currentExercise = exercise
+                                        self.currentRound = round.id + 1
+                                        self.curExIdx = round.sets.firstIndex(of: exercise) ?? 0
+                                    }
+                                }.onDelete { self.skipExercise(at: $0, in: round.id) }
+                                    
                             }
-                        }.onDelete(perform: completeExercise)
+                        }
                     }
-//                    .listStyle(GroupedListStyle())
+                    .listStyle(GroupedListStyle())
                 }
                 .background(Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 1)))
         }
@@ -233,48 +241,47 @@ struct TrackWorkoutView: View {
         .edgesIgnoringSafeArea(.all)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: btnCancel, trailing: btnFinish)
+        .navigationBarTitle(self.trackWorkoutViewModel.workout.name)
     }
     
     func completeExercise(at offsets: IndexSet) {
-        self.trackWorkoutViewModel.exercises.remove(atOffsets: offsets)
-        
-        // Save completed exercise
-        if (!self.trackWorkoutViewModel.completedWorkout.rounds.indices.contains(currentRound - 1)) {
-            let newRound = Round(id: currentRound - 1)
-            self.trackWorkoutViewModel.completedWorkout.rounds.append(newRound)
-        }
-        if let currentExercise = self.trackWorkoutViewModel.currentExercise {
-            self.trackWorkoutViewModel.completedWorkout.rounds[currentRound - 1].sets.append(currentExercise)
-        }
-        
-        
         if (!self.workoutStarted) { self.startWorkout() }
         
-        if (self.trackWorkoutViewModel.exercises.count == 0) {
-            print("Rounds \(self.trackWorkoutViewModel.rounds)")
+        // Start new round
+        if (self.curExIdx + 1 >= self.trackWorkoutViewModel.workout.rounds[self.currentRound - 1].sets.count) {
+            print("Rounds \(self.trackWorkoutViewModel.workout.rounds)")
             
-            self.trackWorkoutViewModel.rounds.removeFirst()
+            // Continue to the next round
+            if (self.currentRound < self.trackWorkoutViewModel.workout.rounds.count) { // Check if next round is avaiable
+                
+                self.currentRound += 1
+                self.curExIdx = 0
+                self.trackWorkoutViewModel.currentExercise = self.trackWorkoutViewModel.workout.rounds[self.currentRound - 1].sets[self.curExIdx]
+            } else {
+              
+                // Reset current exercise
+                self.trackWorkoutViewModel.currentExercise = nil
+            }
             
-                // Continue to the next round
-                if (self.trackWorkoutViewModel.rounds.count != 0) {
-                    
-                    self.trackWorkoutViewModel.rounds.forEach { (round) in
-                        print("Round: \(round.id)")
-                    }
-                    
-                    self.trackWorkoutViewModel.exercises = self.trackWorkoutViewModel.rounds[0].sets ?? []
-                    self.currentRound = self.trackWorkoutViewModel.rounds[0].id + 1
-                    self.trackWorkoutViewModel.currentExercise = self.trackWorkoutViewModel.exercises[0]
-                } else {
-                  
-                    // Reset current exercise
-                    self.trackWorkoutViewModel.currentExercise = nil
-                }
-            
-        } else {
-            self.trackWorkoutViewModel.currentExercise = self.trackWorkoutViewModel.exercises[0]
+        } else { // Continue to the next exercise in the round
+            self.curExIdx += 1
+            self.trackWorkoutViewModel.currentExercise = self.trackWorkoutViewModel.workout.rounds[self.currentRound - 1].sets[self.curExIdx]
         }
-        print(self.trackWorkoutViewModel.currentExercise)
+        print(self.trackWorkoutViewModel.currentExercise as Any)
+    }
+    
+    func skipExercise(at offset: IndexSet, in round: Int) {
+        offset.forEach { i in
+            self.trackWorkoutViewModel.workout.rounds[round].sets[i].skipped = true
+            self.trackWorkoutViewModel.workout.rounds[round].sets[i].completed = false
+        }
+    }
+    
+    func addRound() {
+        let newRound = Round(id: currentRound)
+        self.trackWorkoutViewModel.workout.rounds.append(newRound)
+        self.currentRound += 1
+        self.curExIdx = 0
     }
     
     func startWorkout() {
@@ -293,7 +300,7 @@ struct TrackWorkoutView: View {
         let workoutTime = Int(round(currentTime - self.startTime))
         
         // Save workout to log
-        let completedWorkout = CompletedWorkout(workout: self.trackWorkoutViewModel.completedWorkout, completionTs: Date().timeIntervalSince1970, time: workoutTime)
+        let completedWorkout = CompletedWorkout(workout: self.trackWorkoutViewModel.workout, completionTs: Date().timeIntervalSince1970, time: workoutTime)
         print("Completed workout: \(completedWorkout)")
         self.userData.workoutLog.append(completedWorkout)
         self.userData.saveCompletedWorkout(completedWorkout: completedWorkout)
@@ -301,12 +308,8 @@ struct TrackWorkoutView: View {
         // Reset workout data
         self.workoutStarted = false
         self.trackWorkoutViewModel.workout = Workout(name: "")
-        self.trackWorkoutViewModel.rounds = []
-        self.trackWorkoutViewModel.exercises = []
         self.trackWorkoutViewModel.isWorkoutSelected = false
         self.trackWorkoutViewModel.currentExercise = nil
-        self.trackWorkoutViewModel.numOfRounds = 0
-        self.trackWorkoutViewModel.completedWorkout = self.trackWorkoutViewModel.workout
     }
     
     func cancelWorkout() {
@@ -315,9 +318,9 @@ struct TrackWorkoutView: View {
         // Reset workout data
         self.workoutStarted = false
         self.trackWorkoutViewModel.workout = Workout(name: "")
-        self.trackWorkoutViewModel.rounds = []
-        self.trackWorkoutViewModel.exercises = []
         self.trackWorkoutViewModel.isWorkoutSelected = false
+        self.currentRound = 1
+        self.curExIdx = 0
         
         self.presentaionMode.wrappedValue.dismiss()
     }

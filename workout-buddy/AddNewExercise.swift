@@ -133,17 +133,12 @@ struct AddNewExerciseTracking: View {
 
                         let newExSet = ExSet(exId: self.addNewExerciseViewModel.exercise!.id, time: self.time, reps: self.reps)
                         print("New Set: \(newExSet)")
-                        self.trackWorkoutViewModel.exercises.append(newExSet)
                         if (self.trackWorkoutViewModel.workout.rounds.isEmpty) {
                             var newRound = Round(id: 0)
                             newRound.sets = [newExSet]
                             self.trackWorkoutViewModel.workout.rounds.append(newRound)
-                            self.trackWorkoutViewModel.rounds.append(newRound)
-                        } else {
-                            print("Round: \(self.trackWorkoutViewModel.workout.rounds[self.roundNumber])")
-                            self.trackWorkoutViewModel.workout.rounds[self.roundNumber].sets.append(newExSet)
-                            self.trackWorkoutViewModel.rounds = self.trackWorkoutViewModel.workout.rounds
                         }
+                        self.trackWorkoutViewModel.workout.rounds[self.roundNumber].sets.append(newExSet)
                         self.trackWorkoutViewModel.currentExercise = newExSet
                         
                         print("Round: \(self.trackWorkoutViewModel.workout.rounds[self.roundNumber])")

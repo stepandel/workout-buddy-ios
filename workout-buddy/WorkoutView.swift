@@ -36,7 +36,7 @@ struct WorkoutView: View {
             }
             .padding()
             
-            RoundBlock(rounds: workout.rounds ?? [])
+            RoundBlock(rounds: workout.rounds)
 //            Spacer()
 //                .frame(height: 12.0)
             

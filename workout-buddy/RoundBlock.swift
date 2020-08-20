@@ -18,7 +18,7 @@ struct RoundBlock: View {
             
             ForEach(rounds, id:\.self) { round in
                 Section(header: Text("Round \(round.id + 1)")) {
-                    List(round.sets ?? [], id:\.exId) { set in
+                    List(round.sets, id:\.exId) { set in
                         HStack {
                             Text("\(set.exId)")
                             Spacer()
@@ -37,7 +37,7 @@ struct RoundBlock: View {
 
 struct RoundView_Previews: PreviewProvider {
     static var previews: some View {
-        RoundBlock(rounds: sampleWorkouts[0].rounds ?? [])
+        RoundBlock(rounds: sampleWorkouts[0].rounds)
             .previewLayout(.sizeThatFits)
         
     }

@@ -21,21 +21,16 @@ struct PickWorkoutView: View {
                 self.trackWorkoutViewModel.workout = workout
                 self.trackWorkoutViewModel.isWorkoutSelected = true
                 if workout.rounds[0].sets.count != 0 {
-                    self.trackWorkoutViewModel.rounds = workout.rounds
-
-                    self.trackWorkoutViewModel.exercises = workout.rounds[0].sets
-                    self.trackWorkoutViewModel.numOfRounds = workout.rounds.count
-                    
+                    self.trackWorkoutViewModel.currentExercise = workout.rounds[0].sets[0]
                 } else {
                     // TODO: - handle empty workout
                 }
-                self.trackWorkoutViewModel.currentExercise = self.trackWorkoutViewModel.exercises[0]
-                
-                // Set default name to completed workout
-                self.trackWorkoutViewModel.completedWorkout.name = workout.name
-                self.trackWorkoutViewModel.completedWorkout.focus = workout.focus
-                self.trackWorkoutViewModel.completedWorkout.type = workout.type
-                
+                self.trackWorkoutViewModel.workout.rounds.forEach({ round in
+                    print("Round indices: \(round.sets.indices)")
+                    round.sets.indices.forEach({ i in
+                        print("Index: \(i)")
+                    })
+                })
                 self.isPresentationMode.wrappedValue.dismiss()
             }){
                 WorkoutRow(workout: workout)

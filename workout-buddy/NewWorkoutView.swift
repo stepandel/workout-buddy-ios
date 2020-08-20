@@ -150,7 +150,7 @@ struct NewWorkoutView: View {
         let numberOfRounds = self.newWorkoutViewModel.workout.rounds.count
         var newRound = Round(id: numberOfRounds)
         if copy {
-            newRound.sets = self.newWorkoutViewModel.workout.rounds[0].sets ?? []
+            newRound.sets = self.newWorkoutViewModel.workout.rounds[0].sets
         }
         print("New Round: \(newRound)")
         

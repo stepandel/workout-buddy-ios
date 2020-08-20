@@ -12,5 +12,6 @@ struct ExSet: Hashable, Codable {
     var exId: String
     var time: Int?
     var reps: Int?
-//    var sets: Int
+    var skipped: Bool?
+    var completed: Bool?
 }
