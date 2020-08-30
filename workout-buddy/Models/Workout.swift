@@ -21,18 +21,18 @@ struct Workout: Hashable, Codable, Identifiable {
         self.focus = focus
         self.type = type
         
-        let newRound = Round(id: 0)
+        let newRound = Round()
         
         self.rounds = [newRound]
     }
 }
 
 struct Round: Hashable, Codable, Identifiable {
-    var id: Int
+    var id: String
     var sets: [ExSet]
     
-    init(id: Int){
-        self.id = id
+    init(){
+        self.id = UUID().uuidString
         self.sets = []
     }
 }

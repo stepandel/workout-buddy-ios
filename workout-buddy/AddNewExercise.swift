@@ -102,6 +102,7 @@ struct AddNewExerciseTracking: View {
     @ObservedObject var trackWorkoutViewModel: TrackWorkoutViewModel
     @ObservedObject var addNewExerciseViewModel: AddNewExerciseViewModel = AddNewExerciseViewModel()
     @State var roundNumber: Int
+    @State var afterIndex: Int
 
     @State var id = ""
     @State private var repsStr = ""
@@ -134,11 +135,11 @@ struct AddNewExerciseTracking: View {
                         let newExSet = ExSet(exId: self.addNewExerciseViewModel.exercise!.id, time: self.time, reps: self.reps)
                         print("New Set: \(newExSet)")
                         if (self.trackWorkoutViewModel.workout.rounds.isEmpty) {
-                            var newRound = Round(id: 0)
+                            var newRound = Round()
                             newRound.sets = [newExSet]
                             self.trackWorkoutViewModel.workout.rounds.append(newRound)
                         }
-                        self.trackWorkoutViewModel.workout.rounds[self.roundNumber].sets.append(newExSet)
+                        self.trackWorkoutViewModel.workout.rounds[self.roundNumber].sets.insert(newExSet, at: self.afterIndex + 1)
                         self.trackWorkoutViewModel.currentExercise = newExSet
                         
                         print("Round: \(self.trackWorkoutViewModel.workout.rounds[self.roundNumber])")
@@ -277,7 +278,7 @@ struct AddNewExercise_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             AddNewExercise(newWorkoutViewModel: NewWorkoutViewModel(), roundNumber: 0).environmentObject(UserData())
-            AddNewExerciseTracking(trackWorkoutViewModel: TrackWorkoutViewModel(), roundNumber: 0).environmentObject(UserData())
+            AddNewExerciseTracking(trackWorkoutViewModel: TrackWorkoutViewModel(), roundNumber: 0, afterIndex: 0).environmentObject(UserData())
             AddNewExerciseEdit(editWorkoutViewModel: EditWorkoutViewModel(workout: Workout(name: "Random")), roundNumber: 0)
             .environmentObject(UserData())
         }

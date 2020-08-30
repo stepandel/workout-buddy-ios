@@ -16,9 +16,9 @@ struct RoundBlock: View {
             
             // TODO: - create / use OptionalView wrapper
             
-            ForEach(rounds, id:\.self) { round in
-                Section(header: Text("Round \(round.id + 1)")) {
-                    List(round.sets, id:\.exId) { set in
+            ForEach(rounds.indices) { i in
+                Section(header: Text("Round \(i + 1)")) {
+                    List(self.rounds[i].sets, id:\.exId) { set in
                         HStack {
                             Text("\(set.exId)")
                             Spacer()

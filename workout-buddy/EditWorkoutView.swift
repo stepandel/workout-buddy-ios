@@ -89,9 +89,9 @@ struct EditWorkoutView: View {
                     }
                 }
                 
-                ForEach(self.editWorkoutViewModel.workout.rounds, id:\.self) { round in
-                    Section(header: Text("Round \(round.id + 1)"))  {
-                        ForEach(round.sets, id:\.exId) { set in
+                ForEach(self.editWorkoutViewModel.workout.rounds.indices) { i in
+                    Section(header: Text("Round \(i + 1)"))  {
+                        ForEach(self.editWorkoutViewModel.workout.rounds[i].sets, id:\.exId) { set in
                             HStack {
                                 Text(set.exId)
                                 Spacer()
@@ -102,15 +102,13 @@ struct EditWorkoutView: View {
                                 }
                             }.padding(.horizontal)
                         }.onDelete { (indexSet) in
-                            if let round = self.editWorkoutViewModel.workout.rounds.firstIndex(of: round) {
-                                var roundSet = self.editWorkoutViewModel.workout.rounds[round].sets
-                                roundSet.remove(atOffsets: indexSet)
-                                self.editWorkoutViewModel.workout.rounds[round].sets = roundSet
-                            }
+                            var roundSet = self.editWorkoutViewModel.workout.rounds[i].sets
+                            roundSet.remove(atOffsets: indexSet)
+                            self.editWorkoutViewModel.workout.rounds[i].sets = roundSet
                         }
                         HStack {
                             Button(action: {
-                                self.roundNumber = self.editWorkoutViewModel.workout.rounds.firstIndex(of: round)!
+                                self.roundNumber = i
                                 self.showingAddNewExercise.toggle()
                             }) {
                                 Image(systemName: "plus.circle")
@@ -129,8 +127,7 @@ struct EditWorkoutView: View {
     }
     
     func addRound(copy: Bool) {
-        let numberOfRounds = self.editWorkoutViewModel.workout.rounds.count
-        var newRound = Round(id: numberOfRounds)
+        var newRound = Round()
         if copy {
             newRound.sets = self.editWorkoutViewModel.workout.rounds[0].sets
         }

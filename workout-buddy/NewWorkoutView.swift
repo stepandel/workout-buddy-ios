@@ -104,10 +104,10 @@ struct NewWorkoutView: View {
                         }
                     }
                 }
-                ForEach(self.newWorkoutViewModel.workout.rounds, id:\.self) { round in
-                    Section(header: Text("Round \(round.id + 1)")){
+                ForEach(self.newWorkoutViewModel.workout.rounds.indices) { i in
+                    Section(header: Text("Round \(i + 1)")){
                         
-                        List(round.sets, id:\.exId) { set in
+                        List(self.newWorkoutViewModel.workout.rounds[i].sets, id:\.exId) { set in
                             HStack {
                                 Text(set.exId)
                                 Spacer()
@@ -120,7 +120,7 @@ struct NewWorkoutView: View {
                         }
                         HStack {
                             Button(action: {
-                                self.roundNumber = self.newWorkoutViewModel.workout.rounds.firstIndex(of: round)!
+                                self.roundNumber = i
                                 print("Round number: \(self.roundNumber)")
                                 self.showingAddNewExercise.toggle()
                                 print("Workout: \(self.newWorkoutViewModel.workout)")
@@ -147,8 +147,7 @@ struct NewWorkoutView: View {
     
     func addRound(copy: Bool) {
         
-        let numberOfRounds = self.newWorkoutViewModel.workout.rounds.count
-        var newRound = Round(id: numberOfRounds)
+        var newRound = Round()
         if copy {
             newRound.sets = self.newWorkoutViewModel.workout.rounds[0].sets
         }
