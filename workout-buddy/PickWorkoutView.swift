@@ -20,11 +20,6 @@ struct PickWorkoutView: View {
                 print("Button pressed")
                 self.trackWorkoutViewModel.workout = workout
                 self.trackWorkoutViewModel.isWorkoutSelected = true
-                if workout.rounds[0].sets.count != 0 {
-                    self.trackWorkoutViewModel.currentExercise = workout.rounds[0].sets[0]
-                } else {
-                    // TODO: - handle empty workout
-                }
                 self.trackWorkoutViewModel.workout.rounds.forEach({ round in
                     print("Round indices: \(round.sets.indices)")
                     round.sets.indices.forEach({ i in

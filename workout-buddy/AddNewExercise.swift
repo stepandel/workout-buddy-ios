@@ -140,7 +140,6 @@ struct AddNewExerciseTracking: View {
                             self.trackWorkoutViewModel.workout.rounds.append(newRound)
                         }
                         self.trackWorkoutViewModel.workout.rounds[self.roundNumber].sets.insert(newExSet, at: self.afterIndex + 1)
-                        self.trackWorkoutViewModel.currentExercise = newExSet
                         
                         print("Round: \(self.trackWorkoutViewModel.workout.rounds[self.roundNumber])")
                         self.presentaionMode.wrappedValue.dismiss()
