@@ -29,7 +29,7 @@ struct Workout: Hashable, Codable, Identifiable {
 
 struct Round: Hashable, Codable, Identifiable {
     var id: String
-    var sets: [ExSet]
+    var sets: [[ExSet]]
     
     init(){
         self.id = UUID().uuidString

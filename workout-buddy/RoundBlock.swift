@@ -18,14 +18,14 @@ struct RoundBlock: View {
             
             ForEach(rounds.indices) { i in
                 Section(header: Text("Round \(i + 1)")) {
-                    List(self.rounds[i].sets, id:\.exId) { set in
+                    List(self.rounds[i].sets, id:\.self) { set in
                         HStack {
-                            Text("\(set.exId)")
+                            Text("\(set[0].exId)")
                             Spacer()
-                            if set.reps ?? 0 > 0 {
-                                Text("\(set.reps!)x")
-                            } else if set.time != nil {
-                                Text("\(set.time!)sec")
+                            if set[0].reps ?? 0 > 0 {
+                                Text("\(set[0].reps!)x")
+                            } else if set[0].time != nil {
+                                Text("\(set[0].time!)sec")
                             }
                         }
                     }

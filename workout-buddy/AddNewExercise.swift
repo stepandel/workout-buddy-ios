@@ -50,7 +50,7 @@ struct AddNewExercise: View {
                         let newExSet = ExSet(exId: self.addNewExerciseViewModel.exercise!.id, time: self.time, reps: self.reps)
                         print("New Set: \(newExSet)")
                         print("Round: \(self.newWorkoutViewModel.workout.rounds[self.roundNumber])")
-                        self.newWorkoutViewModel.workout.rounds[self.roundNumber].sets.append(newExSet)
+                        self.newWorkoutViewModel.workout.rounds[self.roundNumber].sets.append([newExSet])
                         print("Round: \(self.newWorkoutViewModel.workout.rounds[self.roundNumber])")
                         self.presentaionMode.wrappedValue.dismiss()
                         print("\(self.newWorkoutViewModel.workout)")
@@ -136,10 +136,10 @@ struct AddNewExerciseTracking: View {
                         print("New Set: \(newExSet)")
                         if (self.trackWorkoutViewModel.workout.rounds.isEmpty) {
                             var newRound = Round()
-                            newRound.sets = [newExSet]
+                            newRound.sets = [[newExSet]]
                             self.trackWorkoutViewModel.workout.rounds.append(newRound)
                         }
-                        self.trackWorkoutViewModel.workout.rounds[self.roundNumber].sets.insert(newExSet, at: self.afterIndex + 1)
+                        self.trackWorkoutViewModel.workout.rounds[self.roundNumber].sets.insert([newExSet], at: self.afterIndex + 1)
                         
                         print("Round: \(self.trackWorkoutViewModel.workout.rounds[self.roundNumber])")
                         self.presentaionMode.wrappedValue.dismiss()
@@ -224,7 +224,7 @@ struct AddNewExerciseEdit: View {
                         let newExSet = ExSet(exId: self.addNewExerciseViewModel.exercise!.id, time: self.time, reps: self.reps)
                         print("New Set: \(newExSet)")
                         print("Round: \(self.editWorkoutViewModel.workout.rounds[self.roundNumber])")
-                        self.editWorkoutViewModel.workout.rounds[self.roundNumber].sets.append(newExSet)
+                        self.editWorkoutViewModel.workout.rounds[self.roundNumber].sets.append([newExSet])
                         print("Round: \(self.editWorkoutViewModel.workout.rounds[self.roundNumber])")
                         self.presentaionMode.wrappedValue.dismiss()
                         print("\(self.editWorkoutViewModel.workout)")
