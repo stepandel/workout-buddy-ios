@@ -13,7 +13,7 @@ class TrackWorkoutViewModel: ObservableObject {
     @Published var isWorkoutSelected: Bool
     
     init() {
-        workout = Workout(name: "")
+        workout = Workout(name: "New Workout")
         isWorkoutSelected = false
     }
 }
@@ -66,210 +66,86 @@ struct TrackWorkoutView: View {
     }
     
     var body: some View {
-        VStack {
-                VStack {
-                    Spacer(minLength: 160)
+//        VStack {
                     
-                    // TODO: Update StopWatch placement - taking too much space
 //                    HStack {
-//                        StopWatchView()
+//                        VStack {
+//                            HStack {
+//                                Text("Round \(currentRound + 1) of \(trackWorkoutViewModel.workout.rounds.count)")
+//                                    .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+//                                    .padding()
+//                                Spacer()
+//                            }
+//                        }
+//
 //                    }
-                    
-                    if (self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets.indices.contains(self.curExIdx)) {
-                        
-                        // Current Exercise View
-                        VStack {
-                            HStack {
-                                Button(action: {
-                                    if (self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].completed != false) {
-                                        self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].completed = false
-                                    } else {
-                                        // Mark exercise as complete
-                                        self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].completed = true
-                                        
-                                        let indexSet = IndexSet.init(integer: self.curExIdx)
-                                        self.completeExercise(at: indexSet)
-                                    }
-                                }) {
-                                    Text("\(trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].exId.components(separatedBy: ":")[0].formatId())")
-                                        .font(.system(size: 20, weight: .semibold))
-                                        .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-                                        .frame(width: 240, height: 40)
-                                        .background(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
-                                        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                                        .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 2, x: -2, y: -2)
-                                        .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 2, x: 2, y: 2)
-                                }
-                                .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 16))
-                                
-                                VStack {
-                                    Button(action: {
-                                        if self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].reps! > 0 {
-                                            self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].reps! += 1
-                                        } else if self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].time != nil {
-                                            self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].time! += 1
-                                        }
-                                    }) {
-                                        Image(systemName: "arrowtriangle.up.fill")
-                                            .foregroundColor(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
-    //                                        .frame(width: 60, height: 60)
-    //                                        .background(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
-    //                                        .clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
-                                            .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 0.5, x: -0.5, y: -0.5)
-                                            .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 0.5, x: 0.5, y: 0.5)
-                                    }.padding(.bottom)
-                                    if self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].reps! > 0 {
-                                        Text("\(self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].reps!)x")
-                                            .font(.system(size: 20, weight: .semibold))
-                                            .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-                                            .frame(width: 80, height: 40)
-                                            .background(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
-                                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                                            .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 0.5, x: 0.5, y: 0.5)
-                                            .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 0.5, x: -0.5, y: -0.5)
-                                            .padding(.init(top: 0, leading: 16, bottom: 0, trailing: 16))
-                                    } else if self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].time != nil {
-                                        Text("\(self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].time!)sec")
-                                            .font(.system(size: 20, weight: .semibold))
-                                            .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-                                            .frame(width: 60, height: 40)
-                                            .background(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
-                                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                                            .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 0.5, x: 0.5, y: 0.5)
-                                            .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 0.5, x: -0.5, y: -0.5)
-                                            .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-                                    }
-                                    Button(action: {
-                                        if self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].reps! > 0 {
-                                            self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].reps! -= 1
-                                        } else if self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].time != nil {
-                                            self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].time! -= 1
-                                        }
-                                    }) {
-                                        Image(systemName: "arrowtriangle.down.fill")
-                                            .foregroundColor(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
-    //                                        .frame(width: 60, height: 60)
-    //                                        .background(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
-    //                                        .clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
-                                            .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 0.5, x: -0.5, y: -0.5)
-                                            .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 0.5, x: 0.5, y: 0.5)
-                                    }.padding(.top)
-                                }
-                            
-                            }
-                            
-                            Button(action: {self.addExercise(round: self.currentRound, addLast: false)}) {
-                                Text("+ Exercise")
-                            }
-                            
-                        }
-                        .padding(.init(top: 32, leading: 32, bottom: 16, trailing: 32))
-                    } else {
-                        
-                        // Display Add Exercise and Add Round Buttons
-                        
-                        VStack {
-                            Button(action: {
-                                self.addExercise(round: self.currentRound, addLast: true)
-                            }) {
-                                Image(systemName: "plus")
-                                        .frame(width: 60, height: 60)
-                                        .background(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
-                                        .clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
-                                        .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 2, x: -2, y: -2)
-                                        .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 2, x: 2, y: 2)
-                            }.padding(.bottom)
-                            Button(action: {
-                                self.showingAlert.toggle()
-                                self.alertPopup = .addRound
-                            }) {
-                                Text("Add Round")
-                                        .frame(width: 120, height: 60)
-                                        .background(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
-                                        .clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
-                                        .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 2, x: -2, y: -2)
-                                        .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 2, x: 2, y: 2)
-                                }
-                        }
-//                        .padding(.init(top: 32, leading: 32, bottom: 16, trailing: 32))
-                    }
-                    HStack {
-                        VStack {
-                            HStack {
-                                Text("Round \(currentRound + 1) of \(trackWorkoutViewModel.workout.rounds.count)")
-                                    .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-                                    .padding()
-                                Spacer()
-                            }
-                        }
-                        
-                    }
                     
                     // Exercise List broken down by Round
                     
-                    List {
-                        ForEach(self.trackWorkoutViewModel.workout.rounds) { round in
-                            Section(header: Text("Round \(self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)! + 1)")) {
-                                ForEach(round.sets, id: \.self) { set in
-                                    HStack {
-                                        VStack {
-                                            Text("\(set[0].exId.components(separatedBy: ":")[0].formatId())")
-                                            if (set[0].completed ?? false) {
-                                                Text("Completed")
-                                                    .font(.footnote)
-                                                    .multilineTextAlignment(.leading)
-                                            } else if (set[0].skipped ?? false) {
-                                                Text("Skipped")
-                                                    .font(.footnote)
-                                                    .multilineTextAlignment(.leading)
-                                            }
-                                        }
-                                        Spacer()
-                                        if set[0].reps! > 0 {
-                                            Text("\(set[0].reps!)x")
-                                        } else if set[0].time != nil {
-                                            Text("\(set[0].time!)sec")
-                                        }
-                                    }.onTapGesture {
+        List {
+            ForEach(self.trackWorkoutViewModel.workout.rounds) { round in
+                Section(header: Text("Round \(self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)! + 1)")) {
+                    ForEach(round.sets, id: \.self) { set in
+                        HStack {
+                            VStack {
+                                Text("\(set[0].exId.components(separatedBy: ":")[0].formatId())")
+                                Spacer()
+                                Text("1 Set")
+                                .font(.footnote)
+                                if (set[0].completed ?? false) {
+                                    Text("Completed")
+                                        .font(.footnote)
+                                        .multilineTextAlignment(.leading)
+                                } else if (set[0].skipped ?? false) {
+                                    Text("Skipped")
+                                        .font(.footnote)
+                                        .multilineTextAlignment(.leading)
+                                }
+                            }
+                            Spacer()
+                            if set[0].reps! > 0 {
+                                Text("\(set[0].reps!)x")
+                            } else if set[0].time != nil {
+                                Text("\(set[0].time!)sec")
+                            }
+                        }.onTapGesture {
 //                                        self.trackWorkoutViewModel.currentExercise = exercise
-                                        self.currentRound = self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!
-                                        self.curExIdx = round.sets.firstIndex(of: set) ?? 0
-                                    }
-                                }.onDelete { self.deleteExercise(at: $0, in: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!) }
-                                Button(action: { self.addExercise(round: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!, addLast: true) }) {
-                                    Text("+ Exercise")
-                                        .multilineTextAlignment(.center)
-                                }
-                                    
-                            }
-                            Section {
-                                Button(action: {
-                                    self.deleteRound(round: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!)
-                                }) {
-                                    Text("Delete round")
-                                        .multilineTextAlignment(.center)
-                                        .foregroundColor(.red)
-                                }
-                                Button(action: {
-                                    self.currentRound = self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!
-                                    self.curExIdx = 0
-                                    self.showingAlert.toggle()
-                                    self.alertPopup = .addRound
-                                }) {
-                                    Text("Add Round")
-                                        .multilineTextAlignment(.center)
-                                }
-                            }
+                            self.currentRound = self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!
+                            self.curExIdx = round.sets.firstIndex(of: set) ?? 0
                         }
-                        Section(header: Text("")) {
-                            EmptyView()
-
-                        }
+                    }.onDelete { self.deleteExercise(at: $0, in: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!) }
+                    Button(action: { self.addExercise(round: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!, addLast: true) }) {
+                        Text("+ Exercise")
+                            .multilineTextAlignment(.center)
                     }
-                    .listStyle(GroupedListStyle())
+                        
                 }
-                .background(Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 1)))
+                Section {
+                    Button(action: {
+                        self.deleteRound(round: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!)
+                    }) {
+                        Text("Delete round")
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.red)
+                    }
+                    Button(action: {
+                        self.currentRound = self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!
+                        self.curExIdx = 0
+                        self.showingAlert.toggle()
+                        self.alertPopup = .addRound
+                    }) {
+                        Text("Add Round")
+                            .multilineTextAlignment(.center)
+                    }
+                }
+            }
+            Section(header: Text("")) {
+                EmptyView()
+
+            }
         }
+        .listStyle(GroupedListStyle())
+//        }
         .onAppear {
             print("\(self.trackWorkoutViewModel.workout)")
             UIApplication.shared.isIdleTimerDisabled = true
@@ -296,12 +172,13 @@ struct TrackWorkoutView: View {
                 return Alert(title: Text("Something went wrong!"))
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+//        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 1)))
-        .edgesIgnoringSafeArea(.all)
+//        .edgesIgnoringSafeArea(.all)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: btnCancel, trailing: btnFinish)
         .navigationBarTitle(self.trackWorkoutViewModel.workout.name)
+        
     }
     
     func completeExercise(at offsets: IndexSet) {
