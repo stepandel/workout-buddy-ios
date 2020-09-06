@@ -13,7 +13,7 @@ class TrackWorkoutViewModel: ObservableObject {
     @Published var isWorkoutSelected: Bool
     
     init() {
-        workout = Workout(name: "New Workout")
+        workout = Workout(name: "")
         isWorkoutSelected = false
     }
 }
@@ -81,11 +81,15 @@ struct TrackWorkoutView: View {
 //                    }
                     
                     // Exercise List broken down by Round
-                    
+//        NavigationView {
         List {
+            Section {
+                TextField("New Workout", text: self.$trackWorkoutViewModel.workout.name)
+            }
             ForEach(self.trackWorkoutViewModel.workout.rounds) { round in
                 Section(header: Text("Round \(self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)! + 1)")) {
                     ForEach(round.sets, id: \.self) { set in
+                        NavigationLink(destination: SelectedExerciseView(trackWorkoutViewModel: self.trackWorkoutViewModel, currentRound: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!, curExIdx: round.sets.firstIndex(of: set)!)) {
                         HStack {
                             VStack {
                                 Text("\(set[0].exId.components(separatedBy: ":")[0].formatId())")
@@ -108,12 +112,16 @@ struct TrackWorkoutView: View {
                             } else if set[0].time != nil {
                                 Text("\(set[0].time!)sec")
                             }
-                        }.onTapGesture {
-//                                        self.trackWorkoutViewModel.currentExercise = exercise
-                            self.currentRound = self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!
-                            self.curExIdx = round.sets.firstIndex(of: set) ?? 0
                         }
-                    }.onDelete { self.deleteExercise(at: $0, in: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!) }
+                    }
+//                    .onTapGesture {
+////                                        self.trackWorkoutViewModel.currentExercise = exercise
+//                        self.currentRound = self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!
+//                        self.curExIdx = round.sets.firstIndex(of: set) ?? 0
+//                    }
+                    
+                    }
+//                        .onDelete { self.deleteExercise(at: $0, in: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!) }
                     Button(action: { self.addExercise(round: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!, addLast: true) }) {
                         Text("+ Exercise")
                             .multilineTextAlignment(.center)
@@ -138,6 +146,9 @@ struct TrackWorkoutView: View {
                             .multilineTextAlignment(.center)
                     }
                 }
+            }
+            .onTapGesture {
+                self.hideKeyboard()
             }
             Section(header: Text("")) {
                 EmptyView()
@@ -280,6 +291,10 @@ struct TrackWorkoutView: View {
         self.curExIdx = 0
         
         self.presentaionMode.wrappedValue.dismiss()
+    }
+    
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 
