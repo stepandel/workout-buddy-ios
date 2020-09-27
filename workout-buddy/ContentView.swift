@@ -43,7 +43,13 @@ struct ContentView: View {
 //                    }
 //                }
 //                .tag(2)
-            // TODO: - Add Profile View
+            ProfileView()
+                .tabItem {
+                    VStack {
+                        Image(systemName: "person.crop.circle")
+                        Text("Profile")
+                    }
+                }
         }
     }
 }
