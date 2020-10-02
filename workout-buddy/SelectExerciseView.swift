@@ -12,6 +12,7 @@ struct SelectExerciseView: View {
     @EnvironmentObject var userData: UserData
     @ObservedObject var addNewExerciseViewModel: AddNewExerciseViewModel
     @State private var searchText: String = ""
+    @State private var isPresented = false
     
     @Environment(\.presentationMode) var presentaionMode
     
@@ -33,7 +34,13 @@ struct SelectExerciseView: View {
                     }
                 }
             }.navigationBarTitle(Text("Exercises"))
-        }.onTapGesture {
+            .navigationBarItems(trailing: Button(action: {
+                self.isPresented.toggle()
+            }) {
+                Image(systemName: "plus")
+        })
+        }.sheet(isPresented: self.$isPresented) { NewExerciseView().environmentObject(self.userData) }
+        .onTapGesture {
             self.hideKeyboard()
         }
     }
