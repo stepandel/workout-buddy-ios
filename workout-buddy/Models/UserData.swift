@@ -8,20 +8,57 @@
 
 import Combine
 import SwiftUI
+import CryptoKit
 
 final class UserData: ObservableObject {
+    @Published var isLoggedIn = false
     @Published var workouts: [Workout] = []
     @Published var exercises: [Exercise] = []
     @Published var workoutLog: [CompletedWorkout] = []
-    private var userId: String = UIDevice.current.identifierForVendor?.uuidString ?? "fake666"
+    private var userId: String = ""
     
     init() {
-        getWorkouts()
-        getExercises()
-        getWorkoutLog()
+        if userId != "" {
+            isLoggedIn = true
+        }
     }
     
     // TODO: - Listen for changes to save new workouts
+    
+    func saveNewUser(email: String, pass: String) {
+        
+        let emailData = Data(email.utf8)
+        let id = SHA256.hash(data: emailData).description
+        
+        NetworkManager().saveNewUser(id: id, pass: pass)
+        
+        self.userId = id
+        
+        self.isLoggedIn = true
+    }
+    
+    func checkUser(email: String, pass: String) {
+        
+        let emailData = Data(email.utf8)
+        let id = SHA256.hash(data: emailData).description
+        
+        NetworkManager().checkUser(id: id, pass: pass) { (success) in
+            DispatchQueue.main.async {
+                self.isLoggedIn = success
+                
+                print("\n \n Success loggin in? \(String(success)) \n \n")
+                
+                if success {
+                    
+                    self.userId = id
+                    
+                    self.getWorkouts()
+                    self.getExercises()
+                    self.getWorkoutLog()
+                }
+            }
+        }
+    }
     
     func getWorkouts() {
         NetworkManager().getWorkouts(userId: self.userId) { (workouts) in

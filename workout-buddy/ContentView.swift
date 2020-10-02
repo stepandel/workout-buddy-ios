@@ -15,41 +15,49 @@ struct ContentView: View {
     @State private var selection = 0
  
     var body: some View {
-        TabView(selection: $selection){
-            ActivitiesView()
-                .environmentObject(self.userData)
-                .tabItem {
-                    VStack {
-                        Image(systemName: "house.fill")
-                        Text("Feed")
+        
+        ZStack {
+        
+            TabView(selection: $selection){
+                ActivitiesView()
+                    .environmentObject(self.userData)
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "house.fill")
+                            Text("Feed")
+                        }
                     }
-                }
-                .tag(1)
-            SelectTrackingView()
-                .environmentObject(self.userData)
-                .tabItem {
-                    VStack {
-                        Image(systemName: "play.circle")
-                        Text("Track")
+                    .tag(1)
+                SelectTrackingView()
+                    .environmentObject(self.userData)
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "play.circle")
+                            Text("Track")
+                        }
                     }
-                }
-                .tag(0)
-//            WorkoutsView()
-//                .environmentObject(self.userData)
-//                .tabItem {
-//                    VStack {
-//                        Image(systemName: "tray.fill")
-//                        Text("Workouts")
-//                    }
-//                }
-//                .tag(2)
-            ProfileView()
-                .tabItem {
-                    VStack {
-                        Image(systemName: "person.crop.circle")
-                        Text("Profile")
+                    .tag(0)
+    //            WorkoutsView()
+    //                .environmentObject(self.userData)
+    //                .tabItem {
+    //                    VStack {
+    //                        Image(systemName: "tray.fill")
+    //                        Text("Workouts")
+    //                    }
+    //                }
+    //                .tag(2)
+                ProfileView()
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "person.crop.circle")
+                            Text("Profile")
+                        }
                     }
-                }
+            }
+            
+            if !userData.isLoggedIn {
+                LoginView()
+            }
         }
     }
 }

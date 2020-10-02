@@ -9,6 +9,28 @@
 import SwiftUI
 
 
+struct SaveNewUserRequest: Encodable {
+    var user = ["id": "", "password": ""]
+    
+    init(id: String, password: String) {
+        self.user["id"] = id
+        self.user["password"] = password
+    }
+}
+
+struct CheckUserRequest: Encodable {
+    var user = ["id": "", "password": ""]
+    
+    init(id: String, password: String) {
+        self.user["id"] = id
+        self.user["password"] = password
+    }
+}
+
+struct CheckUserResponse: Decodable {
+    var success: Bool
+}
+
 struct GetWorkoutsRequest: Encodable {
     var userId: String
     
@@ -77,8 +99,64 @@ struct SaveCompletedWorkoutRequest: Encodable {
 
 class NetworkManager {
     
+    let baseUrl = "https://21dld2pcsg.execute-api.us-east-2.amazonaws.com/dev/"
+    
+    func saveNewUser(id: String, pass: String) {
+        guard let url = URL(string: baseUrl + "saveNewUser") else { return }
+               
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let saveNewUserRequest = SaveNewUserRequest(id: id, password: pass)
+
+        let jsonEncoder = JSONEncoder()
+        
+        if let jsonData = try? jsonEncoder.encode(saveNewUserRequest) {
+            print(jsonData)
+            URLSession.shared.uploadTask(with: request, from: jsonData) { (data,res,err) in
+                if let err = err {
+                    print("Error creating new user: \(String(describing: err))")
+                }
+                print("Save New User Response: \(String(describing: res))")
+            }.resume()
+        }
+    }
+    
+    func checkUser(id: String, pass: String, completion: @escaping((Bool) -> ())) {
+        guard let url = URL(string: baseUrl + "checkUser") else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let checkUserRequest = CheckUserRequest(id: id, password: pass)
+        
+        let jsonEncoder = JSONEncoder()
+        
+        if let jsonData = try? jsonEncoder.encode(checkUserRequest) {
+            print(jsonData)
+            URLSession.shared.uploadTask(with: request, from: jsonData) { (data,res,err) in
+                
+                if let err = err {
+                    print("Error: \(String(describing: err))")
+                }
+                
+                if let data = data {
+                    
+                    let decoder = JSONDecoder()
+                    
+                    if let json = try? decoder.decode(CheckUserResponse.self, from: data) {
+                        DispatchQueue.main.async {
+                            print(json)
+                            completion(json.success)
+                        }
+                    }
+                }
+            }.resume()
+        }
+    }
+    
     func getWorkouts(userId: String, completion: @escaping([Workout]) -> ()) {
-        guard let url = URL(string: "https://21dld2pcsg.execute-api.us-east-2.amazonaws.com/dev/getWorkoutsForUser") else { return }
+        guard let url = URL(string: baseUrl + "getWorkoutsForUser") else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -109,7 +187,7 @@ class NetworkManager {
     }
     
     func getExercises(userId: String, completion: @escaping(([Exercise]) -> ())) {
-        guard let url = URL(string: "https://21dld2pcsg.execute-api.us-east-2.amazonaws.com/dev/getExercisesForUser") else { return }
+        guard let url = URL(string: baseUrl + "getExercisesForUser") else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -141,7 +219,7 @@ class NetworkManager {
     
     
     func getWorkoutLog(userId: String, completion: @escaping(([CompletedWorkout]) -> ())) {
-        guard let url = URL(string: "https://21dld2pcsg.execute-api.us-east-2.amazonaws.com/dev/getWorkoutLogForUser") else { return }
+        guard let url = URL(string: baseUrl + "getWorkoutLogForUser") else { return }
                
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -173,7 +251,7 @@ class NetworkManager {
     
     
     func saveWorkout(workout: Workout, userId: String) {
-        guard let url = URL(string: "https://21dld2pcsg.execute-api.us-east-2.amazonaws.com/dev/saveWorkout") else { return }
+        guard let url = URL(string: baseUrl + "saveWorkout") else { return }
                
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -191,7 +269,7 @@ class NetworkManager {
     }
     
     func saveCompletedWorkout(completedWorkout: CompletedWorkout, userId: String) {
-        guard let url = URL(string: "https://21dld2pcsg.execute-api.us-east-2.amazonaws.com/dev/saveCompletedWorkout") else { return }
+        guard let url = URL(string: baseUrl + "saveCompletedWorkout") else { return }
                
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -209,7 +287,7 @@ class NetworkManager {
     }
     
     func saveExercise(exercise: Exercise, userId: String) {
-        guard let url = URL(string: "https://21dld2pcsg.execute-api.us-east-2.amazonaws.com/dev/saveExercise") else { return }
+        guard let url = URL(string: baseUrl + "saveExercise") else { return }
                
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
