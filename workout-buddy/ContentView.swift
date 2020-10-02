@@ -47,6 +47,7 @@ struct ContentView: View {
     //                }
     //                .tag(2)
                 ProfileView()
+                    .environmentObject(self.userData)
                     .tabItem {
                         VStack {
                             Image(systemName: "person.crop.circle")

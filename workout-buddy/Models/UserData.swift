@@ -64,6 +64,14 @@ final class UserData: ObservableObject {
         }
     }
     
+    func logOutUser() {
+        userId = ""
+        isLoggedIn = false
+        workouts = []
+        exercises = []
+        workoutLog = []
+    }
+    
     func getWorkouts() {
         NetworkManager().getWorkouts(userId: self.userId) { (workouts) in
             self.workouts = workouts

@@ -9,8 +9,22 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @EnvironmentObject var userData: UserData
+    
+    
     var body: some View {
         List {
+            Section {
+                HStack {
+                    Spacer()
+                    
+                    Button(action: {
+                        self.userData.logOutUser()
+                    }) {
+                        Text("Log Out")
+                    }
+                }
+            }
             Section {
                 UserProfile().padding(.top).padding(.bottom)
             }
@@ -37,12 +51,11 @@ struct ProfileView: View {
                     })
             }
         }
-        
     }
 }
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ProfileView().environmentObject(UserData())
     }
 }
