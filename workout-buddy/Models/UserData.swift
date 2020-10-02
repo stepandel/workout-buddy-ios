@@ -15,7 +15,11 @@ final class UserData: ObservableObject {
     @Published var workouts: [Workout] = []
     @Published var exercises: [Exercise] = []
     @Published var workoutLog: [CompletedWorkout] = []
-    private var userId: String = ""
+    private var userId: String = UserDefaults.standard.string(forKey: "userId") ?? "" {
+        didSet {
+            UserDefaults.standard.set(self.userId, forKey: "userId")
+        }
+    }
     
     init() {
         if userId != "" {
