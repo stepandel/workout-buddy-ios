@@ -9,94 +9,6 @@
 import SwiftUI
 
 
-struct SaveNewUserRequest: Encodable {
-    var user = ["id": "", "password": ""]
-    
-    init(id: String, password: String) {
-        self.user["id"] = id
-        self.user["password"] = password
-    }
-}
-
-struct CheckUserRequest: Encodable {
-    var user = ["id": "", "password": ""]
-    
-    init(id: String, password: String) {
-        self.user["id"] = id
-        self.user["password"] = password
-    }
-}
-
-struct CheckUserResponse: Decodable {
-    var success: Bool
-}
-
-struct GetWorkoutsRequest: Encodable {
-    var userId: String
-    
-    init(userId: String) {
-        self.userId = userId
-    }
-}
-
-struct GetWorkoutResponse: Decodable {
-    var workouts: [Workout]
-}
-
-struct GetExercisesRequest: Encodable {
-    var userId: String
-    
-    init(userId: String) {
-        self.userId = userId
-    }
-}
-
-struct GetExercisesResponse: Decodable {
-    var exercises: [Exercise]
-}
-
-struct GetWorkoutLogRequest: Encodable {
-    var userId: String
-    
-    init(userId: String) {
-        self.userId = userId
-    }
-}
-
-struct GetWorkoutLogResponse: Decodable {
-    var completedWorkouts: [CompletedWorkout]
-}
-
-struct SaveWorkoutRequest: Encodable {
-    var workout: Workout
-    var userId: String
-    
-    init(workout: Workout, userId: String) {
-        self.workout = workout
-        self.userId = userId
-    }
-}
-
-struct SaveExerciseRequest: Encodable {
-    var exercise: Exercise
-    var userId: String
-    
-    init(exercise: Exercise, userId: String) {
-        self.exercise = exercise
-        self.userId = userId
-    }
-}
-
-struct SaveCompletedWorkoutRequest: Encodable {
-    var completedWorkout: CompletedWorkoutShort
-    var userId: String
-    
-    init(completedWorkout: CompletedWorkout, userId: String) {
-        self.completedWorkout = CompletedWorkoutShort(wlId: completedWorkout.wlId, workoutId: completedWorkout.workout.id, time: completedWorkout.time, completionTs: completedWorkout.completionTs)
-        self.userId = userId
-    }
-}
-
 class NetworkManager {
     
     let baseUrl = "https://21dld2pcsg.execute-api.us-east-2.amazonaws.com/dev/"
@@ -148,6 +60,58 @@ class NetworkManager {
                         DispatchQueue.main.async {
                             print(json)
                             completion(json.success)
+                        }
+                    }
+                }
+            }.resume()
+        }
+    }
+    
+    func saveUser(user: User) {
+        guard let url = URL(string: baseUrl + "saveUser") else { return }
+               
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let saveUserRequest = SaveUserRequest(user: user)
+
+        let jsonEncoder = JSONEncoder()
+        
+        if let jsonData = try? jsonEncoder.encode(saveUserRequest) {
+            print(jsonData)
+            URLSession.shared.uploadTask(with: request, from: jsonData) { (data,res,err) in
+                if let err = err {
+                    print("Error saving user: \(String(describing: err))")
+                }
+                print("SaveUser Response: \(String(describing: res))")
+            }.resume()
+        }
+    }
+    
+    func getUser(id: String, completion: @escaping(User) -> ()) {
+        guard let url = URL(string: baseUrl + "getUser") else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let getUserRequest = GetUserRequest(id: id)
+        
+        let jsonEncoder = JSONEncoder()
+        
+        if let jsonData = try? jsonEncoder.encode(getUserRequest) {
+            print(jsonData)
+            URLSession.shared.uploadTask(with: request, from: jsonData) { (data,res,err) in
+                if let data = data {
+                    
+                    let dataAsString = String(data: data, encoding: .utf8)
+                    print(dataAsString)
+                    
+                    let decoder = JSONDecoder()
+                    
+                    if let json = try? decoder.decode(GetUserResponse.self, from: data) {
+                        print(json)
+                        DispatchQueue.main.async {
+                            completion(json.user)
                         }
                     }
                 }

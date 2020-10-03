@@ -11,18 +11,27 @@ import SwiftUI
 struct ProfileView: View {
     @EnvironmentObject var userData: UserData
     
+    @State var isEditPresented = false
+    
     
     var body: some View {
         List {
             Section {
                 HStack {
+                    
+                    Text("Edit")
+                        .padding()
+                        .onTapGesture(perform: {
+                            self.isEditPresented.toggle()
+                        })
+                    
                     Spacer()
                     
-                    Button(action: {
-                        self.userData.logOutUser()
-                    }) {
-                        Text("Log Out")
-                    }
+                    Text("Log Out")
+                        .padding()
+                        .onTapGesture(perform: {
+                            self.userData.logOutUser()
+                        })
                 }
             }
             Section {
@@ -50,6 +59,8 @@ struct ProfileView: View {
                         Text("Stats")
                     })
             }
+        }.sheet(isPresented: $isEditPresented) {
+            EditProfileView()
         }
     }
 }

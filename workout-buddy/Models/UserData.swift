@@ -15,6 +15,17 @@ final class UserData: ObservableObject {
     @Published var workouts: [Workout] = []
     @Published var exercises: [Exercise] = []
     @Published var workoutLog: [CompletedWorkout] = []
+    @Published var firstName: String?
+    @Published var lastName: String?
+    @Published var bio: String?
+    @Published var city: String?
+    @Published var state: String?
+    @Published var sport: String?
+    @Published var weight: Double?
+    @Published var birthDate: Date?
+    @Published var sex: String?
+    
+        
     private var userId: String = UserDefaults.standard.string(forKey: "userId") ?? "" {
         didSet {
             UserDefaults.standard.set(self.userId, forKey: "userId")
@@ -23,7 +34,12 @@ final class UserData: ObservableObject {
     
     init() {
         if userId != "" {
-            isLoggedIn = true
+            self.isLoggedIn = true
+            
+            self.getUserData()
+            self.getWorkouts()
+            self.getExercises()
+            self.getWorkoutLog()
         }
     }
     
@@ -56,6 +72,7 @@ final class UserData: ObservableObject {
                     
                     self.userId = id
                     
+                    self.getUserData()
                     self.getWorkouts()
                     self.getExercises()
                     self.getWorkoutLog()
@@ -70,6 +87,46 @@ final class UserData: ObservableObject {
         workouts = []
         exercises = []
         workoutLog = []
+    }
+    
+    func saveUserData(firstName: String?, lastName: String?, bio: String?, city: String?, state: String?, sport: String?, weight: String?, birthDate: Date?, sex: String?) {
+        self.firstName = firstName
+        self.lastName = lastName
+        self.bio = bio
+        self.city = city
+        self.state = state
+        self.sport = sport
+        self.weight = weight != nil ? Double(weight ?? "0") : nil
+        self.birthDate = birthDate
+        self.sex = sex
+        
+        let user = User(self.userId,
+                        firstName: firstName,
+                        lastName: lastName,
+                        bio: bio,
+                        city: city,
+                        state: state,
+                        sport: sport,
+                        weight: weight != nil ? Double(weight ?? "0") : nil,
+                        birthDate: birthDate,
+                        sex: sex
+        )
+        
+        NetworkManager().saveUser(user: user)
+    }
+    
+    func getUserData() {
+        NetworkManager().getUser(id: self.userId) { (user) in
+            self.firstName = user.firstName
+            self.lastName = user.lastName
+            self.bio = user.bio
+            self.city = user.city
+            self.state = user.state
+            self.sport = user.sport
+            self.weight = user.weight
+            self.birthDate = user.birthDate
+            self.sex = user.sex
+        }
     }
     
     func getWorkouts() {

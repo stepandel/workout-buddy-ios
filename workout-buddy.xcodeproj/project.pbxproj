@@ -15,6 +15,8 @@
 		D914766D24740ECA00447A55 /* workoutLog.json in Resources */ = {isa = PBXBuildFile; fileRef = D914766C24740ECA00447A55 /* workoutLog.json */; };
 		D914766F24740FB500447A55 /* CompletedWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D914766E24740FB500447A55 /* CompletedWorkoutView.swift */; };
 		D9294D7D24DEE92D00AA5211 /* SelectTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9294D7C24DEE92D00AA5211 /* SelectTrackingView.swift */; };
+		D93AFA6525290E03008BEAC1 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93AFA6425290E03008BEAC1 /* EditProfileView.swift */; };
+		D93AFA6B25293357008BEAC1 /* ServerStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93AFA6A25293357008BEAC1 /* ServerStructs.swift */; };
 		D94CE25724E19CA0009AF605 /* NavigateModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94CE25624E19CA0009AF605 /* NavigateModifier.swift */; };
 		D94EDB8A245DCD5C00EBF1D2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94EDB89245DCD5C00EBF1D2 /* NetworkManager.swift */; };
 		D94EDBB424643C3400EBF1D2 /* AddNewExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94EDBB324643C3400EBF1D2 /* AddNewExercise.swift */; };
@@ -66,6 +68,8 @@
 		D914766C24740ECA00447A55 /* workoutLog.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = workoutLog.json; sourceTree = "<group>"; };
 		D914766E24740FB500447A55 /* CompletedWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedWorkoutView.swift; sourceTree = "<group>"; };
 		D9294D7C24DEE92D00AA5211 /* SelectTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTrackingView.swift; sourceTree = "<group>"; };
+		D93AFA6425290E03008BEAC1 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		D93AFA6A25293357008BEAC1 /* ServerStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerStructs.swift; sourceTree = "<group>"; };
 		D94CE25624E19CA0009AF605 /* NavigateModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigateModifier.swift; sourceTree = "<group>"; };
 		D94EDB89245DCD5C00EBF1D2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		D94EDBB324643C3400EBF1D2 /* AddNewExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewExercise.swift; sourceTree = "<group>"; };
@@ -173,6 +177,7 @@
 				D9A2F6BD2520D12200CDA717 /* ProfileView.swift */,
 				D9A2F6C32520D6B100CDA717 /* ProfileImage.swift */,
 				D9A2F6C62520DB2800CDA717 /* UserProfile.swift */,
+				D93AFA6425290E03008BEAC1 /* EditProfileView.swift */,
 				D9147666246B7F5B00447A55 /* TrackWorkoutView.swift */,
 				D97F69192502A742002A74A3 /* SelectedExerciseView.swift */,
 				D9294D7C24DEE92D00AA5211 /* SelectTrackingView.swift */,
@@ -229,6 +234,7 @@
 				D9A2FFCE243A42EC00352747 /* Data.swift */,
 				D9147664246B7DF900447A55 /* CompletedWorkout.swift */,
 				D94EDB89245DCD5C00EBF1D2 /* NetworkManager.swift */,
+				D93AFA6A25293357008BEAC1 /* ServerStructs.swift */,
 				D9A2FFC8243A38E700352747 /* Workout.swift */,
 				D9BBB80D245493B60001F9E1 /* ExSet.swift */,
 				D9EA692B244522A000371DEB /* UserData.swift */,
@@ -266,7 +272,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Stepan Arsentjev";
 				TargetAttributes = {
 					D9A2FFAA243A380F00352747 = {
@@ -365,6 +371,7 @@
 				D9EA692C244522A000371DEB /* UserData.swift in Sources */,
 				D98A73BF2498FDAC009B190C /* StringFormatter.swift in Sources */,
 				D9A2F6C72520DB2800CDA717 /* UserProfile.swift in Sources */,
+				D93AFA6B25293357008BEAC1 /* ServerStructs.swift in Sources */,
 				D9A2FFC3243A384B00352747 /* ActivitiesView.swift in Sources */,
 				D94EDB8A245DCD5C00EBF1D2 /* NetworkManager.swift in Sources */,
 				D9BF9BEB247DEE4300213DB2 /* SelectExerciseView.swift in Sources */,
@@ -388,6 +395,7 @@
 				D9A2F6BE2520D12200CDA717 /* ProfileView.swift in Sources */,
 				D9BBB80E245493B60001F9E1 /* ExSet.swift in Sources */,
 				D9EA692A24451FD400371DEB /* NewWorkoutView.swift in Sources */,
+				D93AFA6525290E03008BEAC1 /* EditProfileView.swift in Sources */,
 				D9147661246711EF00447A55 /* EditWorkoutView.swift in Sources */,
 				D98A73BD2498F6FB009B190C /* CurrentExerciseView.swift in Sources */,
 				D9A2FFCB243A3EBE00352747 /* Exercise.swift in Sources */,
@@ -436,6 +444,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -496,6 +505,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

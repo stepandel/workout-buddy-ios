@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct UserProfile: View {
+    @EnvironmentObject var userData: UserData
+    
     var body: some View {
         HStack {
             ProfileImage()
@@ -16,7 +18,7 @@ struct UserProfile: View {
             Spacer()
             
             VStack(alignment: .leading) {
-                Text("John Doe")
+                Text("\(self.userData.firstName ?? "") \(self.userData.lastName ?? "")")
                     .font(.title)
                     .padding(.bottom, 16)
                 
@@ -31,7 +33,7 @@ struct UserProfile: View {
 
 struct UserProfile_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfile()
+        UserProfile().environmentObject(UserData())
             .previewLayout(.fixed(width: 300, height: 100))
     }
 }

@@ -1,0 +1,140 @@
+//
+//  EditProfileView.swift
+//  workout-buddy
+//
+//  Created by Stepan Arsentjev on 2020-10-03.
+//  Copyright © 2020 Stepan Arsentjev. All rights reserved.
+//
+
+import SwiftUI
+
+struct EditProfileView: View {
+    @EnvironmentObject var userData: UserData
+    @State private var firstName = ""
+    @State private var lastName = ""
+    @State private var bio = ""
+    @State private var city = ""
+    @State private var state = ""
+    @State private var sport = ""
+    @State private var weight = ""
+    @State private var birthDate = Date()
+    @State private var checkDate = Date().addingTimeInterval(-31536000)
+    @State private var sex = ""
+    
+    @Environment(\.presentationMode) var presentationMode
+    
+    var body: some View {
+        VStack {
+            
+            HStack {
+                
+                Text("Cancel")
+                    .padding()
+                    .onTapGesture(perform: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    })
+                
+                Spacer()
+                
+                Text("Save")
+                    .padding()
+                    .onTapGesture(perform: {
+                        
+                        print("\n \n Birth Date: \(self.birthDate)")
+                        print("Check Date: \(self.checkDate) \n \n")
+                        
+                        // Save UserData
+                        userData.saveUserData(
+                            firstName: self.firstName != "" ? self.firstName : nil,
+                            lastName: self.lastName != "" ? self.lastName : nil,
+                            bio: self.bio != "" ? self.bio : nil,
+                            city: self.city != "" ? self.city : nil,
+                            state: self.state != "" ? self.state : nil,
+                            sport: self.sport != "" ? self.sport : nil,
+                            weight: self.weight != "" ? self.weight : nil,
+                            birthDate: self.birthDate < self.checkDate ? self.birthDate : nil,
+                            sex: self.sex != "" ? self.sex : nil
+                        )
+                        
+                        
+                        self.presentationMode.wrappedValue.dismiss()
+                    })
+                
+                
+            }.padding([.leading,.trailing])
+            
+            Form {
+                HStack {
+                    ProfileImage().padding()
+                    
+                    Spacer()
+                    
+                    VStack {
+                        List {
+                            TextField("First Name", text: $firstName)
+                            TextField("Last Name", text: $lastName)
+                        }
+                    }
+                }
+                
+                Section {
+                    List {
+                        TextField("Bio", text: $bio)
+                        TextField("City", text: $city)
+                        TextField("State", text: $state)
+                        TextField("Primary Sport", text: $sport)
+                    }
+                }
+                
+                Section {
+                    List {
+                        TextField("Wight", text: $weight)
+                        DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) {
+                            Text("Birth Date")
+                        }
+                        if #available(iOS 14.0, *) {
+                            HStack {
+                                Text("Sex")
+                                
+                                Spacer()
+                                
+                                Menu {
+                                    Button(action: { self.sex = "Male" }) {
+                                        Text("Male")
+                                    }
+                                    Button(action: { self.sex = "Female" }) {
+                                        Text("Female")
+                                    }
+                                } label: {
+                                    if (self.sex != "") {
+                                        Text("\(self.sex)")
+                                    } else {
+                                        Text("Sex")
+                                    }
+                                }
+                            }
+                        } else {
+                            // Fallback on earlier versions
+                        }
+                    }
+                }
+            }
+        }.onAppear {
+            self.firstName = self.userData.firstName ?? ""
+            self.lastName = self.userData.lastName ?? ""
+            self.bio = self.userData.bio ?? ""
+            self.city = self.userData.city ?? ""
+            self.state = self.userData.state ?? ""
+            self.sport = self.userData.sport ?? ""
+            self.weight = self.userData.weight != nil ? String(describing: self.userData.weight) ?? "" : ""
+            self.birthDate = self.userData.birthDate ?? Date()
+            self.sex = self.userData.sex ?? ""
+        }
+    }
+}
+
+struct EditProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        EditProfileView().environmentObject(UserData())
+    }
+}
