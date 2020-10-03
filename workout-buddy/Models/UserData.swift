@@ -48,7 +48,10 @@ final class UserData: ObservableObject {
     func saveNewUser(email: String, pass: String) {
         
         let emailData = Data(email.utf8)
-        let id = SHA256.hash(data: emailData).description
+        let emailHash = SHA256.hash(data: emailData)
+        let id = emailHash.compactMap {
+            String(format: "%02x", $0)
+        }.joined()
         
         NetworkManager().saveNewUser(id: id, pass: pass)
         
@@ -60,7 +63,10 @@ final class UserData: ObservableObject {
     func checkUser(email: String, pass: String) {
         
         let emailData = Data(email.utf8)
-        let id = SHA256.hash(data: emailData).description
+        let emailHash = SHA256.hash(data: emailData)
+        let id = emailHash.compactMap {
+            String(format: "%02x", $0)
+        }.joined()
         
         NetworkManager().checkUser(id: id, pass: pass) { (success) in
             DispatchQueue.main.async {
