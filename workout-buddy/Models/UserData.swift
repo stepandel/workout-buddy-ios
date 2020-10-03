@@ -93,6 +93,15 @@ final class UserData: ObservableObject {
         workouts = []
         exercises = []
         workoutLog = []
+        firstName = nil
+        lastName = nil
+        bio = nil
+        city = nil
+        state = nil
+        sport = nil
+        weight = nil
+        birthDate = nil
+        sex = nil
     }
     
     func saveUserData(firstName: String?, lastName: String?, bio: String?, city: String?, state: String?, sport: String?, weight: String?, birthDate: Date?, sex: String?) {
