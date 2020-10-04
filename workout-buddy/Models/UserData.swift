@@ -24,6 +24,7 @@ final class UserData: ObservableObject {
     @Published var weight: Double?
     @Published var birthDate: Date?
     @Published var sex: String?
+    @Published var profileImage: UIImage?
     
         
     private var userId: String = UserDefaults.standard.string(forKey: "userId") ?? "" {

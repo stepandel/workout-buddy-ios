@@ -9,18 +9,38 @@
 import SwiftUI
 
 struct ProfileImage: View {
+    @EnvironmentObject var userData: UserData
+    
     var body: some View {
-        Image("popeye").resizable()
-            .frame(width: 80, height: 80)
-            .clipShape(Circle())
-            .overlay(
-                Circle().stroke(Color.white, lineWidth: 2))
-            .shadow(radius: 4)
+        
+        if userData.profileImage != nil {
+            
+            Image(uiImage: userData.profileImage!)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 80, height: 80)
+                .clipShape(Circle())
+                .clipped()
+                .overlay(
+                    Circle().stroke(Color.white, lineWidth: 2))
+                .shadow(radius: 4)
+            
+        } else {
+            Image("popeye")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 80, height: 80)
+                .clipShape(Circle())
+                .clipped()
+                .overlay(
+                    Circle().stroke(Color.white, lineWidth: 2))
+                .shadow(radius: 4)
+        }
     }
 }
 
 struct ProfileImage_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileImage()
+        ProfileImage().environmentObject(UserData())
     }
 }

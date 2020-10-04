@@ -18,8 +18,13 @@ struct EditProfileView: View {
     @State private var sport = ""
     @State private var weight = ""
     @State private var birthDate = Date()
-    @State private var checkDate = Date().addingTimeInterval(-31536000)
+    @State private var checkDate = Date().addingTimeInterval(-31536000) // Birthdate has to be least 1 year old?
     @State private var sex = ""
+    
+    @State private var showingImagePicker = false
+    @State private var inputImage: UIImage?
+    @State private var pickerSourceType: UIImagePickerController.SourceType = .photoLibrary
+    @State private var showingActionSheet = false
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -65,7 +70,11 @@ struct EditProfileView: View {
             
             Form {
                 HStack {
-                    ProfileImage().padding()
+                    ProfileImage().environmentObject(userData)
+                        .padding()
+                        .onTapGesture(perform: {
+                            self.showingActionSheet.toggle()
+                        })
                     
                     Spacer()
                     
@@ -126,10 +135,31 @@ struct EditProfileView: View {
             self.city = self.userData.city ?? ""
             self.state = self.userData.state ?? ""
             self.sport = self.userData.sport ?? ""
-            self.weight = self.userData.weight != nil ? String(describing: self.userData.weight) ?? "" : ""
+            self.weight = self.userData.weight != nil ? String(describing: self.userData.weight) : ""
             self.birthDate = self.userData.birthDate ?? Date()
             self.sex = self.userData.sex ?? ""
-        }
+        }.sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
+            ImagePicker(sourceType: self.pickerSourceType, image: self.$inputImage)
+        }.actionSheet(isPresented: $showingActionSheet, content: {
+            
+            
+            ActionSheet(title: Text("Update Profile Image"), buttons: [
+                .default(Text("Take Picture")) {
+                    self.pickerSourceType = .camera
+                    self.showingImagePicker = true
+                },
+                .default(Text("Select From Library")) {
+                    self.pickerSourceType = .photoLibrary
+                    self.showingImagePicker = true
+                },
+                .cancel()
+            ])
+        })
+    }
+    
+    func loadImage() {
+        guard let inputImage = inputImage else { return }
+        self.userData.profileImage = inputImage
     }
 }
 

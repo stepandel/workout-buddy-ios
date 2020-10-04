@@ -13,7 +13,7 @@ struct UserProfile: View {
     
     var body: some View {
         HStack {
-            ProfileImage()
+            ProfileImage().environmentObject(userData)
             
             Spacer()
             
