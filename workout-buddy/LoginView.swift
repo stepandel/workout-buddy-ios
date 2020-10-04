@@ -23,23 +23,27 @@ struct LoginView: View {
             
             Text("Sylach")
                 .font(.largeTitle)
+                .foregroundColor(.black)
                 .padding([.top, .bottom], 40)
             
             VStack {
                 TextField("Email", text: self.$email)
                     .padding()
                     .background(Color.white)
+                    .foregroundColor(.black)
                     .cornerRadius(20.0)
                 
                 SecureField("Password", text: self.$password)
                     .padding()
                     .background(Color.white)
+                    .foregroundColor(.black)
                     .cornerRadius(20.0)
                 
                 if isSignup {
                     SecureField("Re-Password", text: self.$rePassword)
                         .padding()
                         .background(Color.white)
+                        .foregroundColor(.black)
                         .cornerRadius(20.0)
                 }
                 
