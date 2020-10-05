@@ -160,6 +160,8 @@ struct EditProfileView: View {
     func loadImage() {
         guard let inputImage = inputImage else { return }
         self.userData.profileImage = inputImage
+        
+        self.userData.updateUserImage()
     }
 }
 

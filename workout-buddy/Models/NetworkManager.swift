@@ -119,6 +119,45 @@ class NetworkManager {
         }
     }
     
+    func uploadUserImage(userId: String, userImage: String) {
+        guard let url = URL(string: baseUrl + "updateUserImage") else { return }
+               
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let uploadUserImageRequest = UploadUserImageRequest(userId: userId, userImage: userImage)
+
+        let jsonEncoder = JSONEncoder()
+        
+        if let jsonData = try? jsonEncoder.encode(uploadUserImageRequest) {
+            print(jsonData)
+            URLSession.shared.uploadTask(with: request, from: jsonData) { (data,res,err) in
+                
+                if let err = err {
+                    print("Error uploading image: \(String(describing: err))")
+                }
+                print("Upload image response: \(String(describing: res))")
+            }.resume()
+        }
+    }
+    
+    func getImage(from urlStr: String, completion: @escaping(UIImage) -> ()) {
+        guard let url = URL(string: urlStr) else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { (data,res,err) in
+            guard let data = data, err == nil else { return }
+            
+            if let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    completion(image)
+                }
+            }
+        }.resume()
+    }
+    
     func getWorkouts(userId: String, completion: @escaping([Workout]) -> ()) {
         guard let url = URL(string: baseUrl + "getWorkoutsForUser") else { return }
         

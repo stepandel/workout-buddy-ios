@@ -9,6 +9,7 @@
 import Combine
 import SwiftUI
 import CryptoKit
+import UIKit
 
 final class UserData: ObservableObject {
     @Published var isLoggedIn = false
@@ -24,6 +25,7 @@ final class UserData: ObservableObject {
     @Published var weight: Double?
     @Published var birthDate: Date?
     @Published var sex: String?
+    @Published var profileImageUrl: String?
     @Published var profileImage: UIImage?
     
         
@@ -116,6 +118,10 @@ final class UserData: ObservableObject {
         self.birthDate = birthDate
         self.sex = sex
         
+        if self.profileImage != nil {
+            self.profileImageUrl = "https://workout-server-public.s3.us-east-2.amazonaws.com/profile_photos/" + self.userId + ".jpeg"
+        }
+        
         let user = User(self.userId,
                         firstName: firstName,
                         lastName: lastName,
@@ -125,7 +131,8 @@ final class UserData: ObservableObject {
                         sport: sport,
                         weight: weight != nil ? Double(weight ?? "0") : nil,
                         birthDate: birthDate,
-                        sex: sex
+                        sex: sex,
+                        profileImageUrl: self.profileImageUrl
         )
         
         NetworkManager().saveUser(user: user)
@@ -142,7 +149,26 @@ final class UserData: ObservableObject {
             self.weight = user.weight
             self.birthDate = user.birthDate
             self.sex = user.sex
+            self.profileImageUrl = user.profileImageUrl
+            
+            if let profileImageUrl = self.profileImageUrl {
+                NetworkManager().getImage(from: profileImageUrl) { (image) in
+                    self.profileImage = image
+                }
+            }
         }
+    }
+    
+    func updateUserImage() {
+        
+        guard let profileImage = profileImage else { return }
+        
+        let imageData = profileImage.jpeg(.low)
+        let imageAsString = imageData?.base64EncodedString(options: .lineLength64Characters)
+        
+        guard let imageStr = imageAsString else { return }
+        
+        NetworkManager().uploadUserImage(userId: self.userId, userImage: imageStr)
     }
     
     func getWorkouts() {

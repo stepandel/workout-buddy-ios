@@ -41,8 +41,9 @@ struct User: Identifiable, Codable {
     var weight: Double?
     var birthDate: Date?
     var sex: String?
+    var profileImageUrl: String?
     
-    init(_ id: String, firstName: String?, lastName: String?, bio: String?, city: String?, state: String?, sport: String?, weight: Double?, birthDate: Date?, sex: String?) {
+    init(_ id: String, firstName: String?, lastName: String?, bio: String?, city: String?, state: String?, sport: String?, weight: Double?, birthDate: Date?, sex: String?, profileImageUrl: String?) {
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
@@ -53,6 +54,7 @@ struct User: Identifiable, Codable {
         self.weight = weight
         self.birthDate = birthDate
         self.sex = sex
+        self.profileImageUrl = profileImageUrl
     }
 }
 
@@ -74,6 +76,16 @@ struct GetUserRequest: Encodable {
 
 struct GetUserResponse: Decodable {
     var user: User
+}
+
+struct UploadUserImageRequest: Encodable {
+    var userId: String
+    var userImage: String
+    
+    init(userId: String, userImage: String) {
+        self.userId = userId
+        self.userImage = userImage
+    }
 }
 
 struct GetWorkoutsRequest: Encodable {
