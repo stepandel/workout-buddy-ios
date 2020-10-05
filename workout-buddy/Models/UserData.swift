@@ -196,6 +196,7 @@ final class UserData: ObservableObject {
     
     func saveCompletedWorkout(completedWorkout: CompletedWorkout) {
         NetworkManager().saveCompletedWorkout(completedWorkout: completedWorkout, userId: self.userId)
+        NetworkManager().saveWorkout(workout: completedWorkout.workout, userId: self.userId)
     }
     
     func saveExercise(exercise: Exercise) {
