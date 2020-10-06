@@ -38,7 +38,7 @@ struct CurrentExerciseView: View {
                                 
                             }
                         }) {
-                            Text("\(trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].exId.components(separatedBy: ":")[0].formatId())")
+                            Text("\(trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].exId.components(separatedBy: ":")[0].formatFromId())")
                                 .font(.system(size: 20, weight: .semibold))
                                 .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
                                 .frame(width: 240, height: 40)

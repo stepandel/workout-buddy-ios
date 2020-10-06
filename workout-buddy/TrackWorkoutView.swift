@@ -92,7 +92,7 @@ struct TrackWorkoutView: View {
                         NavigationLink(destination: SelectedExerciseView(trackWorkoutViewModel: self.trackWorkoutViewModel, currentRound: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!, curExIdx: round.sets.firstIndex(of: set)!)) {
                         HStack {
                             VStack {
-                                Text("\(set[0].exId.components(separatedBy: ":")[0].formatId())")
+                                Text("\(set[0].exId.components(separatedBy: ":")[0].formatFromId())")
                                 Spacer()
                                 Text("1 Set")
                                 .font(.footnote)

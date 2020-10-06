@@ -15,15 +15,24 @@ extension String {
     
     // TODO: - Try combining these 2 functions into one
 
-    mutating func capitalizeFirstLetter() {
-        self = self.capitalizingFirstLetter()
-    }
+//    mutating func capitalizeFirstLetter() {
+//        self = self.capitalizingFirstLetter()
+//    }
     
-    func formatId() -> String {
+    func formatFromId() -> String {
         var formattedStr = ""
         let words = self.components(separatedBy: "_")
         words.forEach { (str) in
             formattedStr += str.capitalizingFirstLetter() + " "
+        }
+        return String(formattedStr.dropLast())
+    }
+    
+    func formatToId() -> String {
+        var formattedStr = ""
+        let words = self.components(separatedBy: " ")
+        words.forEach { (str) in
+            formattedStr += str.lowercased() + "_"
         }
         return String(formattedStr.dropLast())
     }

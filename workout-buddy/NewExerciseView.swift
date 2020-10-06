@@ -28,7 +28,7 @@ struct NewExerciseView: View {
                 Spacer()
                 Button(action: {
                     
-                    let exId = self.name + ":" + self.equipment + ":" + self.type
+                    let exId = self.name.formatToId() + ":" + self.equipment.formatToId() + ":" + self.type.formatToId()
                     let newExercise = Exercise(id: exId, bodyPart: self.bodyPart, muscleGroup: self.muscleGroup)
                     
                     self.userData.exercises.append(newExercise)
