@@ -270,7 +270,6 @@ struct TrackWorkoutView: View {
         // Save workout to log
         let completedWorkout = CompletedWorkout(workout: self.trackWorkoutViewModel.workout, completionTs: Date().timeIntervalSince1970, time: workoutTime)
         print("Completed workout: \(completedWorkout)")
-        self.userData.workoutLog.append(completedWorkout)
         self.userData.saveCompletedWorkout(completedWorkout: completedWorkout)
         
         // Reset workout data

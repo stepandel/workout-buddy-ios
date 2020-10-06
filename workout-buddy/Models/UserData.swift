@@ -196,7 +196,25 @@ final class UserData: ObservableObject {
     
     func saveCompletedWorkout(completedWorkout: CompletedWorkout) {
         NetworkManager().saveCompletedWorkout(completedWorkout: completedWorkout, userId: self.userId)
-        NetworkManager().saveWorkout(workout: completedWorkout.workout, userId: self.userId)
+        workoutLog.append(completedWorkout)
+        
+        // Update existing workout or create new one
+        if let index = workouts.firstIndex(where: { $0.id == completedWorkout.workout.id }) {
+            
+            let originalWorkout = workouts[index]
+            
+            if isSameWorkout(w1: originalWorkout, w2: completedWorkout.workout) {
+                NetworkManager().saveWorkout(workout: completedWorkout.workout, userId: self.userId)
+            } else {
+                let newWorkout = Workout(workout: completedWorkout.workout)
+                NetworkManager().saveWorkout(workout: newWorkout, userId: self.userId)
+                workouts.append(newWorkout)
+            }
+            
+        } else {
+            NetworkManager().saveWorkout(workout: completedWorkout.workout, userId: self.userId)
+            workouts.append(completedWorkout.workout)
+        }
     }
     
     func saveExercise(exercise: Exercise) {
