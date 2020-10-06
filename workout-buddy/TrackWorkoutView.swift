@@ -120,8 +120,8 @@ struct TrackWorkoutView: View {
 //                        self.curExIdx = round.sets.firstIndex(of: set) ?? 0
 //                    }
                     
-                    }
-//                        .onDelete { self.deleteExercise(at: $0, in: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!) }
+                    }.onDelete { self.deleteExercise(at: $0, in: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!) }
+                    
                     Button(action: { self.addExercise(round: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!, addLast: true) }) {
                         Text("+ Exercise")
                             .multilineTextAlignment(.center)
