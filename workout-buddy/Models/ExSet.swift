@@ -13,13 +13,15 @@ struct ExSet: Hashable, Codable, Identifiable {
     var exId: String
     var time: Int?
     var reps: Int?
+    var weight: Int?
     var skipped: Bool?
     var completed: Bool?
     
-    init(exId: String, time: Int?, reps: Int?) {
+    init(exId: String, time: Int?, reps: Int?, weight: Int?) {
         self.id = UUID()
         self.exId = exId
         self.time = time
         self.reps = reps
+        self.weight = weight
     }
 }

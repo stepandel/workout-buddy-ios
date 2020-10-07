@@ -13,12 +13,14 @@ struct SetData: Hashable, Identifiable {
     var exId: String
     var reps: String
     var time: String
+    var weight: String
     
-    init(exId: String, reps: String, time: String) {
+    init(exId: String, reps: String, time: String, weight: String) {
         self.id = UUID()
         self.exId = exId
         self.reps = reps
         self.time = time
+        self.weight = weight
     }
 }
 
@@ -46,7 +48,7 @@ struct SelectedExerciseView: View {
                 HStack {
                     Text("\(self.sets.firstIndex(of: set)! + 1)")
                     Spacer()
-                    TextField("Weight", text: self.$weight)
+                    TextField("Weight", text: self.$sets[self.sets.firstIndex(of: set)!].weight)
                         .multilineTextAlignment(.center)
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
@@ -82,7 +84,7 @@ struct SelectedExerciseView: View {
         }
         .onAppear {
             self.sets = self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx].reduce([], { (sets: [SetData], exSet: ExSet) -> [SetData] in
-                let nextSet = SetData(exId: exSet.exId, reps: String(exSet.reps ?? 0), time: String(exSet.time ?? 0))
+                let nextSet = SetData(exId: exSet.exId, reps: String(exSet.reps ?? 0), time: String(exSet.time ?? 0), weight: String(exSet.weight ?? 0))
                 var result = sets
                 result.append(nextSet)
                 return result
@@ -95,7 +97,7 @@ struct SelectedExerciseView: View {
     
     func addSet() {
         let firstSet = self.sets[0]
-        let newSet = SetData(exId: firstSet.exId, reps: firstSet.reps, time: firstSet.time)
+        let newSet = SetData(exId: firstSet.exId, reps: firstSet.reps, time: firstSet.time, weight: firstSet.weight)
         self.sets.append(newSet)
     }
     
@@ -104,8 +106,9 @@ struct SelectedExerciseView: View {
             if (self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx].indices.contains(i)) {
                 self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][i].reps = Int(self.sets[i].reps)
                 self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][i].time = Int(self.sets[i].time)
+                self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][i].weight = Int(self.sets[i].weight)
             } else {
-                let newExSet = ExSet(exId: self.sets[i].exId, time: Int(self.sets[i].time), reps: Int(self.sets[i].reps))
+                let newExSet = ExSet(exId: self.sets[i].exId, time: Int(self.sets[i].time), reps: Int(self.sets[i].reps), weight: Int(self.sets[i].weight))
                 self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx].append(newExSet)
             }
         }

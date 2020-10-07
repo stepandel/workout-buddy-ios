@@ -22,8 +22,8 @@ struct AddNewExercise: View {
     @State var id = ""
     @State private var repsStr = ""
     @State var reps = 1
-    @State private var setsStr = ""
-    @State var sets = 1
+    @State private var weightStr = ""
+    @State var weight = 1
     @State private var timeStr = ""
     @State var time = 0
     
@@ -45,9 +45,9 @@ struct AddNewExercise: View {
                         print("Time: \(self.timeStr)")
                         self.time = Int(self.timeStr) ?? 0
                         self.reps = Int(self.repsStr) ?? 0
-                        self.sets = Int(self.setsStr) ?? 0
+                        self.weight = Int(self.weightStr) ?? 0
                         
-                        let newExSet = ExSet(exId: self.addNewExerciseViewModel.exercise!.id, time: self.time, reps: self.reps)
+                        let newExSet = ExSet(exId: self.addNewExerciseViewModel.exercise!.id, time: self.time, reps: self.reps, weight: self.weight)
                         print("New Set: \(newExSet)")
                         print("Round: \(self.newWorkoutViewModel.workout.rounds[self.roundNumber])")
                         self.newWorkoutViewModel.workout.rounds[self.roundNumber].sets.append([newExSet])
@@ -76,8 +76,8 @@ struct AddNewExercise: View {
                     TextField("Reps", text: self.$repsStr).keyboardType(.numberPad)
                 }
                 HStack {
-                    Text("Sets: ")
-                    TextField("Sets", text: self.$setsStr).keyboardType(.numberPad)
+                    Text("Weight: ")
+                    TextField("0 kg", text: self.$weightStr).keyboardType(.numberPad)
                 }
                 HStack {
                     Text("Time: ")
@@ -107,8 +107,8 @@ struct AddNewExerciseTracking: View {
     @State var id = ""
     @State private var repsStr = ""
     @State var reps = 1
-    @State private var setsStr = ""
-    @State var sets = 1
+    @State private var weightStr = ""
+    @State var weight = 0
     @State private var timeStr = ""
     @State var time = 0
 
@@ -130,9 +130,9 @@ struct AddNewExerciseTracking: View {
                         print("Time: \(self.timeStr)")
                         self.time = Int(self.timeStr) ?? 0
                         self.reps = Int(self.repsStr) ?? 0
-                        self.sets = Int(self.setsStr) ?? 0
+                        self.weight = Int(self.weightStr) ?? 0
 
-                        let newExSet = ExSet(exId: self.addNewExerciseViewModel.exercise!.id, time: self.time, reps: self.reps)
+                        let newExSet = ExSet(exId: self.addNewExerciseViewModel.exercise!.id, time: self.time, reps: self.reps, weight: self.weight)
                         print("New Set: \(newExSet)")
                         if (self.trackWorkoutViewModel.workout.rounds.isEmpty) {
                             var newRound = Round()
@@ -166,8 +166,8 @@ struct AddNewExerciseTracking: View {
                     TextField("Reps", text: self.$repsStr).keyboardType(.numberPad)
                 }
                 HStack {
-                    Text("Sets: ")
-                    TextField("Sets", text: self.$setsStr).keyboardType(.numberPad)
+                    Text("Weight (kg): ")
+                    TextField("0 kg", text: self.$weightStr).keyboardType(.numberPad)
                 }
                 HStack {
                     Text("Time: ")
@@ -196,8 +196,8 @@ struct AddNewExerciseEdit: View {
     @State var id = ""
     @State private var repsStr = ""
     @State var reps = 1
-    @State private var setsStr = ""
-    @State var sets = 1
+    @State private var weightStr = ""
+    @State var weight = 1
     @State private var timeStr = ""
     @State var time = 0
     
@@ -219,9 +219,9 @@ struct AddNewExerciseEdit: View {
                         print("Time: \(self.timeStr)")
                         self.time = Int(self.timeStr) ?? 0
                         self.reps = Int(self.repsStr) ?? 0
-                        self.sets = Int(self.setsStr) ?? 0
+                        self.weight = Int(self.weightStr) ?? 0
                         
-                        let newExSet = ExSet(exId: self.addNewExerciseViewModel.exercise!.id, time: self.time, reps: self.reps)
+                        let newExSet = ExSet(exId: self.addNewExerciseViewModel.exercise!.id, time: self.time, reps: self.reps, weight: self.weight)
                         print("New Set: \(newExSet)")
                         print("Round: \(self.editWorkoutViewModel.workout.rounds[self.roundNumber])")
                         self.editWorkoutViewModel.workout.rounds[self.roundNumber].sets.append([newExSet])
@@ -250,8 +250,8 @@ struct AddNewExerciseEdit: View {
                     TextField("Reps", text: self.$repsStr).keyboardType(.numberPad)
                 }
                 HStack {
-                    Text("Sets: ")
-                    TextField("Sets", text: self.$setsStr).keyboardType(.numberPad)
+                    Text("Weight: ")
+                    TextField("0 kg", text: self.$weightStr).keyboardType(.numberPad)
                 }
                 HStack {
                     Text("Time: ")
