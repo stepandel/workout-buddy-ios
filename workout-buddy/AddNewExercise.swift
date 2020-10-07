@@ -27,6 +27,8 @@ struct AddNewExercise: View {
     @State private var timeStr = ""
     @State var time = 0
     
+    @State private var timed = false
+    
     @Environment(\.presentationMode) var presentaionMode
     @State private var showingSelectExercises = false
     
@@ -64,24 +66,34 @@ struct AddNewExercise: View {
             
             Form {
                 if (addNewExerciseViewModel.wasExerciseSelected) {
-                    Text("\(addNewExerciseViewModel.exercise!.id)")
+                    Text("\(addNewExerciseViewModel.exercise!.id.components(separatedBy: ":")[0].formatFromId())")
                 } else {
                     Button(action: { self.showingSelectExercises.toggle() }) {
                         Text("Select Exercise")
                     }
                 }
-//                TextField("Id", text: $id)
-                HStack {
-                    Text("Reps: ")
-                    TextField("Reps", text: self.$repsStr).keyboardType(.numberPad)
-                }
-                HStack {
-                    Text("Weight: ")
-                    TextField("0 kg", text: self.$weightStr).keyboardType(.numberPad)
-                }
-                HStack {
-                    Text("Time: ")
-                    TextField("Time", text: self.$timeStr).keyboardType(.numberPad)
+                
+                if addNewExerciseViewModel.wasExerciseSelected {
+                    HStack {
+                        Toggle(isOn: $timed, label: {
+                            Text("Timed")
+                        })
+                    }
+                    if timed {
+                        HStack {
+                            Text("Time (sec): ")
+                            TextField("0 sec", text: self.$timeStr).keyboardType(.numberPad)
+                        }
+                    } else {
+                        HStack {
+                            Text("Reps: ")
+                            TextField("0", text: self.$repsStr).keyboardType(.numberPad)
+                        }
+                    }
+                    HStack {
+                        Text("Weight (kg): ")
+                        TextField("0 kg", text: self.$weightStr).keyboardType(.numberPad)
+                    }
                 }
             }
         }.sheet(isPresented: self.$showingSelectExercises) {
@@ -111,6 +123,8 @@ struct AddNewExerciseTracking: View {
     @State var weight = 0
     @State private var timeStr = ""
     @State var time = 0
+    
+    @State private var timed = false
 
     @Environment(\.presentationMode) var presentaionMode
     @State private var showingSelectExercises = false
@@ -154,24 +168,34 @@ struct AddNewExerciseTracking: View {
 
             Form {
                 if (addNewExerciseViewModel.wasExerciseSelected) {
-                    Text("\(addNewExerciseViewModel.exercise!.id)")
+                    Text("\(addNewExerciseViewModel.exercise!.id.components(separatedBy: ":")[0].formatFromId())")
                 } else {
                     Button(action: { self.showingSelectExercises.toggle() }) {
                         Text("Select Exercise")
                     }
                 }
-//                TextField("Id", text: $id)
-                HStack {
-                    Text("Reps: ")
-                    TextField("Reps", text: self.$repsStr).keyboardType(.numberPad)
-                }
-                HStack {
-                    Text("Weight (kg): ")
-                    TextField("0 kg", text: self.$weightStr).keyboardType(.numberPad)
-                }
-                HStack {
-                    Text("Time: ")
-                    TextField("Time", text: self.$timeStr).keyboardType(.numberPad)
+                
+                if addNewExerciseViewModel.wasExerciseSelected {
+                    HStack {
+                        Toggle(isOn: $timed, label: {
+                            Text("Timed")
+                        })
+                    }
+                    if timed {
+                        HStack {
+                            Text("Time (sec): ")
+                            TextField("0 sec", text: self.$timeStr).keyboardType(.numberPad)
+                        }
+                    } else {
+                        HStack {
+                            Text("Reps: ")
+                            TextField("0", text: self.$repsStr).keyboardType(.numberPad)
+                        }
+                    }
+                    HStack {
+                        Text("Weight (kg): ")
+                        TextField("0 kg", text: self.$weightStr).keyboardType(.numberPad)
+                    }
                 }
             }
         }.sheet(isPresented: self.$showingSelectExercises) {
@@ -200,6 +224,8 @@ struct AddNewExerciseEdit: View {
     @State var weight = 1
     @State private var timeStr = ""
     @State var time = 0
+    
+    @State private var timed = false
     
     @Environment(\.presentationMode) var presentaionMode
     @State private var showingSelectExercises = false
@@ -238,24 +264,34 @@ struct AddNewExerciseEdit: View {
             
             Form {
                 if (addNewExerciseViewModel.wasExerciseSelected) {
-                    Text("\(addNewExerciseViewModel.exercise!.id)")
+                    Text("\(addNewExerciseViewModel.exercise!.id.components(separatedBy: ":")[0].formatFromId())")
                 } else {
                     Button(action: { self.showingSelectExercises.toggle() }) {
                         Text("Select Exercise")
                     }
                 }
-//                TextField("Id", text: $id)
-                HStack {
-                    Text("Reps: ")
-                    TextField("Reps", text: self.$repsStr).keyboardType(.numberPad)
-                }
-                HStack {
-                    Text("Weight: ")
-                    TextField("0 kg", text: self.$weightStr).keyboardType(.numberPad)
-                }
-                HStack {
-                    Text("Time: ")
-                    TextField("Time", text: self.$timeStr).keyboardType(.numberPad)
+                
+                if addNewExerciseViewModel.wasExerciseSelected {
+                    HStack {
+                        Toggle(isOn: $timed, label: {
+                            Text("Timed")
+                        })
+                    }
+                    if timed {
+                        HStack {
+                            Text("Time (sec): ")
+                            TextField("0 sec", text: self.$timeStr).keyboardType(.numberPad)
+                        }
+                    } else {
+                        HStack {
+                            Text("Reps: ")
+                            TextField("0", text: self.$repsStr).keyboardType(.numberPad)
+                        }
+                    }
+                    HStack {
+                        Text("Weight (kg): ")
+                        TextField("0 kg", text: self.$weightStr).keyboardType(.numberPad)
+                    }
                 }
             }
         }.sheet(isPresented: self.$showingSelectExercises) {
