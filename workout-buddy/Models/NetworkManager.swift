@@ -306,4 +306,53 @@ class NetworkManager {
             }.resume()
         }
     }
+    
+    func saveStats(userId: String, stats: Stats) {
+        guard let url = URL(string: baseUrl + "saveStatsForUser") else { return }
+               
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let saveStatsRequest = SaveStatsRequest(userId: userId, stats: stats)
+        
+        let jsonEncoder = JSONEncoder()
+        
+        if let jsonData = try? jsonEncoder.encode(saveStatsRequest) {
+            print(jsonData)
+            URLSession.shared.uploadTask(with: request, from: jsonData) { (data, res, err) in
+                print("Save Stats Response: \(String(describing: res))")
+            }.resume()
+        }
+    }
+    
+    func getStats(userId: String, completion: @escaping(Stats) -> ()) {
+        guard let url = URL(string: baseUrl + "getStatsForUser") else { return }
+               
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+
+        let getStatsRequest = GetStatsRequest(userId: userId)
+        
+        let jsonEncoder = JSONEncoder()
+        
+        if let jsonData = try? jsonEncoder.encode(getStatsRequest) {
+            print(jsonData)
+            URLSession.shared.uploadTask(with: request, from: jsonData) { (data,res,err) in
+                if let data = data {
+                    
+                    let dataAsString = String(data: data, encoding: .utf8)
+                    print(dataAsString)
+                    
+                    let decoder = JSONDecoder()
+                    
+                    if let json = try? decoder.decode(GetStatsResponse.self, from: data) {
+                        print(json)
+                        DispatchQueue.main.async {
+                            completion(json.stats)
+                        }
+                    }
+                }
+            }.resume()
+        }
+    }
 }

@@ -27,6 +27,7 @@ final class UserData: ObservableObject {
     @Published var sex: String?
     @Published var profileImageUrl: String?
     @Published var profileImage: UIImage?
+    @Published var stats: Stats
     
         
     private var userId: String = UserDefaults.standard.string(forKey: "userId") ?? "" {
@@ -36,6 +37,8 @@ final class UserData: ObservableObject {
     }
     
     init() {
+        self.stats = Stats()
+        
         if userId != "" {
             self.isLoggedIn = true
             
@@ -43,7 +46,10 @@ final class UserData: ObservableObject {
             self.getWorkouts()
             self.getExercises()
             self.getWorkoutLog()
+            self.getStats()
         }
+        
+        print("\(stats)")
     }
     
     // TODO: - Listen for changes to save new workouts
@@ -215,9 +221,34 @@ final class UserData: ObservableObject {
             NetworkManager().saveWorkout(workout: completedWorkout.workout, userId: self.userId)
             workouts.append(completedWorkout.workout)
         }
+        
+        // Update stats
+        self.stats.totalWorkoutsCompleted += 1
+        self.stats.totalTimeWorkingout += completedWorkout.time
+        completedWorkout.workout.rounds.forEach { round in
+            round.sets.forEach { sets in
+                sets.forEach { set in
+                    self.stats.totalSetsCompleted += 1
+                    if let reps = set.reps, reps > 0 {
+                        self.stats.totalRepsCompleted += reps
+                    }
+                    if let weight = set.weight, weight > 0 {
+                        self.stats.totalWeightLifted += weight
+                    }
+                }
+            }
+        }
+        
+        NetworkManager().saveStats(userId: self.userId, stats: self.stats)
     }
     
     func saveExercise(exercise: Exercise) {
         NetworkManager().saveExercise(exercise: exercise, userId: self.userId)
+    }
+    
+    func getStats() {
+        NetworkManager().getStats(userId: self.userId) { stats in
+            self.stats = stats
+        }
     }
 }

@@ -32,7 +32,7 @@ struct CompletedWorkoutView: View {
             }
             .padding()
             
-            RoundBlock(rounds: completedWorkout.workout.rounds ?? [])
+            RoundBlock(rounds: completedWorkout.workout.rounds)
             
             Spacer()
         }.onAppear {

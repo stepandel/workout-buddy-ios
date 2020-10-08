@@ -153,3 +153,25 @@ struct SaveCompletedWorkoutRequest: Encodable {
         self.userId = userId
     }
 }
+
+struct SaveStatsRequest: Encodable {
+    var userId: String
+    var stats: Stats
+    
+    init(userId: String, stats: Stats) {
+        self.userId = userId
+        self.stats = stats
+    }
+}
+
+struct GetStatsRequest: Encodable {
+    var userId: String
+    
+    init(userId: String) {
+        self.userId = userId
+    }
+}
+
+struct GetStatsResponse: Decodable {
+    var stats: Stats
+}
