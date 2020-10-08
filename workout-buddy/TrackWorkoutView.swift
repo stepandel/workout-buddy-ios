@@ -46,6 +46,7 @@ struct TrackWorkoutView: View {
     @State var startTime: Double = 0
     @State var longShadowRad = 2
     @State var shortShadowRad = 0.5
+    @State private var showingActionSheet = false
     
     var btnCancel: some View {
         Button(action: {
@@ -62,6 +63,14 @@ struct TrackWorkoutView: View {
             self.alertPopup = .endWorkout
         }) {
             Text("Finish")
+        }
+    }
+    
+    var btnEnd: some View {
+        Button(action: {
+            self.showingActionSheet.toggle()
+        }) {
+            Text("End")
         }
     }
     
@@ -174,9 +183,9 @@ struct TrackWorkoutView: View {
         })
         .alert(isPresented: $showingAlert) {
             if self.alertPopup == .endWorkout {
-                return Alert(title: Text("Stop Workout"), message: Text("Are you sure you want to end workout?"), primaryButton: .default(Text("Yes, I'm done!"), action: {
-                    self.completeWorkout()
-                }), secondaryButton: .cancel())
+                return Alert(title: Text("Cancel Workout"), message: Text("Are you sure you want to cancel workout?"), primaryButton: .default(Text("Yes!"), action: {
+                    self.cancelWorkout()
+                }), secondaryButton: .default(Text("No")))
             } else if self.alertPopup == .addRound {
                 return Alert(title: Text("Add Round"), message: Text("Do you want to copy round?"), primaryButton: .default(Text("Yes"), action: {
                     self.addRound(copyRound: true)
@@ -185,11 +194,23 @@ struct TrackWorkoutView: View {
                 return Alert(title: Text("Something went wrong!"))
             }
         }
+        .actionSheet(isPresented: $showingActionSheet, content: {
+            ActionSheet(title: Text("End Workout?"), buttons: [
+                .default(Text("Finish Workout")) {
+                    self.completeWorkout()
+                },
+                .default(Text("Cancel Workout").foregroundColor(.red)) {
+                    self.showingAlert.toggle()
+                    self.alertPopup = .endWorkout
+                },
+                .cancel()
+            ])
+        })
 //        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 1)))
 //        .edgesIgnoringSafeArea(.all)
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: btnCancel, trailing: EditButton())
+        .navigationBarItems(leading: btnEnd, trailing: EditButton())
         .navigationBarTitle(self.trackWorkoutViewModel.workout.name)
         
     }
