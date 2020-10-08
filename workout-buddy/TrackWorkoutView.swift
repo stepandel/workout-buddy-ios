@@ -94,7 +94,7 @@ struct TrackWorkoutView: View {
                             VStack {
                                 Text("\(set[0].exId.components(separatedBy: ":")[0].formatFromId())")
                                 Spacer()
-                                Text("1 Set")
+                                Text("\(set.count) \(set.count > 1 ? "Sets" : "Set")")
                                 .font(.footnote)
                                 if (set[0].completed ?? false) {
                                     Text("Completed")

@@ -40,10 +40,10 @@ struct SelectedExerciseView: View {
             HStack {
                 Text("Set #")
                 Spacer()
-                Text("Weight")
+                Text("Weight (kg)")
                 Spacer()
                 if timed {
-                    Text("Time (s)")
+                    Text("Time (sec)")
                 } else {
                     Text("Reps")
                 }
@@ -54,7 +54,7 @@ struct SelectedExerciseView: View {
                 HStack {
                     Text("\(self.sets.firstIndex(of: set)! + 1)")
                     Spacer()
-                    TextField("Weight", text: self.$sets[self.sets.firstIndex(of: set)!].weight)
+                    TextField("0 kg", text: self.$sets[self.sets.firstIndex(of: set)!].weight)
                         .multilineTextAlignment(.center)
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
@@ -66,7 +66,7 @@ struct SelectedExerciseView: View {
                         .padding(.init(top: 0, leading: 16, bottom: 0, trailing: 16))
                     Spacer()
                     if timed {
-                        TextField("Time", text: self.$sets[self.sets.firstIndex(of: set)!].time)
+                        TextField("0 sec", text: self.$sets[self.sets.firstIndex(of: set)!].time)
                             .multilineTextAlignment(.center)
                             .font(.system(size: 20, weight: .semibold))
                             .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
@@ -77,7 +77,7 @@ struct SelectedExerciseView: View {
                             .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 0.5, x: -0.5, y: -0.5)
                             .padding(.init(top: 0, leading: 16, bottom: 0, trailing: 16))
                     } else {
-                        TextField("Reps", text: self.$sets[self.sets.firstIndex(of: set)!].reps)
+                        TextField("0", text: self.$sets[self.sets.firstIndex(of: set)!].reps)
                             .multilineTextAlignment(.center)
                             .font(.system(size: 20, weight: .semibold))
                             .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
