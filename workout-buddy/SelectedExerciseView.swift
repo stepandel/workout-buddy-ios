@@ -108,7 +108,7 @@ struct SelectedExerciseView: View {
                 result.append(nextSet)
                 return result
             })
-            if self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].time != nil {
+            if let time = self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].time, time > 0 {
                 self.timed = true
             }
         }
