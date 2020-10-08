@@ -120,7 +120,9 @@ struct TrackWorkoutView: View {
 //                        self.curExIdx = round.sets.firstIndex(of: set) ?? 0
 //                    }
                     
-                    }.onDelete { self.deleteExercise(at: $0, in: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!) }
+                    }
+                    .onDelete { self.deleteExercise(at: $0, in: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!) }
+                    .onMove { self.moveExercise(source: $0, destination: $1, in: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!) }
                     
                     Button(action: { self.addExercise(round: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!, addLast: true) }) {
                         Text("+ Exercise")
@@ -187,7 +189,7 @@ struct TrackWorkoutView: View {
         .background(Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 1)))
 //        .edgesIgnoringSafeArea(.all)
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: btnCancel, trailing: btnFinish)
+        .navigationBarItems(leading: btnCancel, trailing: EditButton())
         .navigationBarTitle(self.trackWorkoutViewModel.workout.name)
         
     }
@@ -227,8 +229,10 @@ struct TrackWorkoutView: View {
     
     func deleteExercise(at offset: IndexSet, in round: Int) {
         self.trackWorkoutViewModel.workout.rounds[round].sets.remove(atOffsets: offset)
-        
-        // TODO: - Delete all sets of this exercise in the round
+    }
+    
+    func moveExercise(source: IndexSet, destination: Int, in round: Int) {
+        self.trackWorkoutViewModel.workout.rounds[round].sets.move(fromOffsets: source, toOffset: destination)
     }
     
     func addRound(copyRound: Bool) {
