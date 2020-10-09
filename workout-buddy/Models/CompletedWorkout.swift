@@ -11,13 +11,13 @@ import SwiftUI
 struct CompletedWorkout: Hashable, Codable {
     var wlId: String
     var workout: Workout
-    var completionTs: Double
+    var startTS: Double
     var time: Int
     
-    init(workout: Workout, completionTs: Double, time: Int) {
+    init(workout: Workout, startTS: Double, time: Int) {
         self.wlId = UUID().uuidString
         self.workout = workout
-        self.completionTs = completionTs
+        self.startTS = startTS
         self.time = time
     }
 }
@@ -26,12 +26,12 @@ struct CompletedWorkoutShort: Codable {
     var wlId: String
     var workoutId: String
     var time: Int
-    var completionTs: Double
+    var startTS: Double
     
-    init(wlId: String, workoutId: String, time: Int, completionTs: Double) {
+    init(wlId: String, workoutId: String, time: Int, startTS: Double) {
         self.wlId = wlId
         self.workoutId = workoutId
         self.time = time
-        self.completionTs = completionTs
+        self.startTS = startTS
     }
 }

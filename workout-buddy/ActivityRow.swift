@@ -31,7 +31,7 @@ struct ActivityRow: View {
             self.dateFormatter.locale = NSLocale.current
             self.dateFormatter.dateFormat = "MMM-d, yyyy"
             
-            let date = Date(timeIntervalSince1970: self.completedWorkout.completionTs)
+            let date = Date(timeIntervalSince1970: self.completedWorkout.startTS)
             self.dateStr = self.dateFormatter.string(from: date)
         }
     }

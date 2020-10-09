@@ -24,6 +24,8 @@
 		D94EDBB424643C3400EBF1D2 /* AddNewExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94EDBB324643C3400EBF1D2 /* AddNewExercise.swift */; };
 		D95541D9248E6993005ED239 /* StopWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95541D8248E6993005ED239 /* StopWatchView.swift */; };
 		D95541DB248E6B4B005ED239 /* StopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95541DA248E6B4B005ED239 /* StopWatch.swift */; };
+		D979982C2530C85300E05A80 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D979982B2530C85300E05A80 /* Calendar.swift */; };
+		D97998332530EC7A00E05A80 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97998322530EC7A00E05A80 /* StatsView.swift */; };
 		D97F691A2502A743002A74A3 /* SelectedExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97F69192502A742002A74A3 /* SelectedExerciseView.swift */; };
 		D98A73BD2498F6FB009B190C /* CurrentExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98A73BC2498F6FB009B190C /* CurrentExerciseView.swift */; };
 		D98A73BF2498FDAC009B190C /* StringFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98A73BE2498FDAC009B190C /* StringFormatter.swift */; };
@@ -80,6 +82,8 @@
 		D94EDBB324643C3400EBF1D2 /* AddNewExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewExercise.swift; sourceTree = "<group>"; };
 		D95541D8248E6993005ED239 /* StopWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchView.swift; sourceTree = "<group>"; };
 		D95541DA248E6B4B005ED239 /* StopWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatch.swift; sourceTree = "<group>"; };
+		D979982B2530C85300E05A80 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
+		D97998322530EC7A00E05A80 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		D97F69192502A742002A74A3 /* SelectedExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedExerciseView.swift; sourceTree = "<group>"; };
 		D98A73BC2498F6FB009B190C /* CurrentExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentExerciseView.swift; sourceTree = "<group>"; };
 		D98A73BE2498FDAC009B190C /* StringFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringFormatter.swift; sourceTree = "<group>"; };
@@ -153,6 +157,7 @@
 				D94CE25624E19CA0009AF605 /* NavigateModifier.swift */,
 				D93B4142252A1C5F00E98994 /* ImagePicker.swift */,
 				D93B4145252B586300E98994 /* Image.swift */,
+				D979982B2530C85300E05A80 /* Calendar.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -186,6 +191,7 @@
 				D9A2F6C32520D6B100CDA717 /* ProfileImage.swift */,
 				D9A2F6C62520DB2800CDA717 /* UserProfile.swift */,
 				D93AFA6425290E03008BEAC1 /* EditProfileView.swift */,
+				D97998322530EC7A00E05A80 /* StatsView.swift */,
 				D9147666246B7F5B00447A55 /* TrackWorkoutView.swift */,
 				D97F69192502A742002A74A3 /* SelectedExerciseView.swift */,
 				D9294D7C24DEE92D00AA5211 /* SelectTrackingView.swift */,
@@ -371,6 +377,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D97998332530EC7A00E05A80 /* StatsView.swift in Sources */,
 				D9A2FFCF243A42EC00352747 /* Data.swift in Sources */,
 				D9294D7D24DEE92D00AA5211 /* SelectTrackingView.swift in Sources */,
 				D9A2FFAF243A380F00352747 /* AppDelegate.swift in Sources */,
@@ -380,6 +387,7 @@
 				D9EA692C244522A000371DEB /* UserData.swift in Sources */,
 				D98A73BF2498FDAC009B190C /* StringFormatter.swift in Sources */,
 				D9A2F6C72520DB2800CDA717 /* UserProfile.swift in Sources */,
+				D979982C2530C85300E05A80 /* Calendar.swift in Sources */,
 				D93AFA6B25293357008BEAC1 /* ServerStructs.swift in Sources */,
 				D9A2FFC3243A384B00352747 /* ActivitiesView.swift in Sources */,
 				D94EDB8A245DCD5C00EBF1D2 /* NetworkManager.swift in Sources */,

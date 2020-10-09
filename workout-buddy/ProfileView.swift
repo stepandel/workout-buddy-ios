@@ -15,52 +15,40 @@ struct ProfileView: View {
     
     
     var body: some View {
-        List {
-            Section {
-                HStack {
-                    
-                    Text("Edit")
-                        .padding()
-                        .onTapGesture(perform: {
-                            self.isEditPresented.toggle()
+        NavigationView {
+            List {
+                Section {
+                    UserProfile().padding(.top).padding(.bottom)
+                }
+                
+                Section (header: Text("")) {
+                    Text("Goal Progress Tracking")
+                }
+                
+                Section(header: Text("")) {
+                    NavigationLink(
+                        destination: Text("Nothing"),
+                        label: {
+                            Text("Ranking")
                         })
-                    
-                    Spacer()
-                    
-                    Text("Log Out")
-                        .padding()
-                        .onTapGesture(perform: {
-                            self.userData.logOutUser()
+                    NavigationLink(
+                        destination: Text("Nothing"),
+                        label: {
+                            Text("Achievements")
+                        })
+                    NavigationLink(
+                        destination: StatsView().environmentObject(userData),
+                        label: {
+                            Text("Statistics")
                         })
                 }
-            }
-            Section {
-                UserProfile().padding(.top).padding(.bottom)
-            }
-            
-            Section (header: Text("")) {
-                Text("Goal Progress Tracking")
-            }
-            
-            Section(header: Text("")) {
-                NavigationLink(
-                    destination: Text("Nothing"),
-                    label: {
-                        Text("Ranking")
-                    })
-                NavigationLink(
-                    destination: Text("Nothing"),
-                    label: {
-                        Text("Achievements")
-                    })
-                NavigationLink(
-                    destination: Text("Nothing"),
-                    label: {
-                        Text("Stats")
-                    })
-            }
-        }.sheet(isPresented: $isEditPresented) {
-            EditProfileView()
+            }.sheet(isPresented: $isEditPresented) {
+                EditProfileView()
+            }.listStyle(GroupedListStyle())
+            .navigationBarItems(
+                leading: Button(action: { self.isEditPresented.toggle() }) { Text("Edit") },
+                trailing: Button(action: { self.userData.logOutUser() }) { Text("Log Out") }
+            ).navigationBarTitle(Text("Profile"), displayMode: .inline)
         }
     }
 }

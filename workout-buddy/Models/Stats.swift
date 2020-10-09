@@ -23,3 +23,19 @@ struct Stats: Hashable, Codable {
         self.totalTimeWorkingout = 0
     }
 }
+
+struct WeeklyStats: Hashable, Codable {
+    var workoutsCompleted: Int
+    var weightLifted: Int
+    var repsCompleted: Int
+    var setsCompleted: Int
+    var timeWorkingout: Int
+    
+    init() {
+        self.workoutsCompleted = 0
+        self.weightLifted = 0
+        self.repsCompleted = 0
+        self.setsCompleted = 0
+        self.timeWorkingout = 0
+    }
+}

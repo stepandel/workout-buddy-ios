@@ -149,7 +149,7 @@ struct SaveCompletedWorkoutRequest: Encodable {
     var userId: String
     
     init(completedWorkout: CompletedWorkout, userId: String) {
-        self.completedWorkout = CompletedWorkoutShort(wlId: completedWorkout.wlId, workoutId: completedWorkout.workout.id, time: completedWorkout.time, completionTs: completedWorkout.completionTs)
+        self.completedWorkout = CompletedWorkoutShort(wlId: completedWorkout.wlId, workoutId: completedWorkout.workout.id, time: completedWorkout.time, startTS: completedWorkout.startTS)
         self.userId = userId
     }
 }
@@ -174,4 +174,20 @@ struct GetStatsRequest: Encodable {
 
 struct GetStatsResponse: Decodable {
     var stats: Stats
+}
+
+struct GetCompletedWorkoutsAndStatsRequest: Encodable {
+    var userId: String
+    var timezoneOffset: Int
+    
+    init(userId: String, timezoneOffset: Int) {
+        self.userId = userId
+        self.timezoneOffset = timezoneOffset
+    }
+}
+
+struct GetCompletedWorkoutsAndStatsResponse: Decodable {
+    var completedWorkouts: [CompletedWorkout]
+    var stats: Stats
+    var weeklyStats: WeeklyStats
 }

@@ -355,4 +355,35 @@ class NetworkManager {
             }.resume()
         }
     }
+    
+    func getCompletedWorkoutsAndStatsForUser(userId: String, timezoneOffset: Int, completion: @escaping(([CompletedWorkout], Stats, WeeklyStats) -> ())) {
+        guard let url = URL(string: baseUrl + "getCompletedWorkoutsAndStatsForUser") else { return }
+               
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+
+        let getCompletedWorkoutsAndStatsRequest = GetCompletedWorkoutsAndStatsRequest(userId: userId, timezoneOffset: timezoneOffset)
+        
+        let jsonEncoder = JSONEncoder()
+        
+        if let jsonData = try? jsonEncoder.encode(getCompletedWorkoutsAndStatsRequest) {
+            print(jsonData)
+            URLSession.shared.uploadTask(with: request, from: jsonData) { (data,res,err) in
+                if let data = data {
+                    
+                    let dataAsString = String(data: data, encoding: .utf8)
+                    print(dataAsString)
+                    
+                    let decoder = JSONDecoder()
+                    
+                    if let json = try? decoder.decode(GetCompletedWorkoutsAndStatsResponse.self, from: data) {
+                        print(json)
+                        DispatchQueue.main.async {
+                            completion(json.completedWorkouts, json.stats, json.weeklyStats)
+                        }
+                    }
+                }
+            }.resume()
+        }
+    }
 }

@@ -76,7 +76,7 @@
             ]
         },
         "time": 17,
-        "completionTs": 1589891520.212856
+        "startTS": 1589891520.212856
     },
     {
         "wlId": "fake1",
@@ -92,6 +92,6 @@
             "type": "rounds"
         },
         "time": 3245,
-        "completionTs": 1589827970
+        "startTS": 1589827970
     }
 ]

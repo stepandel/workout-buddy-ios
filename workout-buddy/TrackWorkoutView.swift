@@ -171,6 +171,7 @@ struct TrackWorkoutView: View {
         .onAppear {
             print("\(self.trackWorkoutViewModel.workout)")
             UIApplication.shared.isIdleTimerDisabled = true
+            startWorkout()
         }
         .sheet(isPresented: $showingModalView, onDismiss: {
             self.showingModalView = false
@@ -293,7 +294,7 @@ struct TrackWorkoutView: View {
         let workoutTime = Int(round(currentTime - self.startTime))
         
         // Save workout to log
-        let completedWorkout = CompletedWorkout(workout: self.trackWorkoutViewModel.workout, completionTs: Date().timeIntervalSince1970, time: workoutTime)
+        let completedWorkout = CompletedWorkout(workout: self.trackWorkoutViewModel.workout, startTS: self.startTime, time: workoutTime)
         print("Completed workout: \(completedWorkout)")
         self.userData.saveCompletedWorkout(completedWorkout: completedWorkout)
         
