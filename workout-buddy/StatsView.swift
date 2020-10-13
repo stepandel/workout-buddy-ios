@@ -10,9 +10,33 @@ import SwiftUI
 
 struct StatsView: View {
     @EnvironmentObject var userData: UserData
+    @State var weightLiftedByWeek: [CGFloat] = [400, 800, 600, 400, 356, 379, 600, 1005, 580, 740]
+    @State var repsCompletedByWeek: [CGFloat] = [1010, 960, 488, 798, 1245, 856, 1157, 950, 1379, 1057]
+    @State var workoutsPerWeek: [CGFloat] = [3, 4, 2, 3, 4, 3, 3, 3, 3, 4, 3]
     
     var body: some View {
         List {
+            Section(header: Text("Weight Lifted")) {
+                HStack {
+                    Spacer()
+                    CapsuleBarChart(data: weightLiftedByWeek.normilized)
+                    Spacer()
+                }.listRowBackground(Constants.Colors.appBackground)
+            }
+            Section(header: Text("Reps Completed")) {
+                HStack {
+                    Spacer()
+                    CapsuleBarChart(data: repsCompletedByWeek.normilized)
+                    Spacer()
+                }.listRowBackground(Constants.Colors.appBackground)
+            }
+            Section(header: Text("Number Of Workouts")) {
+                HStack {
+                    Spacer()
+                    CapsuleBarChart(data: workoutsPerWeek.normilized)
+                    Spacer()
+                }.listRowBackground(Constants.Colors.appBackground)
+            }
             Section(header: Text("Totals")) {
                 HStack {
                     Text("Total Workouts Completed")
