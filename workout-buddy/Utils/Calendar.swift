@@ -20,6 +20,6 @@ extension Date {
     
     func endOfWeek(using calendar: Calendar = .gregorian) -> Date? {
         guard let sunday = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else { return nil }
-        return calendar.date(byAdding: .day, value: 7, to: sunday)
+        return calendar.date(byAdding: .day, value: 8, to: sunday)
     }
 }

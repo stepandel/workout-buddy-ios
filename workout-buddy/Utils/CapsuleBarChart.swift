@@ -41,12 +41,3 @@ struct BarView: View {
         }
     }
 }
-
-extension Array where Element == CGFloat {
-    var normilized: [CGFloat] {
-        if let _ = self.min(), let max = self.max() {
-            return self.map { ($0 - 0) / (max * 1.2 - 0) }
-        }
-        return []
-    }
-}

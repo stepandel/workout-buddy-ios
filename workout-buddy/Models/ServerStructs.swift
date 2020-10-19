@@ -189,5 +189,4 @@ struct GetCompletedWorkoutsAndStatsRequest: Encodable {
 struct GetCompletedWorkoutsAndStatsResponse: Decodable {
     var completedWorkouts: [CompletedWorkout]
     var stats: Stats
-    var weeklyStats: WeeklyStats
 }

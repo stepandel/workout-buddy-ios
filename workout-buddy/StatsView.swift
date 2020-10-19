@@ -10,33 +10,11 @@ import SwiftUI
 
 struct StatsView: View {
     @EnvironmentObject var userData: UserData
-    @State var weightLiftedByWeek: [CGFloat] = [400, 800, 600, 400, 356, 379, 600, 1005, 580, 740]
-    @State var repsCompletedByWeek: [CGFloat] = [1010, 960, 488, 798, 1245, 856, 1157, 950, 1379, 1057]
-    @State var workoutsPerWeek: [CGFloat] = [3, 4, 2, 3, 4, 3, 3, 3, 3, 4, 3]
+    @State var selected = 9
+    @State var selectedWeek = "This Week"
     
     var body: some View {
         List {
-            Section(header: Text("Weight Lifted")) {
-                HStack {
-                    Spacer()
-                    CapsuleBarChart(data: weightLiftedByWeek.normilized)
-                    Spacer()
-                }.listRowBackground(Constants.Colors.appBackground)
-            }
-            Section(header: Text("Reps Completed")) {
-                HStack {
-                    Spacer()
-                    CapsuleBarChart(data: repsCompletedByWeek.normilized)
-                    Spacer()
-                }.listRowBackground(Constants.Colors.appBackground)
-            }
-            Section(header: Text("Number Of Workouts")) {
-                HStack {
-                    Spacer()
-                    CapsuleBarChart(data: workoutsPerWeek.normilized)
-                    Spacer()
-                }.listRowBackground(Constants.Colors.appBackground)
-            }
             Section(header: Text("Totals")) {
                 HStack {
                     Text("Total Workouts Completed")
@@ -61,38 +39,156 @@ struct StatsView: View {
                 HStack {
                     Text("Total Active Time")
                     Spacer()
-                    Text("\(userData.stats.totalTimeWorkingout / 60000) min")
+                    Text("\(userData.stats.totalTimeWorkingout / 60) min")
                 }
             }
-            Section(header: Text("This Week")) {
+            
+            
+            Section(header: Text("Weight Lifted (" + selectedWeek + ")")) {
+                    
+                HStack(spacing: 16) {
+                    
+                    ForEach(userData.tenWeekRollingStats.stats.indices, id: \.self) { idx in
+                        
+                        VStack {
+                            
+                            Spacer(minLength: 0)
+                            
+                            if selected == idx {
+                                Text("\(userData.tenWeekRollingStats.stats[idx].weightLifted)")
+                                    .font(.footnote)
+                                    .padding(.bottom, 5)
+                                    .frame(maxWidth: .infinity)
+                            }
+                            
+                            Rectangle()
+                                .fill(selected == idx ? Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)) : Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)).opacity(0.4))
+                                .frame(height: userData.tenWeekRollingStats.normilized(by: .weightLifted)[idx] * 200)
+                        }
+                        .frame(height: 220)
+                        .onTapGesture {
+                            selected = idx
+                            getSelectedWeekInterval()
+                        }
+                    }
+                }.listRowBackground(Constants.Colors.appBackground)
+            }
+            Section(header: Text("Reps Completed (" + selectedWeek + ")")) {
+                
+                
+                HStack(spacing: 16) {
+                    
+                    ForEach(userData.tenWeekRollingStats.stats.indices, id: \.self) { idx in
+                        
+                        VStack {
+                            
+                            Spacer(minLength: 0)
+                            
+                            if selected == idx {
+                                Text("\(userData.tenWeekRollingStats.stats[idx].repsCompleted)")
+                                    .font(.footnote)
+                                    .padding(.bottom, 5)
+                                    .frame(maxWidth: .infinity)
+                            }
+                            
+                            Rectangle()
+                                .fill(selected == idx ? Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)) : Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)).opacity(0.4))
+                                .frame(height: userData.tenWeekRollingStats.normilized(by: .repsCompleted)[idx] * 200)
+                        }
+                        .frame(height: 220)
+                        .onTapGesture {
+                            selected = idx
+                            getSelectedWeekInterval()
+                        }
+                    }
+                }.listRowBackground(Constants.Colors.appBackground)
+                
+            }
+            Section(header: Text("Number Of Workouts (" + selectedWeek + ")")) {
+                
+                HStack(spacing: 16) {
+                    
+                    ForEach(userData.tenWeekRollingStats.stats.indices, id: \.self) { idx in
+                        
+                        VStack {
+                            
+                            Spacer(minLength: 0)
+                            
+                            if selected == idx {
+                                Text("\(userData.tenWeekRollingStats.stats[idx].workoutsCompleted)")
+                                    .font(.footnote)
+                                    .padding(.bottom, 5)
+                            }
+                            
+                            Rectangle()
+                                .fill(selected == idx ? Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)) : Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)).opacity(0.4))
+                                .frame(height: userData.tenWeekRollingStats.normilized(by: .workoutsCompleted)[idx] * 200)
+                        }
+                        .frame(height: 220)
+                        .onTapGesture {
+                            selected = idx
+                            getSelectedWeekInterval()
+                        }
+                    }
+                }.listRowBackground(Constants.Colors.appBackground)
+                
+            }
+            
+            Section(header: Text(selectedWeek)) {
                 HStack {
                     Text("Workouts Completed")
                     Spacer()
-                    Text("\(userData.weeklyStats.workoutsCompleted)")
+                    Text("\(userData.tenWeekRollingStats.stats[selected].workoutsCompleted)")
                 }
                 HStack {
                     Text("Weight Lifted")
                     Spacer()
-                    Text("\(userData.weeklyStats.weightLifted) kg")
+                    Text("\(userData.tenWeekRollingStats.stats[selected].weightLifted) kg")
                 }
                 HStack {
                     Text("Reps Completed")
                     Spacer()
-                    Text("\(userData.weeklyStats.repsCompleted)")
+                    Text("\(userData.tenWeekRollingStats.stats[selected].repsCompleted)")
                 }
                 HStack {
                     Text("Sets Completed")
                     Spacer()
-                    Text("\(userData.weeklyStats.setsCompleted)")
+                    Text("\(userData.tenWeekRollingStats.stats[selected].setsCompleted)")
                 }
                 HStack {
                     Text("Active Time")
                     Spacer()
-                    Text("\(userData.weeklyStats.timeWorkingout / 60000) min")
+                    Text("\(userData.tenWeekRollingStats.stats[selected].timeWorkingout / 60) min")
                 }
             }
         }.listStyle(GroupedListStyle())
         .navigationBarTitle(Text("Statistics"))
+    }
+    
+    func getSelectedWeekInterval() {
+        
+        if selected == 9 {
+            self.selectedWeek = "This Week"
+            return
+        }
+        
+        let weekLength = 604800.0
+        
+        if let weekEndTS = userData.weekEndTS {
+            
+            let lastDayOfWeek = Date(timeIntervalSince1970: weekEndTS - (weekLength * Double(9 - selected)) - 1)
+            let firstDayOfWeek = Date(timeIntervalSince1970: weekEndTS - (weekLength * Double(9 - selected + 1)) + 1)
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = NSLocale.current
+            dateFormatter.dateFormat = "MMM-dd"
+            
+            self.selectedWeek = "\(dateFormatter.string(from: firstDayOfWeek)) - \(dateFormatter.string(from: lastDayOfWeek))"
+        } else {
+            
+            self.selectedWeek = "Week -\(self.selected)"
+        }
+        
     }
 }
 

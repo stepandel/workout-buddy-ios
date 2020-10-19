@@ -24,7 +24,7 @@ class NetworkManager {
         let jsonEncoder = JSONEncoder()
         
         if let jsonData = try? jsonEncoder.encode(saveNewUserRequest) {
-            print(jsonData)
+//            print(jsonData)
             URLSession.shared.uploadTask(with: request, from: jsonData) { (data,res,err) in
                 if let err = err {
                     print("Error creating new user: \(String(describing: err))")
@@ -45,7 +45,7 @@ class NetworkManager {
         let jsonEncoder = JSONEncoder()
         
         if let jsonData = try? jsonEncoder.encode(checkUserRequest) {
-            print(jsonData)
+//            print(jsonData)
             URLSession.shared.uploadTask(with: request, from: jsonData) { (data,res,err) in
                 
                 if let err = err {
@@ -58,7 +58,7 @@ class NetworkManager {
                     
                     if let json = try? decoder.decode(CheckUserResponse.self, from: data) {
                         DispatchQueue.main.async {
-                            print(json)
+//                            print(json)
                             completion(json.success)
                         }
                     }
@@ -78,7 +78,7 @@ class NetworkManager {
         let jsonEncoder = JSONEncoder()
         
         if let jsonData = try? jsonEncoder.encode(saveUserRequest) {
-            print(jsonData)
+//            print(jsonData)
             URLSession.shared.uploadTask(with: request, from: jsonData) { (data,res,err) in
                 if let err = err {
                     print("Error saving user: \(String(describing: err))")
@@ -103,13 +103,13 @@ class NetworkManager {
             URLSession.shared.uploadTask(with: request, from: jsonData) { (data,res,err) in
                 if let data = data {
                     
-                    let dataAsString = String(data: data, encoding: .utf8)
-                    print(dataAsString)
+//                    let dataAsString = String(data: data, encoding: .utf8)
+//                    print(dataAsString)
                     
                     let decoder = JSONDecoder()
                     
                     if let json = try? decoder.decode(GetUserResponse.self, from: data) {
-                        print(json)
+//                        print(json)
                         DispatchQueue.main.async {
                             completion(json.user)
                         }
@@ -130,7 +130,7 @@ class NetworkManager {
         let jsonEncoder = JSONEncoder()
         
         if let jsonData = try? jsonEncoder.encode(uploadUserImageRequest) {
-            print(jsonData)
+//            print(jsonData)
             URLSession.shared.uploadTask(with: request, from: jsonData) { (data,res,err) in
                 
                 if let err = err {
@@ -169,17 +169,17 @@ class NetworkManager {
         let jsonEncoder = JSONEncoder()
         
         if let jsonData = try? jsonEncoder.encode(getWorkoutsRequest) {
-            print(jsonData)
+//            print(jsonData)
             URLSession.shared.uploadTask(with: request, from: jsonData) { (data,res,err) in
                 if let data = data {
                     
-                    let dataAsString = String(data: data, encoding: .utf8)
-                    print(dataAsString)
+//                    let dataAsString = String(data: data, encoding: .utf8)
+//                    print(dataAsString)
                     
                     let decoder = JSONDecoder()
                     
                     if let json = try? decoder.decode(GetWorkoutResponse.self, from: data) {
-                        print(json)
+//                        print(json)
                         DispatchQueue.main.async {
                             completion(json.workouts)
                         }
@@ -200,17 +200,17 @@ class NetworkManager {
         let jsonEncoder = JSONEncoder()
         
         if let jsonData = try? jsonEncoder.encode(getExercisesRequest) {
-            print(jsonData)
+//            print(jsonData)
             URLSession.shared.uploadTask(with: request, from: jsonData) { (data,res,err) in
                 if let data = data {
                     
-                    let dataAsString = String(data: data, encoding: .utf8)
-                    print(dataAsString)
+//                    let dataAsString = String(data: data, encoding: .utf8)
+//                    print(dataAsString)
                     
                     let decoder = JSONDecoder()
                     
                     if let json = try? decoder.decode(GetExercisesResponse.self, from: data) {
-                        print(json)
+//                        print(json)
                         DispatchQueue.main.async {
                             completion(json.exercises)
                         }
@@ -232,17 +232,17 @@ class NetworkManager {
         let jsonEncoder = JSONEncoder()
         
         if let jsonData = try? jsonEncoder.encode(getWorkoutLogRequest) {
-            print(jsonData)
+//            print(jsonData)
             URLSession.shared.uploadTask(with: request, from: jsonData) { (data,res,err) in
                 if let data = data {
                     
-                    let dataAsString = String(data: data, encoding: .utf8)
-                    print(dataAsString)
+//                    let dataAsString = String(data: data, encoding: .utf8)
+//                    print(dataAsString)
                     
                     let decoder = JSONDecoder()
                     
                     if let json = try? decoder.decode(GetWorkoutLogResponse.self, from: data) {
-                        print(json)
+//                        print(json)
                         DispatchQueue.main.async {
                             completion(json.completedWorkouts)
                         }
@@ -264,7 +264,7 @@ class NetworkManager {
         let jsonEncoder = JSONEncoder()
         
         if let jsonData = try? jsonEncoder.encode(saveWorkoutRequest) {
-            print(jsonData)
+//            print(jsonData)
             URLSession.shared.uploadTask(with: request, from: jsonData) { (data,res,err) in
                print("Save Workout Response: \(String(describing: res))")
             }.resume()
@@ -282,7 +282,7 @@ class NetworkManager {
         let jsonEncoder = JSONEncoder()
         
         if let jsonData = try? jsonEncoder.encode(saveCompletedWorkoutRequest) {
-            print(jsonData)
+//            print(jsonData)
             URLSession.shared.uploadTask(with: request, from: jsonData) { (data, res, err) in
                 print("Save Completed Workout Response: \(String(describing: res))")
             }.resume()
@@ -300,7 +300,7 @@ class NetworkManager {
         let jsonEncoder = JSONEncoder()
         
         if let jsonData = try? jsonEncoder.encode(saveExerciseRequest) {
-            print(jsonData)
+//            print(jsonData)
             URLSession.shared.uploadTask(with: request, from: jsonData) { (data, res, err) in
                 print("Save Completed Workout Response: \(String(describing: res))")
             }.resume()
@@ -318,7 +318,7 @@ class NetworkManager {
         let jsonEncoder = JSONEncoder()
         
         if let jsonData = try? jsonEncoder.encode(saveStatsRequest) {
-            print(jsonData)
+//            print(jsonData)
             URLSession.shared.uploadTask(with: request, from: jsonData) { (data, res, err) in
                 print("Save Stats Response: \(String(describing: res))")
             }.resume()
@@ -336,17 +336,17 @@ class NetworkManager {
         let jsonEncoder = JSONEncoder()
         
         if let jsonData = try? jsonEncoder.encode(getStatsRequest) {
-            print(jsonData)
+//            print(jsonData)
             URLSession.shared.uploadTask(with: request, from: jsonData) { (data,res,err) in
                 if let data = data {
                     
-                    let dataAsString = String(data: data, encoding: .utf8)
-                    print(dataAsString)
+//                    let dataAsString = String(data: data, encoding: .utf8)
+//                    print(dataAsString)
                     
                     let decoder = JSONDecoder()
                     
                     if let json = try? decoder.decode(GetStatsResponse.self, from: data) {
-                        print(json)
+//                        print(json)
                         DispatchQueue.main.async {
                             completion(json.stats)
                         }
@@ -356,7 +356,7 @@ class NetworkManager {
         }
     }
     
-    func getCompletedWorkoutsAndStatsForUser(userId: String, timezoneOffset: Int, completion: @escaping(([CompletedWorkout], Stats, WeeklyStats) -> ())) {
+    func getCompletedWorkoutsAndStatsForUser(userId: String, timezoneOffset: Int, completion: @escaping(([CompletedWorkout], Stats) -> ())) {
         guard let url = URL(string: baseUrl + "getCompletedWorkoutsAndStatsForUser") else { return }
                
         var request = URLRequest(url: url)
@@ -367,19 +367,19 @@ class NetworkManager {
         let jsonEncoder = JSONEncoder()
         
         if let jsonData = try? jsonEncoder.encode(getCompletedWorkoutsAndStatsRequest) {
-            print(jsonData)
+//            print(jsonData)
             URLSession.shared.uploadTask(with: request, from: jsonData) { (data,res,err) in
                 if let data = data {
                     
-                    let dataAsString = String(data: data, encoding: .utf8)
-                    print(dataAsString)
+//                    let dataAsString = String(data: data, encoding: .utf8)
+//                    print(dataAsString)
                     
                     let decoder = JSONDecoder()
                     
                     if let json = try? decoder.decode(GetCompletedWorkoutsAndStatsResponse.self, from: data) {
-                        print(json)
+//                        print(json)
                         DispatchQueue.main.async {
-                            completion(json.completedWorkouts, json.stats, json.weeklyStats)
+                            completion(json.completedWorkouts, json.stats)
                         }
                     }
                 }

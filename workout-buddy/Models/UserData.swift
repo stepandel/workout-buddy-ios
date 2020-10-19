@@ -29,7 +29,7 @@ final class UserData: ObservableObject {
     @Published var profileImage: UIImage?
     @Published var stats: Stats
     @Published var weekEndTS: Double?
-    @Published var weeklyStats: WeeklyStats
+    @Published var tenWeekRollingStats: TenWeekRollingStats
     
         
     private var userId: String = UserDefaults.standard.string(forKey: "userId") ?? "" {
@@ -40,15 +40,14 @@ final class UserData: ObservableObject {
     
     init() {
         self.stats = Stats()
-        self.weeklyStats = WeeklyStats()
+        self.tenWeekRollingStats = TenWeekRollingStats()
+        self.weekEndTS = Date().endOfWeek()?.timeIntervalSince1970
         
         if userId != "" {
             self.isLoggedIn = true
             
             self.loadAllData()
         }
-        
-        print("\(stats)")
     }
     
     func loadAllData() {
@@ -56,8 +55,6 @@ final class UserData: ObservableObject {
         self.getWorkouts()
         self.getExercises()
         self.getWorkoutLogAndStats()
-        
-        self.weekEndTS = Date().endOfWeek()?.timeIntervalSince1970
     }
     
     // TODO: - Listen for changes to save new workouts
@@ -88,13 +85,8 @@ final class UserData: ObservableObject {
         NetworkManager().checkUser(id: id, pass: pass) { (success) in
             DispatchQueue.main.async {
                 self.isLoggedIn = success
-                
-                print("\n \n Success loggin in? \(String(success)) \n \n")
-                
                 if success {
-                    
                     self.userId = id
-                    
                     self.loadAllData()
                 }
             }
@@ -119,7 +111,7 @@ final class UserData: ObservableObject {
         profileImage = nil
         profileImageUrl = nil
         stats = Stats()
-        weeklyStats = WeeklyStats()
+        tenWeekRollingStats = TenWeekRollingStats()
     }
     
     func saveUserData(firstName: String?, lastName: String?, bio: String?, city: String?, state: String?, sport: String?, weight: String?, birthDate: Date?, sex: String?) {
@@ -194,7 +186,6 @@ final class UserData: ObservableObject {
     
     func getExercises() {
         NetworkManager().getExercises(userId: self.userId) { (exercises) in
-            print("\(exercises)")
             self.exercises = exercises
         }
     }
@@ -235,25 +226,25 @@ final class UserData: ObservableObject {
         let curTS = Date().timeIntervalSince1970
         if let weekEndTS = self.weekEndTS, weekEndTS < curTS {
             self.weekEndTS = Date().endOfWeek()?.timeIntervalSince1970
-            self.weeklyStats = WeeklyStats()
+            self.tenWeekRollingStats = TenWeekRollingStats()
         }
         
         self.stats.totalWorkoutsCompleted += 1
-        self.weeklyStats.workoutsCompleted += 1
+        self.tenWeekRollingStats.stats[9].workoutsCompleted += 1
         self.stats.totalTimeWorkingout += completedWorkout.time
-        self.weeklyStats.timeWorkingout += completedWorkout.time
+        self.tenWeekRollingStats.stats[9].timeWorkingout += completedWorkout.time
         completedWorkout.workout.rounds.forEach { round in
             round.sets.forEach { sets in
                 sets.forEach { set in
                     self.stats.totalSetsCompleted += 1
-                    self.weeklyStats.setsCompleted += 1
+                    self.tenWeekRollingStats.stats[9].setsCompleted += 1
                     if let reps = set.reps, reps > 0 {
                         self.stats.totalRepsCompleted += reps
-                        self.weeklyStats.repsCompleted += reps
+                        self.tenWeekRollingStats.stats[9].repsCompleted += reps
                     }
                     if let weight = set.weight, weight > 0 {
                         self.stats.totalWeightLifted += weight
-                        self.weeklyStats.weightLifted += weight
+                        self.tenWeekRollingStats.stats[9].weightLifted += weight
                     }
                 }
             }
@@ -274,10 +265,37 @@ final class UserData: ObservableObject {
     
     func getWorkoutLogAndStats() {
         let timezoneOffset = TimeZone.current.secondsFromGMT() / 60
-        NetworkManager().getCompletedWorkoutsAndStatsForUser(userId: self.userId, timezoneOffset: timezoneOffset) { (workoutLog, stats, weeklyStats) in
+        NetworkManager().getCompletedWorkoutsAndStatsForUser(userId: self.userId, timezoneOffset: timezoneOffset) { (workoutLog, stats) in
             self.workoutLog = workoutLog
             self.stats = stats
-            self.weeklyStats = weeklyStats
+            
+            // Calculate 10 Week rolling stats
+            self.weekEndTS = Date().endOfWeek()?.timeIntervalSince1970
+            let weekInS = 604800.0
+            
+            self.workoutLog.forEach { workout in
+                guard let weekEndTS = self.weekEndTS else { return }
+                let weekIdx = 9 - Int(floor((weekEndTS - workout.startTS) / weekInS))
+                if weekIdx > -1 && weekIdx < 10 {
+                
+                    self.tenWeekRollingStats.stats[weekIdx].workoutsCompleted += 1
+                    self.tenWeekRollingStats.stats[weekIdx].timeWorkingout += workout.time
+                    workout.workout.rounds.forEach { round in
+                        round.sets.forEach { sets in
+                            sets.forEach { set in
+                                self.tenWeekRollingStats.stats[weekIdx].setsCompleted += 1
+                                if let reps = set.reps, reps > 0 {
+                                    self.tenWeekRollingStats.stats[weekIdx].repsCompleted += reps
+                                }
+                                if let weight = set.weight, weight > 0 {
+                                    self.tenWeekRollingStats.stats[weekIdx].weightLifted += weight
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
         }
     }
 }
