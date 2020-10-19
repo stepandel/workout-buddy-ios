@@ -25,7 +25,6 @@ struct WorkoutsView: View {
             .navigationBarItems(trailing:
                 Button(action: {
                     self.isPresented.toggle()
-                    print("UserData.workouts: \(self.userData.workouts)")
                 }) {
                     Image(systemName: "plus")
                 })

@@ -20,8 +20,6 @@ struct ActivitiesView: View {
                 }
             }
             .navigationBarTitle("Activities")
-        }.onAppear {
-            print("Workout Log: \(self.userData.workoutLog)")
         }
     }
 }

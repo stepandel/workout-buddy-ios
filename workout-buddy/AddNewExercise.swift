@@ -43,19 +43,13 @@ struct AddNewExercise: View {
                 Spacer()
                 Button(action: {
                     if (self.addNewExerciseViewModel.wasExerciseSelected) {
-                        print("Round number: \(self.roundNumber)")
-                        print("Time: \(self.timeStr)")
                         self.time = Int(self.timeStr) ?? 0
                         self.reps = Int(self.repsStr) ?? 0
                         self.weight = Int(self.weightStr) ?? 0
                         
                         let newExSet = ExSet(exId: self.addNewExerciseViewModel.exercise!.id, time: self.time, reps: self.reps, weight: self.weight)
-                        print("New Set: \(newExSet)")
-                        print("Round: \(self.newWorkoutViewModel.workout.rounds[self.roundNumber])")
                         self.newWorkoutViewModel.workout.rounds[self.roundNumber].sets.append([newExSet])
-                        print("Round: \(self.newWorkoutViewModel.workout.rounds[self.roundNumber])")
                         self.presentaionMode.wrappedValue.dismiss()
-                        print("\(self.newWorkoutViewModel.workout)")
                     }
                 }) {
                     Text("Done")
@@ -140,14 +134,11 @@ struct AddNewExerciseTracking: View {
                 Spacer()
                 Button(action: {
                     if (self.addNewExerciseViewModel.wasExerciseSelected) {
-                        print("Round number: \(self.roundNumber)")
-                        print("Time: \(self.timeStr)")
                         self.time = Int(self.timeStr) ?? 0
                         self.reps = Int(self.repsStr) ?? 0
                         self.weight = Int(self.weightStr) ?? 0
 
                         let newExSet = ExSet(exId: self.addNewExerciseViewModel.exercise!.id, time: self.time, reps: self.reps, weight: self.weight)
-                        print("New Set: \(newExSet)")
                         if (self.trackWorkoutViewModel.workout.rounds.isEmpty) {
                             var newRound = Round()
                             newRound.sets = [[newExSet]]
@@ -155,9 +146,7 @@ struct AddNewExerciseTracking: View {
                         }
                         self.trackWorkoutViewModel.workout.rounds[self.roundNumber].sets.insert([newExSet], at: self.afterIndex + 1)
                         
-                        print("Round: \(self.trackWorkoutViewModel.workout.rounds[self.roundNumber])")
                         self.presentaionMode.wrappedValue.dismiss()
-                        print("\(self.trackWorkoutViewModel.workout)")
                     }
                 }) {
                     Text("Done")
@@ -241,19 +230,13 @@ struct AddNewExerciseEdit: View {
                 Spacer()
                 Button(action: {
                     if (self.addNewExerciseViewModel.wasExerciseSelected) {
-                        print("Round number: \(self.roundNumber)")
-                        print("Time: \(self.timeStr)")
                         self.time = Int(self.timeStr) ?? 0
                         self.reps = Int(self.repsStr) ?? 0
                         self.weight = Int(self.weightStr) ?? 0
                         
                         let newExSet = ExSet(exId: self.addNewExerciseViewModel.exercise!.id, time: self.time, reps: self.reps, weight: self.weight)
-                        print("New Set: \(newExSet)")
-                        print("Round: \(self.editWorkoutViewModel.workout.rounds[self.roundNumber])")
                         self.editWorkoutViewModel.workout.rounds[self.roundNumber].sets.append([newExSet])
-                        print("Round: \(self.editWorkoutViewModel.workout.rounds[self.roundNumber])")
                         self.presentaionMode.wrappedValue.dismiss()
-                        print("\(self.editWorkoutViewModel.workout)")
                     }
                 }) {
                     Text("Done")

@@ -221,7 +221,6 @@ struct TrackWorkoutView: View {
         
         // Start new round
         if (self.curExIdx + 1 >= self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets.count) {
-            print("Rounds \(self.trackWorkoutViewModel.workout.rounds)")
             
             // Continue to the next round
             if (self.currentRound + 1 < self.trackWorkoutViewModel.workout.rounds.count) { // Check if next round is avaiable
@@ -279,11 +278,13 @@ struct TrackWorkoutView: View {
     }
     
     func startWorkout() {
-        self.workoutStarted = true
+        if !self.workoutStarted {
+            // Start timer
+            print("Timer: \(Date().timeIntervalSince1970)")
+            self.startTime = Date().timeIntervalSince1970
+        }
         
-        // Start timer
-        print("Timer: \(Date().timeIntervalSince1970)")
-        self.startTime = Date().timeIntervalSince1970
+        self.workoutStarted = true
     }
     
     func completeWorkout() {
