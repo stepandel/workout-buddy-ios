@@ -58,7 +58,6 @@ struct StatsView: View {
                                 Text("\(userData.tenWeekRollingStats.stats[idx].weightLifted)")
                                     .font(.footnote)
                                     .padding(.bottom, 5)
-                                    .frame(maxWidth: .infinity)
                             }
                             
                             Rectangle()
@@ -88,7 +87,6 @@ struct StatsView: View {
                                 Text("\(userData.tenWeekRollingStats.stats[idx].repsCompleted)")
                                     .font(.footnote)
                                     .padding(.bottom, 5)
-                                    .frame(maxWidth: .infinity)
                             }
                             
                             Rectangle()
