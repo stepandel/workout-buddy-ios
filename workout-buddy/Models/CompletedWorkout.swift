@@ -20,6 +20,35 @@ struct CompletedWorkout: Hashable, Codable {
         self.startTS = startTS
         self.time = time
     }
+    
+    func stringFormattedTime() -> String {
+        let hours = String(self.time / 3600)
+        let minutes = String(format: "%02d", (self.time % 3600) / 60 )
+        let seconds = String(format: "%02d", (self.time % 3600) % 60 )
+        
+        return hours + ":" + minutes + ":" + seconds
+    }
+    
+    func getWorkoutStats() -> WorkoutStats {
+        var workoutStats = WorkoutStats()
+        self.workout.rounds.forEach { round in
+            round.sets.forEach { sets in
+                sets.forEach { set in
+                    workoutStats.setsCompleted += 1
+                    if !workoutStats.completedExercises.contains(set.exId) {
+                        workoutStats.completedExercises.append(set.exId)
+                    }
+                    if let reps = set.reps, reps > 0 {
+                        workoutStats.repsCompleted += reps
+                    }
+                    if let weight = set.weight, weight > 0 {
+                        workoutStats.weightLifted += weight
+                    }
+                }
+            }
+        }
+        return workoutStats
+    }
 }
 
 struct CompletedWorkoutShort: Codable {

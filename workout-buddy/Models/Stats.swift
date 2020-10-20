@@ -79,6 +79,20 @@ struct WeeklyStats: Hashable, Codable, Identifiable {
     }
 }
 
+struct WorkoutStats {
+    var completedExercises: [String]
+    var repsCompleted: Int
+    var setsCompleted: Int
+    var weightLifted: Int
+    
+    init() {
+        self.completedExercises = []
+        self.repsCompleted = 0
+        self.setsCompleted = 0
+        self.weightLifted = 0
+    }
+}
+
 extension Array where Element == CGFloat {
     var normalized: [CGFloat] {
         if let _ = self.min(), let max = self.max() {

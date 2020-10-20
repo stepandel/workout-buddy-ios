@@ -12,12 +12,23 @@ struct ActivitiesView: View {
     
     @EnvironmentObject var userData: UserData
     
+//    init() {
+//        if #available(iOS 14.0, *) {
+//            UINavigationBar.appearance().backgroundColor  = UIColor(Constants.Colors.appBackground)
+//        }
+//    }
+    
     var body: some View {
         NavigationView {
-            List(userData.workoutLog.reversed(), id:\.wlId) { completedWorkout in
-                NavigationLink(destination: CompletedWorkoutView(completedWorkout: completedWorkout)) {
-                    ActivityRow(completedWorkout: completedWorkout)
+            List {
+                ForEach(userData.workoutLog.reversed(), id:\.wlId) { completedWorkout in
+                    Section(header: Text("")) {
+                        NavigationLink(destination: CompletedWorkoutView(completedWorkout: completedWorkout)) {
+                            ActivityRow(completedWorkout: completedWorkout)
+                        }
+                    }
                 }
+//                .listRowBackground(Constants.Colors.appBackground)
             }
             .navigationBarTitle("Activities")
         }
