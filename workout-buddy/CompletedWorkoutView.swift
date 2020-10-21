@@ -15,22 +15,21 @@ struct CompletedWorkoutView: View {
     let dateFormatter = DateFormatter()
     
     var body: some View {
-        VStack {
+        List {
             
-            
-            HStack {
-                Text("Date: \(dateStr)")
-                    .padding()
-                Spacer()
+            Section {
+                HStack {
+                    Text("Date: \(dateStr)")
+                        .padding()
+                    Spacer()
+                }
+                    
+                HStack {
+                    Text("Rounds: \(completedWorkout.workout.rounds.count)x")
+                    Spacer()
+                }
+                .padding()
             }
-                
-            
-            
-            HStack {
-                Text("Rounds: \(completedWorkout.workout.rounds.count)x")
-                Spacer()
-            }
-            .padding()
             
             RoundBlock(rounds: completedWorkout.workout.rounds)
             

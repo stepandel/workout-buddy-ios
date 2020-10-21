@@ -24,4 +24,20 @@ struct ExSet: Hashable, Codable, Identifiable {
         self.reps = reps
         self.weight = weight
     }
+    
+    func isTimed() -> Bool {
+        if let time = self.time, time > 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func isWeighted() -> Bool {
+        if let weight = self.weight, weight > 0 {
+            return true
+        } else {
+            return false
+        }
+    }
 }

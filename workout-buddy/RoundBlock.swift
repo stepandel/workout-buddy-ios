@@ -18,14 +18,28 @@ struct RoundBlock: View {
             
             ForEach(rounds.indices) { i in
                 Section(header: Text("Round \(i + 1)")) {
-                    List(self.rounds[i].sets, id:\.self) { set in
-                        HStack {
-                            Text("\(set[0].exId.components(separatedBy: ":")[0].formatFromId())")
-                            Spacer()
-                            if set[0].reps ?? 0 > 0 {
-                                Text("\(set[0].reps!)x")
-                            } else if set[0].time != nil {
-                                Text("\(set[0].time!)sec")
+                    ForEach(self.rounds[i].sets, id:\.self) { sets in
+                        VStack(alignment: .leading, spacing: 4) {
+                            HStack {
+                                Text("\(sets[0].exId.components(separatedBy: ":")[0].formatFromId())")
+                                    .bold()
+                            }.padding()
+                            ForEach(sets.indices) { i in
+                                HStack {
+                                    Text("Set \(i + 1)")
+                                    Spacer()
+                                    if sets[i].isWeighted() {
+                                        Text("+ \(sets[i].weight!)kg")
+                                    } else {
+                                        Text("")
+                                    }
+                                    Spacer()
+                                    if sets[i].isTimed() {
+                                        Text("\(sets[i].time!)sec")
+                                    } else {
+                                        Text("\(sets[i].reps ?? 0)")
+                                    }
+                                }.padding()
                             }
                         }
                     }
