@@ -21,27 +21,29 @@ struct ProfileView: View {
                     UserProfile().padding(.top).padding(.bottom)
                 }
                 
-                Section (header: Text("")) {
-                    Text("Goal Progress Tracking")
-                }
+//                Section (header: Text("")) {
+//                    Text("Goal Progress Tracking")
+//                }
                 
-                Section(header: Text("")) {
-                    NavigationLink(
-                        destination: Text("Nothing"),
-                        label: {
-                            Text("Ranking")
-                        })
-                    NavigationLink(
-                        destination: Text("Nothing"),
-                        label: {
-                            Text("Achievements")
-                        })
-                    NavigationLink(
-                        destination: StatsView().environmentObject(userData),
-                        label: {
-                            Text("Statistics")
-                        })
-                }
+//                Section(header: Text("Statistics")) {
+//                    NavigationLink(
+//                        destination: Text("Nothing"),
+//                        label: {
+//                            Text("Ranking")
+//                        })
+//                    NavigationLink(
+//                        destination: Text("Nothing"),
+//                        label: {
+//                            Text("Achievements")
+//                        })
+//                    NavigationLink(
+//                        destination: StatsView().environmentObject(userData),
+//                        label: {
+//                            Text("Statistics")
+//                        })
+                    
+                    StatsView().environmentObject(userData)
+//                }
             }.sheet(isPresented: $isEditPresented) {
                 EditProfileView()
             }.listStyle(GroupedListStyle())

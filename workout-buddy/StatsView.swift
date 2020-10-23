@@ -14,7 +14,7 @@ struct StatsView: View {
     @State var selectedWeek = "This Week"
     
     var body: some View {
-        List {
+//        List {
             Section(header: Text("Totals")) {
                 HStack {
                     Text("Total Workouts Completed")
@@ -159,8 +159,8 @@ struct StatsView: View {
                     Text("\(userData.tenWeekRollingStats.stats[selected].timeWorkingout / 60) min")
                 }
             }
-        }.listStyle(GroupedListStyle())
-        .navigationBarTitle(Text("Statistics"))
+//        }.listStyle(GroupedListStyle())
+//        .navigationBarTitle(Text("Statistics"))
     }
     
     func getSelectedWeekInterval() {

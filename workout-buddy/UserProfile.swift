@@ -22,8 +22,18 @@ struct UserProfile: View {
                     .font(.title)
                     .padding(.bottom, 16)
                 
-                Text("Following / Followers")
-                    .font(.footnote)
+                if self.userData.city != nil || self.userData.city != "" {
+                    Text("\(self.userData.city ?? ""), \(self.userData.state ?? "")")
+                        .font(.footnote)
+                } else {
+                    Text("\(self.userData.state ?? "")")
+                        .font(.footnote)
+                }
+                
+                if self.userData.bio != nil || self.userData.bio != nil {
+                    Text("\(self.userData.bio ?? "")")
+                        .padding(.top)
+                }
             }
         }
         .padding(.trailing, 32)
