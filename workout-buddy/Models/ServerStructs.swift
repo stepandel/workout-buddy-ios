@@ -190,3 +190,13 @@ struct GetCompletedWorkoutsAndStatsResponse: Decodable {
     var completedWorkouts: [CompletedWorkout]
     var stats: Stats
 }
+
+struct DeleteWorkoutFromLogRequest: Encodable {
+    var userId: String
+    var wlId: String
+    
+    init(userId: String, wlId: String) {
+        self.userId = userId
+        self.wlId = wlId
+    }
+}

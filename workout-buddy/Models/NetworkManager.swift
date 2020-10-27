@@ -386,4 +386,21 @@ class NetworkManager {
             }.resume()
         }
     }
+    
+    func deleteWorkoutFromLog(userId: String, wlId: String) {
+        guard let url = URL(string: baseUrl + "deleteWorkoutFromLog") else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let deleteWorkoutFromLogRequest = DeleteWorkoutFromLogRequest(userId: userId, wlId: wlId)
+        
+        let jsonEncoder = JSONEncoder()
+        
+        if let jsonData = try? jsonEncoder.encode(deleteWorkoutFromLogRequest) {
+            URLSession.shared.uploadTask(with: request, from: jsonData) { (data, res, err) in
+                print("Delete Workout From Log Response: \(String(describing: res))")
+            }.resume()
+        }
+    }
 }

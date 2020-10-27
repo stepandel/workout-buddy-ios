@@ -312,4 +312,12 @@ final class UserData: ObservableObject {
             
         }
     }
+    
+    func deleteWorkoutLogItem(completedWorkout: CompletedWorkout) {
+        NetworkManager().deleteWorkoutFromLog(userId: self.userId, wlId: completedWorkout.wlId)
+        
+        if let idx = self.workoutLog.firstIndex(of: completedWorkout) {
+            self.workoutLog.remove(at: idx)
+        }
+    }
 }

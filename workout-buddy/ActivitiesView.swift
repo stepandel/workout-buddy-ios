@@ -27,10 +27,16 @@ struct ActivitiesView: View {
                             ActivityRow(completedWorkout: completedWorkout)
                         }
                     }
-                }
+                }.onDelete { self.deleteWorkout(at: $0) }
 //                .listRowBackground(Constants.Colors.appBackground)
             }
             .navigationBarTitle("Activities")
+        }
+    }
+    
+    func deleteWorkout(at offsets: IndexSet) {
+        offsets.forEach { i in
+            userData.deleteWorkoutLogItem(completedWorkout: self.userData.workoutLog.reversed()[i])
         }
     }
 }
