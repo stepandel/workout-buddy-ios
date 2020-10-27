@@ -92,6 +92,18 @@ struct TrackWorkoutView: View {
         List {
             Section {
                 TextField("New Workout", text: self.$trackWorkoutViewModel.workout.name)
+                HStack {
+                    Text("Focus: ")
+                    Spacer()
+                    TextField("Focus", text: self.$trackWorkoutViewModel.workout.focus)
+                }
+                if #available(iOS 14.0, *) {
+                    VStack(alignment: .leading) {
+                        Text("Notes: ")
+                        TextEditor(text: self.$trackWorkoutViewModel.workout.notes)
+                            .frame(minHeight: 100)
+                    }
+                }
             }
             ForEach(self.trackWorkoutViewModel.workout.rounds) { round in
                 Section(header: Text("Round \(self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)! + 1)")) {

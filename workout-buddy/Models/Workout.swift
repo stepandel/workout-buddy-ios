@@ -12,13 +12,15 @@ struct Workout: Hashable, Codable, Identifiable {
     var id: String
     var name: String
     var focus: String
+    var notes: String
     var type: String
     var rounds: [Round]
     
-    init(name: String, focus: String = "", type: String = "") {
+    init(name: String, focus: String = "", notes: String = "", type: String = "") {
         self.id = UUID().uuidString
         self.name = name
         self.focus = focus
+        self.notes = notes
         self.type = type
         
         let newRound = Round()
@@ -30,6 +32,7 @@ struct Workout: Hashable, Codable, Identifiable {
         self.id = UUID().uuidString
         self.name = workout.name
         self.focus = workout.focus
+        self.notes = workout.notes
         self.type = workout.type
         self.rounds = workout.rounds
     }
@@ -46,7 +49,7 @@ struct Round: Hashable, Codable, Identifiable {
 }
 
 func isSameWorkout(w1: Workout, w2: Workout) -> Bool {
-    if w1.id == w2.id && w1.name == w2.name && w1.focus == w2.focus {
+    if w1.id == w2.id && w1.name == w2.name {
         
         if w1.rounds.count == w2.rounds.count {
             // Compare each round

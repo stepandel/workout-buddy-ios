@@ -23,12 +23,30 @@ struct CompletedWorkoutView: View {
                         .padding()
                     Spacer()
                 }
+                
+                if completedWorkout.workout.focus != "" {
+                    HStack {
+                        Text("Focus: \(completedWorkout.workout.focus)")
+                        Spacer()
+                    }.padding()
+                }
                     
                 HStack {
                     Text("Rounds: \(completedWorkout.workout.rounds.count)x")
                     Spacer()
                 }
                 .padding()
+                
+                if completedWorkout.workout.notes != "" {
+                    VStack {
+                        HStack {
+                            Text("Notes:")
+                            Spacer()
+                        }.padding([.leading, .top])
+                        Text(completedWorkout.workout.notes)
+                            .frame(minHeight: 100)
+                    }.padding(.bottom, 32)
+                }
             }
             
             RoundBlock(rounds: completedWorkout.workout.rounds)

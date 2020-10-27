@@ -12,7 +12,7 @@ struct RoundBlock: View {
     @State var rounds: [Round]
     
     var body: some View {
-        VStack {
+//        VStack {
             
             // TODO: - create / use OptionalView wrapper
             
@@ -45,7 +45,7 @@ struct RoundBlock: View {
                     }
                 }
             }
-        }
+//        }
     }
 }
 
