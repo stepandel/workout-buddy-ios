@@ -23,7 +23,7 @@ enum ModalView {
     case exercises
 }
 
-enum AlertPopup {
+enum ActionSheetView {
     case endWorkout
     case addRound
 }
@@ -42,11 +42,11 @@ struct TrackWorkoutView: View {
     @State var curExIdx = 0
     @State var addExAfterIdx = 0
     @State var showingAlert = false
-    @State var alertPopup: AlertPopup = .addRound
     @State var startTime: Double = 0
     @State var longShadowRad = 2
     @State var shortShadowRad = 0.5
     @State private var showingActionSheet = false
+    @State private var actionSheetView: ActionSheetView = .addRound
     
     var btnCancel: some View {
         Button(action: {
@@ -60,7 +60,6 @@ struct TrackWorkoutView: View {
     var btnFinish: some View {
         Button(action: {
             self.showingAlert.toggle()
-            self.alertPopup = .endWorkout
         }) {
             Text("Finish")
         }
@@ -69,13 +68,13 @@ struct TrackWorkoutView: View {
     var btnEnd: some View {
         Button(action: {
             self.showingActionSheet.toggle()
+            self.actionSheetView = .endWorkout
         }) {
             Text("End")
         }
     }
     
     var body: some View {
-//        VStack {
                     
 //                    HStack {
 //                        VStack {
@@ -89,8 +88,7 @@ struct TrackWorkoutView: View {
 //
 //                    }
                     
-                    // Exercise List broken down by Round
-//        NavigationView {
+        NavigationView {                // Exercise List broken down by Round
         List {
             Section {
                 TextField("New Workout", text: self.$trackWorkoutViewModel.workout.name)
@@ -99,63 +97,70 @@ struct TrackWorkoutView: View {
                 Section(header: Text("Round \(self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)! + 1)")) {
                     ForEach(round.sets, id: \.self) { set in
                         NavigationLink(destination: SelectedExerciseView(trackWorkoutViewModel: self.trackWorkoutViewModel, currentRound: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!, curExIdx: round.sets.firstIndex(of: set)!)) {
-                        HStack {
-                            VStack {
-                                Text("\(set[0].exId.components(separatedBy: ":")[0].formatFromId())")
+                            HStack {
+                                VStack {
+                                    Text("\(set[0].exId.components(separatedBy: ":")[0].formatFromId())")
+                                    Spacer()
+                                    Text("\(set.count) \(set.count > 1 ? "Sets" : "Set")")
+                                    .font(.footnote)
+                                    if (set[0].completed ?? false) {
+                                        Text("Completed")
+                                            .font(.footnote)
+                                            .multilineTextAlignment(.leading)
+                                    } else if (set[0].skipped ?? false) {
+                                        Text("Skipped")
+                                            .font(.footnote)
+                                            .multilineTextAlignment(.leading)
+                                    }
+                                }
                                 Spacer()
-                                Text("\(set.count) \(set.count > 1 ? "Sets" : "Set")")
-                                .font(.footnote)
-                                if (set[0].completed ?? false) {
-                                    Text("Completed")
-                                        .font(.footnote)
-                                        .multilineTextAlignment(.leading)
-                                } else if (set[0].skipped ?? false) {
-                                    Text("Skipped")
-                                        .font(.footnote)
-                                        .multilineTextAlignment(.leading)
+                                if set[0].reps! > 0 {
+                                    Text("\(set[0].reps!)x")
+                                } else if set[0].time != nil {
+                                    Text("\(set[0].time!)sec")
                                 }
                             }
-                            Spacer()
-                            if set[0].reps! > 0 {
-                                Text("\(set[0].reps!)x")
-                            } else if set[0].time != nil {
-                                Text("\(set[0].time!)sec")
-                            }
                         }
-                    }
-//                    .onTapGesture {
-////                                        self.trackWorkoutViewModel.currentExercise = exercise
-//                        self.currentRound = self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!
-//                        self.curExIdx = round.sets.firstIndex(of: set) ?? 0
-//                    }
                     
                     }
                     .onDelete { self.deleteExercise(at: $0, in: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!) }
                     .onMove { self.moveExercise(source: $0, destination: $1, in: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!) }
                     
                     Button(action: { self.addExercise(round: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!, addLast: true) }) {
-                        Text("+ Exercise")
-                            .multilineTextAlignment(.center)
-                    }
+                        HStack {
+                            Spacer()
+                            Text("+ Exercise")
+                                .multilineTextAlignment(.center)
+                            Spacer()
+                        }
+                    }.buttonStyle(BorderlessButtonStyle())
                         
                 }
                 Section {
                     Button(action: {
                         self.deleteRound(round: self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!)
                     }) {
-                        Text("Delete round")
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.red)
-                    }
+                        HStack {
+                            Spacer()
+                            Text("Delete round")
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(.red)
+                            Spacer()
+                        }
+                    }.buttonStyle(BorderlessButtonStyle())
                     Button(action: {
                         self.currentRound = self.trackWorkoutViewModel.workout.rounds.firstIndex(of: round)!
                         self.curExIdx = 0
-                        self.showingAlert.toggle()
-                        self.alertPopup = .addRound
+                        self.showingActionSheet.toggle()
+                        self.actionSheetView = .addRound
                     }) {
-                        Text("Add Round")
-                            .multilineTextAlignment(.center)
-                    }
+                        HStack {
+                            Spacer()
+                            Text("Add Round")
+                                .multilineTextAlignment(.center)
+                            Spacer()
+                        }
+                    }.buttonStyle(BorderlessButtonStyle())
                 }
             }
             .onTapGesture {
@@ -167,7 +172,6 @@ struct TrackWorkoutView: View {
             }
         }
         .listStyle(GroupedListStyle())
-//        }
         .onAppear {
             print("\(self.trackWorkoutViewModel.workout)")
             UIApplication.shared.isIdleTimerDisabled = true
@@ -183,36 +187,39 @@ struct TrackWorkoutView: View {
             }
         })
         .alert(isPresented: $showingAlert) {
-            if self.alertPopup == .endWorkout {
-                return Alert(title: Text("Cancel Workout"), message: Text("Are you sure you want to cancel workout?"), primaryButton: .default(Text("Yes!"), action: {
-                    self.cancelWorkout()
-                }), secondaryButton: .default(Text("No")))
-            } else if self.alertPopup == .addRound {
-                return Alert(title: Text("Add Round"), message: Text("Do you want to copy round?"), primaryButton: .default(Text("Yes"), action: {
-                    self.addRound(copyRound: true)
-                }), secondaryButton: .default(Text("No, create empty round"), action: { self.addRound(copyRound: false)}))
-            } else {
-                return Alert(title: Text("Something went wrong!"))
-            }
+            Alert(title: Text("Cancel Workout"), message: Text("Are you sure you want to cancel workout?"), primaryButton: .default(Text("Yes!"), action: {
+                self.cancelWorkout()
+            }), secondaryButton: .default(Text("No")))
         }
         .actionSheet(isPresented: $showingActionSheet, content: {
-            ActionSheet(title: Text("End Workout?"), buttons: [
-                .default(Text("Finish Workout")) {
-                    self.completeWorkout()
-                },
-                .default(Text("Cancel Workout").foregroundColor(.red)) {
-                    self.showingAlert.toggle()
-                    self.alertPopup = .endWorkout
-                },
-                .cancel()
-            ])
+            if self.actionSheetView == .endWorkout {
+                return ActionSheet(title: Text("End Workout?"), buttons: [
+                    .default(Text("Finish Workout")) {
+                        self.completeWorkout()
+                    },
+                    .default(Text("Cancel Workout").foregroundColor(.red)) {
+                        self.showingAlert.toggle()
+                    },
+                    .cancel()
+                ])
+            } else if self.actionSheetView == .addRound {
+                return ActionSheet(title: Text("Add Round"), buttons: [
+                    .default(Text("Empty Round")) {
+                        self.addRound(copyRound: false)
+                    },
+                    .default(Text("Copy Previous Round")) {
+                        self.addRound(copyRound: true)
+                    },
+                    .cancel()
+                ])
+            } else {
+                return ActionSheet(title: Text("Something went wrong!"), buttons: [ .cancel() ])
+            }
         })
-//        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 1)))
-//        .edgesIgnoringSafeArea(.all)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: btnEnd, trailing: EditButton())
         .navigationBarTitle(self.trackWorkoutViewModel.workout.name)
+        }
         
     }
     
@@ -303,7 +310,10 @@ struct TrackWorkoutView: View {
         self.workoutStarted = false
         self.trackWorkoutViewModel.workout = Workout(name: "")
         self.trackWorkoutViewModel.isWorkoutSelected = false
-//        self.trackWorkoutViewModel.currentExercise = nil
+
+        self.userData.trackingStatus.started = false
+        self.userData.trackingStatus.new = true
+        self.userData.selectedTab = 0
     }
     
     func cancelWorkout() {
@@ -317,6 +327,10 @@ struct TrackWorkoutView: View {
         self.curExIdx = 0
         
         self.presentaionMode.wrappedValue.dismiss()
+        
+        self.userData.trackingStatus.started = false
+        self.userData.trackingStatus.new = true
+        self.userData.selectedTab = 0
     }
     
     func hideKeyboard() {

@@ -30,7 +30,7 @@ struct AddNewExercise: View {
     @State private var timed = false
     
     @Environment(\.presentationMode) var presentaionMode
-    @State private var showingSelectExercises = false
+    @State private var showingSelectExercises = true
     
     var body: some View {
         VStack {
@@ -52,20 +52,20 @@ struct AddNewExercise: View {
                         self.presentaionMode.wrappedValue.dismiss()
                     }
                 }) {
-                    Text("Done")
+                    Text("Add")
                 }
             }
             .padding(.horizontal)
             .padding(.top)
             
             Form {
-                if (addNewExerciseViewModel.wasExerciseSelected) {
-                    Text("\(addNewExerciseViewModel.exercise!.id.components(separatedBy: ":")[0].formatFromId())")
-                } else {
-                    Button(action: { self.showingSelectExercises.toggle() }) {
+                Button(action: { self.showingSelectExercises.toggle() }) {
+                    if (addNewExerciseViewModel.wasExerciseSelected) {
+                        Text("\(addNewExerciseViewModel.exercise!.id.components(separatedBy: ":")[0].formatFromId())")
+                    } else {
                         Text("Select Exercise")
                     }
-                }
+                }.buttonStyle(BorderlessButtonStyle())
                 
                 if addNewExerciseViewModel.wasExerciseSelected {
                     HStack {
@@ -121,7 +121,7 @@ struct AddNewExerciseTracking: View {
     @State private var timed = false
 
     @Environment(\.presentationMode) var presentaionMode
-    @State private var showingSelectExercises = false
+    @State private var showingSelectExercises = true
 
     var body: some View {
         VStack {
@@ -149,20 +149,20 @@ struct AddNewExerciseTracking: View {
                         self.presentaionMode.wrappedValue.dismiss()
                     }
                 }) {
-                    Text("Done")
+                    Text("Add")
                 }
             }
             .padding(.horizontal)
             .padding(.top)
 
             Form {
-                if (addNewExerciseViewModel.wasExerciseSelected) {
-                    Text("\(addNewExerciseViewModel.exercise!.id.components(separatedBy: ":")[0].formatFromId())")
-                } else {
-                    Button(action: { self.showingSelectExercises.toggle() }) {
+                Button(action: { self.showingSelectExercises.toggle() }) {
+                    if (addNewExerciseViewModel.wasExerciseSelected) {
+                        Text("\(addNewExerciseViewModel.exercise!.id.components(separatedBy: ":")[0].formatFromId())")
+                    } else {
                         Text("Select Exercise")
                     }
-                }
+                }.buttonStyle(BorderlessButtonStyle())
                 
                 if addNewExerciseViewModel.wasExerciseSelected {
                     HStack {
@@ -217,7 +217,7 @@ struct AddNewExerciseEdit: View {
     @State private var timed = false
     
     @Environment(\.presentationMode) var presentaionMode
-    @State private var showingSelectExercises = false
+    @State private var showingSelectExercises = true
     
     var body: some View {
         VStack {
@@ -239,20 +239,20 @@ struct AddNewExerciseEdit: View {
                         self.presentaionMode.wrappedValue.dismiss()
                     }
                 }) {
-                    Text("Done")
+                    Text("Add")
                 }
             }
             .padding(.horizontal)
             .padding(.top)
             
             Form {
-                if (addNewExerciseViewModel.wasExerciseSelected) {
-                    Text("\(addNewExerciseViewModel.exercise!.id.components(separatedBy: ":")[0].formatFromId())")
-                } else {
-                    Button(action: { self.showingSelectExercises.toggle() }) {
+                Button(action: { self.showingSelectExercises.toggle() }) {
+                    if (addNewExerciseViewModel.wasExerciseSelected) {
+                        Text("\(addNewExerciseViewModel.exercise!.id.components(separatedBy: ":")[0].formatFromId())")
+                    } else {
                         Text("Select Exercise")
                     }
-                }
+                }.buttonStyle(BorderlessButtonStyle())
                 
                 if addNewExerciseViewModel.wasExerciseSelected {
                     HStack {

@@ -26,19 +26,19 @@ struct SelectExerciseView: View {
                     }) { exercise in
                         Button(action: {
                             self.addNewExerciseViewModel.exercise = exercise
-                            self.addNewExerciseViewModel.wasExerciseSelected.toggle()
+                            self.addNewExerciseViewModel.wasExerciseSelected = true
                             self.presentaionMode.wrappedValue.dismiss()
                         }) {
-                            Text(exercise.id)
-                        }
+                            Text(exercise.id.components(separatedBy: ":")[0].formatFromId())
+                        }.buttonStyle(BorderlessButtonStyle())
                     }
                 }
             }.navigationBarTitle(Text("Exercises"))
             .navigationBarItems(trailing: Button(action: {
                 self.isPresented.toggle()
             }) {
-                Image(systemName: "plus")
-        })
+                Text("+ New Exercise")
+            })
         }.sheet(isPresented: self.$isPresented) { NewExerciseView().environmentObject(self.userData) }
         .onTapGesture {
             self.hideKeyboard()

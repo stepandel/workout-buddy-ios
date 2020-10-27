@@ -12,13 +12,21 @@ import RealmSwift
 struct ContentView: View {
     @EnvironmentObject var userData: UserData
     
-    @State private var selection = 0
+    @State private var isActionSheetPresented = false
  
     var body: some View {
+        let selection = Binding<Int>(
+            get: { self.userData.selectedTab },
+            set: { self.userData.selectedTab = $0
+                if $0 == 1 {
+                    isActionSheetPresented.toggle()
+                }
+            }
+        )
         
         ZStack {
         
-            TabView(selection: $selection){
+            TabView(selection: selection){
                 ActivitiesView()
                     .environmentObject(self.userData)
                     .tabItem {
@@ -27,8 +35,8 @@ struct ContentView: View {
                             Text("Feed")
                         }
                     }
-                    .tag(1)
-                SelectTrackingView()
+                    .tag(0)
+                TrackWorkoutView(showingModalView: !userData.trackingStatus.new)
                     .environmentObject(self.userData)
                     .tabItem {
                         VStack {
@@ -36,16 +44,7 @@ struct ContentView: View {
                             Text("Track")
                         }
                     }
-                    .tag(0)
-    //            WorkoutsView()
-    //                .environmentObject(self.userData)
-    //                .tabItem {
-    //                    VStack {
-    //                        Image(systemName: "tray.fill")
-    //                        Text("Workouts")
-    //                    }
-    //                }
-    //                .tag(2)
+                    .tag(1)
                 ProfileView()
                     .environmentObject(self.userData)
                     .tabItem {
@@ -54,6 +53,25 @@ struct ContentView: View {
                             Text("Profile")
                         }
                     }
+                    .tag(2)
+            }.actionSheet(isPresented: $isActionSheetPresented) {
+                ActionSheet(title: Text("Start Workout"), buttons: [
+                    .default(Text("Start New")) {
+                        userData.trackingStatus.started = true
+                    },
+                    .default(Text("Select Previously Completed")) {
+                        userData.trackingStatus.new = false
+                        userData.trackingStatus.started = true
+                    },
+                    .cancel() {
+                        userData.selectedTab = 0
+                    }
+                ])
+            }
+            
+            if userData.trackingStatus.started {
+                TrackWorkoutView(showingModalView: !userData.trackingStatus.new)
+                    .environmentObject(self.userData)
             }
             
             if !userData.isLoggedIn {

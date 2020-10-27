@@ -11,11 +11,23 @@ import SwiftUI
 import CryptoKit
 import UIKit
 
+struct TrackingStatus {
+    var started: Bool
+    var new: Bool
+    
+    init() {
+        self.started = false
+        self.new = true
+    }
+}
+
 final class UserData: ObservableObject {
     @Published var isLoggedIn = false
     @Published var workouts: [Workout] = []
     @Published var exercises: [Exercise] = []
     @Published var workoutLog: [CompletedWorkout] = []
+    @Published var trackingStatus: TrackingStatus
+    @Published var selectedTab: Int
     @Published var firstName: String?
     @Published var lastName: String?
     @Published var bio: String?
@@ -39,6 +51,8 @@ final class UserData: ObservableObject {
     }
     
     init() {
+        self.trackingStatus = TrackingStatus()
+        self.selectedTab = 0
         self.stats = Stats()
         self.tenWeekRollingStats = TenWeekRollingStats()
         self.weekEndTS = Date().endOfWeek()?.timeIntervalSince1970

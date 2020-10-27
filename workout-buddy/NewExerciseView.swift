@@ -13,7 +13,7 @@ struct NewExerciseView: View {
     
     @State var name = ""
     @State var equipment = ""
-    @State var type = ""
+    @State var type = "pow"
     @State var bodyPart = ""
     @State var muscleGroup = ""
     
@@ -41,11 +41,54 @@ struct NewExerciseView: View {
                 .padding(.top)
             Form {
                 List {
-                    TextField("Name", text: $name)
-                    TextField("Equipment", text: $equipment)
-                    TextField("Type", text: $type)
-                    TextField("Body Part", text: $bodyPart)
-                    TextField("Muscle Group", text: $muscleGroup)
+                    HStack {
+                        Text("Name: ")
+                        Spacer()
+                        TextField("Name", text: $name)
+                    }
+                    HStack {
+                        Text("Equipment: ")
+                        Spacer()
+                        TextField("Equipment", text: $equipment)
+                    }
+                    if #available(iOS 14.0, *) {
+                        HStack {
+                            Text("Type: ")
+                            
+                            Spacer()
+                            
+                            Menu {
+                                Button(action: { self.type = "pow"}) {
+                                    Text("Power")
+                                }
+                                Button(action: { self.type = "exp" }) {
+                                    Text("Explosive")
+                                }
+                                Button(action: { self.type = "iso" }) {
+                                    Text("Isometric")
+                                }
+                            } label: {
+                                Text("\(self.type)")
+                            }
+                        }
+                    } else {
+                        // Fallback on earlier versions
+                        HStack {
+                            Text("Type: ")
+                            Spacer()
+                            TextField("Type", text: $type)
+                        }
+                    }
+                    HStack {
+                        Text("Body Part: ")
+                        Spacer()
+                        TextField("Body Part", text: $bodyPart)
+                    }
+                    HStack {
+                        Text("Muscle Group: ")
+                        Spacer()
+                        TextField("Muscle Group", text: $muscleGroup)
+                    }
                 }
             }
         }.onTapGesture {

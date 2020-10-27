@@ -14,7 +14,6 @@
 		D914766B24740BB500447A55 /* ActivityRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D914766A24740BB500447A55 /* ActivityRow.swift */; };
 		D914766D24740ECA00447A55 /* workoutLog.json in Resources */ = {isa = PBXBuildFile; fileRef = D914766C24740ECA00447A55 /* workoutLog.json */; };
 		D914766F24740FB500447A55 /* CompletedWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D914766E24740FB500447A55 /* CompletedWorkoutView.swift */; };
-		D9294D7D24DEE92D00AA5211 /* SelectTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9294D7C24DEE92D00AA5211 /* SelectTrackingView.swift */; };
 		D93AFA6525290E03008BEAC1 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93AFA6425290E03008BEAC1 /* EditProfileView.swift */; };
 		D93AFA6B25293357008BEAC1 /* ServerStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93AFA6A25293357008BEAC1 /* ServerStructs.swift */; };
 		D93B4143252A1C5F00E98994 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93B4142252A1C5F00E98994 /* ImagePicker.swift */; };
@@ -74,7 +73,6 @@
 		D914766A24740BB500447A55 /* ActivityRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRow.swift; sourceTree = "<group>"; };
 		D914766C24740ECA00447A55 /* workoutLog.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = workoutLog.json; sourceTree = "<group>"; };
 		D914766E24740FB500447A55 /* CompletedWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedWorkoutView.swift; sourceTree = "<group>"; };
-		D9294D7C24DEE92D00AA5211 /* SelectTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTrackingView.swift; sourceTree = "<group>"; };
 		D93AFA6425290E03008BEAC1 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		D93AFA6A25293357008BEAC1 /* ServerStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerStructs.swift; sourceTree = "<group>"; };
 		D93B4142252A1C5F00E98994 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -200,7 +198,6 @@
 				D97998322530EC7A00E05A80 /* StatsView.swift */,
 				D9147666246B7F5B00447A55 /* TrackWorkoutView.swift */,
 				D97F69192502A742002A74A3 /* SelectedExerciseView.swift */,
-				D9294D7C24DEE92D00AA5211 /* SelectTrackingView.swift */,
 				D98A73BC2498F6FB009B190C /* CurrentExerciseView.swift */,
 				D9147668246B8D6800447A55 /* PickWorkoutView.swift */,
 				D9A2FFC2243A384B00352747 /* ActivitiesView.swift */,
@@ -385,7 +382,6 @@
 			files = (
 				D97998332530EC7A00E05A80 /* StatsView.swift in Sources */,
 				D9A2FFCF243A42EC00352747 /* Data.swift in Sources */,
-				D9294D7D24DEE92D00AA5211 /* SelectTrackingView.swift in Sources */,
 				D9A2FFAF243A380F00352747 /* AppDelegate.swift in Sources */,
 				D9147667246B7F5B00447A55 /* TrackWorkoutView.swift in Sources */,
 				D9147669246B8D6800447A55 /* PickWorkoutView.swift in Sources */,
