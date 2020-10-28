@@ -23,6 +23,7 @@ struct TrackingStatus {
 
 final class UserData: ObservableObject {
     @Published var isLoggedIn = false
+    @Published var didCreateAccount = false
     @Published var workouts: [Workout] = []
     @Published var exercises: [Exercise] = []
     @Published var workoutLog: [CompletedWorkout] = []
@@ -59,19 +60,35 @@ final class UserData: ObservableObject {
         
         if userId != "" {
             self.isLoggedIn = true
+            if let deviceId = UIDevice.current.identifierForVendor?.uuidString, deviceId == self.userId {
+                self.didCreateAccount = false
+            }
             
             self.loadAllData()
         }
     }
     
     func loadAllData() {
-        self.getUserData()
+        if didCreateAccount { self.getUserData() }
         self.getWorkouts()
         self.getExercises()
         self.getWorkoutLogAndStats()
     }
     
     // TODO: - Listen for changes to save new workouts
+    
+    func saveNewUserWithoutAccount() {
+        if let deviceId = UIDevice.current.identifierForVendor?.uuidString {
+            self.userId = deviceId
+            self.isLoggedIn = true
+            
+            NetworkManager().saveNewUserWithoutAccount(id: self.userId)
+            
+            self.loadAllData()
+        } else {
+            // Do not proceed (Unable to start the trial at this time)
+        }
+    }
     
     func saveNewUser(email: String, pass: String) {
         
@@ -86,6 +103,7 @@ final class UserData: ObservableObject {
         self.userId = id
         
         self.isLoggedIn = true
+        self.didCreateAccount = true
     }
     
     func checkUser(email: String, pass: String) {
@@ -99,6 +117,7 @@ final class UserData: ObservableObject {
         NetworkManager().checkUser(id: id, pass: pass) { (success) in
             DispatchQueue.main.async {
                 self.isLoggedIn = success
+                self.didCreateAccount = success
                 if success {
                     self.userId = id
                     self.loadAllData()
@@ -110,6 +129,7 @@ final class UserData: ObservableObject {
     func logOutUser() {
         userId = ""
         isLoggedIn = false
+        didCreateAccount = false
         workouts = []
         exercises = []
         workoutLog = []

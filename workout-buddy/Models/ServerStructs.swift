@@ -8,6 +8,14 @@
 
 import SwiftUI
 
+struct SaveNewUserWithoutAccountRequest: Encodable {
+    var id: String
+    
+    init(id: String) {
+        self.id = id
+    }
+}
+
 struct SaveNewUserRequest: Encodable {
     var user = ["id": "", "password": ""]
     

@@ -48,7 +48,7 @@ struct ProfileView: View {
                 EditProfileView()
             }.listStyle(GroupedListStyle())
             .navigationBarItems(
-                leading: Button(action: { self.isEditPresented.toggle() }) { Text("Edit") },
+                leading: self.userData.didCreateAccount ? AnyView(Button(action: { self.isEditPresented.toggle() }) { Text("Edit") }) : AnyView(EmptyView()),
                 trailing: Button(action: { self.userData.logOutUser() }) { Text("Log Out") }
             ).navigationBarTitle(Text("Profile"), displayMode: .inline)
         }

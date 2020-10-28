@@ -88,6 +88,20 @@ struct LoginView: View {
                 }
             }.padding(.top, 40.0)
             
+            Button(action: {
+                self.userData.saveNewUserWithoutAccount()
+                
+                // TODO: - Display warning that the data could get lost
+            }) {
+                Text("Try Without Account")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(width: 300, height: 50)
+                    .background(Color.gray)
+                    .cornerRadius(12.0)
+            }.padding(.top)
+            
             Button(action: {self.isSignup.toggle()}) {
                 if isSignup {
                     Text("Already have an account? Log in")

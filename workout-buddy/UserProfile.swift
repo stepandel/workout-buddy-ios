@@ -17,23 +17,32 @@ struct UserProfile: View {
             
             Spacer()
             
-            VStack(alignment: .leading) {
-                Text("\(self.userData.firstName ?? "") \(self.userData.lastName ?? "")")
-                    .font(.title)
-                    .padding(.bottom, 16)
-                
-                if self.userData.city != nil || self.userData.city != "" {
-                    Text("\(self.userData.city ?? ""), \(self.userData.state ?? "")")
-                        .font(.footnote)
-                } else {
-                    Text("\(self.userData.state ?? "")")
-                        .font(.footnote)
+            if userData.didCreateAccount {
+            
+                VStack(alignment: .leading) {
+                    Text("\(self.userData.firstName ?? "") \(self.userData.lastName ?? "")")
+                        .font(.title)
+                        .padding(.bottom, 16)
+                    
+                    if self.userData.city != nil || self.userData.city != "" {
+                        Text("\(self.userData.city ?? ""), \(self.userData.state ?? "")")
+                            .font(.footnote)
+                    } else {
+                        Text("\(self.userData.state ?? "")")
+                            .font(.footnote)
+                    }
+                    
+                    if self.userData.bio != nil || self.userData.bio != nil {
+                        Text("\(self.userData.bio ?? "")")
+                            .padding(.top)
+                    }
                 }
                 
-                if self.userData.bio != nil || self.userData.bio != nil {
-                    Text("\(self.userData.bio ?? "")")
-                        .padding(.top)
-                }
+            } else {
+                HStack {
+                    Text("Me")
+                    Spacer()
+                }.padding(.leading)
             }
         }
         .padding(.trailing, 32)

@@ -13,6 +13,27 @@ class NetworkManager {
     
     let baseUrl = "https://21dld2pcsg.execute-api.us-east-2.amazonaws.com/dev/"
     
+    func saveNewUserWithoutAccount(id: String) {
+        guard let url = URL(string: baseUrl + "saveNewUserWithoutAccount") else { return }
+               
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let saveNewUserWithoutAccountRequest = SaveNewUserWithoutAccountRequest(id: id)
+
+        let jsonEncoder = JSONEncoder()
+        
+        if let jsonData = try? jsonEncoder.encode(saveNewUserWithoutAccountRequest) {
+//            print(jsonData)
+            URLSession.shared.uploadTask(with: request, from: jsonData) { (data,res,err) in
+                if let err = err {
+                    print("Error creating new user: \(String(describing: err))")
+                }
+                print("Save New User Response: \(String(describing: res))")
+            }.resume()
+        }
+    }
+    
     func saveNewUser(id: String, pass: String) {
         guard let url = URL(string: baseUrl + "saveNewUser") else { return }
                
