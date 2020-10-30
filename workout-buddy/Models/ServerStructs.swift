@@ -18,10 +18,12 @@ struct SaveNewUserWithoutAccountRequest: Encodable {
 
 struct SaveNewUserRequest: Encodable {
     var user = ["id": "", "password": ""]
+    var deviceId: String?
     
-    init(id: String, password: String) {
+    init(id: String, password: String, deviceId: String?) {
         self.user["id"] = id
         self.user["password"] = password
+        self.deviceId = deviceId
     }
 }
 

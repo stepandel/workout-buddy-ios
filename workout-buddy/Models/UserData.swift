@@ -98,9 +98,14 @@ final class UserData: ObservableObject {
             String(format: "%02x", $0)
         }.joined()
         
-        NetworkManager().saveNewUser(id: id, pass: pass)
+        if userId == "" {
+            NetworkManager().saveNewUser(id: id, pass: pass, deviceId: nil)
+        } else {
+            NetworkManager().saveNewUser(id: id, pass: pass, deviceId: userId)
+        }
         
         self.userId = id
+        self.loadAllData()
         
         self.isLoggedIn = true
         self.didCreateAccount = true
@@ -127,7 +132,9 @@ final class UserData: ObservableObject {
     }
     
     func logOutUser() {
-        userId = ""
+        if didCreateAccount {
+            userId = ""
+        }
         isLoggedIn = false
         didCreateAccount = false
         workouts = []

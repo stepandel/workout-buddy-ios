@@ -34,13 +34,13 @@ class NetworkManager {
         }
     }
     
-    func saveNewUser(id: String, pass: String) {
+    func saveNewUser(id: String, pass: String, deviceId: String?) {
         guard let url = URL(string: baseUrl + "saveNewUser") else { return }
                
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
-        let saveNewUserRequest = SaveNewUserRequest(id: id, password: pass)
+        let saveNewUserRequest = SaveNewUserRequest(id: id, password: pass, deviceId: deviceId)
 
         let jsonEncoder = JSONEncoder()
         
