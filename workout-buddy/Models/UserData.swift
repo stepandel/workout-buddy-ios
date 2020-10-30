@@ -272,26 +272,8 @@ final class UserData: ObservableObject {
             self.tenWeekRollingStats = TenWeekRollingStats()
         }
         
-        self.stats.totalWorkoutsCompleted += 1
-        self.tenWeekRollingStats.stats[9].workoutsCompleted += 1
-        self.stats.totalTimeWorkingout += completedWorkout.time
-        self.tenWeekRollingStats.stats[9].timeWorkingout += completedWorkout.time
-        completedWorkout.workout.rounds.forEach { round in
-            round.sets.forEach { sets in
-                sets.forEach { set in
-                    self.stats.totalSetsCompleted += 1
-                    self.tenWeekRollingStats.stats[9].setsCompleted += 1
-                    if let reps = set.reps, reps > 0 {
-                        self.stats.totalRepsCompleted += reps
-                        self.tenWeekRollingStats.stats[9].repsCompleted += reps
-                    }
-                    if let weight = set.weight, weight > 0 {
-                        self.stats.totalWeightLifted += weight
-                        self.tenWeekRollingStats.stats[9].weightLifted += weight
-                    }
-                }
-            }
-        }
+        self.stats.addStatsFrom(workout: completedWorkout)
+        self.tenWeekRollingStats.weeklyStats[9].stats.addStatsFrom(workout: completedWorkout)
         
         NetworkManager().saveStats(userId: self.userId, stats: self.stats)
     }
@@ -311,32 +293,8 @@ final class UserData: ObservableObject {
         NetworkManager().getCompletedWorkoutsAndStatsForUser(userId: self.userId, timezoneOffset: timezoneOffset) { (workoutLog, stats) in
             self.workoutLog = workoutLog
             self.stats = stats
-            
-            // Calculate 10 Week rolling stats
-            self.weekEndTS = Date().endOfWeek()?.timeIntervalSince1970
-            let weekInS = 604800.0
-            
             self.workoutLog.forEach { workout in
-                guard let weekEndTS = self.weekEndTS else { return }
-                let weekIdx = 9 - Int(floor((weekEndTS - workout.startTS) / weekInS))
-                if weekIdx > -1 && weekIdx < 10 {
-                
-                    self.tenWeekRollingStats.stats[weekIdx].workoutsCompleted += 1
-                    self.tenWeekRollingStats.stats[weekIdx].timeWorkingout += workout.time
-                    workout.workout.rounds.forEach { round in
-                        round.sets.forEach { sets in
-                            sets.forEach { set in
-                                self.tenWeekRollingStats.stats[weekIdx].setsCompleted += 1
-                                if let reps = set.reps, reps > 0 {
-                                    self.tenWeekRollingStats.stats[weekIdx].repsCompleted += reps
-                                }
-                                if let weight = set.weight, weight > 0 {
-                                    self.tenWeekRollingStats.stats[weekIdx].weightLifted += weight
-                                }
-                            }
-                        }
-                    }
-                }
+                self.updateTenWeekRollingStats(with: workout)
             }
             
         }
@@ -346,25 +304,30 @@ final class UserData: ObservableObject {
         NetworkManager().deleteWorkoutFromLog(userId: self.userId, wlId: completedWorkout.wlId)
         
         // Update stats
-        self.stats.totalWorkoutsCompleted -= 1
-        self.stats.totalTimeWorkingout -= completedWorkout.time
-        completedWorkout.workout.rounds.forEach { round in
-            round.sets.forEach { sets in
-                sets.forEach { set in
-                    self.stats.totalSetsCompleted -= 1
-                    if let reps = set.reps, reps > 0 {
-                        self.stats.totalRepsCompleted -= reps
-                    }
-                    if let weight = set.weight, weight > 0 {
-                        self.stats.totalWeightLifted -= weight
-                    }
-                }
-            }
-        }
+        self.stats.subtractStatsFrom(workout: completedWorkout)
         NetworkManager().saveStats(userId: self.userId, stats: self.stats)
+        
+        // Update weekly stats
+        self.updateTenWeekRollingStats(with: completedWorkout, subtract: true)
         
         if let idx = self.workoutLog.firstIndex(of: completedWorkout) {
             self.workoutLog.remove(at: idx)
+        }
+    }
+    
+    func updateTenWeekRollingStats(with workout: CompletedWorkout, subtract: Bool = false) {
+        self.weekEndTS = Date().endOfWeek()?.timeIntervalSince1970
+        let weekInS = 604800.0
+        
+        guard let weekEndTS = self.weekEndTS else { return }
+        
+        let weekIdx = 9 - Int(floor((weekEndTS - workout.startTS) / weekInS))
+        if weekIdx > -1 && weekIdx < 10 {
+            if subtract {
+                self.tenWeekRollingStats.weeklyStats[weekIdx].stats.subtractStatsFrom(workout: workout)
+            } else {
+                self.tenWeekRollingStats.weeklyStats[weekIdx].stats.addStatsFrom(workout: workout)
+            }
         }
     }
     

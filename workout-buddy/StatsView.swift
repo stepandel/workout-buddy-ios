@@ -48,14 +48,14 @@ struct StatsView: View {
                     
                 HStack(spacing: 16) {
                     
-                    ForEach(userData.tenWeekRollingStats.stats.indices, id: \.self) { idx in
+                    ForEach(userData.tenWeekRollingStats.weeklyStats.indices, id: \.self) { idx in
                         
                         VStack {
                             
                             Spacer(minLength: 0)
                             
                             if selected == idx {
-                                Text("\(userData.tenWeekRollingStats.stats[idx].weightLifted)")
+                                Text("\(userData.tenWeekRollingStats.weeklyStats[idx].stats.totalWeightLifted)")
                                     .font(.footnote)
                                     .padding(.bottom, 5)
                             }
@@ -77,14 +77,14 @@ struct StatsView: View {
                 
                 HStack(spacing: 16) {
                     
-                    ForEach(userData.tenWeekRollingStats.stats.indices, id: \.self) { idx in
+                    ForEach(userData.tenWeekRollingStats.weeklyStats.indices, id: \.self) { idx in
                         
                         VStack {
                             
                             Spacer(minLength: 0)
                             
                             if selected == idx {
-                                Text("\(userData.tenWeekRollingStats.stats[idx].repsCompleted)")
+                                Text("\(userData.tenWeekRollingStats.weeklyStats[idx].stats.totalRepsCompleted)")
                                     .font(.footnote)
                                     .padding(.bottom, 5)
                             }
@@ -106,14 +106,14 @@ struct StatsView: View {
                 
                 HStack(spacing: 16) {
                     
-                    ForEach(userData.tenWeekRollingStats.stats.indices, id: \.self) { idx in
+                    ForEach(userData.tenWeekRollingStats.weeklyStats.indices, id: \.self) { idx in
                         
                         VStack {
                             
                             Spacer(minLength: 0)
                             
                             if selected == idx {
-                                Text("\(userData.tenWeekRollingStats.stats[idx].workoutsCompleted)")
+                                Text("\(userData.tenWeekRollingStats.weeklyStats[idx].stats.totalWorkoutsCompleted)")
                                     .font(.footnote)
                                     .padding(.bottom, 5)
                             }
@@ -136,27 +136,27 @@ struct StatsView: View {
                 HStack {
                     Text("Workouts Completed")
                     Spacer()
-                    Text("\(userData.tenWeekRollingStats.stats[selected].workoutsCompleted)")
+                    Text("\(userData.tenWeekRollingStats.weeklyStats[selected].stats.totalWorkoutsCompleted)")
                 }
                 HStack {
                     Text("Weight Lifted")
                     Spacer()
-                    Text("\(userData.tenWeekRollingStats.stats[selected].weightLifted) kg")
+                    Text("\(userData.tenWeekRollingStats.weeklyStats[selected].stats.totalWeightLifted) kg")
                 }
                 HStack {
                     Text("Reps Completed")
                     Spacer()
-                    Text("\(userData.tenWeekRollingStats.stats[selected].repsCompleted)")
+                    Text("\(userData.tenWeekRollingStats.weeklyStats[selected].stats.totalRepsCompleted)")
                 }
                 HStack {
                     Text("Sets Completed")
                     Spacer()
-                    Text("\(userData.tenWeekRollingStats.stats[selected].setsCompleted)")
+                    Text("\(userData.tenWeekRollingStats.weeklyStats[selected].stats.totalSetsCompleted)")
                 }
                 HStack {
                     Text("Active Time")
                     Spacer()
-                    Text("\(userData.tenWeekRollingStats.stats[selected].timeWorkingout / 60) min")
+                    Text("\(userData.tenWeekRollingStats.weeklyStats[selected].stats.totalTimeWorkingout / 60) min")
                 }
             }
 //        }.listStyle(GroupedListStyle())
