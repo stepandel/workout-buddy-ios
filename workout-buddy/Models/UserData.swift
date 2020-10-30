@@ -345,6 +345,24 @@ final class UserData: ObservableObject {
     func deleteWorkoutLogItem(completedWorkout: CompletedWorkout) {
         NetworkManager().deleteWorkoutFromLog(userId: self.userId, wlId: completedWorkout.wlId)
         
+        // Update stats
+        self.stats.totalWorkoutsCompleted -= 1
+        self.stats.totalTimeWorkingout -= completedWorkout.time
+        completedWorkout.workout.rounds.forEach { round in
+            round.sets.forEach { sets in
+                sets.forEach { set in
+                    self.stats.totalSetsCompleted -= 1
+                    if let reps = set.reps, reps > 0 {
+                        self.stats.totalRepsCompleted -= reps
+                    }
+                    if let weight = set.weight, weight > 0 {
+                        self.stats.totalWeightLifted -= weight
+                    }
+                }
+            }
+        }
+        NetworkManager().saveStats(userId: self.userId, stats: self.stats)
+        
         if let idx = self.workoutLog.firstIndex(of: completedWorkout) {
             self.workoutLog.remove(at: idx)
         }
