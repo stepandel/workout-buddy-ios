@@ -347,4 +347,13 @@ final class UserData: ObservableObject {
             self.workoutLog.remove(at: idx)
         }
     }
+    
+    func deleteWorkouts(at offsets: IndexSet) {
+        var workoutIds: [String] = []
+        offsets.forEach { i in
+            workoutIds.append(workouts[i].id)
+        }
+        workouts.remove(atOffsets: offsets)
+        NetworkManager().deleteWorkouts(userId: self.userId, workoutIds: workoutIds)
+    }
 }

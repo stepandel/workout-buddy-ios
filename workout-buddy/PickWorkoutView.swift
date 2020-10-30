@@ -9,33 +9,36 @@
 import SwiftUI
 
 struct PickWorkoutView: View {
-    var workouts: [Workout]
+    @EnvironmentObject var userData: UserData
     @ObservedObject var trackWorkoutViewModel: TrackWorkoutViewModel
     
     @Environment(\.presentationMode) var isPresentationMode
     
     var body: some View {
-        List(workouts) { workout in
-            Button(action: {
-                print("Button pressed")
-                self.trackWorkoutViewModel.workout = workout
-                self.trackWorkoutViewModel.isWorkoutSelected = true
-                self.trackWorkoutViewModel.workout.rounds.forEach({ round in
-                    print("Round indices: \(round.sets.indices)")
-                    round.sets.indices.forEach({ i in
-                        print("Index: \(i)")
+        List {
+            ForEach(userData.workouts) { workout in
+                Button(action: {
+                    print("Button pressed")
+                    self.trackWorkoutViewModel.workout = workout
+                    self.trackWorkoutViewModel.isWorkoutSelected = true
+                    self.trackWorkoutViewModel.workout.rounds.forEach({ round in
+                        print("Round indices: \(round.sets.indices)")
+                        round.sets.indices.forEach({ i in
+                            print("Index: \(i)")
+                        })
                     })
-                })
-                self.isPresentationMode.wrappedValue.dismiss()
-            }){
-                WorkoutRow(workout: workout)
-            }
+                    self.isPresentationMode.wrappedValue.dismiss()
+                }){
+                    WorkoutRow(workout: workout)
+                }
+            }.onDelete { userData.deleteWorkouts(at: $0) }
         }
     }
 }
 
 struct PickWorkoutView_Previews: PreviewProvider {
     static var previews: some View {
-        PickWorkoutView(workouts: sampleWorkouts, trackWorkoutViewModel: TrackWorkoutViewModel())
+        PickWorkoutView(trackWorkoutViewModel: TrackWorkoutViewModel())
+            .environmentObject(UserData())
     }
 }

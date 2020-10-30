@@ -193,7 +193,7 @@ struct TrackWorkoutView: View {
             self.showingModalView = false
         }, content: {
             if self.modalView == .workouts {
-                PickWorkoutView(workouts: self.userData.workouts, trackWorkoutViewModel: self.trackWorkoutViewModel)
+                PickWorkoutView(trackWorkoutViewModel: self.trackWorkoutViewModel).environmentObject(self.userData)
             } else if self.modalView == .exercises {
                 AddNewExerciseTracking(trackWorkoutViewModel: self.trackWorkoutViewModel, roundNumber: self.currentRound, afterIndex: self.addExAfterIdx).environmentObject(self.userData)
             }

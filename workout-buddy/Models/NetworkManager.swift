@@ -210,6 +210,24 @@ class NetworkManager {
         }
     }
     
+    func deleteWorkouts(userId: String, workoutIds: [String]) {
+        guard let url = URL(string: baseUrl + "deleteUserWorkouts") else { return }
+               
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let deleteWorkoutsRequest = DeleteWorkoutsRequest(userId: userId, workoutIds: workoutIds)
+
+        let jsonEncoder = JSONEncoder()
+        
+        if let jsonData = try? jsonEncoder.encode(deleteWorkoutsRequest) {
+//            print(jsonData)
+            URLSession.shared.uploadTask(with: request, from: jsonData) { (data,res,err) in
+               print("Delete Workouts Response: \(String(describing: res))")
+            }.resume()
+        }
+    }
+    
     func getExercises(userId: String, completion: @escaping(([Exercise]) -> ())) {
         guard let url = URL(string: baseUrl + "getExercisesForUser") else { return }
         

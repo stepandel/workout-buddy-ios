@@ -110,6 +110,16 @@ struct GetWorkoutResponse: Decodable {
     var workouts: [Workout]
 }
 
+struct DeleteWorkoutsRequest: Encodable {
+    var userId: String
+    var workoutIds: [String]
+    
+    init(userId: String, workoutIds: [String]) {
+        self.userId = userId
+        self.workoutIds = workoutIds
+    }
+}
+
 struct GetExercisesRequest: Encodable {
     var userId: String
     
