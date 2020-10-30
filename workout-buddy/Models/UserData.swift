@@ -62,6 +62,8 @@ final class UserData: ObservableObject {
             self.isLoggedIn = true
             if let deviceId = UIDevice.current.identifierForVendor?.uuidString, deviceId == self.userId {
                 self.didCreateAccount = false
+            } else {
+                self.didCreateAccount = true
             }
             
             self.loadAllData()
