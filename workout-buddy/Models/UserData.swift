@@ -21,6 +21,20 @@ struct TrackingStatus {
     }
 }
 
+struct User {
+    var firstName: String?
+    var lastName: String?
+    var bio: String?
+    var city: String?
+    var state: String?
+    var sport: String?
+    var weight: Double?
+    var birthDate: Date?
+    var sex: String?
+    var profileImageUrl: String?
+    var profileImage: UIImage?
+}
+
 final class UserData: ObservableObject {
     @Published var isLoggedIn = false
     @Published var didCreateAccount = false
@@ -29,17 +43,7 @@ final class UserData: ObservableObject {
     @Published var workoutLog: [CompletedWorkout] = []
     @Published var trackingStatus: TrackingStatus
     @Published var selectedTab: Int
-    @Published var firstName: String?
-    @Published var lastName: String?
-    @Published var bio: String?
-    @Published var city: String?
-    @Published var state: String?
-    @Published var sport: String?
-    @Published var weight: Double?
-    @Published var birthDate: Date?
-    @Published var sex: String?
-    @Published var profileImageUrl: String?
-    @Published var profileImage: UIImage?
+    @Published var user: User
     @Published var stats: Stats
     @Published var weekEndTS: Double?
     @Published var tenWeekRollingStats: TenWeekRollingStats
@@ -54,6 +58,7 @@ final class UserData: ObservableObject {
     init() {
         self.trackingStatus = TrackingStatus()
         self.selectedTab = 0
+        self.user = User()
         self.stats = Stats()
         self.tenWeekRollingStats = TenWeekRollingStats()
         self.weekEndTS = Date().endOfWeek()?.timeIntervalSince1970
@@ -142,37 +147,27 @@ final class UserData: ObservableObject {
         workouts = []
         exercises = []
         workoutLog = []
-        firstName = nil
-        lastName = nil
-        bio = nil
-        city = nil
-        state = nil
-        sport = nil
-        weight = nil
-        birthDate = nil
-        sex = nil
-        profileImage = nil
-        profileImageUrl = nil
+        user = User()
         stats = Stats()
         tenWeekRollingStats = TenWeekRollingStats()
     }
     
     func saveUserData(firstName: String?, lastName: String?, bio: String?, city: String?, state: String?, sport: String?, weight: String?, birthDate: Date?, sex: String?) {
-        self.firstName = firstName
-        self.lastName = lastName
-        self.bio = bio
-        self.city = city
-        self.state = state
-        self.sport = sport
-        self.weight = weight != nil ? Double(weight ?? "0") : nil
-        self.birthDate = birthDate
-        self.sex = sex
+        self.user.firstName = firstName
+        self.user.lastName = lastName
+        self.user.bio = bio
+        self.user.city = city
+        self.user.state = state
+        self.user.sport = sport
+        self.user.weight = weight != nil ? Double(weight ?? "0") : nil
+        self.user.birthDate = birthDate
+        self.user.sex = sex
         
-        if self.profileImage != nil {
-            self.profileImageUrl = "https://workout-server-public.s3.us-east-2.amazonaws.com/profile_photos/" + self.userId + ".jpeg"
+        if self.user.profileImage != nil {
+            self.user.profileImageUrl = "https://workout-server-public.s3.us-east-2.amazonaws.com/profile_photos/" + self.userId + ".jpeg"
         }
         
-        let user = User(self.userId,
+        let user = UserRequest(self.userId,
                         firstName: firstName,
                         lastName: lastName,
                         bio: bio,
@@ -182,7 +177,7 @@ final class UserData: ObservableObject {
                         weight: weight != nil ? Double(weight ?? "0") : nil,
                         birthDate: birthDate,
                         sex: sex,
-                        profileImageUrl: self.profileImageUrl
+                        profileImageUrl: self.user.profileImageUrl
         )
         
         NetworkManager().saveUser(user: user)
@@ -190,20 +185,20 @@ final class UserData: ObservableObject {
     
     func getUserData() {
         NetworkManager().getUser(id: self.userId) { (user) in
-            self.firstName = user.firstName
-            self.lastName = user.lastName
-            self.bio = user.bio
-            self.city = user.city
-            self.state = user.state
-            self.sport = user.sport
-            self.weight = user.weight
-            self.birthDate = user.birthDate
-            self.sex = user.sex
-            self.profileImageUrl = user.profileImageUrl
+            self.user.firstName = user.firstName
+            self.user.lastName = user.lastName
+            self.user.bio = user.bio
+            self.user.city = user.city
+            self.user.state = user.state
+            self.user.sport = user.sport
+            self.user.weight = user.weight
+            self.user.birthDate = user.birthDate
+            self.user.sex = user.sex
+            self.user.profileImageUrl = user.profileImageUrl
             
-            if let profileImageUrl = self.profileImageUrl {
+            if let profileImageUrl = self.user.profileImageUrl {
                 NetworkManager().getImage(from: profileImageUrl) { (image) in
-                    self.profileImage = image
+                    self.user.profileImage = image
                 }
             }
         }
@@ -211,7 +206,7 @@ final class UserData: ObservableObject {
     
     func updateUserImage() {
         
-        guard let profileImage = profileImage else { return }
+        guard let profileImage = self.user.profileImage else { return }
         
         let imageData = profileImage.jpeg(.low)
         let imageAsString = imageData?.base64EncodedString(options: .lineLength64Characters)

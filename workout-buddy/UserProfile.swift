@@ -20,20 +20,20 @@ struct UserProfile: View {
             if userData.didCreateAccount {
             
                 VStack(alignment: .leading) {
-                    Text("\(self.userData.firstName ?? "") \(self.userData.lastName ?? "")")
+                    Text("\(self.userData.user.firstName ?? "") \(self.userData.user.lastName ?? "")")
                         .font(.title)
                         .padding(.bottom, 16)
                     
-                    if self.userData.city != nil || self.userData.city != "" {
-                        Text("\(self.userData.city ?? ""), \(self.userData.state ?? "")")
+                    if self.userData.user.city != nil || self.userData.user.city != "" {
+                        Text("\(self.userData.user.city ?? ""), \(self.userData.user.state ?? "")")
                             .font(.footnote)
                     } else {
-                        Text("\(self.userData.state ?? "")")
+                        Text("\(self.userData.user.state ?? "")")
                             .font(.footnote)
                     }
                     
-                    if self.userData.bio != nil || self.userData.bio != nil {
-                        Text("\(self.userData.bio ?? "")")
+                    if self.userData.user.bio != nil || self.userData.user.bio != nil {
+                        Text("\(self.userData.user.bio ?? "")")
                             .padding(.top)
                     }
                 }

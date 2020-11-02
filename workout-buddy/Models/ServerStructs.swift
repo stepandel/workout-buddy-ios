@@ -40,7 +40,7 @@ struct CheckUserResponse: Decodable {
     var success: Bool
 }
 
-struct User: Identifiable, Codable {
+struct UserRequest: Identifiable, Codable {
     var id: String
     var firstName: String?
     var lastName: String?
@@ -69,9 +69,9 @@ struct User: Identifiable, Codable {
 }
 
 struct SaveUserRequest: Encodable {
-    var user: User
+    var user: UserRequest
     
-    init(user: User) {
+    init(user: UserRequest) {
         self.user = user
     }
 }
@@ -85,7 +85,7 @@ struct GetUserRequest: Encodable {
 }
 
 struct GetUserResponse: Decodable {
-    var user: User
+    var user: UserRequest
 }
 
 struct UploadUserImageRequest: Encodable {

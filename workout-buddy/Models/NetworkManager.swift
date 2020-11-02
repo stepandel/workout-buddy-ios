@@ -88,7 +88,7 @@ class NetworkManager {
         }
     }
     
-    func saveUser(user: User) {
+    func saveUser(user: UserRequest) {
         guard let url = URL(string: baseUrl + "saveUser") else { return }
                
         var request = URLRequest(url: url)
@@ -109,7 +109,7 @@ class NetworkManager {
         }
     }
     
-    func getUser(id: String, completion: @escaping(User) -> ()) {
+    func getUser(id: String, completion: @escaping(UserRequest) -> ()) {
         guard let url = URL(string: baseUrl + "getUser") else { return }
         
         var request = URLRequest(url: url)

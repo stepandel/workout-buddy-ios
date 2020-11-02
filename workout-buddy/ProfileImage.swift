@@ -13,9 +13,9 @@ struct ProfileImage: View {
     
     var body: some View {
         
-        if userData.profileImage != nil {
+        if userData.user.profileImage != nil {
             
-            Image(uiImage: userData.profileImage!)
+            Image(uiImage: userData.user.profileImage!)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 80, height: 80)

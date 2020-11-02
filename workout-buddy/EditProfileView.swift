@@ -88,16 +88,31 @@ struct EditProfileView: View {
                 
                 Section {
                     List {
-                        TextField("Bio", text: $bio)
-                        TextField("City", text: $city)
-                        TextField("State", text: $state)
-                        TextField("Primary Sport", text: $sport)
+                        HStack {
+                            Text("Bio: ")
+                            TextField("Bio", text: $bio)
+                        }
+                        HStack {
+                            Text("City: ")
+                            TextField("City", text: $city)
+                        }
+                        HStack {
+                            Text("State: ")
+                            TextField("State", text: $state)
+                        }
+                        HStack {
+                            Text("Primary Sport: ")
+                            TextField("Primary Sport", text: $sport)
+                        }
                     }
                 }
                 
                 Section {
                     List {
-                        TextField("Wight", text: $weight)
+                        HStack {
+                            Text("Weight (kg): ")
+                            TextField("Wight", text: $weight)
+                        }
                         DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) {
                             Text("Birth Date")
                         }
@@ -129,15 +144,15 @@ struct EditProfileView: View {
                 }
             }
         }.onAppear {
-            self.firstName = self.userData.firstName ?? ""
-            self.lastName = self.userData.lastName ?? ""
-            self.bio = self.userData.bio ?? ""
-            self.city = self.userData.city ?? ""
-            self.state = self.userData.state ?? ""
-            self.sport = self.userData.sport ?? ""
-            self.weight = self.userData.weight != nil ? String(describing: self.userData.weight) : ""
-            self.birthDate = self.userData.birthDate ?? Date()
-            self.sex = self.userData.sex ?? ""
+            self.firstName = self.userData.user.firstName ?? ""
+            self.lastName = self.userData.user.lastName ?? ""
+            self.bio = self.userData.user.bio ?? ""
+            self.city = self.userData.user.city ?? ""
+            self.state = self.userData.user.state ?? ""
+            self.sport = self.userData.user.sport ?? ""
+            self.weight = self.userData.user.weight != nil ? String(describing: self.userData.user.weight!) : ""
+            self.birthDate = self.userData.user.birthDate ?? Date()
+            self.sex = self.userData.user.sex ?? ""
         }.sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
             ImagePicker(sourceType: self.pickerSourceType, image: self.$inputImage)
         }.actionSheet(isPresented: $showingActionSheet, content: {
@@ -159,7 +174,7 @@ struct EditProfileView: View {
     
     func loadImage() {
         guard let inputImage = inputImage else { return }
-        self.userData.profileImage = inputImage
+        self.userData.user.profileImage = inputImage
         
         self.userData.updateUserImage()
     }
