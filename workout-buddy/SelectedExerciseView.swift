@@ -41,14 +41,22 @@ struct SelectedExerciseView: View {
         List {
             HStack {
                 Text("Set #")
+                    .frame(width: 52)
                 Spacer()
                 Text("Weight (kg)")
+                    .frame(width: 92)
+                    .padding([.leading, .trailing], 16)
                 Spacer()
                 if timed {
                     Text("Time (sec)")
+                        .frame(width: 92)
+                        .padding([.leading, .trailing], 16)
                 } else {
                     Text("Reps")
+                        .frame(width: 92)
+                        .padding([.leading, .trailing], 16)
                 }
+                Spacer()
             }
             .padding(.leading, 16)
             .padding(.trailing, 16)
@@ -56,12 +64,13 @@ struct SelectedExerciseView: View {
                 if !set.deleted {
                     HStack {
                         Text("\(self.sets.firstIndex(of: set)! + 1)")
+                            .frame(width: 52)
                         Spacer()
                         TextField("0 kg", text: self.$sets[self.sets.firstIndex(of: set)!].weight)
                             .multilineTextAlignment(.center)
                             .font(.system(size: 20, weight: .semibold))
                             .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-                            .frame(width: 80, height: 40)
+                            .frame(width: 92, height: 40)
                             .background(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
                             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                             .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 0.5, x: 0.5, y: 0.5)
@@ -112,6 +121,7 @@ struct SelectedExerciseView: View {
             }) {
                 Text("+ Set")
             }
+            .navigationBarTitle(Text("\(self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].exId.components(separatedBy: ":")[0].formatFromId())"))
         }
         .onAppear {
             self.sets = self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx].reduce([], { (sets: [SetData], exSet: ExSet) -> [SetData] in
