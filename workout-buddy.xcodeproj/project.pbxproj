@@ -272,7 +272,6 @@
 				D9A2FFA7243A380F00352747 /* Sources */,
 				D9A2FFA8243A380F00352747 /* Frameworks */,
 				D9A2FFA9243A380F00352747 /* Resources */,
-				8B9840375E8A2F08C71F4B0D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -334,23 +333,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8B9840375E8A2F08C71F4B0D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-workout-buddy/Pods-workout-buddy-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-workout-buddy/Pods-workout-buddy-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-workout-buddy/Pods-workout-buddy-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		B8D2F2141452FD13C75DB689 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

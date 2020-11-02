@@ -3,7 +3,5 @@
 
 target 'workout-buddy' do
   use_frameworks!
-
-  pod 'RealmSwift'
   
 end
