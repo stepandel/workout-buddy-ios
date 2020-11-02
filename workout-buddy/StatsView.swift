@@ -170,12 +170,20 @@ struct StatsView: View {
             return
         }
         
-        let weekLength = 604800.0
-        
         if let weekEndTS = userData.weekEndTS {
             
-            let lastDayOfWeek = Date(timeIntervalSince1970: weekEndTS - (weekLength * Double(9 - selected)) - 1)
-            let firstDayOfWeek = Date(timeIntervalSince1970: weekEndTS - (weekLength * Double(9 - selected + 1)) + 1)
+            var dateComponentsLast = DateComponents()
+            dateComponentsLast.day = -(9 - selected)*7
+            dateComponentsLast.second = -1
+            var dateComponentsFirst = DateComponents()
+            dateComponentsFirst.day = -(9 - selected + 1)*7
+            dateComponentsFirst.second = 1
+            
+            guard let lastDayOfWeek = Calendar.current.date(byAdding: dateComponentsLast, to: Date(timeIntervalSince1970: weekEndTS))
+                  , let firstDayOfWeek = Calendar.current.date(byAdding: dateComponentsFirst, to: Date(timeIntervalSince1970: weekEndTS)) else {
+                self.selectedWeek = "Week -\(self.selected)"
+                return
+            }
             
             let dateFormatter = DateFormatter()
             dateFormatter.locale = NSLocale.current
