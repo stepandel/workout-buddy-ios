@@ -26,7 +26,7 @@ struct ProfileImage: View {
                 .shadow(radius: 4)
             
         } else {
-            Image("popeye")
+            Image("profilePlaceholder")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 80, height: 80)
