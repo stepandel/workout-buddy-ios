@@ -547,7 +547,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"workout-buddy/Preview Content\"";
-				DEVELOPMENT_TEAM = YQZQLZVGVS;
+				DEVELOPMENT_TEAM = T2T986DDGJ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "workout-buddy/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -555,7 +555,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.stepandel.workout-buddy";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.featness.workout-buddy";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -569,7 +569,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"workout-buddy/Preview Content\"";
-				DEVELOPMENT_TEAM = YQZQLZVGVS;
+				DEVELOPMENT_TEAM = T2T986DDGJ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "workout-buddy/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -577,7 +577,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.stepandel.workout-buddy";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.featness.workout-buddy";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

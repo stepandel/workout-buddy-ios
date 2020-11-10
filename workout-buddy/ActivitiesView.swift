@@ -20,17 +20,22 @@ struct ActivitiesView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(userData.workoutLog.reversed(), id:\.wlId) { completedWorkout in
-                    Section(header: Text("")) {
-                        NavigationLink(destination: CompletedWorkoutView(completedWorkout: completedWorkout)) {
-                            ActivityRow(completedWorkout: completedWorkout)
+            if userData.workoutLog.count > 0 {
+                List {
+                    ForEach(userData.workoutLog.reversed(), id:\.wlId) { completedWorkout in
+                        Section(header: Text("")) {
+                            NavigationLink(destination: CompletedWorkoutView(completedWorkout: completedWorkout)) {
+                                ActivityRow(completedWorkout: completedWorkout)
+                            }
                         }
-                    }
-                }.onDelete { self.deleteWorkout(at: $0) }
-//                .listRowBackground(Constants.Colors.appBackground)
+                    }.onDelete { self.deleteWorkout(at: $0) }
+    //                .listRowBackground(Constants.Colors.appBackground)
+                }
+                .navigationBarTitle("Completed Workouts")
+            } else {
+                Text("Complete a Workout!")
+                    .navigationBarTitle("Completed Workouts")
             }
-            .navigationBarTitle("Activities")
         }
     }
     

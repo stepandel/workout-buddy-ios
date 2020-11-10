@@ -30,8 +30,8 @@ struct ContentView: View {
                     .environmentObject(self.userData)
                     .tabItem {
                         VStack {
-                            Image(systemName: "house.fill")
-                            Text("Feed")
+                            Image(systemName: "folder")
+                            Text("Workouts")
                         }
                     }
                     .tag(0)
@@ -49,7 +49,7 @@ struct ContentView: View {
                     .tabItem {
                         VStack {
                             Image(systemName: "bolt")
-                            Text("My Exercises")
+                            Text("Exercises")
                         }
                     }
                     .tag(2)

@@ -15,22 +15,36 @@ struct ExercisesView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                SearchBar(text: $searchText)
-                List {
-                    ForEach(userData.exercises.filter {
-                        self.searchText.isEmpty ? true : $0.id.contains(self.searchText)
-                    }) { exercise in
-                        Text("\(exercise.id.components(separatedBy: ":")[0].formatFromId())")
+            if userData.exercises.count > 0 {
+                VStack {
+                    SearchBar(text: $searchText)
+                    List {
+                        ForEach(userData.exercises.filter {
+                            self.searchText.isEmpty ? true : $0.id.contains(self.searchText)
+                        }) { exercise in
+                            Text("\(exercise.id.components(separatedBy: ":")[0].formatFromId())")
+                        }
                     }
-                }
-                .listStyle(PlainListStyle())
-                .navigationBarTitle("Exercises")
+                    .listStyle(PlainListStyle())
+                    .navigationBarTitle("My Exercises")
                     .navigationBarItems(trailing: Button(action: {
                         self.isPresented.toggle()
                     }) {
                         Image(systemName: "plus")
-                })
+                            .padding()
+                    })
+                }
+            } else {
+                Text("Create New Exercise")
+                    .onTapGesture {
+                        self.isPresented.toggle()
+                    }
+                    .navigationBarTitle("My Exercises")
+                    .navigationBarItems(trailing: Button(action: {
+                        self.isPresented.toggle()
+                    }) {
+                        Image(systemName: "plus")
+                    })
             }
         }
         .sheet(isPresented: self.$isPresented) { NewExerciseView().environmentObject(self.userData) }
