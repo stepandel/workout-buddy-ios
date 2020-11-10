@@ -11,7 +11,7 @@ import SwiftUI
 
 class NetworkManager {
     
-    let baseUrl = "https://21dld2pcsg.execute-api.us-east-2.amazonaws.com/dev/"
+    let baseUrl = "https://4uls5hv9c2.execute-api.us-east-2.amazonaws.com/prod/"
     
     func saveNewUserWithoutAccount(id: String) {
         guard let url = URL(string: baseUrl + "saveNewUserWithoutAccount") else { return }
