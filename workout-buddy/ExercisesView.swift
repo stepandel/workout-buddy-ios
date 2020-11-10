@@ -31,6 +31,7 @@ struct ExercisesView: View {
                         self.isPresented.toggle()
                     }) {
                         Image(systemName: "plus")
+                            .padding()
                     })
                 }
             } else {
