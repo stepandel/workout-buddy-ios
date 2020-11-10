@@ -21,16 +21,19 @@ struct ExercisesView: View {
                     ForEach(userData.exercises.filter {
                         self.searchText.isEmpty ? true : $0.id.contains(self.searchText)
                     }) { exercise in
-                        Text("\(exercise.id)")
+                        Text("\(exercise.id.components(separatedBy: ":")[0].formatFromId())")
                     }
-                }.navigationBarTitle("Exercises")
+                }
+                .listStyle(PlainListStyle())
+                .navigationBarTitle("Exercises")
                     .navigationBarItems(trailing: Button(action: {
                         self.isPresented.toggle()
                     }) {
                         Image(systemName: "plus")
                 })
             }
-        }.sheet(isPresented: self.$isPresented) { NewExerciseView().environmentObject(self.userData) }
+        }
+        .sheet(isPresented: self.$isPresented) { NewExerciseView().environmentObject(self.userData) }
         .onTapGesture {
             self.hideKeyboard()
         }

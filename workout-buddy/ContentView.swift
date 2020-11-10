@@ -44,6 +44,15 @@ struct ContentView: View {
                         }
                     }
                     .tag(1)
+                ExercisesView()
+                    .environmentObject(userData)
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "bolt")
+                            Text("My Exercises")
+                        }
+                    }
+                    .tag(2)
                 ProfileView()
                     .environmentObject(self.userData)
                     .tabItem {
@@ -52,7 +61,7 @@ struct ContentView: View {
                             Text("Profile")
                         }
                     }
-                    .tag(2)
+                    .tag(3)
             }.actionSheet(isPresented: $isActionSheetPresented) {
                 ActionSheet(title: Text("Start Workout"), buttons: [
                     .default(Text("Start New")) {

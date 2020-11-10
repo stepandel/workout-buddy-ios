@@ -34,11 +34,12 @@ struct SelectExerciseView: View {
                     }
                 }
             }.navigationBarTitle(Text("Exercises"))
-            .navigationBarItems(trailing: Button(action: {
-                self.isPresented.toggle()
-            }) {
-                Text("+ New Exercise")
-            })
+            // TODO: - fix bug. Crashing when creating new exercise
+//            .navigationBarItems(trailing: Button(action: {
+//                self.isPresented.toggle()
+//            }) {
+//                Text("+ New Exercise")
+//            })
         }.sheet(isPresented: self.$isPresented) { NewExerciseView().environmentObject(self.userData) }
         .onTapGesture {
             self.hideKeyboard()

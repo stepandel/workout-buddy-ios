@@ -22,8 +22,11 @@ extension String {
     func formatFromId() -> String {
         var formattedStr = ""
         let words = self.components(separatedBy: "_")
-        words.forEach { (str) in
-            formattedStr += str.capitalizingFirstLetter() + " "
+        words.forEach { (word) in
+            word.components(separatedBy: "-").forEach { str in
+                formattedStr += str.capitalizingFirstLetter() + "-"
+            }
+            formattedStr = formattedStr.dropLast() + " "
         }
         return String(formattedStr.dropLast())
     }
