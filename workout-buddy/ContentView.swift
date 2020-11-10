@@ -82,9 +82,9 @@ struct ContentView: View {
                     .environmentObject(self.userData)
             }
             
-            if !userData.isLoggedIn {
-                LoginView()
-            }
+//            if !userData.isLoggedIn {
+//                LoginView()
+//            }
         }
     }
 }
