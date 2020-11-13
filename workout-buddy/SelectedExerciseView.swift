@@ -27,7 +27,7 @@ struct SetData: Hashable, Identifiable {
 }
 
 struct SelectedExerciseView: View {
-    @ObservedObject var trackWorkoutViewModel: TrackWorkoutViewModel
+    @ObservedObject var trackWorkoutViewModel: TrackWorkout.ViewModel
     @State var currentRound: Int
     @State var curExIdx: Int
     
@@ -159,6 +159,6 @@ struct SelectedExerciseView: View {
 
 struct SelectedExerciseView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectedExerciseView(trackWorkoutViewModel: TrackWorkoutViewModel(), currentRound: 0, curExIdx: 0)
+        SelectedExerciseView(trackWorkoutViewModel: TrackWorkout.ViewModel(userData: UserData(), showingModalView: false), currentRound: 0, curExIdx: 0)
     }
 }

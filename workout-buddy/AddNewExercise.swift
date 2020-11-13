@@ -105,7 +105,7 @@ struct AddNewExercise: View {
 
 struct AddNewExerciseTracking: View {
     @EnvironmentObject var userData: UserData
-    @ObservedObject var trackWorkoutViewModel: TrackWorkoutViewModel
+    @ObservedObject var trackWorkoutViewModel: TrackWorkout.ViewModel
     @ObservedObject var addNewExerciseViewModel: AddNewExerciseViewModel = AddNewExerciseViewModel()
     @State var roundNumber: Int
     @State var afterIndex: Int
@@ -296,7 +296,7 @@ struct AddNewExercise_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             AddNewExercise(newWorkoutViewModel: NewWorkoutViewModel(), roundNumber: 0).environmentObject(UserData())
-            AddNewExerciseTracking(trackWorkoutViewModel: TrackWorkoutViewModel(), roundNumber: 0, afterIndex: 0).environmentObject(UserData())
+            AddNewExerciseTracking(trackWorkoutViewModel: TrackWorkout.ViewModel(userData: UserData(), showingModalView: false), roundNumber: 0, afterIndex: 0).environmentObject(UserData())
             AddNewExerciseEdit(editWorkoutViewModel: EditWorkoutViewModel(workout: Workout(name: "Random")), roundNumber: 0)
             .environmentObject(UserData())
         }

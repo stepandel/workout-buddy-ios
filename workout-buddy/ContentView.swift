@@ -35,7 +35,7 @@ struct ContentView: View {
                         }
                     }
                     .tag(0)
-                TrackWorkoutView(showingModalView: !userData.trackingStatus.new)
+                TrackWorkout(viewModel: .init(userData: self.userData, showingModalView: false))
                     .environmentObject(self.userData)
                     .tabItem {
                         VStack {
@@ -78,7 +78,7 @@ struct ContentView: View {
             }
             
             if userData.trackingStatus.started {
-                TrackWorkoutView(showingModalView: !userData.trackingStatus.new)
+                TrackWorkout(viewModel: .init(userData: self.userData, showingModalView: false))
                     .environmentObject(self.userData)
             }
             

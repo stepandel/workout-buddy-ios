@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PickWorkoutView: View {
     @EnvironmentObject var userData: UserData
-    @ObservedObject var trackWorkoutViewModel: TrackWorkoutViewModel
+    @ObservedObject var trackWorkoutViewModel: TrackWorkout.ViewModel
     
     @Environment(\.presentationMode) var isPresentationMode
     
@@ -38,7 +38,7 @@ struct PickWorkoutView: View {
 
 struct PickWorkoutView_Previews: PreviewProvider {
     static var previews: some View {
-        PickWorkoutView(trackWorkoutViewModel: TrackWorkoutViewModel())
+        PickWorkoutView(trackWorkoutViewModel: TrackWorkout.ViewModel(userData: UserData(), showingModalView: false))
             .environmentObject(UserData())
     }
 }
