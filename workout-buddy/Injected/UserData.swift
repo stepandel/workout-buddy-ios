@@ -243,7 +243,7 @@ extension AppState {
             }
             
             self.stats.addStatsFrom(workout: completedWorkout)
-            self.tenWeekRollingStats.weeklyStats[9].stats.addStatsFrom(workout: completedWorkout)
+            self.updateTenWeekRollingStats(with: completedWorkout)
             
             NetworkManager().saveStats(userId: self.userId, stats: self.stats)
         }
