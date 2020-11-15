@@ -9,31 +9,31 @@
 import SwiftUI
 
 struct UserProfile: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
         HStack {
-            ProfileImage().environmentObject(userData)
+            ProfileImage().environmentObject(appState)
             
             Spacer()
             
-            if userData.didCreateAccount {
+            if appState.userData.didCreateAccount {
             
                 VStack(alignment: .leading) {
-                    Text("\(self.userData.user.firstName ?? "") \(self.userData.user.lastName ?? "")")
+                    Text("\(self.appState.userData.user.firstName ?? "") \(self.appState.userData.user.lastName ?? "")")
                         .font(.title)
                         .padding(.bottom, 16)
                     
-                    if self.userData.user.city != nil || self.userData.user.city != "" {
-                        Text("\(self.userData.user.city ?? ""), \(self.userData.user.state ?? "")")
+                    if self.appState.userData.user.city != nil || self.appState.userData.user.city != "" {
+                        Text("\(self.appState.userData.user.city ?? ""), \(self.appState.userData.user.state ?? "")")
                             .font(.footnote)
                     } else {
-                        Text("\(self.userData.user.state ?? "")")
+                        Text("\(self.appState.userData.user.state ?? "")")
                             .font(.footnote)
                     }
                     
-                    if self.userData.user.bio != nil || self.userData.user.bio != nil {
-                        Text("\(self.userData.user.bio ?? "")")
+                    if self.appState.userData.user.bio != nil || self.appState.userData.user.bio != nil {
+                        Text("\(self.appState.userData.user.bio ?? "")")
                             .padding(.top)
                     }
                 }
@@ -52,7 +52,7 @@ struct UserProfile: View {
 
 struct UserProfile_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfile().environmentObject(UserData())
+        UserProfile().environmentObject(AppState())
             .previewLayout(.fixed(width: 300, height: 100))
     }
 }

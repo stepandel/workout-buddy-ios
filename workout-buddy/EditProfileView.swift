@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct EditProfileView: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
     @State private var firstName = ""
     @State private var lastName = ""
     @State private var bio = ""
@@ -49,7 +49,7 @@ struct EditProfileView: View {
                         print("Check Date: \(self.checkDate) \n \n")
                         
                         // Save UserData
-                        userData.saveUserData(
+                        appState.userData.saveUserData(
                             firstName: self.firstName != "" ? self.firstName : nil,
                             lastName: self.lastName != "" ? self.lastName : nil,
                             bio: self.bio != "" ? self.bio : nil,
@@ -70,7 +70,7 @@ struct EditProfileView: View {
             
             Form {
                 HStack {
-                    ProfileImage().environmentObject(userData)
+                    ProfileImage().environmentObject(appState)
                         .padding()
                         .onTapGesture(perform: {
                             self.showingActionSheet.toggle()
@@ -144,15 +144,15 @@ struct EditProfileView: View {
                 }
             }
         }.onAppear {
-            self.firstName = self.userData.user.firstName ?? ""
-            self.lastName = self.userData.user.lastName ?? ""
-            self.bio = self.userData.user.bio ?? ""
-            self.city = self.userData.user.city ?? ""
-            self.state = self.userData.user.state ?? ""
-            self.sport = self.userData.user.sport ?? ""
-            self.weight = self.userData.user.weight != nil ? String(describing: self.userData.user.weight!) : ""
-            self.birthDate = self.userData.user.birthDate ?? Date()
-            self.sex = self.userData.user.sex ?? ""
+            self.firstName = self.appState.userData.user.firstName ?? ""
+            self.lastName = self.appState.userData.user.lastName ?? ""
+            self.bio = self.appState.userData.user.bio ?? ""
+            self.city = self.appState.userData.user.city ?? ""
+            self.state = self.appState.userData.user.state ?? ""
+            self.sport = self.appState.userData.user.sport ?? ""
+            self.weight = self.appState.userData.user.weight != nil ? String(describing: self.appState.userData.user.weight!) : ""
+            self.birthDate = self.appState.userData.user.birthDate ?? Date()
+            self.sex = self.appState.userData.user.sex ?? ""
         }.sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
             ImagePicker(sourceType: self.pickerSourceType, image: self.$inputImage)
         }.actionSheet(isPresented: $showingActionSheet, content: {
@@ -174,14 +174,14 @@ struct EditProfileView: View {
     
     func loadImage() {
         guard let inputImage = inputImage else { return }
-        self.userData.user.profileImage = inputImage
+        self.appState.userData.user.profileImage = inputImage
         
-        self.userData.updateUserImage()
+        self.appState.userData.updateUserImage()
     }
 }
 
 struct EditProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        EditProfileView().environmentObject(UserData())
+        EditProfileView().environmentObject(AppState())
     }
 }

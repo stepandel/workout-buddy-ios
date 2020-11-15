@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct WorkoutView: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
     
     @State var workout: Workout // TODO: - how to update this dynamically?\
     @State var duration: Int?
@@ -46,20 +46,20 @@ struct WorkoutView: View {
         }
         .navigationBarTitle(Text(workout.name), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {
-            self.workoutIdx = self.userData.workouts.firstIndex(of: self.workout)!
+            self.workoutIdx = self.appState.userData.workouts.firstIndex(of: self.workout)!
             self.isEditPresented.toggle()
         }) {
             Text("Edit")
         })
         .sheet(isPresented: self.$isEditPresented) {
             EditWorkoutView(editWorkoutViewModel: EditWorkoutViewModel(workout: self.workout), workoutIdx: self.workoutIdx)
-                .environmentObject(self.userData)
+                .environmentObject(self.appState)
         }
     }
 }
 
 struct WorkoutView_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutView(workout: sampleWorkouts[0], duration: 40).environmentObject(UserData())
+        WorkoutView(workout: sampleWorkouts[0], duration: 40).environmentObject(AppState())
     }
 }

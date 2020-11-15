@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct TrackWorkout: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
     @ObservedObject private(set) var viewModel: ViewModel
     @Environment(\.presentationMode) var presentaionMode: Binding<PresentationMode>
     
@@ -181,9 +181,9 @@ private extension TrackWorkout {
     @ViewBuilder
     func modalSheet() -> some View {
         if self.viewModel.modalView == .workouts {
-            PickWorkoutView(trackWorkoutViewModel: self.viewModel).environmentObject(self.userData)
+            PickWorkoutView(trackWorkoutViewModel: self.viewModel).environmentObject(self.appState)
         } else if self.viewModel.modalView == .exercises {
-            AddNewExerciseTracking(trackWorkoutViewModel: self.viewModel, roundNumber: self.viewModel.currentRound, afterIndex: self.viewModel.addExAfterIdx).environmentObject(self.userData)
+            AddNewExerciseTracking(trackWorkoutViewModel: self.viewModel, roundNumber: self.viewModel.currentRound, afterIndex: self.viewModel.addExAfterIdx).environmentObject(self.appState)
         }
     }
 }
@@ -235,6 +235,6 @@ private extension TrackWorkout  {
 
 struct TrackWorkoutView_Previews: PreviewProvider {
     static var previews: some View {
-        TrackWorkout(viewModel: .init(userData: UserData(), showingModalView: false)).environmentObject(UserData())
+        TrackWorkout(viewModel: .init(appState: AppState(), showingModalView: false)).environmentObject(AppState())
     }
 }

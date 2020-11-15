@@ -9,14 +9,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
     
     @State private var isActionSheetPresented = false
  
     var body: some View {
         let selection = Binding<Int>(
-            get: { self.userData.selectedTab },
-            set: { self.userData.selectedTab = $0
+            get: { self.appState.routing.contentView.selectedTab },
+            set: { self.appState.routing.contentView.selectedTab = $0
                 if $0 == 1 {
                     isActionSheetPresented.toggle()
                 }
@@ -27,7 +27,7 @@ struct ContentView: View {
         
             TabView(selection: selection){
                 ActivitiesView()
-                    .environmentObject(self.userData)
+                    .environmentObject(self.appState)
                     .tabItem {
                         VStack {
                             Image(systemName: "folder")
@@ -35,8 +35,8 @@ struct ContentView: View {
                         }
                     }
                     .tag(0)
-                TrackWorkout(viewModel: .init(userData: self.userData, showingModalView: false))
-                    .environmentObject(self.userData)
+                TrackWorkout(viewModel: .init(appState: self.appState, showingModalView: false))
+                    .environmentObject(self.appState)
                     .tabItem {
                         VStack {
                             Image(systemName: "play.circle")
@@ -45,7 +45,7 @@ struct ContentView: View {
                     }
                     .tag(1)
                 ExercisesView()
-                    .environmentObject(userData)
+                    .environmentObject(self.appState)
                     .tabItem {
                         VStack {
                             Image(systemName: "bolt")
@@ -54,7 +54,7 @@ struct ContentView: View {
                     }
                     .tag(2)
                 ProfileView()
-                    .environmentObject(self.userData)
+                    .environmentObject(self.appState)
                     .tabItem {
                         VStack {
                             Image(systemName: "person.crop.circle")
@@ -65,32 +65,41 @@ struct ContentView: View {
             }.actionSheet(isPresented: $isActionSheetPresented) {
                 ActionSheet(title: Text("Start Workout"), buttons: [
                     .default(Text("Start New")) {
-                        userData.trackingStatus.started = true
+                        appState.userData.trackingStatus.started = true
                     },
                     .default(Text("Select Previously Completed")) {
-                        userData.trackingStatus.new = false
-                        userData.trackingStatus.started = true
+                        appState.userData.trackingStatus.new = false
+                        appState.userData.trackingStatus.started = true
                     },
                     .cancel() {
-                        userData.selectedTab = 0
+                        appState.routing.contentView.selectedTab = 0
                     }
                 ])
             }
             
-            if userData.trackingStatus.started {
-                TrackWorkout(viewModel: .init(userData: self.userData, showingModalView: false))
-                    .environmentObject(self.userData)
+            if appState.userData.trackingStatus.started {
+                TrackWorkout(viewModel: .init(appState: self.appState, showingModalView: false))
+                    .environmentObject(self.appState)
             }
             
-            if !userData.isLoggedIn {
+            if !appState.userData.isLoggedIn {
                 LoginView()
             }
         }
     }
 }
 
+
+// MARK: - Routing
+
+extension ContentView {
+    struct Routing {
+        var selectedTab: Int = 0
+    }
+}
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environmentObject(UserData())
+        ContentView().environmentObject(AppState())
     }
 }

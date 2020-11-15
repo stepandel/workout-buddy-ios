@@ -9,17 +9,17 @@
 import SwiftUI
 
 struct ExercisesView: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
     @State private var searchText: String = ""
     @State var isPresented = false
     
     var body: some View {
         NavigationView {
-            if userData.exercises.count > 0 {
+            if appState.userData.exercises.count > 0 {
                 VStack {
                     SearchBar(text: $searchText)
                     List {
-                        ForEach(userData.exercises.filter {
+                        ForEach(appState.userData.exercises.filter {
                             self.searchText.isEmpty ? true : $0.id.contains(self.searchText)
                         }) { exercise in
                             Text("\(exercise.id.components(separatedBy: ":")[0].formatFromId())")
@@ -47,7 +47,7 @@ struct ExercisesView: View {
                     })
             }
         }
-        .sheet(isPresented: self.$isPresented) { NewExerciseView().environmentObject(self.userData) }
+        .sheet(isPresented: self.$isPresented) { NewExerciseView().environmentObject(self.appState) }
         .onTapGesture {
             self.hideKeyboard()
         }
@@ -60,6 +60,6 @@ struct ExercisesView: View {
 
 struct ExercisesView_Previews: PreviewProvider {
     static var previews: some View {
-        ExercisesView().environmentObject(UserData())
+        ExercisesView().environmentObject(AppState())
     }
 }

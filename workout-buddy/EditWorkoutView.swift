@@ -17,7 +17,7 @@ class EditWorkoutViewModel: ObservableObject { //TODO: - initialize in parent vi
 }
 
 struct EditWorkoutView: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
 
     @ObservedObject var editWorkoutViewModel: EditWorkoutViewModel
     @State var workoutIdx: Int
@@ -48,13 +48,13 @@ struct EditWorkoutView: View {
                 Button(action: {
                     print("workout: \(self.editWorkoutViewModel.workout)")
                                        
-//                    self.userData.workouts.append(self.editWorkoutViewModel.workout)
-                    self.userData.workouts[self.workoutIdx] = self.editWorkoutViewModel.workout
-                    self.userData.saveWorkout(workout: self.editWorkoutViewModel.workout)
+//                    self.appState.userData.workouts.append(self.editWorkoutViewModel.workout)
+                    self.appState.userData.workouts[self.workoutIdx] = self.editWorkoutViewModel.workout
+                    self.appState.userData.saveWorkout(workout: self.editWorkoutViewModel.workout)
                    
                     self.presentaionMode.wrappedValue.dismiss()
                    
-                    print("New UserData: \(self.userData.workouts)")
+                    print("New UserData: \(self.appState.userData.workouts)")
                 }) {
                     Text("Done")
                 }
@@ -120,7 +120,7 @@ struct EditWorkoutView: View {
                 }
             }
         }.sheet(isPresented: $showingAddNewExercise) {
-            AddNewExerciseEdit(editWorkoutViewModel: self.editWorkoutViewModel, roundNumber: self.roundNumber).environmentObject(self.userData)
+            AddNewExerciseEdit(editWorkoutViewModel: self.editWorkoutViewModel, roundNumber: self.roundNumber).environmentObject(self.appState)
         }.onTapGesture {
             self.hideKeyboard()
         }
@@ -146,6 +146,6 @@ struct EditWorkoutView: View {
 struct EditWorkout_Previews: PreviewProvider {
     static var previews: some View {
         EditWorkoutView(editWorkoutViewModel: EditWorkoutViewModel(workout: Workout(name: "Random")), workoutIdx: 0)
-        .environmentObject(UserData())
+        .environmentObject(AppState())
     }
 }

@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
     
     @State private var email = ""
     @State private var password = ""
@@ -55,14 +55,14 @@ struct LoginView: View {
                     
                     // TODO: - email & password validation
                     
-                    userData.saveNewUser(email: self.email, pass: self.password)
+                    appState.userData.saveNewUser(email: self.email, pass: self.password)
                     
                     // Dismiss login screen
                     
                 } else {
                     print("Signing in...")
                     
-                    userData.checkUser(email: self.email, pass: self.password)
+                    appState.userData.checkUser(email: self.email, pass: self.password)
                 }
                 
                 
@@ -89,7 +89,7 @@ struct LoginView: View {
             }.padding(.top, 40.0)
             
             Button(action: {
-                self.userData.saveNewUserWithoutAccount()
+                self.appState.userData.saveNewUserWithoutAccount()
                 
                 // TODO: - Display warning that the data could get lost
             }) {
@@ -118,6 +118,6 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView().environmentObject(UserData())
+        LoginView().environmentObject(AppState())
     }
 }

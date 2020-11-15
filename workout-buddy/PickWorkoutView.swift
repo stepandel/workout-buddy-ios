@@ -9,14 +9,14 @@
 import SwiftUI
 
 struct PickWorkoutView: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
     @ObservedObject var trackWorkoutViewModel: TrackWorkout.ViewModel
     
     @Environment(\.presentationMode) var isPresentationMode
     
     var body: some View {
         List {
-            ForEach(userData.workouts) { workout in
+            ForEach(appState.userData.workouts) { workout in
                 Button(action: {
                     print("Button pressed")
                     self.trackWorkoutViewModel.workout = workout
@@ -31,14 +31,14 @@ struct PickWorkoutView: View {
                 }){
                     WorkoutRow(workout: workout)
                 }
-            }.onDelete { userData.deleteWorkouts(at: $0) }
+            }.onDelete { appState.userData.deleteWorkouts(at: $0) }
         }
     }
 }
 
 struct PickWorkoutView_Previews: PreviewProvider {
     static var previews: some View {
-        PickWorkoutView(trackWorkoutViewModel: TrackWorkout.ViewModel(userData: UserData(), showingModalView: false))
-            .environmentObject(UserData())
+        PickWorkoutView(trackWorkoutViewModel: TrackWorkout.ViewModel(appState: AppState(), showingModalView: false))
+            .environmentObject(AppState())
     }
 }

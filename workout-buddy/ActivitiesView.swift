@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ActivitiesView: View {
     
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
     
 //    init() {
 //        if #available(iOS 14.0, *) {
@@ -20,9 +20,9 @@ struct ActivitiesView: View {
     
     var body: some View {
         NavigationView {
-            if userData.workoutLog.count > 0 {
+            if appState.userData.workoutLog.count > 0 {
                 List {
-                    ForEach(userData.workoutLog.reversed(), id:\.wlId) { completedWorkout in
+                    ForEach(appState.userData.workoutLog.reversed(), id:\.wlId) { completedWorkout in
                         Section(header: Text("")) {
                             NavigationLink(destination: CompletedWorkoutView(completedWorkout: completedWorkout)) {
                                 ActivityRow(completedWorkout: completedWorkout)
@@ -41,13 +41,13 @@ struct ActivitiesView: View {
     
     func deleteWorkout(at offsets: IndexSet) {
         offsets.forEach { i in
-            userData.deleteWorkoutLogItem(completedWorkout: self.userData.workoutLog.reversed()[i])
+            appState.userData.deleteWorkoutLogItem(completedWorkout: self.appState.userData.workoutLog.reversed()[i])
         }
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivitiesView().environmentObject(UserData())
+        ActivitiesView().environmentObject(AppState())
     }
 }

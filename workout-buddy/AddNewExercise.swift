@@ -14,7 +14,7 @@ class AddNewExerciseViewModel: ObservableObject {
 }
 
 struct AddNewExercise: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
     @ObservedObject var newWorkoutViewModel: NewWorkoutViewModel
     @ObservedObject var addNewExerciseViewModel: AddNewExerciseViewModel = AddNewExerciseViewModel()
     @State var roundNumber: Int
@@ -91,7 +91,7 @@ struct AddNewExercise: View {
                 }
             }
         }.sheet(isPresented: self.$showingSelectExercises) {
-            SelectExerciseView(addNewExerciseViewModel: self.addNewExerciseViewModel).environmentObject(self.userData)
+            SelectExerciseView(addNewExerciseViewModel: self.addNewExerciseViewModel).environmentObject(self.appState)
         }.onTapGesture {
             self.hideKeyboard()
         }
@@ -104,7 +104,7 @@ struct AddNewExercise: View {
 
 
 struct AddNewExerciseTracking: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
     @ObservedObject var trackWorkoutViewModel: TrackWorkout.ViewModel
     @ObservedObject var addNewExerciseViewModel: AddNewExerciseViewModel = AddNewExerciseViewModel()
     @State var roundNumber: Int
@@ -188,7 +188,7 @@ struct AddNewExerciseTracking: View {
                 }
             }
         }.sheet(isPresented: self.$showingSelectExercises) {
-            SelectExerciseView(addNewExerciseViewModel: self.addNewExerciseViewModel).environmentObject(self.userData)
+            SelectExerciseView(addNewExerciseViewModel: self.addNewExerciseViewModel).environmentObject(self.appState)
         }.onTapGesture {
             self.hideKeyboard()
         }
@@ -201,7 +201,7 @@ struct AddNewExerciseTracking: View {
 
 
 struct AddNewExerciseEdit: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
     @ObservedObject var editWorkoutViewModel: EditWorkoutViewModel
     @ObservedObject var addNewExerciseViewModel = AddNewExerciseViewModel()
     @State var roundNumber: Int
@@ -278,7 +278,7 @@ struct AddNewExerciseEdit: View {
                 }
             }
         }.sheet(isPresented: self.$showingSelectExercises) {
-            SelectExerciseView(addNewExerciseViewModel: self.addNewExerciseViewModel).environmentObject(self.userData)
+            SelectExerciseView(addNewExerciseViewModel: self.addNewExerciseViewModel).environmentObject(self.appState)
         }.onTapGesture {
             self.hideKeyboard()
         }
@@ -295,10 +295,10 @@ struct AddNewExerciseEdit: View {
 struct AddNewExercise_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            AddNewExercise(newWorkoutViewModel: NewWorkoutViewModel(), roundNumber: 0).environmentObject(UserData())
-            AddNewExerciseTracking(trackWorkoutViewModel: TrackWorkout.ViewModel(userData: UserData(), showingModalView: false), roundNumber: 0, afterIndex: 0).environmentObject(UserData())
+            AddNewExercise(newWorkoutViewModel: NewWorkoutViewModel(), roundNumber: 0).environmentObject(AppState())
+            AddNewExerciseTracking(trackWorkoutViewModel: TrackWorkout.ViewModel(appState: AppState(), showingModalView: false), roundNumber: 0, afterIndex: 0).environmentObject(AppState())
             AddNewExerciseEdit(editWorkoutViewModel: EditWorkoutViewModel(workout: Workout(name: "Random")), roundNumber: 0)
-            .environmentObject(UserData())
+            .environmentObject(AppState())
         }
     }
 }

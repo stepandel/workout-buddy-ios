@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SelectExerciseView: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
     @ObservedObject var addNewExerciseViewModel: AddNewExerciseViewModel
     @State private var searchText: String = ""
     @State private var isPresented = false
@@ -21,7 +21,7 @@ struct SelectExerciseView: View {
             VStack {
                 SearchBar(text: $searchText)
                 List {
-                    ForEach(userData.exercises.filter {
+                    ForEach(appState.userData.exercises.filter {
                         self.searchText.isEmpty ? true : $0.id.contains(self.searchText)
                     }) { exercise in
                         Button(action: {
@@ -40,7 +40,7 @@ struct SelectExerciseView: View {
 //            }) {
 //                Text("+ New Exercise")
 //            })
-        }.sheet(isPresented: self.$isPresented) { NewExerciseView().environmentObject(self.userData) }
+        }.sheet(isPresented: self.$isPresented) { NewExerciseView().environmentObject(self.appState) }
         .onTapGesture {
             self.hideKeyboard()
         }
@@ -54,6 +54,6 @@ struct SelectExerciseView: View {
 
 struct SelectExerciseView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectExerciseView(addNewExerciseViewModel: AddNewExerciseViewModel()).environmentObject(UserData())
+        SelectExerciseView(addNewExerciseViewModel: AddNewExerciseViewModel()).environmentObject(AppState())
     }
 }

@@ -43,10 +43,10 @@ extension TrackWorkout {
         @Published var actionSheetView: ActionSheetView = .addRound
         
         // Misc
-        let userData: UserData
+        let appState: AppState
         
-        init(userData: UserData, showingModalView: Bool) {
-            self.userData = userData
+        init(appState: AppState, showingModalView: Bool) {
+            self.appState = appState
             self.showingModalView = showingModalView
             
             workout = Workout(name: "")
@@ -140,16 +140,16 @@ extension TrackWorkout {
             // Save workout to log
             let completedWorkout = CompletedWorkout(workout: self.workout, startTS: self.startTime, time: workoutTime)
             print("Completed workout: \(completedWorkout)")
-            self.userData.saveCompletedWorkout(completedWorkout: completedWorkout)
+            self.appState.userData.saveCompletedWorkout(completedWorkout: completedWorkout)
             
             // Reset workout data
             self.workoutStarted = false
             self.workout = Workout(name: "")
             self.isWorkoutSelected = false
 
-            self.userData.trackingStatus.started = false
-            self.userData.trackingStatus.new = true
-            self.userData.selectedTab = 0
+            self.appState.userData.trackingStatus.started = false
+            self.appState.userData.trackingStatus.new = true
+            self.appState.routing.contentView.selectedTab = 0
         }
         
         func cancelWorkout() {
@@ -162,9 +162,9 @@ extension TrackWorkout {
             self.currentRound = 0
             self.curExIdx = 0
             
-            self.userData.trackingStatus.started = false
-            self.userData.trackingStatus.new = true
-            self.userData.selectedTab = 0
+            self.appState.userData.trackingStatus.started = false
+            self.appState.userData.trackingStatus.new = true
+            self.appState.routing.contentView.selectedTab = 0
         }
         
         

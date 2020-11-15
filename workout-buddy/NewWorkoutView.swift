@@ -13,7 +13,7 @@ class NewWorkoutViewModel: ObservableObject {
 }
 
 struct NewWorkoutView: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
     
     @ObservedObject var newWorkoutViewModel = NewWorkoutViewModel()
     
@@ -47,14 +47,14 @@ struct NewWorkoutView: View {
                     
                     print("workout: \(self.newWorkoutViewModel.workout)")
                     
-                    self.userData.workouts.append(self.newWorkoutViewModel.workout)
+                    self.appState.userData.workouts.append(self.newWorkoutViewModel.workout)
                     
                     self.presentaionMode.wrappedValue.dismiss()
                     
-                    print("New UserData: \(self.userData.workouts)")
+                    print("New UserData: \(self.appState.userData.workouts)")
                     
                     // Save to remote DB
-                    self.userData.saveWorkout(workout: self.newWorkoutViewModel.workout)
+                    self.appState.userData.saveWorkout(workout: self.newWorkoutViewModel.workout)
                     
                 }) {
                     Text("Done")
@@ -134,7 +134,7 @@ struct NewWorkoutView: View {
                     }
                 }
             }.sheet(isPresented: $showingAddNewExercise) {
-                AddNewExercise(newWorkoutViewModel: self.newWorkoutViewModel, roundNumber: self.roundNumber).environmentObject(self.userData)
+                AddNewExercise(newWorkoutViewModel: self.newWorkoutViewModel, roundNumber: self.roundNumber).environmentObject(self.appState)
             }.onTapGesture {
 //                self.isFocused = false
                 self.hideKeyboard()
@@ -171,6 +171,6 @@ struct NewWorkoutView: View {
 
 struct NewWorkoutView_Previews: PreviewProvider {
     static var previews: some View {
-        NewWorkoutView().environmentObject(UserData())
+        NewWorkoutView().environmentObject(AppState())
     }
 }
