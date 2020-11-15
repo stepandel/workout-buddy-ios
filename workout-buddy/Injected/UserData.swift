@@ -13,16 +13,16 @@ import UIKit
 
 extension AppState {
     class UserData {
-        @Published var isLoggedIn = false
-        @Published var didCreateAccount = false
-        @Published var workouts: [Workout] = []
-        @Published var exercises: [Exercise] = []
-        @Published var workoutLog: [CompletedWorkout] = []
-        @Published var trackingStatus: TrackingStatus
-        @Published var user: User
-        @Published var stats: Stats
-        @Published var weekEndTS: Double?
-        @Published var tenWeekRollingStats: TenWeekRollingStats
+        var isLoggedIn = false
+        var didCreateAccount = false
+        var workouts: [Workout] = []
+        var exercises: [Exercise] = []
+        var workoutLog: [CompletedWorkout] = []
+        var trackingStatus: TrackingStatus
+        var user: User
+        var stats: Stats
+        var weekEndTS: Double?
+        var tenWeekRollingStats: TenWeekRollingStats
         
             
         private var userId: String = UserDefaults.standard.string(forKey: "userId") ?? "" {
@@ -271,17 +271,17 @@ extension AppState {
         }
         
         func deleteWorkoutLogItem(completedWorkout: CompletedWorkout) {
-            NetworkManager().deleteWorkoutFromLog(userId: self.userId, wlId: completedWorkout.wlId)
-            
-            // Update stats
-            self.stats.subtractStatsFrom(workout: completedWorkout)
-            NetworkManager().saveStats(userId: self.userId, stats: self.stats)
-            
-            // Update weekly stats
-            self.updateTenWeekRollingStats(with: completedWorkout, subtract: true)
-            
             if let idx = self.workoutLog.firstIndex(of: completedWorkout) {
+                
                 self.workoutLog.remove(at: idx)
+                NetworkManager().deleteWorkoutFromLog(userId: self.userId, wlId: completedWorkout.wlId)
+                
+                // Update stats
+                self.stats.subtractStatsFrom(workout: completedWorkout)
+                NetworkManager().saveStats(userId: self.userId, stats: self.stats)
+                
+                // Update weekly stats
+                self.updateTenWeekRollingStats(with: completedWorkout, subtract: true)
             }
         }
         

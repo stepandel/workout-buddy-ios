@@ -8,27 +8,22 @@
 
 import SwiftUI
 
-struct ActivitiesView: View {
+struct Activities: View {
     
     @EnvironmentObject var appState: AppState
-    
-//    init() {
-//        if #available(iOS 14.0, *) {
-//            UINavigationBar.appearance().backgroundColor  = UIColor(Constants.Colors.appBackground)
-//        }
-//    }
+    @ObservedObject private(set) var viewModel: ViewModel
     
     var body: some View {
         NavigationView {
-            if appState.userData.workoutLog.count > 0 {
+            if viewModel.workoutLog.count > 0 {
                 List {
-                    ForEach(appState.userData.workoutLog.reversed(), id:\.wlId) { completedWorkout in
+                    ForEach(viewModel.workoutLog, id:\.wlId) { completedWorkout in
                         Section(header: Text("")) {
                             NavigationLink(destination: CompletedWorkoutView(completedWorkout: completedWorkout)) {
                                 ActivityRow(completedWorkout: completedWorkout)
                             }
                         }
-                    }.onDelete { self.deleteWorkout(at: $0) }
+                    }.onDelete { self.viewModel.deleteWorkout(at: $0) }
     //                .listRowBackground(Constants.Colors.appBackground)
                 }
                 .navigationBarTitle("Completed Workouts")
@@ -38,16 +33,10 @@ struct ActivitiesView: View {
             }
         }
     }
-    
-    func deleteWorkout(at offsets: IndexSet) {
-        offsets.forEach { i in
-            appState.userData.deleteWorkoutLogItem(completedWorkout: self.appState.userData.workoutLog.reversed()[i])
-        }
-    }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivitiesView().environmentObject(AppState())
+        Activities(viewModel: .init(appState: AppState())).environmentObject(AppState())
     }
 }

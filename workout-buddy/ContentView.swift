@@ -26,7 +26,7 @@ struct ContentView: View {
         ZStack {
         
             TabView(selection: selection){
-                ActivitiesView()
+                Activities(viewModel: .init(appState: self.appState))
                     .environmentObject(self.appState)
                     .tabItem {
                         VStack {
