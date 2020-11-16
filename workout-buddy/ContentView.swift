@@ -10,17 +10,11 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var appState: AppState
-    
-    @State private var isActionSheetPresented = false
  
     var body: some View {
         let selection = Binding<Tabs>(
             get: { self.appState.routing.contentView.selectedTab },
-            set: { self.appState.routing.contentView.selectedTab = $0
-                if $0 == Tabs.tracking {
-                    isActionSheetPresented.toggle()
-                }
-            }
+            set: { self.appState.routing.contentView.selectedTab = $0 }
         )
         
         ZStack {
@@ -62,24 +56,6 @@ struct ContentView: View {
                         }
                     }
                     .tag(Tabs.profile)
-            }.actionSheet(isPresented: $isActionSheetPresented) {
-                ActionSheet(title: Text("Start Workout"), buttons: [
-                    .default(Text("Start New")) {
-                        appState.userData.trackingStatus.started = true
-                    },
-                    .default(Text("Select Previously Completed")) {
-                        appState.userData.trackingStatus.new = false
-                        appState.userData.trackingStatus.started = true
-                    },
-                    .cancel() {
-                        appState.routing.contentView.routeToActivities()
-                    }
-                ])
-            }
-            
-            if appState.userData.trackingStatus.started {
-                TrackWorkout(viewModel: .init(appState: self.appState, showingModalView: false))
-                    .environmentObject(self.appState)
             }
             
             if !appState.userData.isLoggedIn {

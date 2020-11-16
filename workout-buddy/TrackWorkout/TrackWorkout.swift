@@ -222,6 +222,18 @@ private extension TrackWorkout  {
                 },
                 .cancel()
             ])
+        } else if self.appState.routing.trackWorkout.actionSheetView == .startWorkout {
+            return ActionSheet(title: Text("Start Workout"), buttons: [
+                .default(Text("Start New")) {
+                    
+                },
+                .default(Text("Select Previously Completed")) {
+                    self.appState.routing.trackWorkout.showWorkoutsModal()
+                },
+                .cancel() {
+                    self.appState.routing.contentView.routeToActivities()
+                }
+            ])
         } else {
             return ActionSheet(title: Text("Something went wrong!"), buttons: [ .cancel() ])
         }

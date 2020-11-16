@@ -17,6 +17,7 @@ extension TrackWorkout {
     }
 
     enum ActionSheetView {
+        case startWorkout
         case endWorkout
         case addRound
     }
@@ -45,6 +46,11 @@ extension TrackWorkout {
         
         mutating func showCancelWorkoutAlert() {
             self.showingAlert = true
+        }
+        
+        mutating func showStartWorkoutActionSheet() {
+            self.actionSheetView = .startWorkout
+            self.showingActionSheet = true
         }
         
         mutating func showEndWorkoutActionSheet() {
@@ -159,6 +165,8 @@ extension TrackWorkout {
                 // Start timer
                 print("Timer: \(Date().timeIntervalSince1970)")
                 self.startTime = Date().timeIntervalSince1970
+                
+                self.appState.routing.trackWorkout.showStartWorkoutActionSheet()
             }
             
             self.workoutStarted = true
