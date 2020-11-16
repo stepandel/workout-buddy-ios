@@ -159,6 +159,6 @@ struct SelectedExerciseView: View {
 
 struct SelectedExerciseView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectedExerciseView(trackWorkoutViewModel: TrackWorkout.ViewModel(appState: AppState(), showingModalView: false), currentRound: 0, curExIdx: 0)
+        SelectedExerciseView(trackWorkoutViewModel: TrackWorkout.ViewModel(appState: AppState()), currentRound: 0, curExIdx: 0)
     }
 }

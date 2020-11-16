@@ -38,7 +38,7 @@ struct PickWorkoutView: View {
 
 struct PickWorkoutView_Previews: PreviewProvider {
     static var previews: some View {
-        PickWorkoutView(trackWorkoutViewModel: TrackWorkout.ViewModel(appState: AppState(), showingModalView: false))
+        PickWorkoutView(trackWorkoutViewModel: TrackWorkout.ViewModel(appState: AppState()))
             .environmentObject(AppState())
     }
 }

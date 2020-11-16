@@ -245,6 +245,6 @@ private extension TrackWorkout  {
 
 struct TrackWorkoutView_Previews: PreviewProvider {
     static var previews: some View {
-        TrackWorkout(viewModel: .init(appState: AppState(), showingModalView: false)).environmentObject(AppState())
+        TrackWorkout(viewModel: .init(appState: AppState())).environmentObject(AppState())
     }
 }

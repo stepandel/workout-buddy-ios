@@ -29,7 +29,7 @@ struct ContentView: View {
                         }
                     }
                     .tag(Tabs.activities)
-                TrackWorkout(viewModel: .init(appState: self.appState, showingModalView: false))
+                TrackWorkout(viewModel: .init(appState: self.appState))
                     .environmentObject(self.appState)
                     .tabItem {
                         VStack {

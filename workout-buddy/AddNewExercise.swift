@@ -296,7 +296,7 @@ struct AddNewExercise_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             AddNewExercise(newWorkoutViewModel: NewWorkoutViewModel(), roundNumber: 0).environmentObject(AppState())
-            AddNewExerciseTracking(trackWorkoutViewModel: TrackWorkout.ViewModel(appState: AppState(), showingModalView: false), roundNumber: 0, afterIndex: 0).environmentObject(AppState())
+            AddNewExerciseTracking(trackWorkoutViewModel: TrackWorkout.ViewModel(appState: AppState()), roundNumber: 0, afterIndex: 0).environmentObject(AppState())
             AddNewExerciseEdit(editWorkoutViewModel: EditWorkoutViewModel(workout: Workout(name: "Random")), roundNumber: 0)
             .environmentObject(AppState())
         }

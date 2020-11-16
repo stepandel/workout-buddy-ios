@@ -83,12 +83,8 @@ extension TrackWorkout {
         // Misc
         let appState: AppState
         
-        init(appState: AppState, showingModalView: Bool) {
+        init(appState: AppState) {
             self.appState = appState
-            
-            if showingModalView {
-                self.appState.routing.trackWorkout.showWorkoutsModal()
-            }
             
             workout = Workout(name: "")
             isWorkoutSelected = false
