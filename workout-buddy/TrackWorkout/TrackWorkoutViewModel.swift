@@ -23,6 +23,43 @@ extension TrackWorkout {
 }
 
 
+// MARK: - Routing
+
+extension TrackWorkout {
+    struct Routing {
+        var showingModalView = false
+        var modalView: ModalView = .workouts
+        var showingAlert = false
+        var showingActionSheet = false
+        var actionSheetView: ActionSheetView = .addRound
+        
+        mutating func showWorkoutsModal() {
+            self.modalView = .workouts
+            self.showingModalView = true
+        }
+        
+        mutating func showExercisesModal() {
+            self.modalView = .exercises
+            self.showingModalView = true
+        }
+        
+        mutating func showCancelWorkoutAlert() {
+            self.showingAlert = true
+        }
+        
+        mutating func showEndWorkoutActionSheet() {
+            self.actionSheetView = .endWorkout
+            self.showingActionSheet = true
+        }
+        
+        mutating func showAddRoundActionSheet() {
+            self.actionSheetView = .addRound
+            self.showingActionSheet = true
+        }
+    }
+}
+
+
 // MARK: - ViewModel
 
 extension TrackWorkout {
@@ -31,23 +68,21 @@ extension TrackWorkout {
         // State
         @Published var workout: Workout
         @Published var isWorkoutSelected: Bool
-        @Published var showingModalView: Bool
-        @Published var modalView: ModalView = .workouts
         @Published var workoutStarted = false
         @Published var currentRound = 0
         @Published var curExIdx = 0
         @Published var addExAfterIdx = 0
-        @Published var showingAlert = false
         @Published var startTime: Double = 0
-        @Published var showingActionSheet = false
-        @Published var actionSheetView: ActionSheetView = .addRound
         
         // Misc
         let appState: AppState
         
         init(appState: AppState, showingModalView: Bool) {
             self.appState = appState
-            self.showingModalView = showingModalView
+            
+            if showingModalView {
+                self.appState.routing.trackWorkout.showWorkoutsModal()
+            }
             
             workout = Workout(name: "")
             isWorkoutSelected = false
@@ -77,8 +112,7 @@ extension TrackWorkout {
         func addExercise(round: Int, addLast: Bool) {
             self.currentRound = round
             self.addExAfterIdx = addLast ? self.workout.rounds[round].sets.count - 1 : self.curExIdx
-            self.modalView = .exercises
-            self.showingModalView.toggle()
+            self.appState.routing.trackWorkout.showExercisesModal()
         }
         
         func skipExercise(at offset: IndexSet, in round: Int) {

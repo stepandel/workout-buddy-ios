@@ -30,13 +30,13 @@ struct TrackWorkout: View {
                 UIApplication.shared.isIdleTimerDisabled = true
                 self.viewModel.startWorkout()
             }
-            .sheet(isPresented: $viewModel.showingModalView) {
+            .sheet(isPresented: $appState.routing.trackWorkout.showingModalView) {
                 modalSheet()
             }
-            .alert(isPresented: $viewModel.showingAlert) {
+            .alert(isPresented: $appState.routing.trackWorkout.showingAlert) {
                alert()
             }
-            .actionSheet(isPresented: $viewModel.showingActionSheet) {
+            .actionSheet(isPresented: $appState.routing.trackWorkout.showingActionSheet) {
                 actionSheet()
             }
             .navigationBarBackButtonHidden(true)
@@ -62,7 +62,7 @@ private extension TrackWorkout {
     
     private var btnFinish: some View {
         Button(action: {
-            self.viewModel.showingAlert.toggle()
+            
         }) {
             Text("Finish")
         }
@@ -70,8 +70,7 @@ private extension TrackWorkout {
     
     private var btnEnd: some View {
         Button(action: {
-            self.viewModel.showingActionSheet.toggle()
-            self.viewModel.actionSheetView = .endWorkout
+            self.appState.routing.trackWorkout.showEndWorkoutActionSheet()
         }) {
             Text("End")
         }
@@ -159,8 +158,7 @@ private extension TrackWorkout {
                 Button(action: {
                     self.viewModel.currentRound = self.viewModel.workout.rounds.firstIndex(of: round)!
                     self.viewModel.curExIdx = 0
-                    self.viewModel.showingActionSheet.toggle()
-                    self.viewModel.actionSheetView = .addRound
+                    self.appState.routing.trackWorkout.showAddRoundActionSheet()
                 }) {
                     HStack {
                         Spacer()
@@ -180,9 +178,9 @@ private extension TrackWorkout {
 private extension TrackWorkout {
     @ViewBuilder
     func modalSheet() -> some View {
-        if self.viewModel.modalView == .workouts {
+        if self.appState.routing.trackWorkout.modalView == .workouts {
             PickWorkoutView(trackWorkoutViewModel: self.viewModel).environmentObject(self.appState)
-        } else if self.viewModel.modalView == .exercises {
+        } else if self.appState.routing.trackWorkout.modalView == .exercises {
             AddNewExerciseTracking(trackWorkoutViewModel: self.viewModel, roundNumber: self.viewModel.currentRound, afterIndex: self.viewModel.addExAfterIdx).environmentObject(self.appState)
         }
     }
@@ -204,17 +202,17 @@ private extension TrackWorkout {
 
 private extension TrackWorkout  {
     func actionSheet() -> ActionSheet {
-        if self.viewModel.actionSheetView == .endWorkout {
+        if self.appState.routing.trackWorkout.actionSheetView == .endWorkout {
             return ActionSheet(title: Text("End Workout?"), buttons: [
                 .default(Text("Finish Workout")) {
                     self.viewModel.completeWorkout()
                 },
                 .default(Text("Cancel Workout").foregroundColor(.red)) {
-                    self.viewModel.showingAlert.toggle()
+                    self.appState.routing.trackWorkout.showCancelWorkoutAlert()
                 },
                 .cancel()
             ])
-        } else if self.viewModel.actionSheetView == .addRound {
+        } else if self.appState.routing.trackWorkout.actionSheetView == .addRound {
             return ActionSheet(title: Text("Add Round"), buttons: [
                 .default(Text("Empty Round")) {
                     self.viewModel.addRound(copyRound: false)

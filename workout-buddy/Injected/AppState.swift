@@ -17,5 +17,6 @@ final class AppState: ObservableObject {
 extension AppState {
     struct ViewRouting {
         var contentView = ContentView.Routing()
+        var trackWorkout = TrackWorkout.Routing()
     }
 }
