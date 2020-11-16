@@ -149,7 +149,7 @@ extension TrackWorkout {
 
             self.appState.userData.trackingStatus.started = false
             self.appState.userData.trackingStatus.new = true
-            self.appState.routing.contentView.selectedTab = 0
+            self.appState.routing.contentView.routeToActivities()
         }
         
         func cancelWorkout() {
@@ -164,7 +164,7 @@ extension TrackWorkout {
             
             self.appState.userData.trackingStatus.started = false
             self.appState.userData.trackingStatus.new = true
-            self.appState.routing.contentView.selectedTab = 0
+            self.appState.routing.contentView.routeToActivities()
         }
         
         

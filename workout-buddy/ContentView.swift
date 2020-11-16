@@ -14,10 +14,10 @@ struct ContentView: View {
     @State private var isActionSheetPresented = false
  
     var body: some View {
-        let selection = Binding<Int>(
+        let selection = Binding<Tabs>(
             get: { self.appState.routing.contentView.selectedTab },
             set: { self.appState.routing.contentView.selectedTab = $0
-                if $0 == 1 {
+                if $0 == Tabs.tracking {
                     isActionSheetPresented.toggle()
                 }
             }
@@ -34,7 +34,7 @@ struct ContentView: View {
                             Text("Workouts")
                         }
                     }
-                    .tag(0)
+                    .tag(Tabs.activities)
                 TrackWorkout(viewModel: .init(appState: self.appState, showingModalView: false))
                     .environmentObject(self.appState)
                     .tabItem {
@@ -43,7 +43,7 @@ struct ContentView: View {
                             Text("Track")
                         }
                     }
-                    .tag(1)
+                    .tag(Tabs.tracking)
                 ExercisesView()
                     .environmentObject(self.appState)
                     .tabItem {
@@ -52,7 +52,7 @@ struct ContentView: View {
                             Text("Exercises")
                         }
                     }
-                    .tag(2)
+                    .tag(Tabs.exercises)
                 ProfileView()
                     .environmentObject(self.appState)
                     .tabItem {
@@ -61,7 +61,7 @@ struct ContentView: View {
                             Text("Profile")
                         }
                     }
-                    .tag(3)
+                    .tag(Tabs.profile)
             }.actionSheet(isPresented: $isActionSheetPresented) {
                 ActionSheet(title: Text("Start Workout"), buttons: [
                     .default(Text("Start New")) {
@@ -72,7 +72,7 @@ struct ContentView: View {
                         appState.userData.trackingStatus.started = true
                     },
                     .cancel() {
-                        appState.routing.contentView.selectedTab = 0
+                        appState.routing.contentView.routeToActivities()
                     }
                 ])
             }
@@ -93,8 +93,30 @@ struct ContentView: View {
 // MARK: - Routing
 
 extension ContentView {
+    enum Tabs: Int {
+        case activities = 0, tracking, exercises, profile
+    }
+}
+
+extension ContentView {
     struct Routing {
-        var selectedTab: Int = 0
+        var selectedTab: Tabs = .activities
+        
+        mutating func routeToActivities() {
+            self.selectedTab = .activities
+        }
+        
+        mutating func routeToTracking() {
+            self.selectedTab = .tracking
+        }
+        
+        mutating func routeToExercises() {
+            self.selectedTab = .exercises
+        }
+        
+        mutating func routeToProfile()  {
+            self.selectedTab = .profile
+        }
     }
 }
 
