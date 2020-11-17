@@ -156,7 +156,7 @@ private extension TrackWorkout {
                     }
                 }.buttonStyle(BorderlessButtonStyle())
                 Button(action: {
-                    self.viewModel.currentRound = self.appState.trackingData.workout.rounds.firstIndex(of: round)!
+                    self.appState.trackingData.currentRound = self.appState.trackingData.workout.rounds.firstIndex(of: round)!
                     self.viewModel.curExIdx = 0
                     self.appState.routing.trackWorkout.showAddRoundActionSheet()
                 }) {
@@ -181,7 +181,7 @@ private extension TrackWorkout {
         if self.appState.routing.trackWorkout.modalView == .workouts {
             PickWorkoutView(trackWorkoutViewModel: self.viewModel).environmentObject(self.appState)
         } else if self.appState.routing.trackWorkout.modalView == .exercises {
-            AddNewExerciseTracking(roundNumber: self.viewModel.currentRound, afterIndex: self.viewModel.addExAfterIdx).environmentObject(self.appState)
+            AddNewExerciseTracking(roundNumber: self.appState.trackingData.currentRound, afterIndex: self.appState.trackingData.addExAfterIdx).environmentObject(self.appState)
         }
     }
 }

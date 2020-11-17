@@ -73,9 +73,7 @@ extension TrackWorkout {
         
         // State
         @Published var isWorkoutSelected: Bool
-        @Published var currentRound = 0
         @Published var curExIdx = 0
-        @Published var addExAfterIdx = 0
         
         // Misc
         let appState: AppState
@@ -93,12 +91,12 @@ extension TrackWorkout {
             if (!self.appState.trackingData.workoutStarted) { self.startWorkout() }
             
             // Start new round
-            if (self.curExIdx + 1 >= self.appState.trackingData.workout.rounds[self.currentRound].sets.count) {
+            if (self.curExIdx + 1 >= self.appState.trackingData.workout.rounds[self.appState.trackingData.currentRound].sets.count) {
                 
                 // Continue to the next round
-                if (self.currentRound + 1 < self.appState.trackingData.workout.rounds.count) { // Check if next round is avaiable
+                if (self.appState.trackingData.currentRound + 1 < self.appState.trackingData.workout.rounds.count) { // Check if next round is avaiable
                     
-                    self.currentRound += 1
+                    self.appState.trackingData.currentRound += 1
                     self.curExIdx = 0
                 }
                 
@@ -108,8 +106,8 @@ extension TrackWorkout {
         }
         
         func addExercise(round: Int, addLast: Bool) {
-            self.currentRound = round
-            self.addExAfterIdx = addLast ? self.appState.trackingData.workout.rounds[round].sets.count - 1 : self.curExIdx
+            self.appState.trackingData.currentRound = round
+            self.appState.trackingData.addExAfterIdx = addLast ? self.appState.trackingData.workout.rounds[round].sets.count - 1 : self.curExIdx
             self.appState.routing.trackWorkout.showExercisesModal()
         }
         
@@ -131,10 +129,10 @@ extension TrackWorkout {
         func addRound(copyRound: Bool) {
             var newRound = Round()
             if copyRound {
-                newRound.sets = self.appState.trackingData.workout.rounds[self.currentRound].sets
+                newRound.sets = self.appState.trackingData.workout.rounds[self.appState.trackingData.currentRound].sets
             }
-            self.appState.trackingData.workout.rounds.insert(newRound, at: self.currentRound + 1)
-            self.currentRound += 1
+            self.appState.trackingData.workout.rounds.insert(newRound, at: self.appState.trackingData.currentRound + 1)
+            self.appState.trackingData.currentRound += 1
             self.curExIdx = 0
         }
         
@@ -146,7 +144,7 @@ extension TrackWorkout {
                 self.appState.trackingData.workout.rounds.append(newRound)
             }
             
-            self.currentRound = self.currentRound == 0 ? self.currentRound : self.currentRound - 1
+            self.appState.trackingData.currentRound = self.appState.trackingData.currentRound == 0 ? self.appState.trackingData.currentRound : self.appState.trackingData.currentRound - 1
         }
         
         
@@ -193,7 +191,6 @@ extension TrackWorkout {
             self.appState.trackingData.workoutStarted = false
             self.appState.trackingData.reset()
             self.isWorkoutSelected = false
-            self.currentRound = 0
             self.curExIdx = 0
             
             self.appState.userData.trackingStatus.started = false

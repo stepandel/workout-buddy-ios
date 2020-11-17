@@ -27,11 +27,15 @@ extension AppState {
         var workout = Workout()
         var workoutStarted = false
         var startTime: Double = 0
+        var currentRound = 0
+        var addExAfterIdx = 0
         
         mutating func reset() {
             self.workout = Workout()
             self.workoutStarted = false
             self.startTime = 0
+            self.currentRound = 0
+            self.addExAfterIdx = 0
         }
     }
 }
