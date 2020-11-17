@@ -53,6 +53,7 @@
 		D9A2FFD3243A69AB00352747 /* WorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A2FFD2243A69AB00352747 /* WorkoutView.swift */; };
 		D9A2FFD5243A6C9900352747 /* RoundBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A2FFD4243A6C9900352747 /* RoundBlock.swift */; };
 		D9A2FFD7243A8E8900352747 /* WorkoutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A2FFD6243A8E8900352747 /* WorkoutsView.swift */; };
+		D9A6A34C25645D3100D36453 /* exercisesDB.json in Resources */ = {isa = PBXBuildFile; fileRef = D9A6A34B25645D3100D36453 /* exercisesDB.json */; };
 		D9BBB80C24547EF60001F9E1 /* exercises.json in Resources */ = {isa = PBXBuildFile; fileRef = D9BBB80B24547EF60001F9E1 /* exercises.json */; };
 		D9BBB80E245493B60001F9E1 /* ExSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BBB80D245493B60001F9E1 /* ExSet.swift */; };
 		D9BF9BE9247D45DA00213DB2 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BF9BE8247D45DA00213DB2 /* SearchBar.swift */; };
@@ -117,6 +118,7 @@
 		D9A2FFD2243A69AB00352747 /* WorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutView.swift; sourceTree = "<group>"; };
 		D9A2FFD4243A6C9900352747 /* RoundBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundBlock.swift; sourceTree = "<group>"; };
 		D9A2FFD6243A8E8900352747 /* WorkoutsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsView.swift; sourceTree = "<group>"; };
+		D9A6A34B25645D3100D36453 /* exercisesDB.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = exercisesDB.json; sourceTree = "<group>"; };
 		D9BBB80B24547EF60001F9E1 /* exercises.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = exercises.json; sourceTree = "<group>"; };
 		D9BBB80D245493B60001F9E1 /* ExSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExSet.swift; sourceTree = "<group>"; };
 		D9BF9BE8247D45DA00213DB2 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 			children = (
 				D9A2FFC4243A38A900352747 /* workouts.json */,
 				D9BBB80B24547EF60001F9E1 /* exercises.json */,
+				D9A6A34B25645D3100D36453 /* exercisesDB.json */,
 				D914766C24740ECA00447A55 /* workoutLog.json */,
 				D9A2F6C02520D68300CDA717 /* popeye.png */,
 			);
@@ -362,6 +365,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D914766D24740ECA00447A55 /* workoutLog.json in Resources */,
+				D9A6A34C25645D3100D36453 /* exercisesDB.json in Resources */,
 				D9BBB80C24547EF60001F9E1 /* exercises.json in Resources */,
 				D9A2FFBB243A381200352747 /* LaunchScreen.storyboard in Resources */,
 				D9A2FFB8243A381200352747 /* Preview Assets.xcassets in Resources */,

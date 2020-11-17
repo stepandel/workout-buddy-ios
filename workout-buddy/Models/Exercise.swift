@@ -8,7 +8,11 @@
 
 import SwiftUI
 
-struct Exercise: Hashable, Codable, Identifiable {
+struct Exercise: Hashable, Codable, Identifiable, Comparable {
+    static func < (lhs: Exercise, rhs: Exercise) -> Bool {
+        lhs.id < rhs.id
+    }
+    
     var id: String
     var bodyPart: String?
     var muscleGroup: String?

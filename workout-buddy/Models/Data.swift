@@ -11,6 +11,7 @@ import SwiftUI
 let sampleWorkouts: [Workout] = load("workouts.json")
 let exerciseData: [Exercise] = load("exercises.json")
 let sampleWorkoutLog: [CompletedWorkout] = load("workoutLog.json")
+let exercisesDB: [Exercise] = load("exercisesDB.json")
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data

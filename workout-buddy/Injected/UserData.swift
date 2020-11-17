@@ -17,6 +17,7 @@ extension AppState {
         var didCreateAccount = false
         var workouts: [Workout] = []
         var exercises: [Exercise] = []
+        var allExercises: [Exercise] = exercisesDB
         var workoutLog: [CompletedWorkout] = []
         var trackingStatus: TrackingStatus
         var user: User
@@ -200,6 +201,8 @@ extension AppState {
         func getExercises() {
             NetworkManager().getExercises(userId: self.userId) { (exercises) in
                 self.exercises = exercises
+                self.allExercises.append(contentsOf: exercises)
+                self.allExercises.sort()
             }
         }
         

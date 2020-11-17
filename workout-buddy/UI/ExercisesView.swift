@@ -12,39 +12,80 @@ struct ExercisesView: View {
     @EnvironmentObject var appState: AppState
     @State private var searchText: String = ""
     @State var isPresented = false
+    @State var onlyMyExercises = false
     
     var body: some View {
         NavigationView {
-            if appState.userData.exercises.count > 0 {
-                VStack {
-                    SearchBar(text: $searchText)
-                    List {
-                        ForEach(appState.userData.exercises.filter {
-                            self.searchText.isEmpty ? true : $0.id.contains(self.searchText)
-                        }) { exercise in
-                            Text("\(exercise.id.components(separatedBy: ":")[0].formatFromId())")
+            if onlyMyExercises {
+                if appState.userData.exercises.count > 0 {
+                    VStack {
+                        Toggle(isOn: $onlyMyExercises) {
+                            Text("Only Show My Exercises")
+                        }.padding()
+                        SearchBar(text: $searchText)
+                        List {
+                            ForEach(appState.userData.exercises.filter {
+                                self.searchText.isEmpty ? true : $0.id.contains(self.searchText)
+                            }) { exercise in
+                                Text("\(exercise.id.components(separatedBy: ":")[0].formatFromId())")
+                            }
                         }
+                        .listStyle(PlainListStyle())
+                        .navigationBarTitle("My Exercises")
+                        .navigationBarItems(trailing: Button(action: {
+                            self.isPresented.toggle()
+                        }) {
+                            Image(systemName: "plus")
+                                .padding()
+                        })
                     }
-                    .listStyle(PlainListStyle())
-                    .navigationBarTitle("My Exercises")
-                    .navigationBarItems(trailing: Button(action: {
-                        self.isPresented.toggle()
-                    }) {
-                        Image(systemName: "plus")
-                            .padding()
-                    })
+                } else {
+                    Text("Create New Exercise")
+                        .onTapGesture {
+                            self.isPresented.toggle()
+                        }
+                        .navigationBarTitle("My Exercises")
+                        .navigationBarItems(trailing: Button(action: {
+                            self.isPresented.toggle()
+                        }) {
+                            Image(systemName: "plus")
+                        })
                 }
             } else {
-                Text("Create New Exercise")
-                    .onTapGesture {
-                        self.isPresented.toggle()
+                if appState.userData.allExercises.count > 0 {
+                    VStack {
+                        Toggle(isOn: $onlyMyExercises) {
+                            Text("Only Show My Exercises")
+                        }.padding()
+                        SearchBar(text: $searchText)
+                        List {
+                            ForEach(appState.userData.allExercises.filter {
+                                self.searchText.isEmpty ? true : $0.id.contains(self.searchText)
+                            }) { exercise in
+                                Text("\(exercise.id.components(separatedBy: ":")[0].formatFromId())")
+                            }
+                        }
+                        .listStyle(PlainListStyle())
+                        .navigationBarTitle("My Exercises")
+                        .navigationBarItems(trailing: Button(action: {
+                            self.isPresented.toggle()
+                        }) {
+                            Image(systemName: "plus")
+                                .padding()
+                        })
                     }
-                    .navigationBarTitle("My Exercises")
-                    .navigationBarItems(trailing: Button(action: {
-                        self.isPresented.toggle()
-                    }) {
-                        Image(systemName: "plus")
-                    })
+                } else {
+                    Text("Create New Exercise")
+                        .onTapGesture {
+                            self.isPresented.toggle()
+                        }
+                        .navigationBarTitle("My Exercises")
+                        .navigationBarItems(trailing: Button(action: {
+                            self.isPresented.toggle()
+                        }) {
+                            Image(systemName: "plus")
+                        })
+                }
             }
         }
         .sheet(isPresented: self.$isPresented) { NewExerciseView().environmentObject(self.appState) }

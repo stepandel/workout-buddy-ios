@@ -1,0 +1,1411 @@
+[
+  { "id": "ab_crunch_machine::pow", "muscleGroup": "abdominals" },
+  { "id": "ab_roller::pow", "muscleGroup": "abdominals" },
+  { "id": "adductor::pow", "muscleGroup": "adductors" },
+  { "id": "adductor/groin::pow", "muscleGroup": "adductors" },
+  {
+    "id": "advanced_kettlebell_windmill:kettlebell:pow",
+    "muscleGroup": "abdominals"
+  },
+  { "id": "air_bike::pow", "muscleGroup": "abdominals" },
+  { "id": "all_fours_quad_stretch::pow", "muscleGroup": "quadriceps" },
+  { "id": "alternate_hammer_curl::pow", "muscleGroup": "biceps" },
+  { "id": "alternate_heel_touchers::pow", "muscleGroup": "abdominals" },
+  {
+    "id": "alternate_incline_dumbbell_curl:dumbbell:pow",
+    "muscleGroup": "biceps"
+  },
+  { "id": "alternate_leg_diagonal_bound::pow", "muscleGroup": "quadriceps" },
+  {
+    "id": "alternating_cable_shoulder_press:cable:pow",
+    "muscleGroup": "shoulders"
+  },
+  { "id": "alternating_deltoid_raise::pow", "muscleGroup": "shoulders" },
+  { "id": "alternating_floor_press::pow", "muscleGroup": "chest" },
+  { "id": "alternating_hang_clean::pow", "muscleGroup": "hamstrings" },
+  {
+    "id": "alternating_kettlebell_press:kettlebell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "alternating_kettlebell_row:kettlebell:pow",
+    "muscleGroup": "middle back"
+  },
+  { "id": "alternating_renegade_row::pow", "muscleGroup": "middle back" },
+  { "id": "ankle_circles::pow", "muscleGroup": "calves" },
+  { "id": "ankle_on_the_knee::pow", "muscleGroup": "glutes" },
+  { "id": "anterior_tibialis-smr::pow", "muscleGroup": "calves" },
+  { "id": "anti-gravity_press::pow", "muscleGroup": "shoulders" },
+  { "id": "arm_circles::pow", "muscleGroup": "shoulders" },
+  { "id": "arnold_dumbbell_press:dumbbell:pow", "muscleGroup": "shoulders" },
+  { "id": "around_the_worlds::pow", "muscleGroup": "chest" },
+  { "id": "atlas_stone_trainer::pow", "muscleGroup": "lower back" },
+  { "id": "atlas_stones::pow", "muscleGroup": "lower back" },
+  { "id": "axle_deadlift::pow", "muscleGroup": "lower back" },
+  { "id": "ab_crunch_machine::pow", "muscleGroup": "abdominals" },
+  { "id": "ab_roller::pow", "muscleGroup": "abdominals" },
+  { "id": "adductor::pow", "muscleGroup": "adductors" },
+  { "id": "adductor/groin::pow", "muscleGroup": "adductors" },
+  {
+    "id": "advanced_kettlebell_windmill:kettlebell:pow",
+    "muscleGroup": "abdominals"
+  },
+  { "id": "air_bike::pow", "muscleGroup": "abdominals" },
+  { "id": "all_fours_quad_stretch::pow", "muscleGroup": "quadriceps" },
+  { "id": "alternate_hammer_curl::pow", "muscleGroup": "biceps" },
+  { "id": "alternate_heel_touchers::pow", "muscleGroup": "abdominals" },
+  {
+    "id": "alternate_incline_dumbbell_curl:dumbbell:pow",
+    "muscleGroup": "biceps"
+  },
+  { "id": "alternate_leg_diagonal_bound::pow", "muscleGroup": "quadriceps" },
+  {
+    "id": "alternating_cable_shoulder_press:cable:pow",
+    "muscleGroup": "shoulders"
+  },
+  { "id": "alternating_deltoid_raise::pow", "muscleGroup": "shoulders" },
+  { "id": "alternating_floor_press::pow", "muscleGroup": "chest" },
+  { "id": "alternating_hang_clean::pow", "muscleGroup": "hamstrings" },
+  {
+    "id": "alternating_kettlebell_press:kettlebell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "alternating_kettlebell_row:kettlebell:pow",
+    "muscleGroup": "middle back"
+  },
+  { "id": "alternating_renegade_row::pow", "muscleGroup": "middle back" },
+  { "id": "ankle_circles::pow", "muscleGroup": "calves" },
+  { "id": "ankle_on_the_knee::pow", "muscleGroup": "glutes" },
+  { "id": "anterior_tibialis-smr::pow", "muscleGroup": "calves" },
+  { "id": "anti-gravity_press::pow", "muscleGroup": "shoulders" },
+  { "id": "arm_circles::pow", "muscleGroup": "shoulders" },
+  { "id": "arnold_dumbbell_press:dumbbell:pow", "muscleGroup": "shoulders" },
+  { "id": "around_the_worlds::pow", "muscleGroup": "chest" },
+  { "id": "atlas_stone_trainer::pow", "muscleGroup": "lower back" },
+  { "id": "atlas_stones::pow", "muscleGroup": "lower back" },
+  { "id": "axle_deadlift::pow", "muscleGroup": "lower back" },
+  { "id": "back_flyes_-_with_bands::pow", "muscleGroup": "shoulders" },
+  { "id": "backward_drag::pow", "muscleGroup": "quadriceps" },
+  { "id": "backward_medicine_ball_throw:ball:pow", "muscleGroup": "shoulders" },
+  { "id": "balance_board::pow", "muscleGroup": "calves" },
+  { "id": "ball_leg_curl:ball:pow", "muscleGroup": "hamstrings" },
+  { "id": "band_assisted_pull-up:band:pow", "muscleGroup": "lats" },
+  { "id": "band_good_morning:band:pow", "muscleGroup": "hamstrings" },
+  {
+    "id": "band_good_morning_(pull_through):band:pow",
+    "muscleGroup": "hamstrings"
+  },
+  { "id": "band_hip_adductions:band:pow", "muscleGroup": "adductors" },
+  { "id": "band_pull_apart:band:pow", "muscleGroup": "shoulders" },
+  { "id": "band_skull_crusher:band:pow", "muscleGroup": "triceps" },
+  { "id": "barbell_ab_rollout:barbell:pow", "muscleGroup": "abdominals" },
+  {
+    "id": "barbell_ab_rollout_-_on_knees:barbell:pow",
+    "muscleGroup": "abdominals"
+  },
+  {
+    "id": "barbell_bench_press_-_medium_grip:bench:pow",
+    "muscleGroup": "chest"
+  },
+  { "id": "barbell_curl:barbell:pow", "muscleGroup": "biceps" },
+  {
+    "id": "barbell_curls_lying_against_an_incline:barbell:pow",
+    "muscleGroup": "biceps"
+  },
+  { "id": "barbell_deadlift:barbell:pow", "muscleGroup": "lower back" },
+  { "id": "barbell_full_squat:barbell:pow", "muscleGroup": "quadriceps" },
+  { "id": "barbell_glute_bridge:barbell:pow", "muscleGroup": "glutes" },
+  { "id": "barbell_guillotine_bench_press:bench:pow", "muscleGroup": "chest" },
+  { "id": "barbell_hack_squat:barbell:pow", "muscleGroup": "quadriceps" },
+  { "id": "barbell_hip_thrust:barbell:pow", "muscleGroup": "glutes" },
+  {
+    "id": "barbell_incline_bench_press_-_medium_grip:bench:pow",
+    "muscleGroup": "chest"
+  },
+  {
+    "id": "barbell_incline_shoulder_raise:barbell:pow",
+    "muscleGroup": "shoulders"
+  },
+  { "id": "barbell_lunge:barbell:pow", "muscleGroup": "quadriceps" },
+  { "id": "barbell_rear_delt_row:barbell:pow", "muscleGroup": "shoulders" },
+  { "id": "barbell_rollout_from_bench:bench:pow", "muscleGroup": "abdominals" },
+  { "id": "barbell_seated_calf_raise:barbell:pow", "muscleGroup": "calves" },
+  { "id": "barbell_shoulder_press:barbell:pow", "muscleGroup": "shoulders" },
+  { "id": "barbell_shrug:barbell:pow", "muscleGroup": "traps" },
+  { "id": "barbell_shrug_behind_the_back:barbell:pow", "muscleGroup": "traps" },
+  { "id": "barbell_side_bend:barbell:pow", "muscleGroup": "abdominals" },
+  { "id": "barbell_side_split_squat:barbell:pow", "muscleGroup": "quadriceps" },
+  { "id": "barbell_squat:barbell:pow", "muscleGroup": "quadriceps" },
+  { "id": "barbell_squat_to_a_bench:bench:pow", "muscleGroup": "quadriceps" },
+  { "id": "barbell_step_ups:barbell:pow", "muscleGroup": "quadriceps" },
+  { "id": "barbell_walking_lunge:barbell:pow", "muscleGroup": "quadriceps" },
+  { "id": "battling_ropes::pow", "muscleGroup": "shoulders" },
+  { "id": "bear_crawl_sled_drags::pow", "muscleGroup": "quadriceps" },
+  { "id": "behind_head_chest_stretch::pow", "muscleGroup": "chest" },
+  { "id": "bench_dips:bench:pow", "muscleGroup": "triceps" },
+  { "id": "bench_jump:bench:pow", "muscleGroup": "quadriceps" },
+  { "id": "bench_press_-_powerlifting:bench:pow", "muscleGroup": "triceps" },
+  { "id": "bench_press_-_with_bands:bench:pow", "muscleGroup": "chest" },
+  { "id": "bench_press_with_chains:bench:pow", "muscleGroup": "triceps" },
+  { "id": "bench_sprint:bench:pow", "muscleGroup": "quadriceps" },
+  { "id": "bent_over_barbell_row:barbell:pow", "muscleGroup": "middle back" },
+  {
+    "id": "bent_over_dumbbell_rear_delt_raise_with_head_on_bench:bench:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "bent_over_low-pulley_side_lateral::pow",
+    "muscleGroup": "shoulders"
+  },
+  { "id": "bent_over_one-arm_long_bar_row::pow", "muscleGroup": "middle back" },
+  { "id": "bent_over_two-arm_long_bar_row::pow", "muscleGroup": "middle back" },
+  { "id": "bent_over_two-dumbbell_row::pow", "muscleGroup": "middle back" },
+  {
+    "id": "bent_over_two-dumbbell_row_with_palms_in::pow",
+    "muscleGroup": "middle back"
+  },
+  { "id": "bent_press::pow", "muscleGroup": "abdominals" },
+  { "id": "bent-arm_barbell_pullover:barbell:pow", "muscleGroup": "lats" },
+  { "id": "bent-arm_dumbbell_pullover:dumbbell:pow", "muscleGroup": "chest" },
+  { "id": "bent-knee_hip_raise::pow", "muscleGroup": "abdominals" },
+  { "id": "bicycling::pow", "muscleGroup": "quadriceps" },
+  { "id": "bicycling::pow", "muscleGroup": "stationary" },
+  { "id": "board_press::pow", "muscleGroup": "triceps" },
+  { "id": "body_tricep_press::pow", "muscleGroup": "triceps" },
+  { "id": "body-up::pow", "muscleGroup": "triceps" },
+  { "id": "bodyweight_flyes::pow", "muscleGroup": "chest" },
+  { "id": "bodyweight_mid_row::pow", "muscleGroup": "middle back" },
+  { "id": "bodyweight_squat::pow", "muscleGroup": "quadriceps" },
+  { "id": "bodyweight_walking_lunge::pow", "muscleGroup": "quadriceps" },
+  {
+    "id": "bosu_ball_cable_crunch_with_side_bends:cable:pow",
+    "muscleGroup": "abdominals"
+  },
+  { "id": "bottoms_up::pow", "muscleGroup": "abdominals" },
+  {
+    "id": "bottoms-up_clean_from_the_hang_position::pow",
+    "muscleGroup": "forearms"
+  },
+  { "id": "box_jump_(multiple_response):box:pow", "muscleGroup": "hamstrings" },
+  { "id": "box_skip:box:pow", "muscleGroup": "hamstrings" },
+  { "id": "box_squat:box:pow", "muscleGroup": "quadriceps" },
+  { "id": "box_squat_with_bands:box:pow", "muscleGroup": "quadriceps" },
+  { "id": "box_squat_with_chains:box:pow", "muscleGroup": "quadriceps" },
+  { "id": "brachialis-smr::pow", "muscleGroup": "biceps" },
+  { "id": "bradford/rocky_presses::pow", "muscleGroup": "shoulders" },
+  { "id": "butt_lift_(bridge)::pow", "muscleGroup": "glutes" },
+  { "id": "butt-ups::pow", "muscleGroup": "abdominals" },
+  { "id": "butterfly::pow", "muscleGroup": "chest" },
+  { "id": "cable_chest_press:cable:pow", "muscleGroup": "chest" },
+  { "id": "cable_crossover:cable:pow", "muscleGroup": "chest" },
+  { "id": "cable_crunch:cable:pow", "muscleGroup": "abdominals" },
+  { "id": "cable_deadlifts:cable:pow", "muscleGroup": "quadriceps" },
+  {
+    "id": "cable_hammer_curls_-_rope_attachment:cable:pow",
+    "muscleGroup": "biceps"
+  },
+  { "id": "cable_hip_adduction:cable:pow", "muscleGroup": "quadriceps" },
+  { "id": "cable_incline_pushdown:cable:pow", "muscleGroup": "lats" },
+  {
+    "id": "cable_incline_triceps_extension:cable:pow",
+    "muscleGroup": "triceps"
+  },
+  { "id": "cable_internal_rotation:cable:pow", "muscleGroup": "shoulders" },
+  { "id": "cable_iron_cross:cable:pow", "muscleGroup": "chest" },
+  { "id": "cable_judo_flip:cable:pow", "muscleGroup": "abdominals" },
+  { "id": "cable_lying_triceps_extension:cable:pow", "muscleGroup": "triceps" },
+  {
+    "id": "cable_one_arm_tricep_extension:cable:pow",
+    "muscleGroup": "triceps"
+  },
+  { "id": "cable_preacher_curl:cable:pow", "muscleGroup": "biceps" },
+  { "id": "cable_rear_delt_fly:cable:pow", "muscleGroup": "shoulders" },
+  { "id": "cable_reverse_crunch:cable:pow", "muscleGroup": "abdominals" },
+  {
+    "id": "cable_rope_overhead_triceps_extension:cable:pow",
+    "muscleGroup": "triceps"
+  },
+  { "id": "cable_rope_rear-delt_rows:cable:pow", "muscleGroup": "shoulders" },
+  { "id": "cable_russian_twists:cable:pow", "muscleGroup": "abdominals" },
+  { "id": "cable_seated_crunch:cable:pow", "muscleGroup": "abdominals" },
+  { "id": "cable_seated_lateral_raise:cable:pow", "muscleGroup": "shoulders" },
+  { "id": "cable_shoulder_press:cable:pow", "muscleGroup": "shoulders" },
+  { "id": "cable_shrugs:cable:pow", "muscleGroup": "traps" },
+  { "id": "cable_tuck_reverse_crunch:cable:pow", "muscleGroup": "abdominals" },
+  { "id": "cable_wrist_curl:cable:pow", "muscleGroup": "forearms" },
+  { "id": "calf_press::pow", "muscleGroup": "calves" },
+  { "id": "calf_press_on_the_leg_press_machine::pow", "muscleGroup": "calves" },
+  { "id": "calf_raise_on_a_dumbbell:dumbbell:pow", "muscleGroup": "calves" },
+  { "id": "calf_raises_-_with_bands::pow", "muscleGroup": "calves" },
+  { "id": "calf_stretch_elbows_against_wall::pow", "muscleGroup": "calves" },
+  { "id": "calf_stretch_hands_against_wall::pow", "muscleGroup": "calves" },
+  { "id": "calf-machine_shoulder_shrug::pow", "muscleGroup": "traps" },
+  { "id": "calves-smr::pow", "muscleGroup": "calves" },
+  { "id": "car_deadlift::pow", "muscleGroup": "quadriceps" },
+  { "id": "car_drivers::pow", "muscleGroup": "shoulders" },
+  { "id": "carioca_quick_step::pow", "muscleGroup": "adductors" },
+  { "id": "cat_stretch::pow", "muscleGroup": "lower back" },
+  { "id": "catch_and_overhead_throw::pow", "muscleGroup": "lats" },
+  { "id": "chain_handle_extension::pow", "muscleGroup": "triceps" },
+  { "id": "chain_press::pow", "muscleGroup": "chest" },
+  { "id": "chair_leg_extended_stretch::pow", "muscleGroup": "hamstrings" },
+  { "id": "chair_lower_back_stretch::pow", "muscleGroup": "lats" },
+  { "id": "chair_squat::pow", "muscleGroup": "quadriceps" },
+  { "id": "chair_upper_body_stretch::pow", "muscleGroup": "shoulders" },
+  { "id": "chest_and_front_of_shoulder_stretch::pow", "muscleGroup": "chest" },
+  { "id": "chest_push_(multiple_response)::pow", "muscleGroup": "chest" },
+  { "id": "chest_push_(single_response)::pow", "muscleGroup": "chest" },
+  { "id": "chest_push_from_3_point_stance::pow", "muscleGroup": "chest" },
+  { "id": "chest_push_with_run_release::pow", "muscleGroup": "chest" },
+  { "id": "chest_stretch_on_stability_ball:ball:pow", "muscleGroup": "chest" },
+  { "id": "child's_pose::pow", "muscleGroup": "lower back" },
+  { "id": "chin_to_chest_stretch::pow", "muscleGroup": "neck" },
+  { "id": "chin-up::pow", "muscleGroup": "lats" },
+  { "id": "circus_bell::pow", "muscleGroup": "shoulders" },
+  { "id": "clean::pow", "muscleGroup": "hamstrings" },
+  { "id": "clean_and_jerk::pow", "muscleGroup": "shoulders" },
+  { "id": "clean_and_press::pow", "muscleGroup": "shoulders" },
+  { "id": "clean_deadlift::pow", "muscleGroup": "hamstrings" },
+  { "id": "clean_from_blocks::pow", "muscleGroup": "quadriceps" },
+  { "id": "clean_pull::pow", "muscleGroup": "quadriceps" },
+  { "id": "clean_shrug::pow", "muscleGroup": "traps" },
+  { "id": "clock_push-up::pow", "muscleGroup": "chest" },
+  {
+    "id": "close-grip_barbell_bench_press:bench:pow",
+    "muscleGroup": "triceps"
+  },
+  { "id": "close-grip_dumbbell_press:dumbbell:pow", "muscleGroup": "triceps" },
+  { "id": "close-grip_ez-bar_curl:ez-bar:pow", "muscleGroup": "biceps" },
+  {
+    "id": "close-grip_ez-bar_curl_with_band:band:pow",
+    "muscleGroup": "biceps"
+  },
+  { "id": "close-grip_ez-bar_press:ez-bar:pow", "muscleGroup": "triceps" },
+  { "id": "close-grip_front_lat_pulldown::pow", "muscleGroup": "lats" },
+  {
+    "id": "close-grip_push-up_off_of_a_dumbbell:dumbbell:pow",
+    "muscleGroup": "triceps"
+  },
+  {
+    "id": "close-grip_standing_barbell_curl:barbell:pow",
+    "muscleGroup": "biceps"
+  },
+  { "id": "cocoons::pow", "muscleGroup": "abdominals" },
+  { "id": "conan's_wheel::pow", "muscleGroup": "quadriceps" },
+  { "id": "concentration_curls::pow", "muscleGroup": "biceps" },
+  { "id": "cross_body_hammer_curl::pow", "muscleGroup": "biceps" },
+  { "id": "cross_over_-_with_bands::pow", "muscleGroup": "chest" },
+  { "id": "cross-body_crunch::pow", "muscleGroup": "abdominals" },
+  { "id": "crossover_reverse_lunge::pow", "muscleGroup": "lower back" },
+  { "id": "crucifix::pow", "muscleGroup": "shoulders" },
+  { "id": "crunch_-_hands_overhead::pow", "muscleGroup": "abdominals" },
+  {
+    "id": "crunch_-_legs_on_exercise_ball:ball:pow",
+    "muscleGroup": "abdominals"
+  },
+  { "id": "crunches::pow", "muscleGroup": "abdominals" },
+  { "id": "cuban_press::pow", "muscleGroup": "shoulders" },
+  { "id": "dancer's_stretch::pow", "muscleGroup": "lower back" },
+  { "id": "deadlift_with_bands::pow", "muscleGroup": "lower back" },
+  { "id": "deadlift_with_chains::pow", "muscleGroup": "lower back" },
+  { "id": "decline_barbell_bench_press:bench:pow", "muscleGroup": "chest" },
+  {
+    "id": "decline_close-grip_bench_to_skull_crusher:bench:pow",
+    "muscleGroup": "triceps"
+  },
+  { "id": "decline_crunch::pow", "muscleGroup": "abdominals" },
+  { "id": "decline_dumbbell_bench_press:bench:pow", "muscleGroup": "chest" },
+  { "id": "decline_dumbbell_flyes:dumbbell:pow", "muscleGroup": "chest" },
+  {
+    "id": "decline_dumbbell_triceps_extension:dumbbell:pow",
+    "muscleGroup": "triceps"
+  },
+  {
+    "id": "decline_ez-bar_triceps_extension:ez-bar:pow",
+    "muscleGroup": "triceps"
+  },
+  { "id": "decline_oblique_crunch::pow", "muscleGroup": "abdominals" },
+  { "id": "decline_push-up::pow", "muscleGroup": "chest" },
+  { "id": "decline_reverse_crunch::pow", "muscleGroup": "abdominals" },
+  { "id": "decline_smith_press::pow", "muscleGroup": "chest" },
+  { "id": "deficit_deadlift::pow", "muscleGroup": "lower back" },
+  { "id": "depth_jump_leap::pow", "muscleGroup": "quadriceps" },
+  { "id": "dip_machine::pow", "muscleGroup": "triceps" },
+  { "id": "dips_-_chest_version::pow", "muscleGroup": "chest" },
+  { "id": "dips_-_triceps_version::pow", "muscleGroup": "triceps" },
+  { "id": "donkey_calf_raises::pow", "muscleGroup": "calves" },
+  {
+    "id": "double_kettlebell_alternating_hang_clean:kettlebell:pow",
+    "muscleGroup": "hamstrings"
+  },
+  { "id": "double_kettlebell_jerk:kettlebell:pow", "muscleGroup": "shoulders" },
+  {
+    "id": "double_kettlebell_push_press:kettlebell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "double_kettlebell_snatch:kettlebell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "double_kettlebell_windmill:kettlebell:pow",
+    "muscleGroup": "abdominals"
+  },
+  { "id": "double_leg_butt_kick::pow", "muscleGroup": "quadriceps" },
+  { "id": "downward_facing_balance::pow", "muscleGroup": "glutes" },
+  { "id": "drag_curl::pow", "muscleGroup": "biceps" },
+  { "id": "drop_push::pow", "muscleGroup": "chest" },
+  {
+    "id": "dumbbell_alternate_bicep_curl:dumbbell:pow",
+    "muscleGroup": "biceps"
+  },
+  { "id": "dumbbell_bench_press:bench:pow", "muscleGroup": "chest" },
+  {
+    "id": "dumbbell_bench_press_with_neutral_grip:bench:pow",
+    "muscleGroup": "chest"
+  },
+  { "id": "dumbbell_bicep_curl:dumbbell:pow", "muscleGroup": "biceps" },
+  { "id": "dumbbell_clean:dumbbell:pow", "muscleGroup": "hamstrings" },
+  { "id": "dumbbell_floor_press:dumbbell:pow", "muscleGroup": "triceps" },
+  { "id": "dumbbell_flyes:dumbbell:pow", "muscleGroup": "chest" },
+  { "id": "dumbbell_incline_row:dumbbell:pow", "muscleGroup": "middle back" },
+  {
+    "id": "dumbbell_incline_shoulder_raise:dumbbell:pow",
+    "muscleGroup": "shoulders"
+  },
+  { "id": "dumbbell_lunges:dumbbell:pow", "muscleGroup": "quadriceps" },
+  {
+    "id": "dumbbell_lying_one-arm_rear_lateral_raise:dumbbell:pow",
+    "muscleGroup": "shoulders"
+  },
+  { "id": "dumbbell_lying_pronation:dumbbell:pow", "muscleGroup": "forearms" },
+  {
+    "id": "dumbbell_lying_rear_lateral_raise:dumbbell:pow",
+    "muscleGroup": "shoulders"
+  },
+  { "id": "dumbbell_lying_supination:dumbbell:pow", "muscleGroup": "forearms" },
+  {
+    "id": "dumbbell_one-arm_shoulder_press:dumbbell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "dumbbell_one-arm_triceps_extension:dumbbell:pow",
+    "muscleGroup": "triceps"
+  },
+  {
+    "id": "dumbbell_one-arm_upright_row:dumbbell:pow",
+    "muscleGroup": "shoulders"
+  },
+  { "id": "dumbbell_prone_incline_curl:dumbbell:pow", "muscleGroup": "biceps" },
+  { "id": "dumbbell_raise:dumbbell:pow", "muscleGroup": "shoulders" },
+  { "id": "dumbbell_rear_lunge:dumbbell:pow", "muscleGroup": "quadriceps" },
+  { "id": "dumbbell_scaption:dumbbell:pow", "muscleGroup": "shoulders" },
+  { "id": "dumbbell_seated_box_jump:box:pow", "muscleGroup": "quadriceps" },
+  {
+    "id": "dumbbell_seated_one-leg_calf_raise:dumbbell:pow",
+    "muscleGroup": "calves"
+  },
+  { "id": "dumbbell_shoulder_press:dumbbell:pow", "muscleGroup": "shoulders" },
+  { "id": "dumbbell_shrug:dumbbell:pow", "muscleGroup": "traps" },
+  { "id": "dumbbell_side_bend:dumbbell:pow", "muscleGroup": "abdominals" },
+  { "id": "dumbbell_squat:dumbbell:pow", "muscleGroup": "quadriceps" },
+  { "id": "dumbbell_squat_to_a_bench:bench:pow", "muscleGroup": "quadriceps" },
+  { "id": "dumbbell_step_ups:dumbbell:pow", "muscleGroup": "quadriceps" },
+  {
+    "id": "dumbbell_tricep_extension_-pronated_grip:dumbbell:pow",
+    "muscleGroup": "triceps"
+  },
+  { "id": "dynamic_back_stretch::pow", "muscleGroup": "lats" },
+  { "id": "dynamic_chest_stretch::pow", "muscleGroup": "chest" },
+  { "id": "elbow_circles::pow", "muscleGroup": "shoulders" },
+  { "id": "elbow_to_knee::pow", "muscleGroup": "abdominals" },
+  { "id": "elbows_back::pow", "muscleGroup": "chest" },
+  { "id": "elevated_back_lunge::pow", "muscleGroup": "quadriceps" },
+  { "id": "elevated_cable_rows:cable:pow", "muscleGroup": "lats" },
+  { "id": "elliptical_trainer::pow", "muscleGroup": "quadriceps" },
+  { "id": "exercise_ball_crunch:ball:pow", "muscleGroup": "abdominals" },
+  { "id": "exercise_ball_pull-in:ball:pow", "muscleGroup": "abdominals" },
+  {
+    "id": "extended_range_one-arm_kettlebell_floor_press:kettlebell:pow",
+    "muscleGroup": "chest"
+  },
+  { "id": "external_rotation::pow", "muscleGroup": "shoulders" },
+  { "id": "external_rotation_with_band:band:pow", "muscleGroup": "shoulders" },
+  {
+    "id": "external_rotation_with_cable:cable:pow",
+    "muscleGroup": "shoulders"
+  },
+  { "id": "ez-bar_curl:ez-bar:pow", "muscleGroup": "biceps" },
+  { "id": "ez-bar_skullcrusher:ez-bar:pow", "muscleGroup": "triceps" },
+  { "id": "face_pull::pow", "muscleGroup": "shoulders" },
+  { "id": "farmer's_walk::pow", "muscleGroup": "forearms" },
+  { "id": "fast_skipping::pow", "muscleGroup": "quadriceps" },
+  { "id": "finger_curls::pow", "muscleGroup": "forearms" },
+  { "id": "flat_bench_cable_flyes:cable:pow", "muscleGroup": "chest" },
+  { "id": "flat_bench_leg_pull-in:bench:pow", "muscleGroup": "abdominals" },
+  { "id": "flat_bench_lying_leg_raise:bench:pow", "muscleGroup": "abdominals" },
+  {
+    "id": "flexor_incline_dumbbell_curls:dumbbell:pow",
+    "muscleGroup": "biceps"
+  },
+  { "id": "floor_glute-ham_raise::pow", "muscleGroup": "hamstrings" },
+  { "id": "floor_press::pow", "muscleGroup": "triceps" },
+  { "id": "floor_press_with_chains::pow", "muscleGroup": "triceps" },
+  { "id": "flutter_kicks::pow", "muscleGroup": "glutes" },
+  { "id": "foot-smr::pow", "muscleGroup": "calves" },
+  { "id": "forward_drag_with_press::pow", "muscleGroup": "chest" },
+  { "id": "frankenstein_squat::pow", "muscleGroup": "quadriceps" },
+  { "id": "freehand_jump_squat::pow", "muscleGroup": "quadriceps" },
+  { "id": "frog_hops::pow", "muscleGroup": "quadriceps" },
+  { "id": "frog_sit-ups::pow", "muscleGroup": "abdominals" },
+  { "id": "front_barbell_squat:barbell:pow", "muscleGroup": "quadriceps" },
+  {
+    "id": "front_barbell_squat_to_a_bench:bench:pow",
+    "muscleGroup": "quadriceps"
+  },
+  { "id": "front_box_jump:box:pow", "muscleGroup": "hamstrings" },
+  { "id": "front_cable_raise:cable:pow", "muscleGroup": "shoulders" },
+  {
+    "id": "front_cone_hops_(or_hurdle_hops):cone:pow",
+    "muscleGroup": "quadriceps"
+  },
+  { "id": "front_dumbbell_raise:dumbbell:pow", "muscleGroup": "shoulders" },
+  {
+    "id": "front_incline_dumbbell_raise:dumbbell:pow",
+    "muscleGroup": "shoulders"
+  },
+  { "id": "front_leg_raises::pow", "muscleGroup": "hamstrings" },
+  { "id": "front_plate_raise::pow", "muscleGroup": "shoulders" },
+  { "id": "front_raise_and_pullover::pow", "muscleGroup": "chest" },
+  { "id": "front_squat_(clean_grip)::pow", "muscleGroup": "quadriceps" },
+  {
+    "id": "front_squats_with_two_kettlebells:kettlebells:pow",
+    "muscleGroup": "quadriceps"
+  },
+  { "id": "front_two-dumbbell_raise::pow", "muscleGroup": "shoulders" },
+  { "id": "full_range-of-motion_lat_pulldown::pow", "muscleGroup": "lats" },
+  { "id": "gironda_sternum_chins::pow", "muscleGroup": "lats" },
+  { "id": "glute_ham_raise::pow", "muscleGroup": "hamstrings" },
+  { "id": "glute_kickback::pow", "muscleGroup": "glutes" },
+  { "id": "goblet_squat::pow", "muscleGroup": "quadriceps" },
+  { "id": "good_morning::pow", "muscleGroup": "hamstrings" },
+  { "id": "good_morning_off_pins::pow", "muscleGroup": "hamstrings" },
+  { "id": "gorilla_chin/crunch::pow", "muscleGroup": "abdominals" },
+  { "id": "groin_and_back_stretch::pow", "muscleGroup": "adductors" },
+  { "id": "groiners::pow", "muscleGroup": "adductors" },
+  { "id": "hack_squat::pow", "muscleGroup": "quadriceps" },
+  { "id": "hammer_curls::pow", "muscleGroup": "biceps" },
+  {
+    "id": "hammer_grip_incline_db_bench_press:bench:pow",
+    "muscleGroup": "chest"
+  },
+  { "id": "hamstring_stretch::pow", "muscleGroup": "hamstrings" },
+  { "id": "hamstring-smr::pow", "muscleGroup": "hamstrings" },
+  { "id": "handstand_push-ups::pow", "muscleGroup": "shoulders" },
+  { "id": "hang_clean::pow", "muscleGroup": "quadriceps" },
+  { "id": "hang_clean_-_below_the_knees::pow", "muscleGroup": "quadriceps" },
+  { "id": "hang_snatch::pow", "muscleGroup": "hamstrings" },
+  { "id": "hang_snatch_-_below_knees::pow", "muscleGroup": "hamstrings" },
+  { "id": "hanging_bar_good_morning::pow", "muscleGroup": "hamstrings" },
+  { "id": "hanging_leg_raise::pow", "muscleGroup": "abdominals" },
+  { "id": "hanging_pike::pow", "muscleGroup": "abdominals" },
+  { "id": "heaving_snatch_balance::pow", "muscleGroup": "quadriceps" },
+  { "id": "heavy_bag_thrust:bag:pow", "muscleGroup": "chest" },
+  { "id": "high_cable_curls:cable:pow", "muscleGroup": "biceps" },
+  { "id": "hip_circles_(prone)::pow", "muscleGroup": "abductors" },
+  { "id": "hip_crossover,::pow" },
+  { "id": "hip_extension_with_bands::pow", "muscleGroup": "glutes" },
+  { "id": "hip_flexion_with_band:band:pow", "muscleGroup": "quadriceps" },
+  { "id": "hip_lift_with_band:band:pow", "muscleGroup": "glutes" },
+  { "id": "hug_a_ball:ball:pow", "muscleGroup": "lower back" },
+  { "id": "hug_knees_to_chest::pow", "muscleGroup": "lower back" },
+  { "id": "hurdle_hops::pow", "muscleGroup": "hamstrings" },
+  {
+    "id": "hyperextensions_(back_extensions)::pow",
+    "muscleGroup": "lower back"
+  },
+  {
+    "id": "hyperextensions_with_no_hyperextension_bench:bench:pow",
+    "muscleGroup": "lower back"
+  },
+  { "id": "iliotibial_tract-smr::pow", "muscleGroup": "abductors" },
+  {
+    "id": "incline_barbell_triceps_extension:barbell:pow",
+    "muscleGroup": "triceps"
+  },
+  { "id": "incline_bench_pull:bench:pow", "muscleGroup": "middle back" },
+  { "id": "incline_cable_chest_press:cable:pow", "muscleGroup": "chest" },
+  { "id": "incline_cable_flye:cable:pow", "muscleGroup": "chest" },
+  {
+    "id": "incline_dumbbell_bench_with_palms_facing_in:bench:pow",
+    "muscleGroup": "chest"
+  },
+  { "id": "incline_dumbbell_curl:dumbbell:pow", "muscleGroup": "biceps" },
+  { "id": "incline_dumbbell_flyes:dumbbell:pow", "muscleGroup": "chest" },
+  {
+    "id": "incline_dumbbell_flyes_-_with_a_twist:dumbbell:pow",
+    "muscleGroup": "chest"
+  },
+  { "id": "incline_dumbbell_press:dumbbell:pow", "muscleGroup": "chest" },
+  { "id": "incline_hammer_curls::pow", "muscleGroup": "biceps" },
+  { "id": "incline_inner_biceps_curl::pow", "muscleGroup": "biceps" },
+  { "id": "incline_push-up::pow", "muscleGroup": "chest" },
+  { "id": "incline_push-up_close-grip::pow", "muscleGroup": "triceps" },
+  { "id": "incline_push-up_depth_jump::pow", "muscleGroup": "chest" },
+  { "id": "incline_push-up_medium::pow", "muscleGroup": "chest" },
+  { "id": "incline_push-up_reverse_grip::pow", "muscleGroup": "chest" },
+  { "id": "incline_push-up_wide::pow", "muscleGroup": "chest" },
+  { "id": "intermediate_groin_stretch::pow", "muscleGroup": "hamstrings" },
+  {
+    "id": "intermediate_hip_flexor_and_quad_stretch::pow",
+    "muscleGroup": "quadriceps"
+  },
+  { "id": "internal_rotation_with_band:band:pow", "muscleGroup": "shoulders" },
+  { "id": "inverted_row::pow", "muscleGroup": "middle back" },
+  { "id": "inverted_row_with_straps::pow", "muscleGroup": "middle back" },
+  { "id": "iron_cross::pow", "muscleGroup": "shoulders" },
+  { "id": "iron_crosses_(stretch)::pow", "muscleGroup": "quadriceps" },
+  { "id": "isometric_chest_squeezes::pow", "muscleGroup": "chest" },
+  {
+    "id": "isometric_neck_exercise_-_front_and_back::pow",
+    "muscleGroup": "neck"
+  },
+  { "id": "isometric_neck_exercise_-_sides::pow", "muscleGroup": "neck" },
+  { "id": "isometric_wipers::pow", "muscleGroup": "chest" },
+  { "id": "it_band_and_glute_stretch:band:pow", "muscleGroup": "abductors" },
+  { "id": "jackknife_sit-up::pow", "muscleGroup": "abdominals" },
+  { "id": "janda_sit-up::pow", "muscleGroup": "abdominals" },
+  { "id": "jefferson_squats::pow", "muscleGroup": "quadriceps" },
+  { "id": "jerk_balance::pow", "muscleGroup": "shoulders" },
+  { "id": "jerk_dip_squat::pow", "muscleGroup": "quadriceps" },
+  { "id": "jm_press::pow", "muscleGroup": "triceps" },
+  { "id": "jogging-treadmill::pow", "muscleGroup": "quadriceps" },
+  { "id": "keg_load::pow", "muscleGroup": "lower back" },
+  {
+    "id": "kettlebell_arnold_press:kettlebell:pow",
+    "muscleGroup": "shoulders"
+  },
+  { "id": "kettlebell_dead_clean:kettlebell:pow", "muscleGroup": "hamstrings" },
+  { "id": "kettlebell_figure_8:kettlebell:pow", "muscleGroup": "abdominals" },
+  { "id": "kettlebell_hang_clean:kettlebell:pow", "muscleGroup": "hamstrings" },
+  {
+    "id": "kettlebell_one-legged_deadlift:kettlebell:pow",
+    "muscleGroup": "hamstrings"
+  },
+  {
+    "id": "kettlebell_pass_between_the_legs:kettlebell:pow",
+    "muscleGroup": "abdominals"
+  },
+  {
+    "id": "kettlebell_pirate_ships:kettlebell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "kettlebell_pistol_squat:kettlebell:pow",
+    "muscleGroup": "quadriceps"
+  },
+  {
+    "id": "kettlebell_seated_press:kettlebell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "kettlebell_seesaw_press:kettlebell:pow",
+    "muscleGroup": "shoulders"
+  },
+  { "id": "kettlebell_sumo_high_pull:kettlebell:pow", "muscleGroup": "traps" },
+  { "id": "kettlebell_thruster:kettlebell:pow", "muscleGroup": "shoulders" },
+  {
+    "id": "kettlebell_turkish_get-up_(lunge_style):kettlebell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "kettlebell_turkish_get-up_(squat_style):kettlebell:pow",
+    "muscleGroup": "shoulders"
+  },
+  { "id": "kettlebell_windmill:kettlebell:pow", "muscleGroup": "abdominals" },
+  { "id": "kipping_muscle_up::pow", "muscleGroup": "lats" },
+  { "id": "knee_across_the_body::pow", "muscleGroup": "glutes" },
+  { "id": "knee_circles::pow", "muscleGroup": "calves" },
+  { "id": "knee_tuck_jump::pow", "muscleGroup": "hamstrings" },
+  { "id": "knee/hip_raise_on_parallel_bars::pow", "muscleGroup": "abdominals" },
+  { "id": "kneeling_arm_drill::pow", "muscleGroup": "shoulders" },
+  {
+    "id": "kneeling_cable_crunch_with_alternating_oblique_twists:cable:pow",
+    "muscleGroup": "abdominals"
+  },
+  {
+    "id": "kneeling_cable_triceps_extension:cable:pow",
+    "muscleGroup": "triceps"
+  },
+  { "id": "kneeling_forearm_stretch::pow", "muscleGroup": "forearms" },
+  { "id": "kneeling_high_pulley_row::pow", "muscleGroup": "lats" },
+  { "id": "kneeling_hip_flexor::pow", "muscleGroup": "quadriceps" },
+  { "id": "kneeling_jump_squat::pow", "muscleGroup": "glutes" },
+  { "id": "kneeling_single-arm_high_pulley_row::pow", "muscleGroup": "lats" },
+  { "id": "kneeling_squat::pow", "muscleGroup": "glutes" },
+  { "id": "landmine_180's::pow", "muscleGroup": "abdominals" },
+  { "id": "landmine_linear_jammer::pow", "muscleGroup": "shoulders" },
+  { "id": "lateral_bound::pow", "muscleGroup": "adductors" },
+  { "id": "lateral_box_jump:box:pow", "muscleGroup": "adductors" },
+  { "id": "lateral_cone_hops:cone:pow", "muscleGroup": "adductors" },
+  { "id": "lateral_raise_-_with_bands::pow", "muscleGroup": "shoulders" },
+  { "id": "latissimus_dorsi-smr::pow", "muscleGroup": "lats" },
+  { "id": "leg_extensions::pow", "muscleGroup": "quadriceps" },
+  { "id": "leg_lift::pow", "muscleGroup": "glutes" },
+  { "id": "leg_press::pow", "muscleGroup": "quadriceps" },
+  { "id": "leg_pull-in::pow", "muscleGroup": "abdominals" },
+  { "id": "leg-over_floor_press::pow", "muscleGroup": "chest" },
+  { "id": "leg-up_hamstring_stretch::pow", "muscleGroup": "hamstrings" },
+  { "id": "leverage_chest_press:leverage:pow", "muscleGroup": "chest" },
+  { "id": "leverage_deadlift:leverage:pow", "muscleGroup": "quadriceps" },
+  { "id": "leverage_decline_chest_press:leverage:pow", "muscleGroup": "chest" },
+  { "id": "leverage_high_row:leverage:pow", "muscleGroup": "middle back" },
+  { "id": "leverage_incline_chest_press:leverage:pow", "muscleGroup": "chest" },
+  { "id": "leverage_iso_row:leverage:pow", "muscleGroup": "lats" },
+  { "id": "leverage_shoulder_press:leverage:pow", "muscleGroup": "shoulders" },
+  { "id": "leverage_shrug:leverage:pow", "muscleGroup": "traps" },
+  { "id": "linear_3-part_start_technique::pow", "muscleGroup": "hamstrings" },
+  { "id": "linear_acceleration_wall_drill::pow", "muscleGroup": "hamstrings" },
+  { "id": "linear_depth_jump::pow", "muscleGroup": "quadriceps" },
+  { "id": "log_lift::pow", "muscleGroup": "shoulders" },
+  { "id": "london_bridges::pow", "muscleGroup": "lats" },
+  { "id": "looking_at_ceiling::pow", "muscleGroup": "quadriceps" },
+  { "id": "low_cable_crossover:cable:pow", "muscleGroup": "chest" },
+  { "id": "low_cable_triceps_extension:cable:pow", "muscleGroup": "triceps" },
+  { "id": "low_pulley_row_to_neck::pow", "muscleGroup": "shoulders" },
+  { "id": "lower_back_curl::pow", "muscleGroup": "abdominals" },
+  { "id": "lower_back-smr::pow", "muscleGroup": "lower back" },
+  { "id": "lunge_pass_through::pow", "muscleGroup": "hamstrings" },
+  { "id": "lunge_sprint::pow", "muscleGroup": "quadriceps" },
+  { "id": "lying_bent_leg_groin::pow", "muscleGroup": "adductors" },
+  { "id": "lying_cable_curl:cable:pow", "muscleGroup": "biceps" },
+  {
+    "id": "lying_cambered_barbell_row:barbell:pow",
+    "muscleGroup": "middle back"
+  },
+  {
+    "id": "lying_close-grip_bar_curl_on_high_pulley::pow",
+    "muscleGroup": "biceps"
+  },
+  {
+    "id": "lying_close-grip_barbell_triceps_extension_behind_the_head:barbell:pow",
+    "muscleGroup": "triceps"
+  },
+  {
+    "id": "lying_close-grip_barbell_triceps_press_to_chin:barbell:pow",
+    "muscleGroup": "triceps"
+  },
+  { "id": "lying_crossover::pow", "muscleGroup": "abductors" },
+  {
+    "id": "lying_dumbbell_tricep_extension:dumbbell:pow",
+    "muscleGroup": "triceps"
+  },
+  { "id": "lying_face_down_plate_neck_resistance::pow", "muscleGroup": "neck" },
+  { "id": "lying_face_up_plate_neck_resistance::pow", "muscleGroup": "neck" },
+  { "id": "lying_glute::pow", "muscleGroup": "glutes" },
+  { "id": "lying_hamstring::pow", "muscleGroup": "hamstrings" },
+  {
+    "id": "lying_high_bench_barbell_curl:barbell:pow",
+    "muscleGroup": "biceps"
+  },
+  { "id": "lying_leg_curls::pow", "muscleGroup": "hamstrings" },
+  { "id": "lying_machine_squat::pow", "muscleGroup": "quadriceps" },
+  { "id": "lying_one-arm_lateral_raise::pow", "muscleGroup": "shoulders" },
+  { "id": "lying_prone_quadriceps::pow", "muscleGroup": "quadriceps" },
+  { "id": "lying_rear_delt_raise::pow", "muscleGroup": "shoulders" },
+  { "id": "lying_supine_dumbbell_curl:dumbbell:pow", "muscleGroup": "biceps" },
+  { "id": "lying_t-bar_row::pow", "muscleGroup": "middle back" },
+  { "id": "lying_triceps_press::pow", "muscleGroup": "triceps" },
+  { "id": "machine_bench_press:bench:pow", "muscleGroup": "chest" },
+  { "id": "machine_bicep_curl::pow", "muscleGroup": "biceps" },
+  { "id": "machine_preacher_curls::pow", "muscleGroup": "biceps" },
+  {
+    "id": "machine_shoulder_(military)_press::pow",
+    "muscleGroup": "shoulders"
+  },
+  { "id": "machine_triceps_extension::pow", "muscleGroup": "triceps" },
+  { "id": "medicine_ball_chest_pass:ball:pow", "muscleGroup": "chest" },
+  { "id": "medicine_ball_full_twist:ball:pow", "muscleGroup": "abdominals" },
+  { "id": "medicine_ball_scoop_throw:ball:pow", "muscleGroup": "shoulders" },
+  { "id": "middle_back_shrug::pow", "muscleGroup": "middle back" },
+  { "id": "middle_back_stretch::pow", "muscleGroup": "middle back" },
+  { "id": "mixed_grip_chin::pow", "muscleGroup": "middle back" },
+  { "id": "monster_walk::pow", "muscleGroup": "abductors" },
+  { "id": "mountain_climbers::pow", "muscleGroup": "quadriceps" },
+  { "id": "moving_claw_series::pow", "muscleGroup": "hamstrings" },
+  { "id": "muscle_snatch::pow", "muscleGroup": "hamstrings" },
+  { "id": "muscle_up::pow", "muscleGroup": "lats" },
+  { "id": "narrow_stance_hack_squats::pow", "muscleGroup": "quadriceps" },
+  { "id": "narrow_stance_leg_press::pow", "muscleGroup": "quadriceps" },
+  { "id": "narrow_stance_squats::pow", "muscleGroup": "quadriceps" },
+  { "id": "natural_glute_ham_raise::pow", "muscleGroup": "hamstrings" },
+  { "id": "neck_press::pow", "muscleGroup": "chest" },
+  { "id": "neck-smr::pow", "muscleGroup": "neck" },
+  { "id": "oblique_crunches::pow", "muscleGroup": "abdominals" },
+  { "id": "oblique_crunches_-_on_the_floor::pow", "muscleGroup": "abdominals" },
+  { "id": "olympic_squat::pow", "muscleGroup": "quadriceps" },
+  { "id": "on_your_side_quad_stretch::pow", "muscleGroup": "quadriceps" },
+  { "id": "on-your-back_quad_stretch::pow", "muscleGroup": "quadriceps" },
+  { "id": "one_arm_against_wall::pow", "muscleGroup": "lats" },
+  { "id": "one_arm_chin-up::pow", "muscleGroup": "middle back" },
+  { "id": "one_arm_dumbbell_bench_press:bench:pow", "muscleGroup": "chest" },
+  {
+    "id": "one_arm_dumbbell_preacher_curl:dumbbell:pow",
+    "muscleGroup": "biceps"
+  },
+  { "id": "one_arm_floor_press::pow", "muscleGroup": "triceps" },
+  { "id": "one_arm_lat_pulldown::pow", "muscleGroup": "lats" },
+  {
+    "id": "one_arm_pronated_dumbbell_triceps_extension:dumbbell:pow",
+    "muscleGroup": "triceps"
+  },
+  {
+    "id": "one_arm_supinated_dumbbell_triceps_extension:dumbbell:pow",
+    "muscleGroup": "triceps"
+  },
+  { "id": "one_half_locust::pow", "muscleGroup": "quadriceps" },
+  { "id": "one_handed_hang::pow", "muscleGroup": "lats" },
+  { "id": "one_knee_to_chest::pow", "muscleGroup": "glutes" },
+  { "id": "one_leg_barbell_squat:barbell:pow", "muscleGroup": "quadriceps" },
+  { "id": "one-arm_dumbbell_row:dumbbell:pow", "muscleGroup": "middle back" },
+  {
+    "id": "one-arm_flat_bench_dumbbell_flye:dumbbell:pow",
+    "muscleGroup": "chest"
+  },
+  {
+    "id": "one-arm_high-pulley_cable_side_bends:cable:pow",
+    "muscleGroup": "abdominals"
+  },
+  { "id": "one-arm_incline_lateral_raise::pow", "muscleGroup": "shoulders" },
+  {
+    "id": "one-arm_kettlebell_clean:kettlebell:pow",
+    "muscleGroup": "hamstrings"
+  },
+  {
+    "id": "one-arm_kettlebell_clean_and_jerk:kettlebell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "one-arm_kettlebell_floor_press:kettlebell:pow",
+    "muscleGroup": "chest"
+  },
+  {
+    "id": "one-arm_kettlebell_jerk:kettlebell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "one-arm_kettlebell_military_press_to_the_side:kettlebell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "one-arm_kettlebell_para_press:kettlebell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "one-arm_kettlebell_push_press:kettlebell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "one-arm_kettlebell_row:kettlebell:pow",
+    "muscleGroup": "middle back"
+  },
+  {
+    "id": "one-arm_kettlebell_snatch:kettlebell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "one-arm_kettlebell_split_jerk:kettlebell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "one-arm_kettlebell_split_snatch:kettlebell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "one-arm_kettlebell_swings:kettlebell:pow",
+    "muscleGroup": "hamstrings"
+  },
+  { "id": "one-arm_long_bar_row::pow", "muscleGroup": "middle back" },
+  { "id": "one-arm_medicine_ball_slam:ball:pow", "muscleGroup": "abdominals" },
+  {
+    "id": "one-arm_open_palm_kettlebell_clean:kettlebell:pow",
+    "muscleGroup": "hamstrings"
+  },
+  {
+    "id": "one-arm_overhead_kettlebell_squats:kettlebell:pow",
+    "muscleGroup": "quadriceps"
+  },
+  { "id": "one-arm_side_deadlift::pow", "muscleGroup": "quadriceps" },
+  { "id": "one-arm_side_laterals::pow", "muscleGroup": "shoulders" },
+  { "id": "one-legged_cable_kickback:cable:pow", "muscleGroup": "glutes" },
+  {
+    "id": "open_palm_kettlebell_clean:kettlebell:pow",
+    "muscleGroup": "hamstrings"
+  },
+  { "id": "otis-up::pow", "muscleGroup": "abdominals" },
+  { "id": "overhead_cable_curl:cable:pow", "muscleGroup": "biceps" },
+  { "id": "overhead_lat::pow", "muscleGroup": "lats" },
+  { "id": "overhead_slam::pow", "muscleGroup": "lats" },
+  { "id": "overhead_squat::pow", "muscleGroup": "quadriceps" },
+  { "id": "overhead_stretch::pow", "muscleGroup": "abdominals" },
+  { "id": "overhead_triceps::pow", "muscleGroup": "triceps" },
+  { "id": "pallof_press_with_rotation::pow", "muscleGroup": "abdominals" },
+  {
+    "id": "palms-down_dumbbell_wrist_curl_over_a_bench:bench:pow",
+    "muscleGroup": "forearms"
+  },
+  {
+    "id": "palms-down_wrist_curl_over_a_bench:bench:pow",
+    "muscleGroup": "forearms"
+  },
+  {
+    "id": "palms-up_barbell_wrist_curl_over_a_bench:bench:pow",
+    "muscleGroup": "forearms"
+  },
+  {
+    "id": "palms-up_dumbbell_wrist_curl_over_a_bench:bench:pow",
+    "muscleGroup": "forearms"
+  },
+  { "id": "parallel_bar_dip::pow", "muscleGroup": "triceps" },
+  { "id": "pelvic_tilt_into_bridge::pow", "muscleGroup": "lower back" },
+  { "id": "peroneals_stretch::pow", "muscleGroup": "calves" },
+  { "id": "peroneals-smr::pow", "muscleGroup": "calves" },
+  { "id": "physioball_hip_bridge::pow", "muscleGroup": "glutes" },
+  { "id": "pin_presses::pow", "muscleGroup": "triceps" },
+  { "id": "piriformis-smr::pow", "muscleGroup": "glutes" },
+  { "id": "plank::pow", "muscleGroup": "abdominals" },
+  { "id": "plank_with_twist::pow", "muscleGroup": "" },
+  { "id": "plate_pinch::pow", "muscleGroup": "forearms" },
+  { "id": "plate_twist::pow", "muscleGroup": "abdominals" },
+  { "id": "platform_hamstring_slides::pow", "muscleGroup": "hamstrings" },
+  { "id": "plie_dumbbell_squat:dumbbell:pow", "muscleGroup": "quadriceps" },
+  { "id": "plyo_kettlebell_pushups:kettlebell:pow", "muscleGroup": "chest" },
+  { "id": "plyo_push-up::pow", "muscleGroup": "chest" },
+  { "id": "posterior_tibialis_stretch::pow", "muscleGroup": "calves" },
+  { "id": "power_clean::pow", "muscleGroup": "hamstrings" },
+  { "id": "power_clean_from_blocks::pow", "muscleGroup": "hamstrings" },
+  { "id": "power_jerk::pow", "muscleGroup": "quadriceps" },
+  { "id": "power_partials::pow", "muscleGroup": "shoulders" },
+  { "id": "power_snatch::pow", "muscleGroup": "hamstrings" },
+  { "id": "power_snatch_from_blocks::pow", "muscleGroup": "quadriceps" },
+  { "id": "power_stairs::pow", "muscleGroup": "hamstrings" },
+  { "id": "preacher_curl::pow", "muscleGroup": "biceps" },
+  {
+    "id": "preacher_hammer_dumbbell_curl:dumbbell:pow",
+    "muscleGroup": "biceps"
+  },
+  { "id": "press_sit-up::pow", "muscleGroup": "abdominals" },
+  { "id": "prone_manual_hamstring::pow", "muscleGroup": "hamstrings" },
+  { "id": "prowler_sprint::pow", "muscleGroup": "hamstrings" },
+  { "id": "pull_through::pow", "muscleGroup": "glutes" },
+  { "id": "pullups::pow", "muscleGroup": "lats" },
+  { "id": "push_press::pow", "muscleGroup": "shoulders" },
+  { "id": "push_press_-_behind_the_neck::pow", "muscleGroup": "shoulders" },
+  { "id": "push_up_to_side_plank::pow", "muscleGroup": "chest" },
+  { "id": "push-up_wide::pow", "muscleGroup": "chest" },
+  { "id": "push-ups_-_close_triceps_position::pow", "muscleGroup": "triceps" },
+  { "id": "push-ups_with_feet_elevated::pow", "muscleGroup": "chest" },
+  {
+    "id": "push-ups_with_feet_on_an_exercise_ball:ball:pow",
+    "muscleGroup": "chest"
+  },
+  { "id": "pushups::pow", "muscleGroup": "chest" },
+  {
+    "id": "pushups_(close_and_wide_hand_positions)::pow",
+    "muscleGroup": "chest"
+  },
+  { "id": "pyramid::pow", "muscleGroup": "lower back" },
+  { "id": "quad_stretch::pow", "muscleGroup": "quadriceps" },
+  { "id": "quadriceps-smr::pow", "muscleGroup": "quadriceps" },
+  { "id": "quick_leap::pow", "muscleGroup": "quadriceps" },
+  { "id": "rack_delivery::pow", "muscleGroup": "shoulders" },
+  { "id": "rack_pull_with_bands::pow", "muscleGroup": "lower back" },
+  { "id": "rack_pulls::pow", "muscleGroup": "lower back" },
+  { "id": "rear_leg_raises::pow", "muscleGroup": "quadriceps" },
+  { "id": "recumbent_bike::pow", "muscleGroup": "quadriceps" },
+  { "id": "return_push_from_stance::pow", "muscleGroup": "shoulders" },
+  { "id": "reverse_band_bench_press:bench:pow", "muscleGroup": "triceps" },
+  { "id": "reverse_band_box_squat:box:pow", "muscleGroup": "quadriceps" },
+  { "id": "reverse_band_deadlift:band:pow", "muscleGroup": "lower back" },
+  { "id": "reverse_band_power_squat:band:pow", "muscleGroup": "quadriceps" },
+  { "id": "reverse_band_sumo_deadlift:band:pow", "muscleGroup": "hamstrings" },
+  { "id": "reverse_barbell_curl:barbell:pow", "muscleGroup": "biceps" },
+  {
+    "id": "reverse_barbell_preacher_curls:barbell:pow",
+    "muscleGroup": "biceps"
+  },
+  { "id": "reverse_cable_curl:cable:pow", "muscleGroup": "biceps" },
+  { "id": "reverse_crunch::pow", "muscleGroup": "abdominals" },
+  { "id": "reverse_flyes::pow", "muscleGroup": "shoulders" },
+  {
+    "id": "reverse_flyes_with_external_rotation::pow",
+    "muscleGroup": "shoulders"
+  },
+  { "id": "reverse_grip_bent-over_rows::pow", "muscleGroup": "middle back" },
+  { "id": "reverse_grip_triceps_pushdown::pow", "muscleGroup": "triceps" },
+  { "id": "reverse_hyperextension::pow", "muscleGroup": "hamstrings" },
+  { "id": "reverse_machine_flyes::pow", "muscleGroup": "shoulders" },
+  { "id": "reverse_plate_curls::pow", "muscleGroup": "biceps" },
+  { "id": "reverse_triceps_bench_press:bench:pow", "muscleGroup": "triceps" },
+  { "id": "rhomboids-smr::pow", "muscleGroup": "middle back" },
+  { "id": "rickshaw_carry::pow", "muscleGroup": "forearms" },
+  { "id": "rickshaw_deadlift::pow", "muscleGroup": "quadriceps" },
+  { "id": "ring_dips::pow", "muscleGroup": "triceps" },
+  { "id": "rocket_jump::pow", "muscleGroup": "quadriceps" },
+  { "id": "rocking_standing_calf_raise::pow", "muscleGroup": "calves" },
+  { "id": "rocky_pull-ups/pulldowns::pow", "muscleGroup": "lats" },
+  { "id": "romanian_deadlift::pow", "muscleGroup": "hamstrings" },
+  { "id": "romanian_deadlift_from_deficit::pow", "muscleGroup": "hamstrings" },
+  { "id": "rope_climb::pow", "muscleGroup": "lats" },
+  { "id": "rope_crunch::pow", "muscleGroup": "abdominals" },
+  { "id": "rope_jumping::pow", "muscleGroup": "quadriceps" },
+  { "id": "rope_straight-arm_pulldown::pow", "muscleGroup": "lats" },
+  { "id": "round_the_world_shoulder_stretch::pow", "muscleGroup": "shoulders" },
+  { "id": "rowing::pow", "muscleGroup": "stationary" },
+  { "id": "runner's_stretch::pow", "muscleGroup": "hamstrings" },
+  { "id": "running::pow", "muscleGroup": "treadmill" },
+  { "id": "russian_twist::pow", "muscleGroup": "abdominals" },
+  { "id": "sandbag_load::pow", "muscleGroup": "quadriceps" },
+  { "id": "scapular_pull-up::pow", "muscleGroup": "traps" },
+  { "id": "scissor_kick::pow", "muscleGroup": "abdominals" },
+  { "id": "scissors_jump::pow", "muscleGroup": "quadriceps" },
+  { "id": "seated_band_hamstring_curl:band:pow", "muscleGroup": "hamstrings" },
+  {
+    "id": "seated_barbell_military_press:barbell:pow",
+    "muscleGroup": "shoulders"
+  },
+  { "id": "seated_barbell_twist:barbell:pow", "muscleGroup": "abdominals" },
+  {
+    "id": "seated_bent-over_one-arm_dumbbell_triceps_extension:dumbbell:pow",
+    "muscleGroup": "triceps"
+  },
+  { "id": "seated_bent-over_rear_delt_raise::pow", "muscleGroup": "shoulders" },
+  {
+    "id": "seated_bent-over_two-arm_dumbbell_triceps_extension:dumbbell:pow",
+    "muscleGroup": "triceps"
+  },
+  { "id": "seated_biceps::pow", "muscleGroup": "biceps" },
+  { "id": "seated_cable_rows:cable:pow", "muscleGroup": "middle back" },
+  { "id": "seated_cable_shoulder_press:cable:pow", "muscleGroup": "shoulders" },
+  { "id": "seated_calf_raise::pow", "muscleGroup": "calves" },
+  { "id": "seated_calf_stretch::pow", "muscleGroup": "calves" },
+  {
+    "id": "seated_close-grip_concentration_barbell_curl:barbell:pow",
+    "muscleGroup": "biceps"
+  },
+  { "id": "seated_dumbbell_curl:dumbbell:pow", "muscleGroup": "biceps" },
+  {
+    "id": "seated_dumbbell_inner_biceps_curl:dumbbell:pow",
+    "muscleGroup": "biceps"
+  },
+  {
+    "id": "seated_dumbbell_palms-down_wrist_curl:dumbbell:pow",
+    "muscleGroup": "forearms"
+  },
+  {
+    "id": "seated_dumbbell_palms-up_wrist_curl:dumbbell:pow",
+    "muscleGroup": "forearms"
+  },
+  { "id": "seated_dumbbell_press:dumbbell:pow", "muscleGroup": "shoulders" },
+  {
+    "id": "seated_flat_bench_leg_pull-in:bench:pow",
+    "muscleGroup": "abdominals"
+  },
+  { "id": "seated_floor_hamstring_stretch::pow", "muscleGroup": "hamstrings" },
+  { "id": "seated_front_deltoid::pow", "muscleGroup": "shoulders" },
+  { "id": "seated_glute::pow", "muscleGroup": "glutes" },
+  { "id": "seated_good_mornings::pow", "muscleGroup": "lower back" },
+  { "id": "seated_hamstring::pow", "muscleGroup": "hamstrings" },
+  {
+    "id": "seated_hamstring_and_calf_stretch::pow",
+    "muscleGroup": "hamstrings"
+  },
+  { "id": "seated_head_harness_neck_resistance::pow", "muscleGroup": "neck" },
+  { "id": "seated_leg_curl::pow", "muscleGroup": "hamstrings" },
+  { "id": "seated_leg_tucks::pow", "muscleGroup": "abdominals" },
+  {
+    "id": "seated_one-arm_cable_pulley_rows:cable:pow",
+    "muscleGroup": "middle back"
+  },
+  {
+    "id": "seated_one-arm_dumbbell_palms-down_wrist_curl:dumbbell:pow",
+    "muscleGroup": "forearms"
+  },
+  {
+    "id": "seated_one-arm_dumbbell_palms-up_wrist_curl:dumbbell:pow",
+    "muscleGroup": "forearms"
+  },
+  { "id": "seated_overhead_stretch::pow", "muscleGroup": "abdominals" },
+  {
+    "id": "seated_palm-up_barbell_wrist_curl:barbell:pow",
+    "muscleGroup": "forearms"
+  },
+  {
+    "id": "seated_palms-down_barbell_wrist_curl:barbell:pow",
+    "muscleGroup": "forearms"
+  },
+  { "id": "seated_side_lateral_raise::pow", "muscleGroup": "shoulders" },
+  { "id": "seated_triceps_press::pow", "muscleGroup": "triceps" },
+  {
+    "id": "seated_two-arm_palms-up_low-pulley_wrist_curl::pow",
+    "muscleGroup": "forearms"
+  },
+  {
+    "id": "see-saw_press_(alternating_side_press)::pow",
+    "muscleGroup": "shoulders"
+  },
+  { "id": "shotgun_row::pow", "muscleGroup": "lats" },
+  { "id": "shoulder_circles::pow", "muscleGroup": "shoulders" },
+  { "id": "shoulder_press_-_with_bands::pow", "muscleGroup": "shoulders" },
+  { "id": "shoulder_raise::pow", "muscleGroup": "shoulders" },
+  { "id": "shoulder_stretch::pow", "muscleGroup": "shoulders" },
+  { "id": "side_bridge::pow", "muscleGroup": "abdominals" },
+  { "id": "side_hop-sprint::pow", "muscleGroup": "quadriceps" },
+  { "id": "side_jackknife::pow", "muscleGroup": "abdominals" },
+  { "id": "side_lateral_raise::pow", "muscleGroup": "shoulders" },
+  { "id": "side_laterals_to_front_raise::pow", "muscleGroup": "shoulders" },
+  { "id": "side_leg_raises::pow", "muscleGroup": "adductors" },
+  { "id": "side_lying_groin_stretch::pow", "muscleGroup": "adductors" },
+  { "id": "side_neck_stretch::pow", "muscleGroup": "neck" },
+  { "id": "side_standing_long_jump::pow", "muscleGroup": "quadriceps" },
+  { "id": "side_to_side_box_shuffle:box:pow", "muscleGroup": "quadriceps" },
+  { "id": "side_to_side_chins::pow", "muscleGroup": "lats" },
+  { "id": "side_wrist_pull::pow", "muscleGroup": "shoulders" },
+  { "id": "side-lying_floor_stretch::pow", "muscleGroup": "lats" },
+  { "id": "single_dumbbell_raise:dumbbell:pow", "muscleGroup": "shoulders" },
+  { "id": "single_leg_butt_kick::pow", "muscleGroup": "quadriceps" },
+  { "id": "single_leg_glute_bridge::pow", "muscleGroup": "glutes" },
+  { "id": "single_leg_push-off::pow", "muscleGroup": "quadriceps" },
+  { "id": "single-arm_cable_crossover:cable:pow", "muscleGroup": "chest" },
+  { "id": "single-arm_linear_jammer::pow", "muscleGroup": "shoulders" },
+  { "id": "single-arm_push-up::pow", "muscleGroup": "chest" },
+  { "id": "single-cone_sprint_drill::pow", "muscleGroup": "quadriceps" },
+  { "id": "single-leg_high_box_squat:box:pow", "muscleGroup": "quadriceps" },
+  { "id": "single-leg_hop_progression::pow", "muscleGroup": "quadriceps" },
+  { "id": "single-leg_lateral_hop::pow", "muscleGroup": "quadriceps" },
+  { "id": "single-leg_leg_extension::pow", "muscleGroup": "quadriceps" },
+  { "id": "single-leg_stride_jump::pow", "muscleGroup": "quadriceps" },
+  { "id": "sit_squats::pow", "muscleGroup": "quadriceps" },
+  { "id": "sit-up::pow", "muscleGroup": "abdominals" },
+  { "id": "skating::pow", "muscleGroup": "quadriceps" },
+  { "id": "sled_drag_-_harness::pow", "muscleGroup": "quadriceps" },
+  { "id": "sled_overhead_backward_walk::pow", "muscleGroup": "shoulders" },
+  { "id": "sled_overhead_triceps_extension::pow", "muscleGroup": "triceps" },
+  { "id": "sled_push::pow", "muscleGroup": "quadriceps" },
+  { "id": "sled_reverse_flye::pow", "muscleGroup": "shoulders" },
+  { "id": "sled_row::pow", "muscleGroup": "middle back" },
+  { "id": "sledgehammer_swings::pow", "muscleGroup": "abdominals" },
+  { "id": "smith_incline_shoulder_raise::pow", "muscleGroup": "shoulders" },
+  { "id": "smith-machine_behind_the_back_shrug::pow", "muscleGroup": "traps" },
+  { "id": "smith-machine_bench_press:bench:pow", "muscleGroup": "chest" },
+  { "id": "smith-machine_bent_over_row::pow", "muscleGroup": "middle back" },
+  { "id": "smith-machine_calf_raise::pow", "muscleGroup": "calves" },
+  {
+    "id": "smith-machine_close-grip_bench_press:bench:pow",
+    "muscleGroup": "triceps"
+  },
+  { "id": "smith-machine_decline_press::pow", "muscleGroup": "chest" },
+  { "id": "smith-machine_hang_power_clean::pow", "muscleGroup": "hamstrings" },
+  { "id": "smith-machine_hip_raise::pow", "muscleGroup": "abdominals" },
+  {
+    "id": "smith-machine_incline_bench_press:bench:pow",
+    "muscleGroup": "chest"
+  },
+  { "id": "smith-machine_leg_press::pow", "muscleGroup": "quadriceps" },
+  {
+    "id": "smith-machine_one-arm_upright_row::pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "smith-machine_overhead_shoulder_press::pow",
+    "muscleGroup": "shoulders"
+  },
+  { "id": "smith-machine_pistol_squat::pow", "muscleGroup": "quadriceps" },
+  { "id": "smith-machine_reverse_calf_raises::pow", "muscleGroup": "calves" },
+  { "id": "smith-machine_shrug::pow", "muscleGroup": "traps" },
+  { "id": "smith-machine_squat::pow", "muscleGroup": "quadriceps" },
+  {
+    "id": "smith-machine_stiff-legged_deadlift::pow",
+    "muscleGroup": "hamstrings"
+  },
+  { "id": "smith-machine_upright_row::pow", "muscleGroup": "traps" },
+  { "id": "smith_single-leg_split_squat::pow", "muscleGroup": "quadriceps" },
+  { "id": "snatch::pow", "muscleGroup": "quadriceps" },
+  { "id": "snatch_balance::pow", "muscleGroup": "quadriceps" },
+  { "id": "snatch_deadlift::pow", "muscleGroup": "hamstrings" },
+  { "id": "snatch_from_blocks::pow", "muscleGroup": "quadriceps" },
+  { "id": "snatch_pull::pow", "muscleGroup": "hamstrings" },
+  { "id": "snatch_shrug::pow", "muscleGroup": "traps" },
+  { "id": "speed_band_overhead_triceps:band:pow", "muscleGroup": "triceps" },
+  { "id": "speed_band_pushdown:band:pow", "muscleGroup": "triceps" },
+  { "id": "speed_box_squat:box:pow", "muscleGroup": "quadriceps" },
+  { "id": "speed_squats::pow", "muscleGroup": "quadriceps" },
+  { "id": "spell_caster::pow", "muscleGroup": "abdominals" },
+  { "id": "spider_crawl::pow", "muscleGroup": "abdominals" },
+  { "id": "spider_curl::pow", "muscleGroup": "biceps" },
+  { "id": "spinal_stretch::pow", "muscleGroup": "middle back" },
+  { "id": "split_clean::pow", "muscleGroup": "quadriceps" },
+  { "id": "split_jerk::pow", "muscleGroup": "quadriceps" },
+  { "id": "split_jump::pow", "muscleGroup": "quadriceps" },
+  { "id": "split_snatch::pow", "muscleGroup": "hamstrings" },
+  {
+    "id": "split_squat_with_dumbbells:dumbbells:pow",
+    "muscleGroup": "quadriceps"
+  },
+  { "id": "split_squats::pow", "muscleGroup": "hamstrings" },
+  { "id": "squat_jerk::pow", "muscleGroup": "quadriceps" },
+  { "id": "squat_with_bands::pow", "muscleGroup": "quadriceps" },
+  { "id": "squat_with_chains::pow", "muscleGroup": "quadriceps" },
+  { "id": "squat_with_plate_movers::pow", "muscleGroup": "quadriceps" },
+  { "id": "squats_-_with_bands::pow", "muscleGroup": "quadriceps" },
+  { "id": "stairmaster::pow", "muscleGroup": "quadriceps" },
+  {
+    "id": "standing_alternating_dumbbell_press:dumbbell:pow",
+    "muscleGroup": "shoulders"
+  },
+  { "id": "standing_barbell_calf_raise:barbell:pow", "muscleGroup": "calves" },
+  {
+    "id": "standing_barbell_press_behind_neck:barbell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "standing_bent-over_one-arm_dumbbell_triceps_extension:dumbbell:pow",
+    "muscleGroup": "triceps"
+  },
+  {
+    "id": "standing_bent-over_two-arm_dumbbell_triceps_extension:dumbbell:pow",
+    "muscleGroup": "triceps"
+  },
+  { "id": "standing_biceps_cable_curl:cable:pow", "muscleGroup": "biceps" },
+  { "id": "standing_biceps_stretch::pow", "muscleGroup": "biceps" },
+  { "id": "standing_bradford_press::pow", "muscleGroup": "shoulders" },
+  { "id": "standing_cable_chest_press:cable:pow", "muscleGroup": "chest" },
+  { "id": "standing_cable_lift:cable:pow", "muscleGroup": "abdominals" },
+  { "id": "standing_cable_wood_chop:cable:pow", "muscleGroup": "abdominals" },
+  { "id": "standing_calf_raises::pow", "muscleGroup": "calves" },
+  { "id": "standing_concentration_curl::pow", "muscleGroup": "biceps" },
+  {
+    "id": "standing_dumbbell_calf_raise:dumbbell:pow",
+    "muscleGroup": "calves"
+  },
+  { "id": "standing_dumbbell_press:dumbbell:pow", "muscleGroup": "shoulders" },
+  {
+    "id": "standing_dumbbell_reverse_curl:dumbbell:pow",
+    "muscleGroup": "biceps"
+  },
+  {
+    "id": "standing_dumbbell_straight-arm_front_delt_raise_above_head:dumbbell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "standing_dumbbell_triceps_extension:dumbbell:pow",
+    "muscleGroup": "triceps"
+  },
+  {
+    "id": "standing_dumbbell_upright_row:dumbbell:pow",
+    "muscleGroup": "traps"
+  },
+  { "id": "standing_elevated_quad_stretch::pow", "muscleGroup": "quadriceps" },
+  {
+    "id": "standing_front_barbell_raise_over_head:barbell:pow",
+    "muscleGroup": "shoulders"
+  },
+  { "id": "standing_gastrocnemius_calf_stretch::pow", "muscleGroup": "calves" },
+  {
+    "id": "standing_hamstring_and_calf_stretch::pow",
+    "muscleGroup": "hamstrings"
+  },
+  { "id": "standing_hip_circles::pow", "muscleGroup": "abductors" },
+  { "id": "standing_hip_flexors::pow", "muscleGroup": "quadriceps" },
+  { "id": "standing_inner-biceps_curl::pow", "muscleGroup": "biceps" },
+  { "id": "standing_lateral_stretch::pow", "muscleGroup": "abdominals" },
+  { "id": "standing_leg_curl::pow", "muscleGroup": "hamstrings" },
+  { "id": "standing_long_jump::pow", "muscleGroup": "quadriceps" },
+  {
+    "id": "standing_low-pulley_deltoid_raise::pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "standing_low-pulley_one-arm_triceps_extension::pow",
+    "muscleGroup": "triceps"
+  },
+  { "id": "standing_military_press::pow", "muscleGroup": "shoulders" },
+  {
+    "id": "standing_olympic_plate_hand_squeeze::pow",
+    "muscleGroup": "forearms"
+  },
+  { "id": "standing_one-arm_cable_curl:cable:pow", "muscleGroup": "biceps" },
+  {
+    "id": "standing_one-arm_dumbbell_curl_over_incline_bench:bench:pow",
+    "muscleGroup": "biceps"
+  },
+  {
+    "id": "standing_one-arm_dumbbell_triceps_extension:dumbbell:pow",
+    "muscleGroup": "triceps"
+  },
+  {
+    "id": "standing_overhead_barbell_triceps_extension:barbell:pow",
+    "muscleGroup": "triceps"
+  },
+  {
+    "id": "standing_palm-in_one-arm_dumbbell_press:dumbbell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "standing_palms-in_dumbbell_press:dumbbell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "standing_palms-up_barbell_behind_the_back_wrist_curl:barbell:pow",
+    "muscleGroup": "forearms"
+  },
+  { "id": "standing_pelvic_tilt::pow", "muscleGroup": "lower back" },
+  { "id": "standing_rope_crunch::pow", "muscleGroup": "abdominals" },
+  {
+    "id": "standing_soleus_and_achilles_stretch::pow",
+    "muscleGroup": "calves"
+  },
+  { "id": "standing_toe_touches::pow", "muscleGroup": "hamstrings" },
+  { "id": "standing_towel_triceps_extension::pow", "muscleGroup": "triceps" },
+  { "id": "standing_two-arm_overhead_throw::pow", "muscleGroup": "shoulders" },
+  { "id": "star_jump::pow", "muscleGroup": "quadriceps" },
+  { "id": "step_mill::pow", "muscleGroup": "quadriceps" },
+  { "id": "step-up_with_knee_raise::pow", "muscleGroup": "glutes" },
+  {
+    "id": "stiff_leg_barbell_good_morning:barbell:pow",
+    "muscleGroup": "lower back"
+  },
+  {
+    "id": "stiff-legged_barbell_deadlift:barbell:pow",
+    "muscleGroup": "hamstrings"
+  },
+  {
+    "id": "stiff-legged_dumbbell_deadlift:dumbbell:pow",
+    "muscleGroup": "hamstrings"
+  },
+  { "id": "stomach_vacuum::pow", "muscleGroup": "abdominals" },
+  {
+    "id": "straight_bar_bench_mid_rows:bench:pow",
+    "muscleGroup": "middle back"
+  },
+  {
+    "id": "straight_raises_on_incline_bench:bench:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "straight-arm_dumbbell_pullover:dumbbell:pow",
+    "muscleGroup": "chest"
+  },
+  { "id": "straight-arm_pulldown::pow", "muscleGroup": "lats" },
+  { "id": "stride_jump_crossover::pow", "muscleGroup": "quadriceps" },
+  { "id": "sumo_deadlift::pow", "muscleGroup": "hamstrings" },
+  { "id": "sumo_deadlift_with_bands::pow", "muscleGroup": "hamstrings" },
+  { "id": "sumo_deadlift_with_chains::pow", "muscleGroup": "hamstrings" },
+  { "id": "superman::pow", "muscleGroup": "lower back" },
+  { "id": "supine_chest_throw::pow", "muscleGroup": "triceps" },
+  { "id": "supine_one-arm_overhead_throw::pow", "muscleGroup": "abdominals" },
+  { "id": "supine_two-arm_overhead_throw::pow", "muscleGroup": "abdominals" },
+  { "id": "suspended_push-up::pow", "muscleGroup": "chest" },
+  { "id": "suspended_reverse_crunch::pow", "muscleGroup": "abdominals" },
+  { "id": "suspended_row::pow", "muscleGroup": "middle back" },
+  { "id": "suspended_split_squat::pow", "muscleGroup": "quadriceps" },
+  { "id": "t-bar_row_with_handle::pow", "muscleGroup": "middle back" },
+  { "id": "tate_press::pow", "muscleGroup": "triceps" },
+  { "id": "the_straddle::pow", "muscleGroup": "hamstrings" },
+  { "id": "thigh_abductor::pow", "muscleGroup": "abductors" },
+  { "id": "thigh_adductor::pow", "muscleGroup": "adductors" },
+  { "id": "tire_flip::pow", "muscleGroup": "quadriceps" },
+  { "id": "toe_touchers::pow", "muscleGroup": "abdominals" },
+  { "id": "torso_rotation::pow", "muscleGroup": "abdominals" },
+  { "id": "trail_running/walking::pow", "muscleGroup": "quadriceps" },
+  { "id": "trap_bar_deadlift::pow", "muscleGroup": "quadriceps" },
+  { "id": "tricep_dumbbell_kickback:dumbbell:pow", "muscleGroup": "triceps" },
+  { "id": "tricep_side_stretch::pow", "muscleGroup": "triceps" },
+  {
+    "id": "triceps_overhead_extension_with_rope::pow",
+    "muscleGroup": "triceps"
+  },
+  { "id": "triceps_pushdown::pow", "muscleGroup": "triceps" },
+  { "id": "triceps_pushdown_-_rope_attachment::pow", "muscleGroup": "triceps" },
+  {
+    "id": "triceps_pushdown_-_v-bar_attachment::pow",
+    "muscleGroup": "triceps"
+  },
+  { "id": "triceps_stretch::pow", "muscleGroup": "triceps" },
+  { "id": "tuck_crunch::pow", "muscleGroup": "abdominals" },
+  {
+    "id": "two-arm_dumbbell_preacher_curl:dumbbell:pow",
+    "muscleGroup": "biceps"
+  },
+  {
+    "id": "two-arm_kettlebell_clean:kettlebell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "two-arm_kettlebell_jerk:kettlebell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "two-arm_kettlebell_military_press:kettlebell:pow",
+    "muscleGroup": "shoulders"
+  },
+  {
+    "id": "two-arm_kettlebell_row:kettlebell:pow",
+    "muscleGroup": "middle back"
+  },
+  { "id": "underhand_cable_pulldowns:cable:pow", "muscleGroup": "lats" },
+  { "id": "upper_back_stretch::pow", "muscleGroup": "middle back" },
+  { "id": "upper_back-leg_grab::pow", "muscleGroup": "hamstrings" },
+  { "id": "upright_barbell_row:barbell:pow", "muscleGroup": "shoulders" },
+  { "id": "upright_cable_row:cable:pow", "muscleGroup": "traps" },
+  { "id": "upright_row_-_with_bands::pow", "muscleGroup": "traps" },
+  { "id": "upward_stretch::pow", "muscleGroup": "shoulders" },
+  { "id": "v-bar_pulldown::pow", "muscleGroup": "lats" },
+  { "id": "v-bar_pullup::pow", "muscleGroup": "lats" },
+  { "id": "vertical_swing::pow", "muscleGroup": "hamstrings" },
+  { "id": "walking::pow", "muscleGroup": "treadmill" },
+  {
+    "id": "weighted_ball_hyperextension:ball:pow",
+    "muscleGroup": "lower back"
+  },
+  { "id": "weighted_ball_side_bend:ball:pow", "muscleGroup": "abdominals" },
+  { "id": "weighted_bench_dip:bench:pow", "muscleGroup": "triceps" },
+  { "id": "weighted_crunches::pow", "muscleGroup": "abdominals" },
+  { "id": "weighted_jump_squat::pow", "muscleGroup": "quadriceps" },
+  { "id": "weighted_pull_ups::pow", "muscleGroup": "lats" },
+  { "id": "weighted_sissy_squat::pow", "muscleGroup": "quadriceps" },
+  { "id": "weighted_sit-ups_-_with_bands::pow", "muscleGroup": "abdominals" },
+  { "id": "weighted_squat::pow", "muscleGroup": "quadriceps" },
+  {
+    "id": "wide_stance_barbell_squat:barbell:pow",
+    "muscleGroup": "quadriceps"
+  },
+  { "id": "wide_stance_stiff_legs::pow", "muscleGroup": "hamstrings" },
+  { "id": "wide-grip_barbell_bench_press:bench:pow", "muscleGroup": "chest" },
+  {
+    "id": "wide-grip_decline_barbell_bench_press:bench:pow",
+    "muscleGroup": "chest"
+  },
+  {
+    "id": "wide-grip_decline_barbell_pullover:barbell:pow",
+    "muscleGroup": "chest"
+  },
+  { "id": "wide-grip_lat_pulldown::pow", "muscleGroup": "lats" },
+  { "id": "wide-grip_pulldown_behind_the_neck::pow", "muscleGroup": "lats" },
+  { "id": "wide-grip_rear_pull-up::pow", "muscleGroup": "lats" },
+  {
+    "id": "wide-grip_standing_barbell_curl:barbell:pow",
+    "muscleGroup": "biceps"
+  },
+  { "id": "wind_sprints::pow", "muscleGroup": "abdominals" },
+  { "id": "windmills::pow", "muscleGroup": "abductors" },
+  { "id": "world's_greatest_stretch::pow", "muscleGroup": "hamstrings" },
+  { "id": "wrist_circles::pow", "muscleGroup": "forearms" },
+  { "id": "wrist_roller::pow", "muscleGroup": "forearms" },
+  { "id": "wrist_rotations_with_straight_bar::pow", "muscleGroup": "forearms" },
+  { "id": "yoke_walk::pow", "muscleGroup": "quadriceps" },
+  { "id": "zercher_squats::pow", "muscleGroup": "quadriceps" },
+  { "id": "zottman_curl::pow", "muscleGroup": "biceps" },
+  { "id": "zottman_preacher_curl::pow", "muscleGroup": "biceps" }
+]
