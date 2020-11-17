@@ -159,7 +159,7 @@ private extension TrackWorkout {
                 }.buttonStyle(BorderlessButtonStyle())
                 Button(action: {
                     self.appState.trackingData.currentRound = self.appState.trackingData.workout.rounds.firstIndex(of: round)!
-                    self.viewModel.curExIdx = 0
+                    self.appState.trackingData.curExIdx = 0
                     self.appState.routing.trackWorkout.showAddRoundActionSheet()
                 }) {
                     HStack {

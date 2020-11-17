@@ -29,6 +29,7 @@ extension AppState {
         var startTime: Double = 0
         var currentRound = 0
         var addExAfterIdx = 0
+        var curExIdx = 0
         
         mutating func reset() {
             self.workout = Workout()
@@ -36,6 +37,7 @@ extension AppState {
             self.startTime = 0
             self.currentRound = 0
             self.addExAfterIdx = 0
+            self.curExIdx = 0
         }
     }
 }

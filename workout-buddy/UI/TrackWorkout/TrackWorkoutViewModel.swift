@@ -73,7 +73,6 @@ extension TrackWorkout {
         
         // State
         @Published var isWorkoutSelected: Bool
-        @Published var curExIdx = 0
         
         // Misc
         let appState: AppState
@@ -91,23 +90,23 @@ extension TrackWorkout {
             if (!self.appState.trackingData.workoutStarted) { self.startWorkout() }
             
             // Start new round
-            if (self.curExIdx + 1 >= self.appState.trackingData.workout.rounds[self.appState.trackingData.currentRound].sets.count) {
+            if (self.appState.trackingData.curExIdx + 1 >= self.appState.trackingData.workout.rounds[self.appState.trackingData.currentRound].sets.count) {
                 
                 // Continue to the next round
                 if (self.appState.trackingData.currentRound + 1 < self.appState.trackingData.workout.rounds.count) { // Check if next round is avaiable
                     
                     self.appState.trackingData.currentRound += 1
-                    self.curExIdx = 0
+                    self.appState.trackingData.curExIdx = 0
                 }
                 
             } else { // Continue to the next exercise in the round
-                self.curExIdx += 1
+                self.appState.trackingData.curExIdx += 1
             }
         }
         
         func addExercise(round: Int, addLast: Bool) {
             self.appState.trackingData.currentRound = round
-            self.appState.trackingData.addExAfterIdx = addLast ? self.appState.trackingData.workout.rounds[round].sets.count - 1 : self.curExIdx
+            self.appState.trackingData.addExAfterIdx = addLast ? self.appState.trackingData.workout.rounds[round].sets.count - 1 : self.appState.trackingData.curExIdx
             self.appState.routing.trackWorkout.showExercisesModal()
         }
         
@@ -133,7 +132,7 @@ extension TrackWorkout {
             }
             self.appState.trackingData.workout.rounds.insert(newRound, at: self.appState.trackingData.currentRound + 1)
             self.appState.trackingData.currentRound += 1
-            self.curExIdx = 0
+            self.appState.trackingData.curExIdx = 0
         }
         
         func deleteRound(round: Int) {
@@ -189,7 +188,6 @@ extension TrackWorkout {
             self.appState.trackingData.workoutStarted = false
             self.appState.trackingData.reset()
             self.isWorkoutSelected = false
-            self.curExIdx = 0
             
             self.appState.userData.trackingStatus.started = false
             self.appState.userData.trackingStatus.new = true
