@@ -253,6 +253,8 @@ extension AppState {
         
         func saveExercise(exercise: Exercise) {
             NetworkManager().saveExercise(exercise: exercise, userId: self.userId)
+            self.exercises.append(exercise)
+            self.allExercises.append(exercise)
         }
         
         func getStats() {

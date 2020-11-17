@@ -31,8 +31,6 @@ struct NewExerciseView: View {
                     let exId = self.name.formatToId() + ":" + self.equipment.formatToId() + ":" + self.type.formatToId()
                     let newExercise = Exercise(id: exId, bodyPart: self.bodyPart, muscleGroup: self.muscleGroup)
                     
-                    self.appState.userData.exercises.append(newExercise)
-                    
                     self.appState.userData.saveExercise(exercise: newExercise)
                     
                     self.presentationMode.wrappedValue.dismiss()
