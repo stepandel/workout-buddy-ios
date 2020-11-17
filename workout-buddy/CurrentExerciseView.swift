@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct CurrentExerciseView: View {
-    @ObservedObject var trackWorkoutViewModel: TrackWorkout.ViewModel
+    @EnvironmentObject var appState: AppState
     @State var currentRound: Int
     @State var curExIdx: Int
     
@@ -22,23 +22,23 @@ struct CurrentExerciseView: View {
     //                        StopWatchView()
     //                    }
             
-            if (self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets.indices.contains(self.curExIdx)) {
+            if (self.appState.trackingData.workout.rounds[self.currentRound].sets.indices.contains(self.curExIdx)) {
                 
                 // Current Exercise View
                 VStack {
                     HStack {
                         Button(action: {
-                            if (self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].completed != false) {
-                                self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].completed = false
+                            if (self.appState.trackingData.workout.rounds[self.currentRound].sets[self.curExIdx][0].completed != false) {
+                                self.appState.trackingData.workout.rounds[self.currentRound].sets[self.curExIdx][0].completed = false
                             } else {
                                 // Mark exercise as complete
-                                self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].completed = true
+                                self.appState.trackingData.workout.rounds[self.currentRound].sets[self.curExIdx][0].completed = true
                                 
                                 let indexSet = IndexSet.init(integer: self.curExIdx)
                                 
                             }
                         }) {
-                            Text("\(trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].exId.components(separatedBy: ":")[0].formatFromId())")
+                            Text("\(appState.trackingData.workout.rounds[self.currentRound].sets[self.curExIdx][0].exId.components(separatedBy: ":")[0].formatFromId())")
                                 .font(.system(size: 20, weight: .semibold))
                                 .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
                                 .frame(width: 240, height: 40)
@@ -51,10 +51,10 @@ struct CurrentExerciseView: View {
                         
                         VStack {
                             Button(action: {
-                                if self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].reps! > 0 {
-                                    self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].reps! += 1
-                                } else if self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].time != nil {
-                                    self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].time! += 1
+                                if self.appState.trackingData.workout.rounds[self.currentRound].sets[self.curExIdx][0].reps! > 0 {
+                                    self.appState.trackingData.workout.rounds[self.currentRound].sets[self.curExIdx][0].reps! += 1
+                                } else if self.appState.trackingData.workout.rounds[self.currentRound].sets[self.curExIdx][0].time != nil {
+                                    self.appState.trackingData.workout.rounds[self.currentRound].sets[self.curExIdx][0].time! += 1
                                 }
                             }) {
                                 Image(systemName: "arrowtriangle.up.fill")
@@ -65,8 +65,8 @@ struct CurrentExerciseView: View {
                                     .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 0.5, x: -0.5, y: -0.5)
                                     .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 0.5, x: 0.5, y: 0.5)
                             }.padding(.bottom)
-                            if self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].reps! > 0 {
-                                Text("\(self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].reps!)x")
+                            if self.appState.trackingData.workout.rounds[self.currentRound].sets[self.curExIdx][0].reps! > 0 {
+                                Text("\(self.appState.trackingData.workout.rounds[self.currentRound].sets[self.curExIdx][0].reps!)x")
                                     .font(.system(size: 20, weight: .semibold))
                                     .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
                                     .frame(width: 80, height: 40)
@@ -75,8 +75,8 @@ struct CurrentExerciseView: View {
                                     .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 0.5, x: 0.5, y: 0.5)
                                     .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 0.5, x: -0.5, y: -0.5)
                                     .padding(.init(top: 0, leading: 16, bottom: 0, trailing: 16))
-                            } else if self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].time != nil {
-                                Text("\(self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].time!)sec")
+                            } else if self.appState.trackingData.workout.rounds[self.currentRound].sets[self.curExIdx][0].time != nil {
+                                Text("\(self.appState.trackingData.workout.rounds[self.currentRound].sets[self.curExIdx][0].time!)sec")
                                     .font(.system(size: 20, weight: .semibold))
                                     .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
                                     .frame(width: 60, height: 40)
@@ -87,10 +87,10 @@ struct CurrentExerciseView: View {
                                     .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                             }
                             Button(action: {
-                                if self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].reps! > 0 {
-                                    self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].reps! -= 1
-                                } else if self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].time != nil {
-                                    self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].time! -= 1
+                                if self.appState.trackingData.workout.rounds[self.currentRound].sets[self.curExIdx][0].reps! > 0 {
+                                    self.appState.trackingData.workout.rounds[self.currentRound].sets[self.curExIdx][0].reps! -= 1
+                                } else if self.appState.trackingData.workout.rounds[self.currentRound].sets[self.curExIdx][0].time != nil {
+                                    self.appState.trackingData.workout.rounds[self.currentRound].sets[self.curExIdx][0].time! -= 1
                                 }
                             }) {
                                 Image(systemName: "arrowtriangle.down.fill")
@@ -145,7 +145,7 @@ struct CurrentExerciseView: View {
 
 struct CurrentExerciseView_Previews: PreviewProvider {
     static var previews: some View {
-        CurrentExerciseView(trackWorkoutViewModel: TrackWorkout.ViewModel(appState: AppState()), currentRound: 0, curExIdx: 0)
+        CurrentExerciseView(currentRound: 0, curExIdx: 0).environmentObject(AppState())
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 1)))
         .edgesIgnoringSafeArea(.all)

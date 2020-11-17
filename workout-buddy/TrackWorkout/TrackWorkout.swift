@@ -41,7 +41,7 @@ struct TrackWorkout: View {
             }
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: btnEnd, trailing: EditButton())
-            .navigationBarTitle(self.viewModel.workout.name)
+            .navigationBarTitle(self.appState.trackingData.workout.name)
         }
     }
 }
@@ -83,16 +83,16 @@ private extension TrackWorkout {
 private extension TrackWorkout {
     var workoutSpecView: some View {
         Section {
-            TextField("New Workout", text: self.$viewModel.workout.name)
+            TextField("New Workout", text: self.$appState.trackingData.workout.name)
             HStack {
                 Text("Focus: ")
                 Spacer()
-                TextField("Focus", text: self.$viewModel.workout.focus)
+                TextField("Focus", text: self.$appState.trackingData.workout.focus)
             }
             if #available(iOS 14.0, *) {
                 VStack(alignment: .leading) {
                     Text("Notes: ")
-                    TextEditor(text: self.$viewModel.workout.notes)
+                    TextEditor(text: self.$appState.trackingData.workout.notes)
                         .frame(minHeight: 100)
                 }
             }
@@ -100,10 +100,10 @@ private extension TrackWorkout {
     }
     
     var workoutRoundsView: some View {
-        ForEach(self.viewModel.workout.rounds) { round in
-            Section(header: Text("Round \(self.viewModel.workout.rounds.firstIndex(of: round)! + 1)")) {
+        ForEach(self.appState.trackingData.workout.rounds) { round in
+            Section(header: Text("Round \(self.appState.trackingData.workout.rounds.firstIndex(of: round)! + 1)")) {
                 ForEach(round.sets, id: \.self) { set in
-                    NavigationLink(destination: SelectedExerciseView(trackWorkoutViewModel: self.viewModel, currentRound: self.viewModel.workout.rounds.firstIndex(of: round)!, curExIdx: round.sets.firstIndex(of: set)!)) {
+                    NavigationLink(destination: SelectedExerciseView(currentRound: self.appState.trackingData.workout.rounds.firstIndex(of: round)!, curExIdx: round.sets.firstIndex(of: set)!).environmentObject(self.appState)) {
                         HStack {
                             VStack {
                                 Text("\(set[0].exId.components(separatedBy: ":")[0].formatFromId())")
@@ -130,10 +130,10 @@ private extension TrackWorkout {
                     }
                 
                 }
-                .onDelete { self.viewModel.deleteExercise(at: $0, in: self.viewModel.workout.rounds.firstIndex(of: round)!) }
-                .onMove { self.viewModel.moveExercise(source: $0, destination: $1, in: self.viewModel.workout.rounds.firstIndex(of: round)!) }
+                .onDelete { self.viewModel.deleteExercise(at: $0, in: self.appState.trackingData.workout.rounds.firstIndex(of: round)!) }
+                .onMove { self.viewModel.moveExercise(source: $0, destination: $1, in: self.appState.trackingData.workout.rounds.firstIndex(of: round)!) }
                 
-                Button(action: { self.viewModel.addExercise(round: self.viewModel.workout.rounds.firstIndex(of: round)!, addLast: true) }) {
+                Button(action: { self.viewModel.addExercise(round: self.appState.trackingData.workout.rounds.firstIndex(of: round)!, addLast: true) }) {
                     HStack {
                         Spacer()
                         Text("+ Exercise")
@@ -145,7 +145,7 @@ private extension TrackWorkout {
             }
             Section {
                 Button(action: {
-                    self.viewModel.deleteRound(round: self.viewModel.workout.rounds.firstIndex(of: round)!)
+                    self.viewModel.deleteRound(round: self.appState.trackingData.workout.rounds.firstIndex(of: round)!)
                 }) {
                     HStack {
                         Spacer()
@@ -156,7 +156,7 @@ private extension TrackWorkout {
                     }
                 }.buttonStyle(BorderlessButtonStyle())
                 Button(action: {
-                    self.viewModel.currentRound = self.viewModel.workout.rounds.firstIndex(of: round)!
+                    self.viewModel.currentRound = self.appState.trackingData.workout.rounds.firstIndex(of: round)!
                     self.viewModel.curExIdx = 0
                     self.appState.routing.trackWorkout.showAddRoundActionSheet()
                 }) {
@@ -181,7 +181,7 @@ private extension TrackWorkout {
         if self.appState.routing.trackWorkout.modalView == .workouts {
             PickWorkoutView(trackWorkoutViewModel: self.viewModel).environmentObject(self.appState)
         } else if self.appState.routing.trackWorkout.modalView == .exercises {
-            AddNewExerciseTracking(trackWorkoutViewModel: self.viewModel, roundNumber: self.viewModel.currentRound, afterIndex: self.viewModel.addExAfterIdx).environmentObject(self.appState)
+            AddNewExerciseTracking(roundNumber: self.viewModel.currentRound, afterIndex: self.viewModel.addExAfterIdx).environmentObject(self.appState)
         }
     }
 }

@@ -105,7 +105,6 @@ struct AddNewExercise: View {
 
 struct AddNewExerciseTracking: View {
     @EnvironmentObject var appState: AppState
-    @ObservedObject var trackWorkoutViewModel: TrackWorkout.ViewModel
     @ObservedObject var addNewExerciseViewModel: AddNewExerciseViewModel = AddNewExerciseViewModel()
     @State var roundNumber: Int
     @State var afterIndex: Int
@@ -139,12 +138,12 @@ struct AddNewExerciseTracking: View {
                         self.weight = Int(self.weightStr) ?? 0
 
                         let newExSet = ExSet(exId: self.addNewExerciseViewModel.exercise!.id, time: self.time, reps: self.reps, weight: self.weight)
-                        if (self.trackWorkoutViewModel.workout.rounds.isEmpty) {
+                        if (self.appState.trackingData.workout.rounds.isEmpty) {
                             var newRound = Round()
                             newRound.sets = [[newExSet]]
-                            self.trackWorkoutViewModel.workout.rounds.append(newRound)
+                            self.appState.trackingData.workout.rounds.append(newRound)
                         }
-                        self.trackWorkoutViewModel.workout.rounds[self.roundNumber].sets.insert([newExSet], at: self.afterIndex + 1)
+                        self.appState.trackingData.workout.rounds[self.roundNumber].sets.insert([newExSet], at: self.afterIndex + 1)
                         
                         self.presentaionMode.wrappedValue.dismiss()
                     }
@@ -296,7 +295,7 @@ struct AddNewExercise_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             AddNewExercise(newWorkoutViewModel: NewWorkoutViewModel(), roundNumber: 0).environmentObject(AppState())
-            AddNewExerciseTracking(trackWorkoutViewModel: TrackWorkout.ViewModel(appState: AppState()), roundNumber: 0, afterIndex: 0).environmentObject(AppState())
+            AddNewExerciseTracking(roundNumber: 0, afterIndex: 0).environmentObject(AppState())
             AddNewExerciseEdit(editWorkoutViewModel: EditWorkoutViewModel(workout: Workout(name: "Random")), roundNumber: 0)
             .environmentObject(AppState())
         }

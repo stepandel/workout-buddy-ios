@@ -12,11 +12,26 @@ import Combine
 final class AppState: ObservableObject {
     @Published var userData = UserData()
     @Published var routing = ViewRouting()
+    @Published var trackingData = TrackingData()
 }
 
 extension AppState {
     struct ViewRouting {
         var contentView = ContentView.Routing()
         var trackWorkout = TrackWorkout.Routing()
+    }
+}
+
+extension AppState {
+    struct TrackingData {
+        var workout = Workout()
+        var workoutStarted = false
+        var startTime: Double = 0
+        
+        mutating func reset() {
+            self.workout = Workout()
+            self.workoutStarted = false
+            self.startTime = 0
+        }
     }
 }

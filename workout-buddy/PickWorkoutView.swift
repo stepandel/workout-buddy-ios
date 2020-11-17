@@ -19,9 +19,9 @@ struct PickWorkoutView: View {
             ForEach(appState.userData.workouts) { workout in
                 Button(action: {
                     print("Button pressed")
-                    self.trackWorkoutViewModel.workout = workout
+                    self.appState.trackingData.workout = workout
                     self.trackWorkoutViewModel.isWorkoutSelected = true
-                    self.trackWorkoutViewModel.workout.rounds.forEach({ round in
+                    self.appState.trackingData.workout.rounds.forEach({ round in
                         print("Round indices: \(round.sets.indices)")
                         round.sets.indices.forEach({ i in
                             print("Index: \(i)")
