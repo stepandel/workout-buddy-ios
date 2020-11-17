@@ -31,7 +31,7 @@ struct PickWorkoutView: View {
                 }){
                     WorkoutRow(workout: workout)
                 }
-            }.onDelete { appState.userData.deleteWorkouts(at: $0) }
+            }.onDelete { appState.deleteWorkouts(at: $0) }
         }
     }
 }

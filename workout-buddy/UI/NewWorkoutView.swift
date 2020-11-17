@@ -54,7 +54,7 @@ struct NewWorkoutView: View {
                     print("New UserData: \(self.appState.userData.workouts)")
                     
                     // Save to remote DB
-                    self.appState.userData.saveWorkout(workout: self.newWorkoutViewModel.workout)
+                    self.appState.saveWorkout(workout: self.newWorkoutViewModel.workout)
                     
                 }) {
                     Text("Done")

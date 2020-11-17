@@ -50,7 +50,7 @@ struct EditWorkoutView: View {
                                        
 //                    self.appState.userData.workouts.append(self.editWorkoutViewModel.workout)
                     self.appState.userData.workouts[self.workoutIdx] = self.editWorkoutViewModel.workout
-                    self.appState.userData.saveWorkout(workout: self.editWorkoutViewModel.workout)
+                    self.appState.saveWorkout(workout: self.editWorkoutViewModel.workout)
                    
                     self.presentaionMode.wrappedValue.dismiss()
                    

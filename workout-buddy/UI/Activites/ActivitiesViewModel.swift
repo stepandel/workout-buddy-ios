@@ -26,7 +26,7 @@ extension Activities {
         
         func deleteWorkout(at offsets: IndexSet) {
             offsets.forEach { i in
-                self.appState.userData.deleteWorkoutLogItem(completedWorkout: self.workoutLog[i])
+                self.appState.deleteWorkoutLogItem(completedWorkout: self.workoutLog[i])
                 self.completedWorkouts.remove(at: self.completedWorkouts.count - i - 1)
             }
             self.workoutLog.remove(atOffsets: offsets)

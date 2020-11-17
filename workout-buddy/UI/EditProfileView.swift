@@ -49,7 +49,7 @@ struct EditProfileView: View {
                         print("Check Date: \(self.checkDate) \n \n")
                         
                         // Save UserData
-                        appState.userData.saveUserData(
+                        appState.saveUserData(
                             firstName: self.firstName != "" ? self.firstName : nil,
                             lastName: self.lastName != "" ? self.lastName : nil,
                             bio: self.bio != "" ? self.bio : nil,
@@ -176,7 +176,7 @@ struct EditProfileView: View {
         guard let inputImage = inputImage else { return }
         self.appState.userData.user.profileImage = inputImage
         
-        self.appState.userData.updateUserImage()
+        self.appState.updateUserImage()
     }
 }
 

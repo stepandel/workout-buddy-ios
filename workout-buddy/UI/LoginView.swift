@@ -55,14 +55,14 @@ struct LoginView: View {
                     
                     // TODO: - email & password validation
                     
-                    appState.userData.saveNewUser(email: self.email, pass: self.password)
+                    appState.saveNewUser(email: self.email, pass: self.password)
                     
                     // Dismiss login screen
                     
                 } else {
                     print("Signing in...")
                     
-                    appState.userData.checkUser(email: self.email, pass: self.password)
+                    appState.checkUser(email: self.email, pass: self.password)
                 }
                 
                 
@@ -89,7 +89,7 @@ struct LoginView: View {
             }.padding(.top, 40.0)
             
             Button(action: {
-                self.appState.userData.saveNewUserWithoutAccount()
+                self.appState.saveNewUserWithoutAccount()
                 
                 // TODO: - Display warning that the data could get lost
             }) {
