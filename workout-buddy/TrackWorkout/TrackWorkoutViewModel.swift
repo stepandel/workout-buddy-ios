@@ -155,8 +155,6 @@ extension TrackWorkout {
                 // Start timer
                 print("Timer: \(Date().timeIntervalSince1970)")
                 self.appState.trackingData.startTime = Date().timeIntervalSince1970
-                
-                self.appState.routing.trackWorkout.showStartWorkoutActionSheet()
             }
             
             self.appState.trackingData.workoutStarted = true

@@ -24,12 +24,14 @@ struct TrackWorkout: View {
                 Section(header: Text("")) {
                     EmptyView()
                 }
+                .onAppear {
+                    UIApplication.shared.isIdleTimerDisabled = true
+                    if !self.appState.trackingData.workoutStarted {
+                        self.appState.routing.trackWorkout.showStartWorkoutActionSheet()
+                    }
+                }
             }
             .listStyle(GroupedListStyle())
-            .onAppear {
-                UIApplication.shared.isIdleTimerDisabled = true
-                self.viewModel.startWorkout()
-            }
             .sheet(isPresented: $appState.routing.trackWorkout.showingModalView) {
                 modalSheet()
             }
@@ -225,9 +227,10 @@ private extension TrackWorkout  {
         } else if self.appState.routing.trackWorkout.actionSheetView == .startWorkout {
             return ActionSheet(title: Text("Start Workout"), buttons: [
                 .default(Text("Start New")) {
-                    
+                    self.viewModel.startWorkout()
                 },
-                .default(Text("Select Previously Completed")) {
+                .default(Text("Select")) {
+                    self.viewModel.startWorkout()
                     self.appState.routing.trackWorkout.showWorkoutsModal()
                 },
                 .cancel() {
