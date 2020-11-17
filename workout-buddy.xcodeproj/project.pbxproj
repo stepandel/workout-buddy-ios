@@ -222,32 +222,7 @@
 			children = (
 				D9A2FFAE243A380F00352747 /* AppDelegate.swift */,
 				D9A2FFB0243A380F00352747 /* SceneDelegate.swift */,
-				D9A2F6C92522216800CDA717 /* LoginView.swift */,
-				D9A2FFB2243A380F00352747 /* ContentView.swift */,
-				D9A2F6BD2520D12200CDA717 /* ProfileView.swift */,
-				D9A2F6C32520D6B100CDA717 /* ProfileImage.swift */,
-				D9A2F6C62520DB2800CDA717 /* UserProfile.swift */,
-				D93AFA6425290E03008BEAC1 /* EditProfileView.swift */,
-				D97998322530EC7A00E05A80 /* StatsView.swift */,
-				D921901B255EE273005C7899 /* TrackWorkout */,
-				D97F69192502A742002A74A3 /* SelectedExerciseView.swift */,
-				D98A73BC2498F6FB009B190C /* CurrentExerciseView.swift */,
-				D9147668246B8D6800447A55 /* PickWorkoutView.swift */,
-				D92190272561BEAD005C7899 /* Activites */,
-				D914766A24740BB500447A55 /* ActivityRow.swift */,
-				D9A2FFD6243A8E8900352747 /* WorkoutsView.swift */,
-				D9EA692924451FD400371DEB /* NewWorkoutView.swift */,
-				D9147660246711EF00447A55 /* EditWorkoutView.swift */,
-				D94EDBB324643C3400EBF1D2 /* AddNewExercise.swift */,
-				D9BF9BEA247DEE4300213DB2 /* SelectExerciseView.swift */,
-				D9BF9BE8247D45DA00213DB2 /* SearchBar.swift */,
-				D9A2FFD0243A4D0D00352747 /* WorkoutRow.swift */,
-				D9A2FFD2243A69AB00352747 /* WorkoutView.swift */,
-				D914766E24740FB500447A55 /* CompletedWorkoutView.swift */,
-				D9A2FFD4243A6C9900352747 /* RoundBlock.swift */,
-				D9E2CE732476B0A90043C698 /* ExercisesView.swift */,
-				D95541D8248E6993005ED239 /* StopWatchView.swift */,
-				D9E2CE752478005F0043C698 /* NewExerciseView.swift */,
+				D9A6A34525644F2C00D36453 /* UI */,
 				D9219020255F168C005C7899 /* Injected */,
 				D95541DC248E6B57005ED239 /* Utils */,
 				D9A2FFC7243A38CA00352747 /* Models */,
@@ -292,6 +267,39 @@
 				D9A2FFCA243A3EBE00352747 /* Exercise.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		D9A6A34525644F2C00D36453 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				D9A2F6C92522216800CDA717 /* LoginView.swift */,
+				D9A2FFB2243A380F00352747 /* ContentView.swift */,
+				D9A2F6BD2520D12200CDA717 /* ProfileView.swift */,
+				D9A2F6C32520D6B100CDA717 /* ProfileImage.swift */,
+				D9A2F6C62520DB2800CDA717 /* UserProfile.swift */,
+				D93AFA6425290E03008BEAC1 /* EditProfileView.swift */,
+				D97998322530EC7A00E05A80 /* StatsView.swift */,
+				D97F69192502A742002A74A3 /* SelectedExerciseView.swift */,
+				D98A73BC2498F6FB009B190C /* CurrentExerciseView.swift */,
+				D9147668246B8D6800447A55 /* PickWorkoutView.swift */,
+				D914766A24740BB500447A55 /* ActivityRow.swift */,
+				D9A2FFD6243A8E8900352747 /* WorkoutsView.swift */,
+				D9EA692924451FD400371DEB /* NewWorkoutView.swift */,
+				D9147660246711EF00447A55 /* EditWorkoutView.swift */,
+				D94EDBB324643C3400EBF1D2 /* AddNewExercise.swift */,
+				D9BF9BEA247DEE4300213DB2 /* SelectExerciseView.swift */,
+				D9BF9BE8247D45DA00213DB2 /* SearchBar.swift */,
+				D9A2FFD0243A4D0D00352747 /* WorkoutRow.swift */,
+				D9A2FFD2243A69AB00352747 /* WorkoutView.swift */,
+				D914766E24740FB500447A55 /* CompletedWorkoutView.swift */,
+				D9A2FFD4243A6C9900352747 /* RoundBlock.swift */,
+				D9E2CE732476B0A90043C698 /* ExercisesView.swift */,
+				D95541D8248E6993005ED239 /* StopWatchView.swift */,
+				D9E2CE752478005F0043C698 /* NewExerciseView.swift */,
+				D921901B255EE273005C7899 /* TrackWorkout */,
+				D92190272561BEAD005C7899 /* Activites */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
