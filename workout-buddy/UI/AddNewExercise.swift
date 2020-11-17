@@ -14,7 +14,7 @@ class AddNewExerciseViewModel: ObservableObject {
 }
 
 struct AddNewExercise: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
     @ObservedObject var newWorkoutViewModel: NewWorkoutViewModel
     @ObservedObject var addNewExerciseViewModel: AddNewExerciseViewModel = AddNewExerciseViewModel()
     @State var roundNumber: Int
@@ -91,7 +91,7 @@ struct AddNewExercise: View {
                 }
             }
         }.sheet(isPresented: self.$showingSelectExercises) {
-            SelectExerciseView(addNewExerciseViewModel: self.addNewExerciseViewModel).environmentObject(self.userData)
+            SelectExerciseView(addNewExerciseViewModel: self.addNewExerciseViewModel).environmentObject(self.appState)
         }.onTapGesture {
             self.hideKeyboard()
         }
@@ -104,8 +104,7 @@ struct AddNewExercise: View {
 
 
 struct AddNewExerciseTracking: View {
-    @EnvironmentObject var userData: UserData
-    @ObservedObject var trackWorkoutViewModel: TrackWorkoutViewModel
+    @EnvironmentObject var appState: AppState
     @ObservedObject var addNewExerciseViewModel: AddNewExerciseViewModel = AddNewExerciseViewModel()
     @State var roundNumber: Int
     @State var afterIndex: Int
@@ -139,12 +138,12 @@ struct AddNewExerciseTracking: View {
                         self.weight = Int(self.weightStr) ?? 0
 
                         let newExSet = ExSet(exId: self.addNewExerciseViewModel.exercise!.id, time: self.time, reps: self.reps, weight: self.weight)
-                        if (self.trackWorkoutViewModel.workout.rounds.isEmpty) {
+                        if (self.appState.trackingData.workout.rounds.isEmpty) {
                             var newRound = Round()
                             newRound.sets = [[newExSet]]
-                            self.trackWorkoutViewModel.workout.rounds.append(newRound)
+                            self.appState.trackingData.workout.rounds.append(newRound)
                         }
-                        self.trackWorkoutViewModel.workout.rounds[self.roundNumber].sets.insert([newExSet], at: self.afterIndex + 1)
+                        self.appState.trackingData.workout.rounds[self.roundNumber].sets.insert([newExSet], at: self.afterIndex + 1)
                         
                         self.presentaionMode.wrappedValue.dismiss()
                     }
@@ -188,7 +187,7 @@ struct AddNewExerciseTracking: View {
                 }
             }
         }.sheet(isPresented: self.$showingSelectExercises) {
-            SelectExerciseView(addNewExerciseViewModel: self.addNewExerciseViewModel).environmentObject(self.userData)
+            SelectExerciseView(addNewExerciseViewModel: self.addNewExerciseViewModel).environmentObject(self.appState)
         }.onTapGesture {
             self.hideKeyboard()
         }
@@ -201,7 +200,7 @@ struct AddNewExerciseTracking: View {
 
 
 struct AddNewExerciseEdit: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
     @ObservedObject var editWorkoutViewModel: EditWorkoutViewModel
     @ObservedObject var addNewExerciseViewModel = AddNewExerciseViewModel()
     @State var roundNumber: Int
@@ -278,7 +277,7 @@ struct AddNewExerciseEdit: View {
                 }
             }
         }.sheet(isPresented: self.$showingSelectExercises) {
-            SelectExerciseView(addNewExerciseViewModel: self.addNewExerciseViewModel).environmentObject(self.userData)
+            SelectExerciseView(addNewExerciseViewModel: self.addNewExerciseViewModel).environmentObject(self.appState)
         }.onTapGesture {
             self.hideKeyboard()
         }
@@ -295,10 +294,10 @@ struct AddNewExerciseEdit: View {
 struct AddNewExercise_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            AddNewExercise(newWorkoutViewModel: NewWorkoutViewModel(), roundNumber: 0).environmentObject(UserData())
-            AddNewExerciseTracking(trackWorkoutViewModel: TrackWorkoutViewModel(), roundNumber: 0, afterIndex: 0).environmentObject(UserData())
+            AddNewExercise(newWorkoutViewModel: NewWorkoutViewModel(), roundNumber: 0).environmentObject(AppState())
+            AddNewExerciseTracking(roundNumber: 0, afterIndex: 0).environmentObject(AppState())
             AddNewExerciseEdit(editWorkoutViewModel: EditWorkoutViewModel(workout: Workout(name: "Random")), roundNumber: 0)
-            .environmentObject(UserData())
+            .environmentObject(AppState())
         }
     }
 }

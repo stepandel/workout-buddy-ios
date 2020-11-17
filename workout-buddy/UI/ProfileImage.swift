@@ -9,13 +9,13 @@
 import SwiftUI
 
 struct ProfileImage: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
         
-        if userData.user.profileImage != nil {
+        if appState.userData.user.profileImage != nil {
             
-            Image(uiImage: userData.user.profileImage!)
+            Image(uiImage: appState.userData.user.profileImage!)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 80, height: 80)
@@ -41,6 +41,6 @@ struct ProfileImage: View {
 
 struct ProfileImage_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileImage().environmentObject(UserData())
+        ProfileImage().environmentObject(AppState())
     }
 }

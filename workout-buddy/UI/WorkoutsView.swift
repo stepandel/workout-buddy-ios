@@ -10,14 +10,14 @@ import SwiftUI
 
 struct WorkoutsView: View {
     
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
     
     @State var isPresented = false
     
     var body: some View {
         NavigationView {
-            List(userData.workouts) { workout in
-                NavigationLink(destination: WorkoutView(workout: workout).environmentObject(self.userData)) {
+            List(appState.userData.workouts) { workout in
+                NavigationLink(destination: WorkoutView(workout: workout).environmentObject(self.appState)) {
                     WorkoutRow(workout: workout)
                 }
             }
@@ -29,7 +29,7 @@ struct WorkoutsView: View {
                     Image(systemName: "plus")
                 })
             .popover(isPresented: self.$isPresented) {
-                NewWorkoutView().environmentObject(self.userData)
+                NewWorkoutView().environmentObject(self.appState)
             }
         }
     }
@@ -37,6 +37,6 @@ struct WorkoutsView: View {
 
 struct WorkoutsView_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutsView().environmentObject(UserData())
+        WorkoutsView().environmentObject(AppState())
     }
 }

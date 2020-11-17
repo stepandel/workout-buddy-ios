@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct StatsView: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
     @State var selected = 9
     @State var selectedWeek = "This Week"
     
@@ -19,27 +19,27 @@ struct StatsView: View {
                 HStack {
                     Text("Total Workouts Completed")
                     Spacer()
-                    Text("\(userData.stats.totalWorkoutsCompleted)")
+                    Text("\(appState.userData.stats.totalWorkoutsCompleted)")
                 }
                 HStack {
                     Text("Total Weight Lifted")
                     Spacer()
-                    Text("\(userData.stats.totalWeightLifted) kg")
+                    Text("\(appState.userData.stats.totalWeightLifted) kg")
                 }
                 HStack {
                     Text("Total Reps Completed")
                     Spacer()
-                    Text("\(userData.stats.totalRepsCompleted)")
+                    Text("\(appState.userData.stats.totalRepsCompleted)")
                 }
                 HStack {
                     Text("Total Sets Completed")
                     Spacer()
-                    Text("\(userData.stats.totalSetsCompleted)")
+                    Text("\(appState.userData.stats.totalSetsCompleted)")
                 }
                 HStack {
                     Text("Total Active Time")
                     Spacer()
-                    Text("\(userData.stats.totalTimeWorkingout / 60) min")
+                    Text("\(appState.userData.stats.totalTimeWorkingout / 60) min")
                 }
             }
             
@@ -48,21 +48,21 @@ struct StatsView: View {
                     
                 HStack(spacing: 16) {
                     
-                    ForEach(userData.tenWeekRollingStats.weeklyStats.indices, id: \.self) { idx in
+                    ForEach(appState.userData.tenWeekRollingStats.weeklyStats.indices, id: \.self) { idx in
                         
                         VStack {
                             
                             Spacer(minLength: 0)
                             
                             if selected == idx {
-                                Text("\(userData.tenWeekRollingStats.weeklyStats[idx].stats.totalWeightLifted)")
+                                Text("\(appState.userData.tenWeekRollingStats.weeklyStats[idx].stats.totalWeightLifted)")
                                     .font(.footnote)
                                     .padding(.bottom, 5)
                             }
                             
                             Rectangle()
                                 .fill(selected == idx ? Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)) : Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)).opacity(0.4))
-                                .frame(height: userData.tenWeekRollingStats.normilized(by: .weightLifted)[idx] * 200)
+                                .frame(height: appState.userData.tenWeekRollingStats.normilized(by: .weightLifted)[idx] * 200)
                         }
                         .frame(height: 220)
                         .onTapGesture {
@@ -77,21 +77,21 @@ struct StatsView: View {
                 
                 HStack(spacing: 16) {
                     
-                    ForEach(userData.tenWeekRollingStats.weeklyStats.indices, id: \.self) { idx in
+                    ForEach(appState.userData.tenWeekRollingStats.weeklyStats.indices, id: \.self) { idx in
                         
                         VStack {
                             
                             Spacer(minLength: 0)
                             
                             if selected == idx {
-                                Text("\(userData.tenWeekRollingStats.weeklyStats[idx].stats.totalRepsCompleted)")
+                                Text("\(appState.userData.tenWeekRollingStats.weeklyStats[idx].stats.totalRepsCompleted)")
                                     .font(.footnote)
                                     .padding(.bottom, 5)
                             }
                             
                             Rectangle()
                                 .fill(selected == idx ? Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)) : Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)).opacity(0.4))
-                                .frame(height: userData.tenWeekRollingStats.normilized(by: .repsCompleted)[idx] * 200)
+                                .frame(height: appState.userData.tenWeekRollingStats.normilized(by: .repsCompleted)[idx] * 200)
                         }
                         .frame(height: 220)
                         .onTapGesture {
@@ -106,21 +106,21 @@ struct StatsView: View {
                 
                 HStack(spacing: 16) {
                     
-                    ForEach(userData.tenWeekRollingStats.weeklyStats.indices, id: \.self) { idx in
+                    ForEach(appState.userData.tenWeekRollingStats.weeklyStats.indices, id: \.self) { idx in
                         
                         VStack {
                             
                             Spacer(minLength: 0)
                             
                             if selected == idx {
-                                Text("\(userData.tenWeekRollingStats.weeklyStats[idx].stats.totalWorkoutsCompleted)")
+                                Text("\(appState.userData.tenWeekRollingStats.weeklyStats[idx].stats.totalWorkoutsCompleted)")
                                     .font(.footnote)
                                     .padding(.bottom, 5)
                             }
                             
                             Rectangle()
                                 .fill(selected == idx ? Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)) : Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)).opacity(0.4))
-                                .frame(height: userData.tenWeekRollingStats.normilized(by: .workoutsCompleted)[idx] * 200)
+                                .frame(height: appState.userData.tenWeekRollingStats.normilized(by: .workoutsCompleted)[idx] * 200)
                         }
                         .frame(height: 220)
                         .onTapGesture {
@@ -136,27 +136,27 @@ struct StatsView: View {
                 HStack {
                     Text("Workouts Completed")
                     Spacer()
-                    Text("\(userData.tenWeekRollingStats.weeklyStats[selected].stats.totalWorkoutsCompleted)")
+                    Text("\(appState.userData.tenWeekRollingStats.weeklyStats[selected].stats.totalWorkoutsCompleted)")
                 }
                 HStack {
                     Text("Weight Lifted")
                     Spacer()
-                    Text("\(userData.tenWeekRollingStats.weeklyStats[selected].stats.totalWeightLifted) kg")
+                    Text("\(appState.userData.tenWeekRollingStats.weeklyStats[selected].stats.totalWeightLifted) kg")
                 }
                 HStack {
                     Text("Reps Completed")
                     Spacer()
-                    Text("\(userData.tenWeekRollingStats.weeklyStats[selected].stats.totalRepsCompleted)")
+                    Text("\(appState.userData.tenWeekRollingStats.weeklyStats[selected].stats.totalRepsCompleted)")
                 }
                 HStack {
                     Text("Sets Completed")
                     Spacer()
-                    Text("\(userData.tenWeekRollingStats.weeklyStats[selected].stats.totalSetsCompleted)")
+                    Text("\(appState.userData.tenWeekRollingStats.weeklyStats[selected].stats.totalSetsCompleted)")
                 }
                 HStack {
                     Text("Active Time")
                     Spacer()
-                    Text("\(userData.tenWeekRollingStats.weeklyStats[selected].stats.totalTimeWorkingout / 60) min")
+                    Text("\(appState.userData.tenWeekRollingStats.weeklyStats[selected].stats.totalTimeWorkingout / 60) min")
                 }
             }
 //        }.listStyle(GroupedListStyle())
@@ -170,7 +170,7 @@ struct StatsView: View {
             return
         }
         
-        if let weekEndTS = userData.weekEndTS {
+        if let weekEndTS = appState.userData.weekEndTS {
             
             var dateComponentsLast = DateComponents()
             dateComponentsLast.day = -(9 - selected)*7
@@ -200,6 +200,6 @@ struct StatsView: View {
 
 struct StatsView_Previews: PreviewProvider {
     static var previews: some View {
-        StatsView().environmentObject(UserData())
+        StatsView().environmentObject(AppState())
     }
 }

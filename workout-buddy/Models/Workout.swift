@@ -16,7 +16,7 @@ struct Workout: Hashable, Codable, Identifiable {
     var type: String
     var rounds: [Round]
     
-    init(name: String, focus: String = "", notes: String = "", type: String = "") {
+    init(name: String = "", focus: String = "", notes: String = "", type: String = "") {
         self.id = UUID().uuidString
         self.name = name
         self.focus = focus

@@ -27,7 +27,7 @@ struct SetData: Hashable, Identifiable {
 }
 
 struct SelectedExerciseView: View {
-    @ObservedObject var trackWorkoutViewModel: TrackWorkoutViewModel
+    @EnvironmentObject var appState: AppState
     @State var currentRound: Int
     @State var curExIdx: Int
     
@@ -121,16 +121,16 @@ struct SelectedExerciseView: View {
             }) {
                 Text("+ Set")
             }
-            .navigationBarTitle(Text("\(self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].exId.components(separatedBy: ":")[0].formatFromId())"))
+            .navigationBarTitle(Text("\(self.appState.trackingData.workout.rounds[self.currentRound].sets[self.curExIdx][0].exId.components(separatedBy: ":")[0].formatFromId())"))
         }
         .onAppear {
-            self.sets = self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx].reduce([], { (sets: [SetData], exSet: ExSet) -> [SetData] in
+            self.sets = self.appState.trackingData.workout.rounds[self.currentRound].sets[self.curExIdx].reduce([], { (sets: [SetData], exSet: ExSet) -> [SetData] in
                 let nextSet = SetData(exId: exSet.exId, reps: String(exSet.reps ?? 0), time: String(exSet.time ?? 0), weight: String(exSet.weight ?? 0))
                 var result = sets
                 result.append(nextSet)
                 return result
             })
-            if let time = self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx][0].time, time > 0 {
+            if let time = self.appState.trackingData.workout.rounds[self.currentRound].sets[self.curExIdx][0].time, time > 0 {
                 self.timed = true
             }
         }
@@ -147,11 +147,11 @@ struct SelectedExerciseView: View {
     }
     
     func saveSets() {
-        self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx] = []
+        self.appState.trackingData.workout.rounds[self.currentRound].sets[self.curExIdx] = []
         (0..<self.sets.count).forEach { i in
             if !self.sets[i].deleted {
                 let newExSet = ExSet(exId: self.sets[i].exId, time: Int(self.sets[i].time), reps: Int(self.sets[i].reps), weight: Int(self.sets[i].weight))
-                self.trackWorkoutViewModel.workout.rounds[self.currentRound].sets[self.curExIdx].append(newExSet)
+                self.appState.trackingData.workout.rounds[self.currentRound].sets[self.curExIdx].append(newExSet)
             }
         }
     }
@@ -159,6 +159,6 @@ struct SelectedExerciseView: View {
 
 struct SelectedExerciseView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectedExerciseView(trackWorkoutViewModel: TrackWorkoutViewModel(), currentRound: 0, curExIdx: 0)
+        SelectedExerciseView(currentRound: 0, curExIdx: 0).environmentObject(AppState())
     }
 }

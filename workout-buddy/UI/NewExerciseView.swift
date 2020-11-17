@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct NewExerciseView: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
     
     @State var name = ""
     @State var equipment = ""
@@ -31,9 +31,7 @@ struct NewExerciseView: View {
                     let exId = self.name.formatToId() + ":" + self.equipment.formatToId() + ":" + self.type.formatToId()
                     let newExercise = Exercise(id: exId, bodyPart: self.bodyPart, muscleGroup: self.muscleGroup)
                     
-                    self.userData.exercises.append(newExercise)
-                    
-                    self.userData.saveExercise(exercise: newExercise)
+                    self.appState.saveExercise(exercise: newExercise)
                     
                     self.presentationMode.wrappedValue.dismiss()
                 }) { Text("Done") }
@@ -103,6 +101,6 @@ struct NewExerciseView: View {
 
 struct NewExerciseView_Previews: PreviewProvider {
     static var previews: some View {
-        NewExerciseView().environmentObject(UserData())
+        NewExerciseView().environmentObject(AppState())
     }
 }
