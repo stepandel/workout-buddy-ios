@@ -202,6 +202,7 @@ extension AppState {
             self.userData.exercises = exercises
             self.userData.allExercises.append(contentsOf: exercises)
             self.userData.allExercises.sort()
+            self.userData.allExercises.removeDuplicates()
         }
     }
     
