@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var appState: AppState
     
     @State var isEditPresented = false
     
@@ -42,7 +42,7 @@ struct ProfileView: View {
 //                            Text("Statistics")
 //                        })
                     
-                    StatsView().environmentObject(userData)
+                    StatsView().environmentObject(appState)
 //                }
             }.sheet(isPresented: $isEditPresented) {
                 EditProfileView()
@@ -58,6 +58,6 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView().environmentObject(UserData())
+        ProfileView().environmentObject(AppState())
     }
 }
