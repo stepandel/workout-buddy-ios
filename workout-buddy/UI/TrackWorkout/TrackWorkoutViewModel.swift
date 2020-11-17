@@ -176,8 +176,6 @@ extension TrackWorkout {
             self.appState.trackingData.reset()
             self.isWorkoutSelected = false
 
-            self.appState.userData.trackingStatus.started = false
-            self.appState.userData.trackingStatus.new = true
             self.appState.routing.contentView.routeToActivities()
         }
         
@@ -189,8 +187,6 @@ extension TrackWorkout {
             self.appState.trackingData.reset()
             self.isWorkoutSelected = false
             
-            self.appState.userData.trackingStatus.started = false
-            self.appState.userData.trackingStatus.new = true
             self.appState.routing.contentView.routeToActivities()
         }
         

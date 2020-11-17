@@ -18,7 +18,6 @@ extension AppState {
         var exercises: [Exercise] = []
         var allExercises: [Exercise] = exercisesDB
         var workoutLog: [CompletedWorkout] = []
-        var trackingStatus: TrackingStatus
         var user: User
         var stats: Stats
         var weekEndTS: Double?
@@ -33,7 +32,6 @@ extension AppState {
         }
         
         init() {
-            self.trackingStatus = TrackingStatus()
             self.user = User()
             self.stats = Stats()
             self.tenWeekRollingStats = TenWeekRollingStats()
@@ -47,19 +45,6 @@ extension AppState {
                     self.didCreateAccount = true
                 }
             }
-        }
-    }
-}
-
-
-extension AppState.UserData {
-    struct TrackingStatus {
-        var started: Bool
-        var new: Bool
-        
-        init() {
-            self.started = false
-            self.new = true
         }
     }
 }
