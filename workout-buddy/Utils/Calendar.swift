@@ -14,12 +14,28 @@ extension Calendar {
 
 extension Date {
     func startOfWeek(using calendar: Calendar = .gregorian) -> Date? {
-        guard let sunday = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else { return nil }
+        guard let sunday = Date().getSunday() else { return nil }
+        if isTodaySunday() {
+            return calendar.date(byAdding: .day, value: -6, to: sunday)
+        }
         return calendar.date(byAdding: .day, value: 1, to: sunday)
     }
     
     func endOfWeek(using calendar: Calendar = .gregorian) -> Date? {
-        guard let sunday = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else { return nil }
+        guard let sunday = Date().getSunday() else { return nil }
+        if isTodaySunday() {
+            return calendar.date(byAdding: .day, value: 1, to: sunday)
+        }
         return calendar.date(byAdding: .day, value: 8, to: sunday)
+    }
+    
+    func getSunday(using calendar: Calendar = .gregorian) -> Date? {
+        return calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
+    }
+    
+    func isTodaySunday(using calendar: Calendar = .gregorian) -> Bool {
+        guard let sunday = Date().getSunday() else { return false }
+        let dayStart = calendar.startOfDay(for: Date())
+        return dayStart == sunday
     }
 }
