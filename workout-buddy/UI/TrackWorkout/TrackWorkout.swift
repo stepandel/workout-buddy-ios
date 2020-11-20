@@ -32,7 +32,6 @@ struct TrackWorkout: View {
                     EmptyView()
                 }
                 .onAppear {
-                    UIApplication.shared.isIdleTimerDisabled = true
                     if !self.appState.trackingData.workoutStarted {
                         self.appState.routing.trackWorkout.showStartWorkoutActionSheet()
                     }
