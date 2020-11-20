@@ -16,6 +16,13 @@ struct TrackWorkout: View {
     var body: some View {
         NavigationView {
             List {
+                
+                if appState.trackingData.workout.rounds[0].sets.count == 0 {
+                    Section {
+                        selectWorkoutBtn
+                    }
+                }
+                
                 workoutSpecView
                 workoutRoundsView
                 .onTapGesture {
@@ -76,6 +83,14 @@ private extension TrackWorkout {
         }) {
             Text("End")
         }
+    }
+    
+    private var selectWorkoutBtn: some View {
+        Button(action: {
+            self.appState.routing.trackWorkout.showWorkoutsModal()
+        }, label: {
+            Text("Select Workout")
+        })
     }
 }
 
