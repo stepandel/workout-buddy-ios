@@ -31,11 +31,6 @@ struct TrackWorkout: View {
                 Section(header: Text("")) {
                     EmptyView()
                 }
-                .onAppear {
-                    if !self.appState.trackingData.workoutStarted {
-                        self.appState.routing.trackWorkout.showStartWorkoutActionSheet()
-                    }
-                }
             }
             .listStyle(GroupedListStyle())
             .sheet(isPresented: $appState.routing.trackWorkout.showingModalView) {
