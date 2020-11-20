@@ -42,6 +42,9 @@ struct TrackWorkout: View {
             .actionSheet(isPresented: $appState.routing.trackWorkout.showingActionSheet) {
                 actionSheet()
             }
+            .onAppear {
+                self.viewModel.startWorkout()
+            }
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: btnEnd, trailing: EditButton())
             .navigationBarTitle(self.appState.trackingData.workout.name)
