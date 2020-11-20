@@ -15,6 +15,8 @@ final class AppState: ObservableObject {
     @Published var routing = ViewRouting()
     @Published var trackingData = TrackingData()
     
+    let networkManger = NetworkManager()
+    
     init() {
         self.loadAllData()
     }
@@ -71,9 +73,9 @@ extension AppState {
         }.joined()
         
         if self.userData.userId == "" {
-            NetworkManager().saveNewUser(id: id, pass: pass, deviceId: nil)
+            self.networkManger.saveNewUser(id: id, pass: pass, deviceId: nil)
         } else {
-            NetworkManager().saveNewUser(id: id, pass: pass, deviceId: self.userData.userId)
+            self.networkManger.saveNewUser(id: id, pass: pass, deviceId: self.userData.userId)
         }
         
         self.userData.userId = id
@@ -91,7 +93,7 @@ extension AppState {
             String(format: "%02x", $0)
         }.joined()
         
-        NetworkManager().checkUser(id: id, pass: pass) { (success) in
+        self.networkManger.checkUser(id: id, pass: pass) { (success) in
             DispatchQueue.main.async {
                 self.userData.isLoggedIn = success
                 self.userData.didCreateAccount = success
@@ -145,7 +147,7 @@ extension AppState {
                         profileImageUrl: self.userData.user.profileImageUrl
         )
         
-        NetworkManager().saveUser(user: user)
+        self.networkManger.saveUser(user: user)
     }
     
     func updateUserImage() {
@@ -157,11 +159,11 @@ extension AppState {
         
         guard let imageStr = imageAsString else { return }
         
-        NetworkManager().uploadUserImage(userId: self.userData.userId, userImage: imageStr)
+        self.networkManger.uploadUserImage(userId: self.userData.userId, userImage: imageStr)
     }
     
     func getUserData() {
-        NetworkManager().getUser(id: self.userData.userId) { (user) in
+        self.networkManger.getUser(id: self.userData.userId) { (user) in
             self.userData.user.firstName = user.firstName
             self.userData.user.lastName = user.lastName
             self.userData.user.bio = user.bio
@@ -174,7 +176,7 @@ extension AppState {
             self.userData.user.profileImageUrl = user.profileImageUrl
 
             if let profileImageUrl = self.userData.user.profileImageUrl {
-                NetworkManager().getImage(from: profileImageUrl) { (image) in
+                self.networkManger.getImage(from: profileImageUrl) { (image) in
                     self.userData.user.profileImage = image
                 }
             }
@@ -186,7 +188,7 @@ extension AppState {
             self.userData.userId = deviceId
             self.userData.isLoggedIn = true
             
-            NetworkManager().saveNewUserWithoutAccount(id: self.userData.userId)
+            self.networkManger.saveNewUserWithoutAccount(id: self.userData.userId)
             
             self.loadAllData()
         } else {
@@ -198,7 +200,7 @@ extension AppState {
     // MARK: - Exercises
 
     func getExercises() {
-        NetworkManager().getExercises(userId: self.userData.userId) { (exercises) in
+        self.networkManger.getExercises(userId: self.userData.userId) { (exercises) in
             self.userData.exercises = exercises
             self.userData.allExercises.append(contentsOf: exercises)
             self.userData.allExercises.sort()
@@ -207,7 +209,7 @@ extension AppState {
     }
     
     func saveExercise(exercise: Exercise) {
-        NetworkManager().saveExercise(exercise: exercise, userId: self.userData.userId)
+        self.networkManger.saveExercise(exercise: exercise, userId: self.userData.userId)
         self.userData.exercises.append(exercise)
         self.userData.allExercises.append(exercise)
     }
@@ -216,23 +218,23 @@ extension AppState {
     // MARK: - Workouts
     
     func getWorkouts() {
-        NetworkManager().getWorkouts(userId: self.userData.userId) { (workouts) in
+        self.networkManger.getWorkouts(userId: self.userData.userId) { (workouts) in
             self.userData.workouts = workouts
         }
     }
     
     func getWorkoutLog() {
-        NetworkManager().getWorkoutLog(userId: self.userData.userId) { (completedWorkouts) in
+        self.networkManger.getWorkoutLog(userId: self.userData.userId) { (completedWorkouts) in
             self.userData.workoutLog = completedWorkouts
         }
     }
     
     func saveWorkout(workout: Workout) {
-        NetworkManager().saveWorkout(workout: workout, userId: self.userData.userId)
+        self.networkManger.saveWorkout(workout: workout, userId: self.userData.userId)
     }
     
     func saveCompletedWorkout(completedWorkout: CompletedWorkout) {
-        NetworkManager().saveCompletedWorkout(completedWorkout: completedWorkout, userId: self.userData.userId)
+        self.networkManger.saveCompletedWorkout(completedWorkout: completedWorkout, userId: self.userData.userId)
         self.userData.workoutLog.append(completedWorkout)
         
         // Update existing workout or create new one
@@ -241,15 +243,15 @@ extension AppState {
             let originalWorkout = self.userData.workouts[index]
             
             if isSameWorkout(w1: originalWorkout, w2: completedWorkout.workout) {
-                NetworkManager().saveWorkout(workout: completedWorkout.workout, userId: self.userData.userId)
+                self.networkManger.saveWorkout(workout: completedWorkout.workout, userId: self.userData.userId)
             } else {
                 let newWorkout = Workout(workout: completedWorkout.workout)
-                NetworkManager().saveWorkout(workout: newWorkout, userId: self.userData.userId)
+                self.networkManger.saveWorkout(workout: newWorkout, userId: self.userData.userId)
                 self.userData.workouts.append(newWorkout)
             }
             
         } else {
-            NetworkManager().saveWorkout(workout: completedWorkout.workout, userId: self.userData.userId)
+            self.networkManger.saveWorkout(workout: completedWorkout.workout, userId: self.userData.userId)
             self.userData.workouts.append(completedWorkout.workout)
         }
         
@@ -263,11 +265,11 @@ extension AppState {
         self.userData.stats.addStatsFrom(workout: completedWorkout)
         self.updateTenWeekRollingStats(with: completedWorkout)
         
-        NetworkManager().saveStats(userId: self.userData.userId, stats: self.userData.stats)
+        self.networkManger.saveStats(userId: self.userData.userId, stats: self.userData.stats)
     }
     
     func getStats() {
-        NetworkManager().getStats(userId: self.userData.userId) { stats in
+        self.networkManger.getStats(userId: self.userData.userId) { stats in
             self.userData.stats = stats
         }
     }
@@ -276,11 +278,11 @@ extension AppState {
         if let idx = self.userData.workoutLog.firstIndex(of: completedWorkout) {
             
             self.userData.workoutLog.remove(at: idx)
-            NetworkManager().deleteWorkoutFromLog(userId: self.userData.userId, wlId: completedWorkout.wlId)
+            self.networkManger.deleteWorkoutFromLog(userId: self.userData.userId, wlId: completedWorkout.wlId)
             
             // Update stats
             self.userData.stats.subtractStatsFrom(workout: completedWorkout)
-            NetworkManager().saveStats(userId: self.userData.userId, stats: self.userData.stats)
+            self.networkManger.saveStats(userId: self.userData.userId, stats: self.userData.stats)
             
             // Update weekly stats
             self.updateTenWeekRollingStats(with: completedWorkout, subtract: true)
@@ -289,7 +291,7 @@ extension AppState {
     
     func getWorkoutLogAndStats() {
         let timezoneOffset = TimeZone.current.secondsFromGMT() / 60
-        NetworkManager().getCompletedWorkoutsAndStatsForUser(userId: self.userData.userId, timezoneOffset: timezoneOffset) { (workoutLog, stats) in
+        self.networkManger.getCompletedWorkoutsAndStatsForUser(userId: self.userData.userId, timezoneOffset: timezoneOffset) { (workoutLog, stats) in
             self.userData.workoutLog = workoutLog
             self.userData.stats = stats
             self.userData.workoutLog.forEach { workout in
@@ -321,6 +323,6 @@ extension AppState {
             workoutIds.append(self.userData.workouts[i].id)
         }
         self.userData.workouts.remove(atOffsets: offsets)
-        NetworkManager().deleteWorkouts(userId: self.userData.userId, workoutIds: workoutIds)
+        self.networkManger.deleteWorkouts(userId: self.userData.userId, workoutIds: workoutIds)
     }
 }
