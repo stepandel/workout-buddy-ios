@@ -38,6 +38,37 @@ struct Workout: Hashable, Codable, Identifiable {
     }
 }
 
+
+// MARK: - Workout manipulation methods
+
+extension Workout {
+    mutating func deleteExercise(at offset: IndexSet, in round: Int) {
+        self.rounds[round].sets.remove(atOffsets: offset)
+    }
+    
+    mutating func moveExercise(source: IndexSet, destination: Int, in round: Int) {
+        self.rounds[round].sets.move(fromOffsets: source, toOffset: destination)
+    }
+    
+    mutating func addRound(roundToCopy: Round = Round(), addAfterIdx: Int) {
+        self.rounds.insert(roundToCopy, at: addAfterIdx + 1)
+    }
+    
+    mutating func deleteRound(round: Round) {
+        if let idx = self.rounds.firstIndex(of: round) {
+            self.rounds.remove(at: idx)
+            if self.rounds.count == 0 {
+                // Add new empty round
+                let newRound = Round()
+                self.rounds.append(newRound)
+            }
+        }
+    }
+}
+
+
+// MARK: - Round
+
 struct Round: Hashable, Codable, Identifiable {
     var id: String
     var sets: [[ExSet]]
