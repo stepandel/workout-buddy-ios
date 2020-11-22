@@ -50,8 +50,14 @@ extension Workout {
         self.rounds[round].sets.move(fromOffsets: source, toOffset: destination)
     }
     
-    mutating func addRound(roundToCopy: Round = Round(), addAfterIdx: Int) {
-        self.rounds.insert(roundToCopy, at: addAfterIdx + 1)
+    mutating func addRound(after round: Round, copy: Bool) {
+        if let roundIdx = self.rounds.firstIndex(of: round) {
+            if copy {
+                self.rounds.insert(Round(round: round), at: roundIdx + 1)
+            } else {
+                self.rounds.insert(Round(), at: roundIdx + 1)
+            }
+        }
     }
     
     mutating func deleteRound(round: Round) {
@@ -76,6 +82,11 @@ struct Round: Hashable, Codable, Identifiable {
     init(){
         self.id = UUID().uuidString
         self.sets = []
+    }
+    
+    init(round: Round) {
+        self.id = UUID().uuidString
+        self.sets = round.sets
     }
 }
 

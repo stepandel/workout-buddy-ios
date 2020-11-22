@@ -11,6 +11,8 @@ import SwiftUI
 struct WorkoutRounds: View {
     @EnvironmentObject var appState: AppState
     @Binding var workout: Workout
+    @State var curRound = Round()
+    @State var showingActionSheet = false
     
     private(set) var interactor: EditWorkoutInteractor
     
@@ -23,6 +25,9 @@ struct WorkoutRounds: View {
             Section {
                 self.deleteRoundBtn(round: round)
                 self.addRoundBtn(after: round)
+            }
+            .actionSheet(isPresented: self.$showingActionSheet) {
+                self.actionSheet
             }
         }
     }
@@ -99,7 +104,8 @@ extension WorkoutRounds {
     
     private func addRoundBtn(after round: Round) -> some View {
         Button(action: {
-            // TODO: - Show add round ActionSheet
+            self.curRound = round
+            self.showingActionSheet.toggle()
         }) {
             HStack {
                 Spacer()
@@ -108,6 +114,23 @@ extension WorkoutRounds {
                 Spacer()
             }
         }.buttonStyle(BorderlessButtonStyle())
+    }
+}
+
+
+// MARK: - ActionSheet
+
+extension WorkoutRounds {
+    private var actionSheet: ActionSheet {
+        ActionSheet(title: Text("Add Round"), buttons: [
+            .default(Text("Empty Round")) {
+                self.workout.addRound(after: self.curRound, copy: false)
+            },
+            .default(Text("Copy Previous Round")) {
+                self.workout.addRound(after: self.curRound, copy: true)
+            },
+            .cancel()
+        ])
     }
 }
 
