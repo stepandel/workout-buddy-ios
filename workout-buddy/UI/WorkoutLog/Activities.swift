@@ -19,7 +19,7 @@ struct Activities: View {
                 List {
                     ForEach(viewModel.workoutLog, id:\.wlId) { completedWorkout in
                         Section(header: Text("")) {
-                            NavigationLink(destination: CompletedWorkoutView(completedWorkout: completedWorkout)) {
+                            NavigationLink(destination: CompletedWorkoutView(completedWorkout: completedWorkout).environmentObject(self.appState)) {
                                 ActivityRow(completedWorkout: completedWorkout)
                             }
                         }
