@@ -28,6 +28,9 @@ struct EditWorkout: View {
             .navigationBarTitle(self.workout.name)
             .navigationBarItems(leading: cancelBtn, trailing: saveBtn)
         }
+        .sheet(isPresented: self.$appState.routing.editWorkout.showingModalSheet) {
+            AddExercise(interactor: .init(appState: self.appState, round: self.$workout.rounds[self.appState.routing.editWorkout.curRoundIdx]))
+        }
     }
     
     func hideKeyboard() {
@@ -56,6 +59,21 @@ extension EditWorkout {
             Text("Save")
         }
 
+    }
+}
+
+
+// MARK: - Routing
+
+extension EditWorkout {
+    struct Routing {
+        var showingModalSheet = false
+        private(set) var curRoundIdx = 0
+        
+        mutating func showExercisesModal(roundIdx: Int) {
+            self.curRoundIdx = roundIdx
+            self.showingModalSheet = true
+        }
     }
 }
 

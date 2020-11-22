@@ -24,6 +24,8 @@
 		D9451F3E2569B2AE00ECE278 /* EditWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9451F3D2569B2AE00ECE278 /* EditWorkout.swift */; };
 		D9451F41256AD61C00ECE278 /* EditExerciseSetsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9451F40256AD61C00ECE278 /* EditExerciseSetsInteractor.swift */; };
 		D9451F46256ADB9900ECE278 /* EditWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9451F45256ADB9900ECE278 /* EditWorkoutView.swift */; };
+		D9451F4B256B027500ECE278 /* AddExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9451F4A256B027500ECE278 /* AddExercise.swift */; };
+		D9451F52256B06FB00ECE278 /* AddExerciseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9451F51256B06FB00ECE278 /* AddExerciseInteractor.swift */; };
 		D94CE25724E19CA0009AF605 /* NavigateModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94CE25624E19CA0009AF605 /* NavigateModifier.swift */; };
 		D94EDB8A245DCD5C00EBF1D2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94EDB89245DCD5C00EBF1D2 /* NetworkManager.swift */; };
 		D94EDBB424643C3400EBF1D2 /* AddNewExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94EDBB324643C3400EBF1D2 /* AddNewExercise.swift */; };
@@ -94,6 +96,8 @@
 		D9451F3D2569B2AE00ECE278 /* EditWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWorkout.swift; sourceTree = "<group>"; };
 		D9451F40256AD61C00ECE278 /* EditExerciseSetsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExerciseSetsInteractor.swift; sourceTree = "<group>"; };
 		D9451F45256ADB9900ECE278 /* EditWorkoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWorkoutView.swift; sourceTree = "<group>"; };
+		D9451F4A256B027500ECE278 /* AddExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExercise.swift; sourceTree = "<group>"; };
+		D9451F51256B06FB00ECE278 /* AddExerciseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseInteractor.swift; sourceTree = "<group>"; };
 		D94CE25624E19CA0009AF605 /* NavigateModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigateModifier.swift; sourceTree = "<group>"; };
 		D94EDB89245DCD5C00EBF1D2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		D94EDBB324643C3400EBF1D2 /* AddNewExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewExercise.swift; sourceTree = "<group>"; };
@@ -265,8 +269,10 @@
 				D96D82C62569816100CDD45D /* WorkoutSpecView.swift */,
 				D96D82C92569847900CDD45D /* WorkoutRounds.swift */,
 				D91B4FCC25699304003B0772 /* ExerciseSets.swift */,
+				D9451F4A256B027500ECE278 /* AddExercise.swift */,
 				D96D82CD25698DE100CDD45D /* EditWorkoutInteractor.swift */,
 				D9451F40256AD61C00ECE278 /* EditExerciseSetsInteractor.swift */,
+				D9451F51256B06FB00ECE278 /* AddExerciseInteractor.swift */,
 			);
 			path = EditWorkout;
 			sourceTree = "<group>";
@@ -505,6 +511,7 @@
 				D94EDBB424643C3400EBF1D2 /* AddNewExercise.swift in Sources */,
 				D9BF9BE9247D45DA00213DB2 /* SearchBar.swift in Sources */,
 				D96D82CA2569847900CDD45D /* WorkoutRounds.swift in Sources */,
+				D9451F4B256B027500ECE278 /* AddExercise.swift in Sources */,
 				D95541D9248E6993005ED239 /* StopWatchView.swift in Sources */,
 				D9E2CE742476B0A90043C698 /* ExercisesView.swift in Sources */,
 				D9A2FFD3243A69AB00352747 /* WorkoutView.swift in Sources */,
@@ -528,6 +535,7 @@
 				D9A6A362256485A000D36453 /* Array.swift in Sources */,
 				D9A2FFCB243A3EBE00352747 /* Exercise.swift in Sources */,
 				D93B4143252A1C5F00E98994 /* ImagePicker.swift in Sources */,
+				D9451F52256B06FB00ECE278 /* AddExerciseInteractor.swift in Sources */,
 				D914766B24740BB500447A55 /* ActivityRow.swift in Sources */,
 				D9A2FFD5243A6C9900352747 /* RoundBlock.swift in Sources */,
 				D9451F41256AD61C00ECE278 /* EditExerciseSetsInteractor.swift in Sources */,

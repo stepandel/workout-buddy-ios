@@ -11,7 +11,7 @@ import SwiftUI
 struct WorkoutRounds: View {
     @EnvironmentObject var appState: AppState
     @Binding var workout: Workout
-    @State var curRound = Round()
+    @State var curRoundIdx = 0
     @State var showingActionSheet = false
     
     private(set) var interactor: EditWorkoutInteractor
@@ -20,7 +20,7 @@ struct WorkoutRounds: View {
         ForEach(self.workout.rounds) { round in
             Section(header: Text("Round \(self.workout.rounds.firstIndex(of: round)! + 1)")) {
                 self.sets(round: round)
-                self.addExerciseBtn
+                self.addExerciseBtn(round: round)
             }
             Section {
                 self.deleteRoundBtn(round: round)
@@ -75,9 +75,11 @@ extension WorkoutRounds {
 // MARK: - Buttons
 
 extension WorkoutRounds {
-    private var addExerciseBtn: some View {
+    private func addExerciseBtn(round: Round) -> some View {
         Button(action: {
-            // TODO: - Show add exercise modal
+            if let roundIdx = self.workout.rounds.firstIndex(of: round) {
+                self.appState.routing.editWorkout.showExercisesModal(roundIdx: roundIdx)
+            }
         }) {
             HStack {
                 Spacer()
@@ -104,7 +106,7 @@ extension WorkoutRounds {
     
     private func addRoundBtn(after round: Round) -> some View {
         Button(action: {
-            self.curRound = round
+            self.curRoundIdx = self.workout.rounds.firstIndex(of: round) ?? 0
             self.showingActionSheet.toggle()
         }) {
             HStack {
@@ -124,10 +126,10 @@ extension WorkoutRounds {
     private var actionSheet: ActionSheet {
         ActionSheet(title: Text("Add Round"), buttons: [
             .default(Text("Empty Round")) {
-                self.workout.addRound(after: self.curRound, copy: false)
+                self.workout.addRound(after: self.workout.rounds[self.curRoundIdx], copy: false)
             },
             .default(Text("Copy Previous Round")) {
-                self.workout.addRound(after: self.curRound, copy: true)
+                self.workout.addRound(after: self.workout.rounds[self.curRoundIdx], copy: true)
             },
             .cancel()
         ])
