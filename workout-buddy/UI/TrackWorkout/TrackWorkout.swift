@@ -23,8 +23,8 @@ struct TrackWorkout: View {
                     }
                 }
                 
-                workoutSpecView
-                workoutRoundsView
+                WorkoutSpecView(workout: self.$appState.trackingData.workout)
+                WorkoutRounds(workout: self.$appState.trackingData.workout, interactor: .init(appState: self.appState, workout: self.$appState.trackingData.workout)).environmentObject(self.appState)
                 .onTapGesture {
                     self.viewModel.hideKeyboard()
                 }
@@ -92,101 +92,6 @@ private extension TrackWorkout {
 }
 
 
-// MARK: - Content
-
-private extension TrackWorkout {
-    var workoutSpecView: some View {
-        Section {
-            TextField("New Workout", text: self.$appState.trackingData.workout.name)
-            HStack {
-                Text("Focus: ")
-                Spacer()
-                TextField("Focus", text: self.$appState.trackingData.workout.focus)
-            }
-            if #available(iOS 14.0, *) {
-                VStack(alignment: .leading) {
-                    Text("Notes: ")
-                    TextEditor(text: self.$appState.trackingData.workout.notes)
-                        .frame(minHeight: 100)
-                }
-            }
-        }
-    }
-    
-    var workoutRoundsView: some View {
-        ForEach(self.appState.trackingData.workout.rounds) { round in
-            Section(header: Text("Round \(self.appState.trackingData.workout.rounds.firstIndex(of: round)! + 1)")) {
-                ForEach(round.sets, id: \.self) { set in
-                    NavigationLink(destination: SelectedExerciseView(currentRound: self.appState.trackingData.workout.rounds.firstIndex(of: round)!, curExIdx: round.sets.firstIndex(of: set)!).environmentObject(self.appState)) {
-                        HStack {
-                            VStack {
-                                Text("\(set[0].exId.components(separatedBy: ":")[0].formatFromId())")
-                                Spacer()
-                                Text("\(set.count) \(set.count > 1 ? "Sets" : "Set")")
-                                .font(.footnote)
-                                if (set[0].completed ?? false) {
-                                    Text("Completed")
-                                        .font(.footnote)
-                                        .multilineTextAlignment(.leading)
-                                } else if (set[0].skipped ?? false) {
-                                    Text("Skipped")
-                                        .font(.footnote)
-                                        .multilineTextAlignment(.leading)
-                                }
-                            }
-                            Spacer()
-                            if set[0].reps! > 0 {
-                                Text("\(set[0].reps!)x")
-                            } else if set[0].time != nil {
-                                Text("\(set[0].time!)sec")
-                            }
-                        }
-                    }
-                
-                }
-                .onDelete { self.viewModel.deleteExercise(at: $0, in: self.appState.trackingData.workout.rounds.firstIndex(of: round)!) }
-                .onMove { self.viewModel.moveExercise(source: $0, destination: $1, in: self.appState.trackingData.workout.rounds.firstIndex(of: round)!) }
-                
-                Button(action: { self.viewModel.addExercise(round: self.appState.trackingData.workout.rounds.firstIndex(of: round)!, addLast: true) }) {
-                    HStack {
-                        Spacer()
-                        Text("+ Exercise")
-                            .multilineTextAlignment(.center)
-                        Spacer()
-                    }
-                }.buttonStyle(BorderlessButtonStyle())
-                    
-            }
-            Section {
-                Button(action: {
-                    self.viewModel.deleteRound(round: self.appState.trackingData.workout.rounds.firstIndex(of: round)!)
-                }) {
-                    HStack {
-                        Spacer()
-                        Text("Delete round")
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.red)
-                        Spacer()
-                    }
-                }.buttonStyle(BorderlessButtonStyle())
-                Button(action: {
-                    self.appState.trackingData.currentRound = self.appState.trackingData.workout.rounds.firstIndex(of: round)!
-                    self.appState.trackingData.curExIdx = 0
-                    self.appState.routing.trackWorkout.showAddRoundActionSheet()
-                }) {
-                    HStack {
-                        Spacer()
-                        Text("Add Round")
-                            .multilineTextAlignment(.center)
-                        Spacer()
-                    }
-                }.buttonStyle(BorderlessButtonStyle())
-            }
-        }
-    }
-}
-
-
 // MARK: - Modal Sheet
 
 private extension TrackWorkout {
@@ -195,7 +100,7 @@ private extension TrackWorkout {
         if self.appState.routing.trackWorkout.modalView == .workouts {
             PickWorkoutView(trackWorkoutViewModel: self.viewModel).environmentObject(self.appState)
         } else if self.appState.routing.trackWorkout.modalView == .exercises {
-            AddNewExerciseTracking(roundNumber: self.appState.trackingData.currentRound, afterIndex: self.appState.trackingData.addExAfterIdx).environmentObject(self.appState)
+            AddExercise(interactor: .init(appState: self.appState, round: self.$appState.trackingData.workout.rounds[self.appState.routing.trackWorkout.curRoundIdx])).environmentObject(self.appState)
         }
     }
 }
@@ -223,16 +128,6 @@ private extension TrackWorkout  {
                 },
                 .default(Text("Cancel Workout").foregroundColor(.red)) {
                     self.appState.routing.trackWorkout.showCancelWorkoutAlert()
-                },
-                .cancel()
-            ])
-        } else if self.appState.routing.trackWorkout.actionSheetView == .addRound {
-            return ActionSheet(title: Text("Add Round"), buttons: [
-                .default(Text("Empty Round")) {
-                    self.viewModel.addRound(copyRound: false)
-                },
-                .default(Text("Copy Previous Round")) {
-                    self.viewModel.addRound(copyRound: true)
                 },
                 .cancel()
             ])
