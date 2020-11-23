@@ -84,6 +84,6 @@ extension EditWorkout {
 
 struct EditWorkout_Previews: PreviewProvider {
     static var previews: some View {
-        EditWorkout(workout: Workout(), interactor: .init(appState: AppState(), workout: .constant(Workout()))).environmentObject(AppState())
+        EditWorkout(workout: Workout(), interactor: .init(appState: AppState(), workout: .constant(Workout()), parentView: .edit)).environmentObject(AppState())
     }
 }

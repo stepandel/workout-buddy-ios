@@ -24,7 +24,7 @@ struct TrackWorkout: View {
                 }
                 
                 WorkoutSpecView(workout: self.$appState.trackingData.workout)
-                WorkoutRounds(workout: self.$appState.trackingData.workout, interactor: .init(appState: self.appState, workout: self.$appState.trackingData.workout)).environmentObject(self.appState)
+                WorkoutRounds(workout: self.$appState.trackingData.workout, interactor: .init(appState: self.appState, workout: self.$appState.trackingData.workout, parentView: .tracking)).environmentObject(self.appState)
                 .onTapGesture {
                     self.viewModel.hideKeyboard()
                 }

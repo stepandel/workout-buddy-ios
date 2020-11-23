@@ -57,7 +57,7 @@ struct CompletedWorkoutView: View {
             Spacer()
         }
         .sheet(isPresented: self.$isEditPresented, content: {
-            EditWorkout(workout: self.completedWorkout.workout, interactor: .init(appState: self.appState, workout: self.$completedWorkout.workout)).environmentObject(self.appState)
+            EditWorkout(workout: self.completedWorkout.workout, interactor: .init(appState: self.appState, workout: self.$completedWorkout.workout, parentView: .edit)).environmentObject(self.appState)
         })
         .onAppear {
             self.dateFormatter.timeZone = TimeZone.current

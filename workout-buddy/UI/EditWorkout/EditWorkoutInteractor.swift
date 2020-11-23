@@ -10,11 +10,13 @@ import SwiftUI
 
 struct EditWorkoutInteractor {
     @Binding var workout: Workout
+    let parentView: ParentView
     let appState: AppState
     
-    init(appState: AppState, workout: Binding<Workout>) {
+    init(appState: AppState, workout: Binding<Workout>, parentView: ParentView) {
         self.appState = appState
         self._workout = workout
+        self.parentView = parentView
     }
     
     func saveWorkout(workout: Workout) {
@@ -22,7 +24,27 @@ struct EditWorkoutInteractor {
         self.appState.saveWorkout(workout: workout)
     }
     
+    func addExercise(for round: Round) {
+        if let roundIdx = self.workout.rounds.firstIndex(of: round) {
+            switch self.parentView {
+            case .tracking:
+                self.appState.routing.trackWorkout.showExercisesModal(roundIdx: roundIdx)
+            case .edit:
+                self.appState.routing.editWorkout.showExercisesModal(roundIdx: roundIdx)
+            }
+            self.appState.routing.editWorkout.showSelectExercisesSheet()
+        }
+    }
+    
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
+
+extension EditWorkoutInteractor {
+    enum ParentView {
+        case tracking
+        case edit
     }
 }

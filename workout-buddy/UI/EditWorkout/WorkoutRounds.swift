@@ -77,11 +77,7 @@ extension WorkoutRounds {
 extension WorkoutRounds {
     private func addExerciseBtn(round: Round) -> some View {
         Button(action: {
-            if let roundIdx = self.workout.rounds.firstIndex(of: round) {
-                self.appState.routing.editWorkout.showExercisesModal(roundIdx: roundIdx)
-                self.appState.routing.trackWorkout.showExercisesModal(roundIdx: roundIdx)
-                self.appState.routing.editWorkout.showSelectExercisesSheet()
-            }
+            self.interactor.addExercise(for: round)
         }) {
             HStack {
                 Spacer()
@@ -140,6 +136,6 @@ extension WorkoutRounds {
 
 struct WorkoutRounds_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutRounds(workout: .constant(Workout()), interactor: .init(appState: AppState(), workout: .constant(Workout()))).environmentObject(AppState())
+        WorkoutRounds(workout: .constant(Workout()), interactor: .init(appState: AppState(), workout: .constant(Workout()), parentView: .edit)).environmentObject(AppState())
     }
 }
