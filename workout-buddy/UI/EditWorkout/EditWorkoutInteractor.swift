@@ -19,8 +19,7 @@ struct EditWorkoutInteractor {
     
     func saveWorkout(workout: Workout) {
         self.workout = workout
-        
-        // TODO: - Update UserData and WebDB
+        self.appState.saveWorkout(workout: workout)
     }
     
     func hideKeyboard() {

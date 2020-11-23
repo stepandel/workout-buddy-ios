@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CompletedWorkoutView: View {
     @EnvironmentObject var appState: AppState
-    @State var completedWorkout: CompletedWorkout
+    @Binding var completedWorkout: CompletedWorkout
     
     @State var dateStr = ""
     @State var isEditPresented = false
@@ -77,6 +77,6 @@ struct CompletedWorkoutView: View {
 
 struct CompletedWorkoutView_Previews: PreviewProvider {
     static var previews: some View {
-        CompletedWorkoutView(completedWorkout: sampleWorkoutLog[0]).environmentObject(AppState())
+        CompletedWorkoutView(completedWorkout: .constant(sampleWorkoutLog[0])).environmentObject(AppState())
     }
 }
