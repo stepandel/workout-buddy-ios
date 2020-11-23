@@ -21,7 +21,7 @@ struct EditWorkout: View {
                 WorkoutSpecView(workout: self.$workout)
                 WorkoutRounds(workout: self.$workout, interactor: self.interactor).environmentObject(self.appState)
                 .onTapGesture {
-                    self.hideKeyboard()
+                    self.interactor.hideKeyboard()
                 }
             }
             .listStyle(GroupedListStyle())
@@ -31,10 +31,6 @@ struct EditWorkout: View {
         .sheet(isPresented: self.$appState.routing.editWorkout.showingModalSheet) {
             AddExercise(interactor: .init(appState: self.appState, round: self.$workout.rounds[self.appState.routing.editWorkout.curRoundIdx])).environmentObject(self.appState)
         }
-    }
-    
-    func hideKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 

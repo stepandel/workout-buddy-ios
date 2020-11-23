@@ -22,4 +22,8 @@ struct EditWorkoutInteractor {
         
         // TODO: - Update UserData and WebDB
     }
+    
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }
