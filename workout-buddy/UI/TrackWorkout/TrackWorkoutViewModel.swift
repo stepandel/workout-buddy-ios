@@ -19,7 +19,6 @@ extension TrackWorkout {
     enum ActionSheetView {
         case startWorkout
         case endWorkout
-        case addRound
     }
 }
 
@@ -30,16 +29,18 @@ extension TrackWorkout {
     struct Routing {
         var showingModalView = false
         var modalView: ModalView = .workouts
+        private(set) var curRoundIdx = 0
         var showingAlert = false
         var showingActionSheet = false
-        var actionSheetView: ActionSheetView = .addRound
+        var actionSheetView: ActionSheetView = .endWorkout
         
         mutating func showWorkoutsModal() {
             self.modalView = .workouts
             self.showingModalView = true
         }
         
-        mutating func showExercisesModal() {
+        mutating func showExercisesModal(roundIdx: Int) {
+            self.curRoundIdx = roundIdx
             self.modalView = .exercises
             self.showingModalView = true
         }
@@ -55,11 +56,6 @@ extension TrackWorkout {
         
         mutating func showEndWorkoutActionSheet() {
             self.actionSheetView = .endWorkout
-            self.showingActionSheet = true
-        }
-        
-        mutating func showAddRoundActionSheet() {
-            self.actionSheetView = .addRound
             self.showingActionSheet = true
         }
     }
@@ -81,69 +77,6 @@ extension TrackWorkout {
             self.appState = appState
             
             isWorkoutSelected = false
-        }
-        
-        
-        // MARK: - Rounds
-        
-        func completeExercise(at offsets: IndexSet) {
-            if (!self.appState.trackingData.workoutStarted) { self.startWorkout() }
-            
-            // Start new round
-            if (self.appState.trackingData.curExIdx + 1 >= self.appState.trackingData.workout.rounds[self.appState.trackingData.currentRound].sets.count) {
-                
-                // Continue to the next round
-                if (self.appState.trackingData.currentRound + 1 < self.appState.trackingData.workout.rounds.count) { // Check if next round is avaiable
-                    
-                    self.appState.trackingData.currentRound += 1
-                    self.appState.trackingData.curExIdx = 0
-                }
-                
-            } else { // Continue to the next exercise in the round
-                self.appState.trackingData.curExIdx += 1
-            }
-        }
-        
-        func addExercise(round: Int, addLast: Bool) {
-            self.appState.trackingData.currentRound = round
-            self.appState.trackingData.addExAfterIdx = addLast ? self.appState.trackingData.workout.rounds[round].sets.count - 1 : self.appState.trackingData.curExIdx
-            self.appState.routing.trackWorkout.showExercisesModal()
-        }
-        
-        func skipExercise(at offset: IndexSet, in round: Int) {
-            offset.forEach { i in
-                self.appState.trackingData.workout.rounds[round].sets[i][0].skipped = true
-                self.appState.trackingData.workout.rounds[round].sets[i][0].completed = false
-            }
-        }
-        
-        func deleteExercise(at offset: IndexSet, in round: Int) {
-            self.appState.trackingData.workout.rounds[round].sets.remove(atOffsets: offset)
-        }
-        
-        func moveExercise(source: IndexSet, destination: Int, in round: Int) {
-            self.appState.trackingData.workout.rounds[round].sets.move(fromOffsets: source, toOffset: destination)
-        }
-        
-        func addRound(copyRound: Bool) {
-            var newRound = Round()
-            if copyRound {
-                newRound.sets = self.appState.trackingData.workout.rounds[self.appState.trackingData.currentRound].sets
-            }
-            self.appState.trackingData.workout.rounds.insert(newRound, at: self.appState.trackingData.currentRound + 1)
-            self.appState.trackingData.currentRound += 1
-            self.appState.trackingData.curExIdx = 0
-        }
-        
-        func deleteRound(round: Int) {
-            self.appState.trackingData.workout.rounds.remove(at: round)
-            if self.appState.trackingData.workout.rounds.count == 0 {
-                // Add new empty round
-                let newRound = Round()
-                self.appState.trackingData.workout.rounds.append(newRound)
-            }
-            
-            self.appState.trackingData.currentRound = self.appState.trackingData.currentRound == 0 ? self.appState.trackingData.currentRound : self.appState.trackingData.currentRound - 1
         }
         
         

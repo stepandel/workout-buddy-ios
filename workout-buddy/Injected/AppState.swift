@@ -26,6 +26,8 @@ extension AppState {
     struct ViewRouting {
         var contentView = ContentView.Routing()
         var trackWorkout = TrackWorkout.Routing()
+        var editWorkout = EditWorkout.Routing()
+        var exrecises = Exercises.Routing()
     }
 }
 

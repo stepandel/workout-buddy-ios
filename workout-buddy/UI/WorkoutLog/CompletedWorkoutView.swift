@@ -9,9 +9,12 @@
 import SwiftUI
 
 struct CompletedWorkoutView: View {
-    var completedWorkout: CompletedWorkout
+    @EnvironmentObject var appState: AppState
+    @Binding var completedWorkout: CompletedWorkout
     
     @State var dateStr = ""
+    @State var isEditPresented = false
+    
     let dateFormatter = DateFormatter()
     
     var body: some View {
@@ -52,7 +55,11 @@ struct CompletedWorkoutView: View {
             RoundBlock(rounds: completedWorkout.workout.rounds)
             
             Spacer()
-        }.onAppear {
+        }
+        .sheet(isPresented: self.$isEditPresented, content: {
+            EditWorkout(workout: self.completedWorkout.workout, interactor: .init(appState: self.appState, workout: self.$completedWorkout.workout, parentView: .edit)).environmentObject(self.appState)
+        })
+        .onAppear {
             self.dateFormatter.timeZone = TimeZone.current
             self.dateFormatter.locale = NSLocale.current
             self.dateFormatter.dateFormat = "MMM-d, yyyy"
@@ -60,11 +67,16 @@ struct CompletedWorkoutView: View {
             let date = Date(timeIntervalSince1970: self.completedWorkout.startTS)
             self.dateStr = self.dateFormatter.string(from: date)
         }.navigationBarTitle(Text("\(completedWorkout.workout.name)"))
+        .navigationBarItems(trailing: Button(action: {
+            self.isEditPresented.toggle()
+        }, label: {
+            Text("Edit")
+        }))
     }
 }
 
 struct CompletedWorkoutView_Previews: PreviewProvider {
     static var previews: some View {
-        CompletedWorkoutView(completedWorkout: sampleWorkoutLog[0])
+        CompletedWorkoutView(completedWorkout: .constant(sampleWorkoutLog[0])).environmentObject(AppState())
     }
 }
