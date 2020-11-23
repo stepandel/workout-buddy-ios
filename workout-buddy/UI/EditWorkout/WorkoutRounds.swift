@@ -80,6 +80,7 @@ extension WorkoutRounds {
             if let roundIdx = self.workout.rounds.firstIndex(of: round) {
                 self.appState.routing.editWorkout.showExercisesModal(roundIdx: roundIdx)
                 self.appState.routing.trackWorkout.showExercisesModal(roundIdx: roundIdx)
+                self.appState.routing.editWorkout.showSelectExercisesSheet()
             }
         }) {
             HStack {
