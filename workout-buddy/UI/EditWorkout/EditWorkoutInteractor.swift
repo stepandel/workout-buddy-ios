@@ -24,16 +24,14 @@ struct EditWorkoutInteractor {
         self.appState.saveWorkout(workout: workout)
     }
     
-    func addExercise(for round: Round) {
-        if let roundIdx = self.workout.rounds.firstIndex(of: round) {
-            switch self.parentView {
-            case .tracking:
-                self.appState.routing.trackWorkout.showExercisesModal(roundIdx: roundIdx)
-            case .edit:
-                self.appState.routing.editWorkout.showExercisesModal(roundIdx: roundIdx)
-            }
-            self.appState.routing.editWorkout.showSelectExercisesSheet()
+    func showExerciseModal(roundIdx: Int) {
+        switch self.parentView {
+        case .tracking:
+            self.appState.routing.trackWorkout.showExercisesModal(roundIdx: roundIdx)
+        case .edit:
+            self.appState.routing.editWorkout.showExercisesModal(roundIdx: roundIdx)
         }
+        self.appState.routing.editWorkout.showSelectExercisesSheet()
     }
     
     func hideKeyboard() {

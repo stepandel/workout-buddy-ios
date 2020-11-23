@@ -77,7 +77,9 @@ extension WorkoutRounds {
 extension WorkoutRounds {
     private func addExerciseBtn(round: Round) -> some View {
         Button(action: {
-            self.interactor.addExercise(for: round)
+            if let idx = self.workout.rounds.firstIndex(of: round) {
+                self.interactor.showExerciseModal(roundIdx: idx)
+            }
         }) {
             HStack {
                 Spacer()
