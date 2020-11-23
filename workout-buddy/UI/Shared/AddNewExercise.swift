@@ -91,7 +91,7 @@ struct AddNewExercise: View {
                 }
             }
         }.sheet(isPresented: self.$showingSelectExercises) {
-            SelectExerciseView(addNewExerciseViewModel: self.addNewExerciseViewModel).environmentObject(self.appState)
+            SelectExerciseView(exId: self.$id).environmentObject(self.appState)
         }.onTapGesture {
             self.hideKeyboard()
         }
@@ -132,12 +132,12 @@ struct AddNewExerciseTracking: View {
                 }
                 Spacer()
                 Button(action: {
-                    if (self.addNewExerciseViewModel.wasExerciseSelected) {
+                    if (self.id != "") {
                         self.time = Int(self.timeStr) ?? 0
                         self.reps = Int(self.repsStr) ?? 0
                         self.weight = Int(self.weightStr) ?? 0
 
-                        let newExSet = ExSet(exId: self.addNewExerciseViewModel.exercise!.id, time: self.time, reps: self.reps, weight: self.weight)
+                        let newExSet = ExSet(exId: self.id, time: self.time, reps: self.reps, weight: self.weight)
                         if (self.appState.trackingData.workout.rounds.isEmpty) {
                             var newRound = Round()
                             newRound.sets = [[newExSet]]
@@ -156,14 +156,14 @@ struct AddNewExerciseTracking: View {
 
             Form {
                 Button(action: { self.showingSelectExercises.toggle() }) {
-                    if (addNewExerciseViewModel.wasExerciseSelected) {
-                        Text("\(addNewExerciseViewModel.exercise!.id.components(separatedBy: ":")[0].formatFromId())")
+                    if (self.id != "") {
+                        Text("\(self.id.components(separatedBy: ":")[0].formatFromId())")
                     } else {
                         Text("Select Exercise")
                     }
                 }.buttonStyle(BorderlessButtonStyle())
                 
-                if addNewExerciseViewModel.wasExerciseSelected {
+                if self.id != "" {
                     HStack {
                         Toggle(isOn: $timed, label: {
                             Text("Timed")
@@ -187,7 +187,7 @@ struct AddNewExerciseTracking: View {
                 }
             }
         }.sheet(isPresented: self.$showingSelectExercises) {
-            SelectExerciseView(addNewExerciseViewModel: self.addNewExerciseViewModel).environmentObject(self.appState)
+            SelectExerciseView(exId: self.$id).environmentObject(self.appState)
         }.onTapGesture {
             self.hideKeyboard()
         }
@@ -277,7 +277,7 @@ struct AddNewExerciseEdit: View {
                 }
             }
         }.sheet(isPresented: self.$showingSelectExercises) {
-            SelectExerciseView(addNewExerciseViewModel: self.addNewExerciseViewModel).environmentObject(self.appState)
+            SelectExerciseView(exId: self.$id).environmentObject(self.appState)
         }.onTapGesture {
             self.hideKeyboard()
         }

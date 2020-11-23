@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SelectExerciseView: View {
     @EnvironmentObject var appState: AppState
-    @ObservedObject var addNewExerciseViewModel: AddNewExerciseViewModel
+    @Binding var exId: String
     @State private var searchText: String = ""
     @State private var isPresented = false
     @State private var onlyMyExercises = false
@@ -30,8 +30,7 @@ struct SelectExerciseView: View {
                             self.searchText.isEmpty ? true : $0.id.contains(self.searchText)
                         }) { exercise in
                             Button(action: {
-                                self.addNewExerciseViewModel.exercise = exercise
-                                self.addNewExerciseViewModel.wasExerciseSelected = true
+                                self.exId = exercise.id
                                 self.presentaionMode.wrappedValue.dismiss()
                             }) {
                                 Text(exercise.id.components(separatedBy: ":")[0].formatFromId())
@@ -44,8 +43,7 @@ struct SelectExerciseView: View {
                             self.searchText.isEmpty ? true : $0.id.contains(self.searchText)
                         }) { exercise in
                             Button(action: {
-                                self.addNewExerciseViewModel.exercise = exercise
-                                self.addNewExerciseViewModel.wasExerciseSelected = true
+                                self.exId = exercise.id
                                 self.presentaionMode.wrappedValue.dismiss()
                             }) {
                                 Text(exercise.id.components(separatedBy: ":")[0].formatFromId())
@@ -73,6 +71,6 @@ struct SelectExerciseView: View {
 
 struct SelectExerciseView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectExerciseView(addNewExerciseViewModel: AddNewExerciseViewModel()).environmentObject(AppState())
+        SelectExerciseView(exId: .constant("")).environmentObject(AppState())
     }
 }
