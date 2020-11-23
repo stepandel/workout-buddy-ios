@@ -10,92 +10,14 @@ import SwiftUI
 
 struct ExercisesView: View {
     @EnvironmentObject var appState: AppState
-    @State private var searchText: String = ""
-    @State var isPresented = false
-    @State var onlyMyExercises = false
     
     var body: some View {
         NavigationView {
-            if onlyMyExercises {
-                if appState.userData.exercises.count > 0 {
-                    VStack {
-                        Toggle(isOn: $onlyMyExercises) {
-                            Text("Only Show My Exercises")
-                        }.padding()
-                        SearchBar(text: $searchText)
-                        List {
-                            ForEach(appState.userData.exercises.filter {
-                                self.searchText.isEmpty ? true : $0.id.contains(self.searchText)
-                            }) { exercise in
-                                Text("\(exercise.id.components(separatedBy: ":")[0].formatFromId())")
-                            }
-                        }
-                        .listStyle(PlainListStyle())
-                        .navigationBarTitle("My Exercises")
-                        .navigationBarItems(trailing: Button(action: {
-                            self.isPresented.toggle()
-                        }) {
-                            Image(systemName: "plus")
-                                .padding()
-                        })
-                    }
-                } else {
-                    Text("Create New Exercise")
-                        .onTapGesture {
-                            self.isPresented.toggle()
-                        }
-                        .navigationBarTitle("My Exercises")
-                        .navigationBarItems(trailing: Button(action: {
-                            self.isPresented.toggle()
-                        }) {
-                            Image(systemName: "plus")
-                        })
-                }
-            } else {
-                if appState.userData.allExercises.count > 0 {
-                    VStack {
-                        Toggle(isOn: $onlyMyExercises) {
-                            Text("Only Show My Exercises")
-                        }.padding()
-                        SearchBar(text: $searchText)
-                        List {
-                            ForEach(appState.userData.allExercises.filter {
-                                self.searchText.isEmpty ? true : $0.id.contains(self.searchText)
-                            }) { exercise in
-                                Text("\(exercise.id.components(separatedBy: ":")[0].formatFromId())")
-                            }
-                        }
-                        .listStyle(PlainListStyle())
-                        .navigationBarTitle("My Exercises")
-                        .navigationBarItems(trailing: Button(action: {
-                            self.isPresented.toggle()
-                        }) {
-                            Image(systemName: "plus")
-                                .padding()
-                        })
-                    }
-                } else {
-                    Text("Create New Exercise")
-                        .onTapGesture {
-                            self.isPresented.toggle()
-                        }
-                        .navigationBarTitle("My Exercises")
-                        .navigationBarItems(trailing: Button(action: {
-                            self.isPresented.toggle()
-                        }) {
-                            Image(systemName: "plus")
-                        })
-                }
-            }
+            Exercises().environmentObject(self.appState)
         }
-        .sheet(isPresented: self.$isPresented) { NewExerciseView().environmentObject(self.appState) }
-        .onTapGesture {
-            self.hideKeyboard()
+        .sheet(isPresented: self.$appState.routing.exrecises.isModalSheetPresented) {
+            NewExerciseView().environmentObject(self.appState)
         }
-    }
-    
-    func hideKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 
