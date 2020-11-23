@@ -228,6 +228,7 @@
 			children = (
 				D9B96774256C30920040B3F4 /* Exercises.swift */,
 				D9E2CE732476B0A90043C698 /* ExercisesView.swift */,
+				D9BF9BEA247DEE4300213DB2 /* SelectExerciseView.swift */,
 				D9E2CE752478005F0043C698 /* NewExerciseView.swift */,
 			);
 			path = Exercises;
@@ -236,7 +237,6 @@
 		D921901B255EE273005C7899 /* TrackWorkout */ = {
 			isa = PBXGroup;
 			children = (
-				D9BF9BEA247DEE4300213DB2 /* SelectExerciseView.swift */,
 				D9147666246B7F5B00447A55 /* TrackWorkout.swift */,
 				D921901C255EE2A4005C7899 /* TrackWorkoutViewModel.swift */,
 				D97F69192502A742002A74A3 /* SelectedExerciseView.swift */,

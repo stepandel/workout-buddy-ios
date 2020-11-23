@@ -29,7 +29,7 @@ struct EditWorkout: View {
             .navigationBarItems(leading: cancelBtn, trailing: saveBtn)
         }
         .sheet(isPresented: self.$appState.routing.editWorkout.showingModalSheet) {
-            AddExercise(interactor: .init(appState: self.appState, round: self.$workout.rounds[self.appState.routing.editWorkout.curRoundIdx]))
+            AddExercise(interactor: .init(appState: self.appState, round: self.$workout.rounds[self.appState.routing.editWorkout.curRoundIdx])).environmentObject(self.appState)
         }
     }
     
@@ -69,10 +69,19 @@ extension EditWorkout {
     struct Routing {
         var showingModalSheet = false
         private(set) var curRoundIdx = 0
+        var showingSelectExercisesSheet = false
         
         mutating func showExercisesModal(roundIdx: Int) {
             self.curRoundIdx = roundIdx
             self.showingModalSheet = true
+        }
+        
+        mutating func showSelectExercisesSheet() {
+            self.showingSelectExercisesSheet = true
+        }
+        
+        mutating func dismissSelectExercisesSheet() {
+            self.showingSelectExercisesSheet = false
         }
     }
 }

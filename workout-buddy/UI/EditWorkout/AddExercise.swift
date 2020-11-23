@@ -9,9 +9,9 @@
 import SwiftUI
 
 struct AddExercise: View {
+    @EnvironmentObject var appState: AppState
     @Environment(\.presentationMode) var presentationMode
-    @State var showingModalSheet = false
-    @State var exId: String?
+    @State var exId = ""
     @State var timeStr = ""
     @State var repsStr = ""
     @State var weightStr = ""
@@ -24,7 +24,7 @@ struct AddExercise: View {
             HStack {
                 self.cancelBtn
                 Spacer()
-                if exId != nil {
+                if self.exId != "" {
                     self.addBtn
                 }
             }
@@ -33,8 +33,8 @@ struct AddExercise: View {
             
             self.exerciseForm
             
-        }.sheet(isPresented: self.$showingModalSheet) {
-//            SelectExerciseView(addNewExerciseViewModel: self.addNewExerciseViewModel).environmentObject(self.appState)
+        }.sheet(isPresented: self.$appState.routing.editWorkout.showingSelectExercisesSheet) {
+            SelectExerciseView(exId: self.$exId).environmentObject(self.appState)
         }.onTapGesture {
             self.hideKeyboard()
         }
@@ -60,9 +60,10 @@ extension AddExercise {
     
     private var addBtn: some View {
         Button(action: {
-            if let exId = self.exId {
-                self.interactor.addExSet(exId: exId, time: self.timeStr, reps: self.repsStr, weight: self.weightStr, timed: self.timed)
+            if self.exId != "" {
+                self.interactor.addExSet(exId: self.exId, time: self.timeStr, reps: self.repsStr, weight: self.weightStr, timed: self.timed)
             }
+            self.presentationMode.wrappedValue.dismiss()
         }) {
             Text("Add")
         }
@@ -70,10 +71,10 @@ extension AddExercise {
     
     private var selectExerciseBtn: some View {
         Button(action: {
-            self.showingModalSheet.toggle()
+            self.appState.routing.editWorkout.showSelectExercisesSheet()
         }) {
-            if self.exId != nil {
-                Text("\(exId!)")
+            if self.exId != "" {
+                Text("\(self.exId)")
             } else {
                 Text("Select Exercise")
             }
@@ -89,7 +90,7 @@ extension AddExercise {
         Form {
             self.selectExerciseBtn
             
-            if self.exId != nil {
+            if self.exId != "" {
                 HStack {
                     Toggle(isOn: $timed, label: {
                         Text("Timed")
@@ -117,6 +118,6 @@ extension AddExercise {
 
 struct AddExercise_Previews: PreviewProvider {
     static var previews: some View {
-        AddExercise(interactor: .init(appState: AppState(), round: .constant(Round())))
+        AddExercise(interactor: .init(appState: AppState(), round: .constant(Round()))).environmentObject(AppState())
     }
 }

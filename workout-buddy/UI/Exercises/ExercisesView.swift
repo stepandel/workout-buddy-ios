@@ -13,7 +13,7 @@ struct ExercisesView: View {
     
     var body: some View {
         NavigationView {
-            Exercises().environmentObject(self.appState)
+            Exercises(exId: .constant(""), needToSelectExercise: false).environmentObject(self.appState)
         }
         .sheet(isPresented: self.$appState.routing.exrecises.isModalSheetPresented) {
             NewExerciseView().environmentObject(self.appState)

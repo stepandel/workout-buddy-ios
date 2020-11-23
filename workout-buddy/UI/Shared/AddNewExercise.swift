@@ -155,7 +155,9 @@ struct AddNewExerciseTracking: View {
             .padding(.top)
 
             Form {
-                Button(action: { self.showingSelectExercises.toggle() }) {
+                Button(action: {
+                    self.appState.routing.editWorkout.showSelectExercisesSheet()
+                }) {
                     if (self.id != "") {
                         Text("\(self.id.components(separatedBy: ":")[0].formatFromId())")
                     } else {
@@ -186,7 +188,7 @@ struct AddNewExerciseTracking: View {
                     }
                 }
             }
-        }.sheet(isPresented: self.$showingSelectExercises) {
+        }.sheet(isPresented: self.$appState.routing.editWorkout.showingSelectExercisesSheet) {
             SelectExerciseView(exId: self.$id).environmentObject(self.appState)
         }.onTapGesture {
             self.hideKeyboard()

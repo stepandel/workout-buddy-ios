@@ -10,6 +10,8 @@ import SwiftUI
 
 struct Exercises: View {
     @EnvironmentObject var appState: AppState
+    @Binding var exId: String
+    var needToSelectExercise: Bool
     @State private var onlyMyExercises = false
     @State private var searchText = ""
     
@@ -54,7 +56,11 @@ extension Exercises {
             ForEach(appState.userData.exercises.filter {
                 self.searchText.isEmpty ? true : $0.id.contains(self.searchText)
             }) { exercise in
-                Text("\(exercise.id.components(separatedBy: ":")[0].formatFromId())")
+                if self.needToSelectExercise {
+                    self.selectExerciseBtn(exercise: exercise)
+                } else {
+                    self.exerciseNameTxt(exercise: exercise)
+                }
             }
         }
         .listStyle(PlainListStyle())
@@ -65,10 +71,18 @@ extension Exercises {
             ForEach(appState.userData.allExercises.filter {
                 self.searchText.isEmpty ? true : $0.id.contains(self.searchText)
             }) { exercise in
-                Text("\(exercise.id.components(separatedBy: ":")[0].formatFromId())")
+                if self.needToSelectExercise {
+                    self.selectExerciseBtn(exercise: exercise)
+                } else {
+                    self.exerciseNameTxt(exercise: exercise)
+                }
             }
         }
         .listStyle(PlainListStyle())
+    }
+    
+    private func exerciseNameTxt(exercise: Exercise) -> some View {
+        return Text("\(exercise.id.components(separatedBy: ":")[0].formatFromId())")
     }
 }
 
@@ -81,6 +95,15 @@ extension Exercises {
         .onTapGesture {
             self.appState.routing.exrecises.presentNewExerciseModal()
         }
+    }
+    
+    private func selectExerciseBtn(exercise: Exercise) -> some View {
+        return Button(action: {
+            self.exId = exercise.id
+            self.appState.routing.editWorkout.dismissSelectExercisesSheet()
+        }) {
+            Text(exercise.id.components(separatedBy: ":")[0].formatFromId())
+        }.buttonStyle(BorderlessButtonStyle())
     }
 }
 
@@ -110,6 +133,6 @@ extension Exercises {
 
 struct Exercises_Previews: PreviewProvider {
     static var previews: some View {
-        Exercises().environmentObject(AppState())
+        Exercises(exId: .constant(""), needToSelectExercise: false).environmentObject(AppState())
     }
 }
