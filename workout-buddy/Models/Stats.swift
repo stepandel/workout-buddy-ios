@@ -167,32 +167,6 @@ struct ExerciseStats {
             }
         }
     }
-    
-    mutating func subtractStatsFrom(workout: Workout) {
-        workout.rounds.forEach { round in
-            round.sets.forEach { sets in
-                sets.forEach { set in
-                    // sets
-                    self.totalSets -= 1
-                    
-                    // weight
-                    if let weight = set.weight, weight > 0 {
-                        self.volume -= weight
-                    }
-                    
-                    // reps
-                    if let reps = set.reps, reps > 0 {
-                        self.totalReps -= reps
-                    }
-                    
-                    // time
-                    if let time = set.time, time > 0 {
-                        self.totalTime -= time
-                    }
-                }
-            }
-        }
-    }
 }
 
 extension Array where Element == CGFloat {
