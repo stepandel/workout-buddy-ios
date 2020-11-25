@@ -22,7 +22,7 @@ extension AppState {
         var stats: Stats
         var weekEndTS: Double?
         var tenWeekRollingStats: TenWeekRollingStats
-        var testValue = 0
+        var exerciseData: [String: ExerciseStats] = [:]
         
             
         var userId: String = UserDefaults.standard.string(forKey: "userId") ?? "" {

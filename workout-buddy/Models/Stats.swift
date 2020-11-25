@@ -121,6 +121,80 @@ struct WorkoutStats {
     }
 }
 
+
+struct ExerciseStats {
+    var volume: Int
+    var maxWeight: Int
+    var totalReps: Int
+    var maxReps: Int
+    var totalSets: Int
+    var totalTime: Int
+    var maxTime: Int
+    var oneRM: Int
+    
+    init() {
+        self.volume = 0
+        self.maxWeight = 0
+        self.totalReps = 0
+        self.maxReps = 0
+        self.totalSets = 0
+        self.totalTime = 0
+        self.maxTime = 0
+        self.oneRM = 0
+    }
+    
+    mutating func addStatsFrom(sets: [ExSet]) {
+        sets.forEach { set in
+            // sets
+            self.totalSets += 1
+            
+            // weight
+            if let weight = set.weight, weight > 0 {
+                self.volume += weight
+                self.maxWeight = self.maxWeight > weight ? self.maxWeight : weight
+            }
+            
+            // reps
+            if let reps = set.reps, reps > 0 {
+                self.totalReps += reps
+                self.maxReps = self.maxReps > reps ? self.maxReps : reps
+            }
+            
+            // time
+            if let time = set.time, time > 0 {
+                self.totalTime += time
+                self.maxTime = self.maxTime > time ? self.maxTime : time
+            }
+        }
+    }
+    
+    mutating func subtractStatsFrom(workout: Workout) {
+        workout.rounds.forEach { round in
+            round.sets.forEach { sets in
+                sets.forEach { set in
+                    // sets
+                    self.totalSets -= 1
+                    
+                    // weight
+                    if let weight = set.weight, weight > 0 {
+                        self.volume -= weight
+                    }
+                    
+                    // reps
+                    if let reps = set.reps, reps > 0 {
+                        self.totalReps -= reps
+                    }
+                    
+                    // time
+                    if let time = set.time, time > 0 {
+                        self.totalTime -= time
+                    }
+                }
+            }
+        }
+    }
+}
+
 extension Array where Element == CGFloat {
     var normalized: [CGFloat] {
         if let _ = self.min(), let max = self.max() {

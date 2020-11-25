@@ -266,6 +266,7 @@ extension AppState {
         
         self.userData.stats.addStatsFrom(workout: completedWorkout)
         self.updateTenWeekRollingStats(with: completedWorkout)
+        self.recalculateExerciseStats()
         
         self.networkManger.saveStats(userId: self.userData.userId, stats: self.userData.stats)
     }
@@ -288,6 +289,7 @@ extension AppState {
             
             // Update weekly stats
             self.updateTenWeekRollingStats(with: completedWorkout, subtract: true)
+            self.recalculateExerciseStats()
         }
     }
     
@@ -300,8 +302,21 @@ extension AppState {
                 self.updateTenWeekRollingStats(with: workout)
             }
             
+            self.recalculateExerciseStats()
         }
     }
+    
+    func deleteWorkouts(at offsets: IndexSet) {
+        var workoutIds: [String] = []
+        offsets.forEach { i in
+            workoutIds.append(self.userData.workouts[i].id)
+        }
+        self.userData.workouts.remove(atOffsets: offsets)
+        self.networkManger.deleteWorkouts(userId: self.userData.userId, workoutIds: workoutIds)
+    }
+    
+    
+    // MARK: - Stats
     
     func updateTenWeekRollingStats(with workout: CompletedWorkout, subtract: Bool = false) {
         self.userData.weekEndTS = Date().endOfWeek()?.timeIntervalSince1970
@@ -319,12 +334,37 @@ extension AppState {
         }
     }
     
-    func deleteWorkouts(at offsets: IndexSet) {
-        var workoutIds: [String] = []
-        offsets.forEach { i in
-            workoutIds.append(self.userData.workouts[i].id)
+    func recalculateExerciseStats() {
+        self.userData.workoutLog.forEach { completedWorkout in
+            completedWorkout.workout.rounds.forEach { round in
+                
+                var oneRMs: [String: Double] = [:]
+                
+                round.sets.forEach { sets in
+                    if self.userData.exerciseData[sets[0].exId] == nil {
+                        self.userData.exerciseData[sets[0].exId] = ExerciseStats()
+                    }
+                    self.userData.exerciseData[sets[0].exId]?.addStatsFrom(sets: sets)
+                    
+                    // oneRM
+                    sets.forEach { set in
+                        if let weight = set.weight, let reps = set.reps, weight > 0, reps > 0 {
+                            if oneRMs[set.exId] == nil {
+                                oneRMs[set.exId] = 0.0
+                            }
+                            let actualReps = reps > 10 ? 10 : reps
+                            let newOneRM = Double(weight) / (1.0278 - (0.0278*Double(actualReps)))
+                            oneRMs[set.exId] = oneRMs[set.exId]! > newOneRM ? oneRMs[set.exId] : newOneRM
+                        }
+                    }
+                }
+                
+                for (exId, oneRM) in oneRMs {
+                    self.userData.exerciseData[exId]?.oneRM = Int(oneRM)
+                }
+            }
         }
-        self.userData.workouts.remove(atOffsets: offsets)
-        self.networkManger.deleteWorkouts(userId: self.userData.userId, workoutIds: workoutIds)
+        
+        print(self.userData.exerciseData)
     }
 }

@@ -12,6 +12,7 @@ struct StatsView: View {
     @EnvironmentObject var appState: AppState
     @State var selected = 9
     @State var selectedWeek = "This Week"
+    @State var exerciseIds: [String] = []
     
     var body: some View {
         self.totalsSection
@@ -19,6 +20,10 @@ struct StatsView: View {
         self.repsGraph
         self.workoutsGraph
         self.workoutStatsSection
+        self.exerciseStatsSection
+        .onAppear {
+            self.exerciseIds = self.appState.userData.exerciseData.keys.map { $0 }
+        }
     }
     
     func getSelectedWeekInterval() {
@@ -116,6 +121,20 @@ extension StatsView {
                 Text("Active Time")
                 Spacer()
                 Text("\(appState.userData.tenWeekRollingStats.weeklyStats[selected].stats.totalTimeWorkingout / 60) min")
+            }
+        }
+    }
+    
+    private var exerciseStatsSection: some View {
+        Section(header: Text("Exercises")) {
+            ForEach(self.exerciseIds, id: \.self) { exId in
+                if self.appState.userData.exerciseData[exId] != nil {
+                    NavigationLink(
+                        destination: ExerciseStatsView(exerciseStats: self.appState.userData.exerciseData[exId]!),
+                        label: {
+                            Text("\(exId.components(separatedBy: ":")[0].formatFromId())")
+                        })
+                }
             }
         }
     }
