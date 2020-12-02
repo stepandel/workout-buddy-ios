@@ -57,7 +57,7 @@ extension WorkoutRounds {
                         }
                     }
                     Spacer()
-                    if set[0].reps! > 0 {
+                    if set[0].reps != nil {
                         Text("\(set[0].reps!)x")
                     } else if set[0].time != nil {
                         Text("\(set[0].time!)sec")
