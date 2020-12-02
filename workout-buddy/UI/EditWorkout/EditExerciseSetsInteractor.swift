@@ -26,12 +26,17 @@ struct EditExerciseSetsInteractor {
         })
     }
     
-    func saveSets(sets: [SetData]) {
+    func saveSets(sets: [SetData], timed: Bool) {
         self.exSets = []
         (0..<sets.count).forEach { i in
             if !sets[i].deleted {
-                let newExSet = ExSet(exId: sets[i].exId, time: Int(sets[i].time), reps: Int(sets[i].reps), weight: Int(sets[i].weight))
-                self.exSets.append(newExSet)
+                if timed {
+                    let newExSet = ExSet(exId: sets[i].exId, time: Int(sets[i].time), reps: nil, weight: Int(sets[i].weight))
+                    self.exSets.append(newExSet)
+                } else {
+                    let newExSet = ExSet(exId: sets[i].exId, time: nil, reps: Int(sets[i].reps), weight: Int(sets[i].weight))
+                    self.exSets.append(newExSet)
+                }
             }
         }
     }

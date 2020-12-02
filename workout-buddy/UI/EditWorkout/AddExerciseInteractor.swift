@@ -19,10 +19,10 @@ struct AddExerciseInteractor {
     
     func addExSet(exId: String, time: String, reps: String, weight: String, timed: Bool) {
         if timed {
-            let newExSet = ExSet(exId: exId, time: Int(time), reps: 0, weight: Int(weight))
+            let newExSet = ExSet(exId: exId, time: Int(time) ?? 0, reps: nil, weight: Int(weight))
             self.round.sets.append([newExSet])
         } else {
-            let newExSet = ExSet(exId: exId, time: 0, reps: Int(reps), weight: Int(weight))
+            let newExSet = ExSet(exId: exId, time: nil, reps: Int(reps) ?? 0, weight: Int(weight))
             self.round.sets.append([newExSet])
         }
     }
