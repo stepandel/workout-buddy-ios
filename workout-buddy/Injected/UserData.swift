@@ -23,6 +23,7 @@ extension AppState {
         var weekEndTS: Double?
         var tenWeekRollingStats: TenWeekRollingStats
         var exerciseData: [String: ExerciseStats] = [:]
+        var tenWeekRollingExerciseStats: [String: TenWeekRollingExerciseStats] = [:]
         
             
         var userId: String = UserDefaults.standard.string(forKey: "userId") ?? "" {

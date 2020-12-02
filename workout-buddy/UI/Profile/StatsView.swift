@@ -127,10 +127,10 @@ extension StatsView {
     
     private var exerciseStatsSection: some View {
         Section(header: Text("Exercises")) {
-            ForEach(self.exerciseIds, id: \.self) { exId in
-                if self.appState.userData.exerciseData[exId] != nil {
+            ForEach(self.exerciseIds.sorted(), id: \.self) { exId in
+                if self.appState.userData.exerciseData[exId] != nil && self.appState.userData.tenWeekRollingExerciseStats[exId] != nil {
                     NavigationLink(
-                        destination: ExerciseStatsView(exerciseStats: self.appState.userData.exerciseData[exId]!),
+                        destination: ExerciseStatsView(exId: exId, exerciseStats: self.appState.userData.exerciseData[exId]!, tenWeekRollingExerciseStats: self.appState.userData.tenWeekRollingExerciseStats[exId]!),
                         label: {
                             Text("\(exId.components(separatedBy: ":")[0].formatFromId())")
                         })

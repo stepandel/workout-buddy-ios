@@ -365,6 +365,49 @@ extension AppState {
             }
         }
         
-        print(self.userData.exerciseData)
+        self.calcualateExerciseStats()
+    }
+    
+    func calcualateExerciseStats() {
+        let weekSets = getExSetsByExercise()
+        
+        for i in 0...9 {
+            if let exStats = weekSets[i] {
+                for (exId, exSets) in exStats {
+                    if self.userData.tenWeekRollingExerciseStats[exId] == nil {
+                        self.userData.tenWeekRollingExerciseStats[exId] = TenWeekRollingExerciseStats()
+                    }
+                    self.userData.tenWeekRollingExerciseStats[exId]?.weeklyStats[i] = .init(id: i)
+                    self.userData.tenWeekRollingExerciseStats[exId]?.weeklyStats[i].stats = getExerciseStatsFromSets(exSets: exSets)
+                }
+            }
+        }
+    }
+    
+    
+    func getExSetsByExercise() -> [Int : [String : [ExSet]]] {
+        var weekSets: [Int : [String : [ExSet]]] = [:]
+        self.userData.workoutLog.forEach { workout in
+            self.userData.weekEndTS = Date().endOfWeek()?.timeIntervalSince1970
+            let weekInS = 604800.0
+            
+            guard let weekEndTS = self.userData.weekEndTS else { return }
+            
+            let weekIdx = 9 - Int(floor((weekEndTS - workout.startTS) / weekInS))
+            if weekIdx > -1 && weekIdx < 10 {
+                workout.workout.rounds.forEach { round in
+                    round.sets.forEach { sets in
+                        if weekSets[weekIdx] == nil {
+                            weekSets[weekIdx] = [:]
+                        }
+                        var exSets = weekSets[weekIdx]?[sets[0].exId] ?? []
+                        exSets.append(contentsOf: sets)
+                        weekSets[weekIdx]?[sets[0].exId] = exSets
+                    }
+                }
+            }
+        }
+        
+        return weekSets
     }
 }
