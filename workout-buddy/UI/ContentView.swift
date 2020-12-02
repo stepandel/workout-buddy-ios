@@ -58,9 +58,9 @@ struct ContentView: View {
                     .tag(Tabs.profile)
             }
             
-            if !appState.userData.isLoggedIn {
-                LoginView()
-            }
+//            if !appState.userData.isLoggedIn {
+//                LoginView()
+//            }
         }
     }
 }
