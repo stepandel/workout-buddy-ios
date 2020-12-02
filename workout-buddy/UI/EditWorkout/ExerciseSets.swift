@@ -17,6 +17,9 @@ struct ExerciseSets: View {
     
     var body: some View {
         List {
+            Toggle(isOn: $timed) {
+                Text("Timed")
+            }
             self.header
             ForEach(self.sets) { set in
                 if !set.deleted {
@@ -44,7 +47,7 @@ struct ExerciseSets: View {
             }
         }
         .onDisappear {
-            self.interactor.saveSets(sets: self.sets)
+            self.interactor.saveSets(sets: self.sets, timed: self.timed)
         }
     }
 }
