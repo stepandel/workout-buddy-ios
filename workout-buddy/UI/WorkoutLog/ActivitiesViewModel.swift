@@ -30,12 +30,19 @@ extension Activities {
             }
         }
         
-//        func deleteWorkout(at offsets: IndexSet) {
-//            offsets.forEach { i in
-//                self.appState.deleteWorkoutLogItem(completedWorkout: self.workoutLog[i])
-//                self.completedWorkouts.remove(at: self.completedWorkouts.count - i - 1)
-//            }
-//            self.workoutLog.remove(atOffsets: offsets)
-//        }
+        func weekStr(weekIdx: Int) -> String {
+            if weekIdx == 0 {
+                return "This Week"
+            }
+            
+            let today = Date()
+            let weekDay = Calendar.gregorian.date(byAdding: .day, value: -weekIdx*7, to: today)
+            
+            if let startOfWeek = weekDay?.startOfWeek(), let endOfWeek = weekDay?.endOfWeek() {
+                return weekRange(startOfWeek: startOfWeek, endOfWeek: endOfWeek)
+            }
+
+            return "Week ???"
+        }
     }
 }

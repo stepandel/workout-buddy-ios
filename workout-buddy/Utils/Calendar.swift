@@ -14,16 +14,16 @@ extension Calendar {
 
 extension Date {
     func startOfWeek(using calendar: Calendar = .gregorian) -> Date? {
-        guard let sunday = Date().getSunday() else { return nil }
-        if isTodaySunday() {
+        guard let sunday = self.getSunday() else { return nil }
+        if isSunday() {
             return calendar.date(byAdding: .day, value: -6, to: sunday)
         }
         return calendar.date(byAdding: .day, value: 1, to: sunday)
     }
     
     func endOfWeek(using calendar: Calendar = .gregorian) -> Date? {
-        guard let sunday = Date().getSunday() else { return nil }
-        if isTodaySunday() {
+        guard let sunday = self.getSunday() else { return nil }
+        if isSunday() {
             return calendar.date(byAdding: .day, value: 1, to: sunday)
         }
         return calendar.date(byAdding: .day, value: 8, to: sunday)
@@ -33,9 +33,9 @@ extension Date {
         return calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
     }
     
-    func isTodaySunday(using calendar: Calendar = .gregorian) -> Bool {
-        guard let sunday = Date().getSunday() else { return false }
-        let dayStart = calendar.startOfDay(for: Date())
+    func isSunday(using calendar: Calendar = .gregorian) -> Bool {
+        guard let sunday = self.getSunday() else { return false }
+        let dayStart = calendar.startOfDay(for: self)
         return dayStart == sunday
     }
     
@@ -57,4 +57,12 @@ extension Date {
         }
         return nil
     }
+}
+
+func weekRange(startOfWeek: Date, endOfWeek: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = NSLocale.current
+    dateFormatter.dateFormat = "MMM-dd"
+    
+    return "\(dateFormatter.string(from: startOfWeek)) - \(dateFormatter.string(from: Calendar.gregorian.date(byAdding: .second, value: -1 ,to: endOfWeek) ?? endOfWeek))"
 }
