@@ -17,13 +17,18 @@ struct Activities: View {
         NavigationView {
             if viewModel.workoutLog.count > 0 {
                 List {
-                    ForEach(viewModel.workoutLog, id:\.wlId) { completedWorkout in
-                        Section(header: Text("")) {
-                            NavigationLink(destination: CompletedWorkoutView(completedWorkout: self.$appState.userData.workoutLog[appState.userData.workoutLog.firstIndex(of: completedWorkout)!]).environmentObject(self.appState)) {
-                                ActivityRow(completedWorkout: completedWorkout)
+                    ForEach(viewModel.workoutLog, id: \.self) { week in
+                        Section(header: Text("Week")) {
+                            ForEach(week, id:\.wlId) { completedWorkout in
+//                                Section(header: Text("")) {
+                                    NavigationLink(destination: CompletedWorkoutView(completedWorkout: self.$appState.userData.workoutLog[appState.userData.workoutLog.firstIndex(of: completedWorkout)!]).environmentObject(self.appState)) {
+                                        WorkoutLogRow(completedWorkout: completedWorkout)
+                                    }
+//                                }
                             }
                         }
-                    }.onDelete { self.viewModel.deleteWorkout(at: $0) }
+                    }
+//                    .onDelete { self.viewModel.deleteWorkout(at: $0) }
     //                .listRowBackground(Constants.Colors.appBackground)
                 }
                 .navigationBarTitle("Completed Workouts")

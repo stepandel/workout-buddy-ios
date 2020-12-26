@@ -38,4 +38,23 @@ extension Date {
         let dayStart = calendar.startOfDay(for: Date())
         return dayStart == sunday
     }
+    
+    func weekOfYear(using calendar: Calendar = .gregorian) -> Int {
+        return calendar.component(.weekOfYear, from: self)
+    }
+    
+    func yearForWeekOfYear(using calendar: Calendar = .gregorian) -> Int {
+        return calendar.component(.yearForWeekOfYear, from: self)
+    }
+    
+    func lastWeekOfYear(for year: Int, month: Int = 12, day: Int = 31, using calendar: Calendar = .gregorian) -> Int? {
+        let components = DateComponents(year: year, month: month, day: day)
+        if let weekOfYear = calendar.date(from: components)?.weekOfYear() {
+            if weekOfYear == 1 {
+                return Date().lastWeekOfYear(for: year, month: month, day: day - 1)
+            }
+            return weekOfYear
+        }
+        return nil
+    }
 }
