@@ -17,6 +17,7 @@ struct CompletedWorkoutView: View {
     
     @State var dateStr = ""
     @State var isEditPresented = false
+    @State var isShowingAlert = false
     
     let dateFormatter = DateFormatter()
     
@@ -37,6 +38,9 @@ struct CompletedWorkoutView: View {
                 self.dateStr = self.dateFormatter.string(from: date)
             }.navigationBarTitle(Text("\(self.appState.userData.workoutLog[workoutLogIdx].workout.name)"))
             .navigationBarItems(trailing: trailingBarItemStack)
+            .alert(isPresented: self.$isShowingAlert) {
+                self.alert()
+            }
             
         } else {
             EmptyView() // When the workout is being deleted
@@ -58,8 +62,7 @@ extension CompletedWorkoutView {
     
     private var deleteButton: some View {
         Button(action: {
-            self.presentationMode.wrappedValue.dismiss()
-            self.viewModel.deleteWorkout(completedWorkout: self.appState.userData.workoutLog[workoutLogIdx], weekIdx: weekIdx)
+            self.isShowingAlert.toggle()
         }, label: {
             Image(systemName: "trash")
         })
@@ -71,6 +74,18 @@ extension CompletedWorkoutView {
                 .padding(.trailing)
             editButton
         }
+    }
+}
+
+
+// MARK: - Alerts
+
+extension CompletedWorkoutView {
+    private func alert() -> Alert {
+        return Alert(title: Text("Are you sure you want to delete this workout?"), primaryButton: .default(Text("Yes"), action: {
+            self.presentationMode.wrappedValue.dismiss()
+            self.viewModel.deleteWorkout(completedWorkout: self.appState.userData.workoutLog[workoutLogIdx], weekIdx: weekIdx)
+        }), secondaryButton: .default(Text("No")))
     }
 }
 
