@@ -12,7 +12,7 @@ extension Activities {
     class ViewModel: ObservableObject {
         
         // State
-        @Published var workoutLog: [[CompletedWorkout]]
+        @Published var workoutLog: [WorkoutWeek]
         
         // Misc
         let appState: AppState
@@ -27,7 +27,11 @@ extension Activities {
             var curWeekYear = Date().yearForWeekOfYear()
             var weekIdx = 0
             self.completedWorkouts.reversed().forEach { workout in
-                (curWeek, curWeekYear, weekIdx) = workoutLog.addToLog(curWeek: curWeek, curWeekYear: curWeekYear, workout: workout, at: weekIdx)
+                (curWeek, curWeekYear, weekIdx) = self.workoutLog.addToLog(curWeek: curWeek, curWeekYear: curWeekYear, workout: workout, at: weekIdx)
+            }
+            // For new users
+            if self.workoutLog.isEmpty {
+                self.workoutLog.append(WorkoutWeek(id: 0))
             }
         }
         
@@ -36,8 +40,8 @@ extension Activities {
             if let completedWorkoutsIdx = self.completedWorkouts.firstIndex(of: completedWorkout) {
                 self.completedWorkouts.remove(at: completedWorkoutsIdx)
             }
-            if let idxInWeek = self.workoutLog[weekIdx].firstIndex(of: completedWorkout) {
-                self.workoutLog[weekIdx].remove(at: idxInWeek)
+            if let idxInWeek = self.workoutLog[weekIdx].workouts.firstIndex(of: completedWorkout) {
+                self.workoutLog[weekIdx].workouts.remove(at: idxInWeek)
             }
         }
         

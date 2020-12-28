@@ -64,38 +64,3 @@ struct CompletedWorkoutShort: Codable {
         self.startTS = startTS
     }
 }
-
-
-// MARK: - WorkoutLog
-
-extension Array where Element == [CompletedWorkout] {
-    mutating func addToLog(curWeek: Int, curWeekYear: Int, workout: CompletedWorkout, at weekIdx: Int) -> (Int, Int, Int) {
-        let workoutWeek = Date(timeIntervalSince1970: workout.startTS).weekOfYear()
-        if curWeek == workoutWeek {
-            if !self.indices.contains(weekIdx) {
-                self.append([workout])
-            } else {
-                self[weekIdx].append(workout)
-            }
-            
-            return (curWeek, curWeekYear, weekIdx)
-            
-        } else {
-            if !self.indices.contains(weekIdx) {
-                self.append([])
-            }
-            if curWeek == 1 {
-                let prevWeekYear = curWeekYear - 1
-                if let prevWeek = Date().lastWeekOfYear(for: prevWeekYear) {
-                    return self.addToLog(curWeek: prevWeek, curWeekYear: prevWeekYear, workout: workout, at: weekIdx + 1)
-                } else {
-                    return (curWeek, curWeekYear, weekIdx)
-                }
-            } else {
-                let prevWeek = curWeek - 1
-                return self.addToLog(curWeek: prevWeek, curWeekYear: curWeekYear, workout: workout, at: weekIdx + 1)
-            }
-            
-        }
-    }
-}

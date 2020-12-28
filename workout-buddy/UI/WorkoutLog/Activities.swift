@@ -15,28 +15,27 @@ struct Activities: View {
     
     var body: some View {
         NavigationView {
-            if viewModel.workoutLog.count > 0 {
-                List {
-                    ForEach(viewModel.workoutLog, id: \.self) { week in
-                        Section(header: Text(viewModel.weekStr(weekIdx: viewModel.workoutLog.firstIndex(of: week)!))) {
-                            
-                            if week.isEmpty {
-                                self.nonCompletedWorkutLogRow(title: "Rest Week", dateStr: nil)
-                            }
-                            
-                            ForEach(week, id:\.wlId) { completedWorkout in
-                                NavigationLink(destination: CompletedWorkoutView(viewModel: viewModel, workoutLogIdx: self.appState.userData.workoutLog.firstIndex(of: completedWorkout)!, weekIdx: viewModel.workoutLog.firstIndex(of: week)!).environmentObject(self.appState)) {
-                                    self.completedWorkoutLogRow(completedWorkout: completedWorkout)
-                                }
+            List {
+                ForEach(viewModel.workoutLog, id: \.self) { week in
+                    Section(header: Text(viewModel.weekStr(weekIdx: viewModel.workoutLog.firstIndex(of: week)!))) {
+                        
+                        if viewModel.workoutLog.firstIndex(of: week) == 0 {
+                            self.nonCompletedWorkutLogRow(title: "Nothing Scheduled", dateStr: "Today")
+                        }
+                        
+                        else if week.workouts.isEmpty {
+                            self.nonCompletedWorkutLogRow(title: "Rest Week", dateStr: nil)
+                        }
+                        
+                        ForEach(week.workouts, id:\.wlId) { completedWorkout in
+                            NavigationLink(destination: CompletedWorkoutView(viewModel: viewModel, workoutLogIdx: self.appState.userData.workoutLog.firstIndex(of: completedWorkout)!, weekIdx: viewModel.workoutLog.firstIndex(of: week)!).environmentObject(self.appState)) {
+                                self.completedWorkoutLogRow(completedWorkout: completedWorkout)
                             }
                         }
                     }
                 }
-                .navigationBarTitle("Completed Workouts")
-            } else {
-                Text("Complete a Workout!")
-                    .navigationBarTitle("Completed Workouts")
             }
+            .navigationBarTitle("Completed Workouts")
         }
     }
 }
