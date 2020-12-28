@@ -19,9 +19,14 @@ struct Activities: View {
                 List {
                     ForEach(viewModel.workoutLog, id: \.self) { week in
                         Section(header: Text(viewModel.weekStr(weekIdx: viewModel.workoutLog.firstIndex(of: week)!))) {
+                            
+                            if week.isEmpty {
+                                self.nonCompletedWorkutLogRow(title: "Rest Week", dateStr: nil)
+                            }
+                            
                             ForEach(week, id:\.wlId) { completedWorkout in
                                 NavigationLink(destination: CompletedWorkoutView(viewModel: viewModel, workoutLogIdx: self.appState.userData.workoutLog.firstIndex(of: completedWorkout)!, weekIdx: viewModel.workoutLog.firstIndex(of: week)!).environmentObject(self.appState)) {
-                                    WorkoutLogRow(completedWorkout: completedWorkout)
+                                    self.completedWorkoutLogRow(completedWorkout: completedWorkout)
                                 }
                             }
                         }
@@ -32,6 +37,44 @@ struct Activities: View {
                 Text("Complete a Workout!")
                     .navigationBarTitle("Completed Workouts")
             }
+        }
+    }
+}
+
+
+// MARK: - Subviews
+
+extension Activities {
+    private func completedWorkoutLogRow(completedWorkout: CompletedWorkout) -> some View {
+        HStack {
+            Image(systemName: "circle.fill")
+                .padding()
+            VStack(alignment: .leading) {
+                Text("\(self.viewModel.getWeekDayStr(timestamp: completedWorkout.startTS))")
+                    .font(.footnote)
+                    .padding(.bottom, 4)
+                Text("\(completedWorkout.workout.focus)")
+                    .font(.title)
+            }
+            .padding()
+        }
+    }
+    
+    private func nonCompletedWorkutLogRow(title: String, dateStr: String?) -> some View {
+        HStack {
+            Image(systemName: "circle")
+                .padding()
+            VStack(alignment: .leading) {
+                if dateStr != nil {
+                    Text("\(dateStr!)")
+                        .padding(.bottom)
+                        .font(.footnote)
+                }
+                Text("\(title)")
+                    .foregroundColor(Color.gray)
+                    .font(.title)
+            }
+            .padding()
         }
     }
 }

@@ -16,6 +16,7 @@ extension Activities {
         
         // Misc
         let appState: AppState
+        private let dateFormatter = DateFormatter()
         var completedWorkouts: [CompletedWorkout]
         
         init(appState: AppState) {
@@ -53,6 +54,15 @@ extension Activities {
             }
 
             return "Week ???"
+        }
+        
+        func getWeekDayStr(timestamp: Double) -> String {
+            self.dateFormatter.timeZone = TimeZone.current
+            self.dateFormatter.locale = NSLocale.current
+            self.dateFormatter.dateFormat = "EEE, MMM-dd"
+
+            let date = Date(timeIntervalSince1970: timestamp)
+            return self.dateFormatter.string(from: date)
         }
     }
 }
