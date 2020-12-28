@@ -10,7 +10,10 @@ import SwiftUI
 
 struct CompletedWorkoutView: View {
     @EnvironmentObject var appState: AppState
-    @Binding var completedWorkout: CompletedWorkout
+    @Environment(\.presentationMode) var presentationMode
+    @ObservedObject var viewModel: Activities.ViewModel
+    @State var workoutLogIdx: Int
+    @State var weekIdx: Int
     
     @State var dateStr = ""
     @State var isEditPresented = false
@@ -18,8 +21,65 @@ struct CompletedWorkoutView: View {
     let dateFormatter = DateFormatter()
     
     var body: some View {
-        List {
+        
+        if self.appState.userData.workoutLog.indices.contains(workoutLogIdx) {
+        
+            self.workoutView(completedWorkout: self.appState.userData.workoutLog[workoutLogIdx])
+            .sheet(isPresented: self.$isEditPresented, content: {
+                EditWorkout(workout: self.appState.userData.workoutLog[workoutLogIdx].workout, interactor: .init(appState: self.appState, workout: self.$appState.userData.workoutLog[self.workoutLogIdx].workout, parentView: .edit)).environmentObject(self.appState)
+            })
+            .onAppear {
+                self.dateFormatter.timeZone = TimeZone.current
+                self.dateFormatter.locale = NSLocale.current
+                self.dateFormatter.dateFormat = "MMM-d, yyyy"
+                
+                let date = Date(timeIntervalSince1970: self.appState.userData.workoutLog[workoutLogIdx].startTS)
+                self.dateStr = self.dateFormatter.string(from: date)
+            }.navigationBarTitle(Text("\(self.appState.userData.workoutLog[workoutLogIdx].workout.name)"))
+            .navigationBarItems(trailing: trailingBarItemStack)
             
+        } else {
+            EmptyView() // When the workout is being deleted
+        }
+    }
+}
+
+
+// MARK: - Buttons
+
+extension CompletedWorkoutView {
+    private var editButton: some View {
+        Button(action: {
+            self.isEditPresented.toggle()
+        }, label: {
+            Text("Edit")
+        })
+    }
+    
+    private var deleteButton: some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+            self.viewModel.deleteWorkout(completedWorkout: self.appState.userData.workoutLog[workoutLogIdx], weekIdx: weekIdx)
+        }, label: {
+            Image(systemName: "trash")
+        })
+    }
+    
+    private var trailingBarItemStack: some View {
+        HStack {
+            deleteButton
+                .padding(.trailing)
+            editButton
+        }
+    }
+}
+
+
+// MARK: - Subviews
+
+extension CompletedWorkoutView {
+    private func workoutView(completedWorkout: CompletedWorkout) -> some View {
+        List {
             Section {
                 HStack {
                     Text("Date: \(dateStr)")
@@ -56,27 +116,11 @@ struct CompletedWorkoutView: View {
             
             Spacer()
         }
-        .sheet(isPresented: self.$isEditPresented, content: {
-            EditWorkout(workout: self.completedWorkout.workout, interactor: .init(appState: self.appState, workout: self.$completedWorkout.workout, parentView: .edit)).environmentObject(self.appState)
-        })
-        .onAppear {
-            self.dateFormatter.timeZone = TimeZone.current
-            self.dateFormatter.locale = NSLocale.current
-            self.dateFormatter.dateFormat = "MMM-d, yyyy"
-            
-            let date = Date(timeIntervalSince1970: self.completedWorkout.startTS)
-            self.dateStr = self.dateFormatter.string(from: date)
-        }.navigationBarTitle(Text("\(completedWorkout.workout.name)"))
-        .navigationBarItems(trailing: Button(action: {
-            self.isEditPresented.toggle()
-        }, label: {
-            Text("Edit")
-        }))
     }
 }
 
 struct CompletedWorkoutView_Previews: PreviewProvider {
     static var previews: some View {
-        CompletedWorkoutView(completedWorkout: .constant(sampleWorkoutLog[0])).environmentObject(AppState())
+        CompletedWorkoutView(viewModel: .init(appState: AppState()), workoutLogIdx: 0, weekIdx: 0).environmentObject(AppState())
     }
 }

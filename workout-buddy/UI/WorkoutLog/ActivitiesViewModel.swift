@@ -30,6 +30,16 @@ extension Activities {
             }
         }
         
+        func deleteWorkout(completedWorkout: CompletedWorkout, weekIdx: Int) {
+            self.appState.deleteWorkoutLogItem(completedWorkout: completedWorkout)
+            if let completedWorkoutsIdx = self.completedWorkouts.firstIndex(of: completedWorkout) {
+                self.completedWorkouts.remove(at: completedWorkoutsIdx)
+            }
+            if let idxInWeek = self.workoutLog[weekIdx].firstIndex(of: completedWorkout) {
+                self.workoutLog[weekIdx].remove(at: idxInWeek)
+            }
+        }
+        
         func weekStr(weekIdx: Int) -> String {
             if weekIdx == 0 {
                 return "This Week"

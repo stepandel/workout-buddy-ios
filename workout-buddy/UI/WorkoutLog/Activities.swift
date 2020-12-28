@@ -20,7 +20,7 @@ struct Activities: View {
                     ForEach(viewModel.workoutLog, id: \.self) { week in
                         Section(header: Text(viewModel.weekStr(weekIdx: viewModel.workoutLog.firstIndex(of: week)!))) {
                             ForEach(week, id:\.wlId) { completedWorkout in
-                                NavigationLink(destination: CompletedWorkoutView(completedWorkout: self.$appState.userData.workoutLog[appState.userData.workoutLog.firstIndex(of: completedWorkout)!]).environmentObject(self.appState)) {
+                                NavigationLink(destination: CompletedWorkoutView(viewModel: viewModel, workoutLogIdx: self.appState.userData.workoutLog.firstIndex(of: completedWorkout)!, weekIdx: viewModel.workoutLog.firstIndex(of: week)!).environmentObject(self.appState)) {
                                     WorkoutLogRow(completedWorkout: completedWorkout)
                                 }
                             }
