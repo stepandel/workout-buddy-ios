@@ -110,6 +110,8 @@ extension TrackWorkout {
             self.isWorkoutSelected = false
 
             self.appState.routing.contentView.routeToActivities()
+            
+            self.appState.userData.didWorkoutToday = true
         }
         
         func cancelWorkout() {

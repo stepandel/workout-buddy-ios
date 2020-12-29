@@ -24,6 +24,7 @@ extension AppState {
         var tenWeekRollingStats: TenWeekRollingStats
         var exerciseData: [String: ExerciseStats] = [:]
         var tenWeekRollingExerciseStats: [String: TenWeekRollingExerciseStats] = [:]
+        var didWorkoutToday: Bool = false
         
             
         var userId: String = UserDefaults.standard.string(forKey: "userId") ?? "" {
@@ -44,6 +45,33 @@ extension AppState {
                     self.didCreateAccount = false
                 } else {
                     self.didCreateAccount = true
+                }
+            }
+        }
+        
+        mutating func resetAll() {
+            self.isLoggedIn = false
+            self.didCreateAccount = false
+            self.workouts = []
+            self.exercises = []
+            self.workoutLog = []
+            self.user = User()
+            self.stats = Stats()
+            self.tenWeekRollingStats = TenWeekRollingStats()
+            self.exerciseData = [:]
+            self.tenWeekRollingExerciseStats = [:]
+            self.didWorkoutToday = false
+        }
+        
+        mutating func checkIfWorkedOutToday() {
+            if !self.workoutLog.isEmpty {
+                let lastWorkout = self.workoutLog.last!
+                let lastWorkoutDay = Date(timeIntervalSince1970: lastWorkout.startTS).get(.day)
+                let today = Date().get(.day)
+                if lastWorkoutDay == today {
+                    self.didWorkoutToday = true
+                } else {
+                    self.didWorkoutToday = false
                 }
             }
         }

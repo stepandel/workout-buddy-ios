@@ -13,6 +13,14 @@ extension Calendar {
 }
 
 extension Date {
+    func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
+        return calendar.dateComponents(Set(components), from: self)
+    }
+
+    func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
+        return calendar.component(component, from: self)
+    }
+    
     func startOfWeek(using calendar: Calendar = .gregorian) -> Date? {
         guard let sunday = self.getSunday() else { return nil }
         if isSunday() {

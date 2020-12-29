@@ -111,14 +111,7 @@ extension AppState {
         if self.userData.didCreateAccount {
             self.userData.userId = ""
         }
-        self.userData.isLoggedIn = false
-        self.userData.didCreateAccount = false
-        self.userData.workouts = []
-        self.userData.exercises = []
-        self.userData.workoutLog = []
-        self.userData.user = User()
-        self.userData.stats = Stats()
-        self.userData.tenWeekRollingStats = TenWeekRollingStats()
+        self.userData.resetAll()
     }
     
     func saveUserData(firstName: String?, lastName: String?, bio: String?, city: String?, state: String?, sport: String?, weight: String?, birthDate: Date?, sex: String?) {
@@ -290,6 +283,7 @@ extension AppState {
             // Update weekly stats
             self.updateTenWeekRollingStats(with: completedWorkout, subtract: true)
             self.recalculateExerciseStats()
+            self.userData.checkIfWorkedOutToday()
         }
     }
     
@@ -303,6 +297,7 @@ extension AppState {
             }
             
             self.recalculateExerciseStats()
+            self.userData.checkIfWorkedOutToday()
         }
     }
     

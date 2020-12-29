@@ -19,7 +19,7 @@ struct Activities: View {
                 ForEach(viewModel.workoutLog, id: \.self) { week in
                     Section(header: Text(viewModel.weekStr(weekIdx: viewModel.workoutLog.firstIndex(of: week)!))) {
                         
-                        if viewModel.workoutLog.firstIndex(of: week) == 0 {
+                        if viewModel.workoutLog.firstIndex(of: week) == 0 && !appState.userData.didWorkoutToday {
                             self.nonCompletedWorkutLogRow(title: "Nothing Scheduled", dateStr: "Today")
                         }
                         
