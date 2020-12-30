@@ -8,13 +8,41 @@
 
 import SwiftUI
 
+struct WorkoutLogItem: Codable {
+    var wlId: String
+    var workoutId: String
+    var time: Int?
+    var startTS: Double
+    
+    init(wlId: String, workoutId: String, time: Int?, startTS: Double) {
+        self.wlId = wlId
+        self.workoutId = workoutId
+        self.time = time
+        self.startTS = startTS
+    }
+}
+
+struct ScheduledWorkout: Hashable, Codable {
+    var scheduleId: String
+    var workout: Workout
+    var timestamp: Double
+    
+    init(workout: Workout, timestamp: Double) {
+        self.scheduleId = UUID().uuidString
+        self.workout = workout
+        self.timestamp = timestamp
+    }
+}
+
 struct WorkoutWeek: Hashable, Identifiable {
     var id: Int
-    var workouts: [CompletedWorkout]
+    var completed: [CompletedWorkout]
+    var scheduled: [ScheduledWorkout]
     
     init(id: Int) {
         self.id = id
-        self.workouts = []
+        self.completed = []
+        self.scheduled = []
     }
 }
 
@@ -25,10 +53,10 @@ extension Array where Element == WorkoutWeek {
         if curWeek == workoutWeekNum {
             if !self.indices.contains(weekIdx) {
                 var newWeek = WorkoutWeek(id: weekIdx)
-                newWeek.workouts = [workout]
+                newWeek.completed = [workout]
                 self.append(newWeek)
             } else {
-                self[weekIdx].workouts.append(workout)
+                self[weekIdx].completed.append(workout)
             }
             
             return (curWeek, curWeekYear, weekIdx)

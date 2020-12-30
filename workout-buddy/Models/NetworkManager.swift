@@ -311,12 +311,12 @@ class NetworkManager {
     }
     
     func saveCompletedWorkout(completedWorkout: CompletedWorkout, userId: String) {
-        guard let url = URL(string: baseUrl + "saveCompletedWorkout") else { return }
+        guard let url = URL(string: baseUrl + "saveWorkoutLogItem") else { return }
                
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
-        let saveCompletedWorkoutRequest = SaveCompletedWorkoutRequest(completedWorkout: completedWorkout, userId: userId)
+        let saveCompletedWorkoutRequest = SaveWorkoutLogItemRequest(completedWorkout: completedWorkout, userId: userId)
         
         let jsonEncoder = JSONEncoder()
         

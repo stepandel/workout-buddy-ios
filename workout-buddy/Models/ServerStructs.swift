@@ -164,12 +164,12 @@ struct SaveExerciseRequest: Encodable {
     }
 }
 
-struct SaveCompletedWorkoutRequest: Encodable {
-    var completedWorkout: CompletedWorkoutShort
+struct SaveWorkoutLogItemRequest: Encodable {
+    var workoutLogItem: WorkoutLogItem
     var userId: String
     
     init(completedWorkout: CompletedWorkout, userId: String) {
-        self.completedWorkout = CompletedWorkoutShort(wlId: completedWorkout.wlId, workoutId: completedWorkout.workout.id, time: completedWorkout.time, startTS: completedWorkout.startTS)
+        self.workoutLogItem = WorkoutLogItem(wlId: completedWorkout.wlId, workoutId: completedWorkout.workout.id, time: completedWorkout.time, startTS: completedWorkout.startTS)
         self.userId = userId
     }
 }

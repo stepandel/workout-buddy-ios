@@ -40,8 +40,8 @@ extension Activities {
             if let completedWorkoutsIdx = self.completedWorkouts.firstIndex(of: completedWorkout) {
                 self.completedWorkouts.remove(at: completedWorkoutsIdx)
             }
-            if let idxInWeek = self.workoutLog[weekIdx].workouts.firstIndex(of: completedWorkout) {
-                self.workoutLog[weekIdx].workouts.remove(at: idxInWeek)
+            if let idxInWeek = self.workoutLog[weekIdx].completed.firstIndex(of: completedWorkout) {
+                self.workoutLog[weekIdx].completed.remove(at: idxInWeek)
             }
         }
         

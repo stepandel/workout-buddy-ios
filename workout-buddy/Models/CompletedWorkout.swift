@@ -50,17 +50,3 @@ struct CompletedWorkout: Hashable, Codable {
         return workoutStats
     }
 }
-
-struct CompletedWorkoutShort: Codable {
-    var wlId: String
-    var workoutId: String
-    var time: Int
-    var startTS: Double
-    
-    init(wlId: String, workoutId: String, time: Int, startTS: Double) {
-        self.wlId = wlId
-        self.workoutId = workoutId
-        self.time = time
-        self.startTS = startTS
-    }
-}

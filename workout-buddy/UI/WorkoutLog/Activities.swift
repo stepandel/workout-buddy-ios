@@ -23,11 +23,15 @@ struct Activities: View {
                             self.nonCompletedWorkutLogRow(title: "Nothing Scheduled", dateStr: "Today")
                         }
                         
-                        else if week.workouts.isEmpty {
+                        else if week.completed.isEmpty && week.scheduled.isEmpty {
                             self.nonCompletedWorkutLogRow(title: "Rest Week", dateStr: nil)
                         }
                         
-                        ForEach(week.workouts, id:\.wlId) { completedWorkout in
+                        ForEach(week.scheduled, id:\.scheduleId) { scheduledWorkout in
+                            self.nonCompletedWorkutLogRow(title: scheduledWorkout.workout.focus, dateStr: self.viewModel.getWeekDayStr(timestamp: scheduledWorkout.timestamp))
+                        }
+                        
+                        ForEach(week.completed, id:\.wlId) { completedWorkout in
                             NavigationLink(destination: CompletedWorkoutView(viewModel: viewModel, workoutLogIdx: self.appState.userData.workoutLog.firstIndex(of: completedWorkout)!, weekIdx: viewModel.workoutLog.firstIndex(of: week)!).environmentObject(self.appState)) {
                                 self.completedWorkoutLogRow(completedWorkout: completedWorkout)
                             }
