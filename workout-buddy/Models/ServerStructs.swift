@@ -141,7 +141,7 @@ struct GetWorkoutLogRequest: Encodable {
 }
 
 struct GetWorkoutLogResponse: Decodable {
-    var completedWorkouts: [CompletedWorkout]
+    var workoutLog: [WorkoutLogItem]
 }
 
 struct SaveWorkoutRequest: Encodable {
@@ -165,12 +165,28 @@ struct SaveExerciseRequest: Encodable {
 }
 
 struct SaveWorkoutLogItemRequest: Encodable {
-    var workoutLogItem: WorkoutLogItem
+    var workoutLogItem: WorkoutLogItemShort
     var userId: String
     
-    init(completedWorkout: CompletedWorkout, userId: String) {
-        self.workoutLogItem = WorkoutLogItem(wlId: completedWorkout.wlId, workoutId: completedWorkout.workout.id, time: completedWorkout.time, startTS: completedWorkout.startTS)
+    init(workoutLogItem: WorkoutLogItem, userId: String) {
+        self.workoutLogItem = WorkoutLogItemShort(wlId: workoutLogItem.wlId, workoutId: workoutLogItem.workout.id, time: workoutLogItem.time, startTS: workoutLogItem.startTS)
         self.userId = userId
+    }
+}
+
+extension SaveWorkoutLogItemRequest {
+    struct WorkoutLogItemShort: Codable {
+        var wlId: String
+        var workoutId: String
+        var time: Int?
+        var startTS: Double
+        
+        init(wlId: String, workoutId: String, time: Int?, startTS: Double) {
+            self.wlId = wlId
+            self.workoutId = workoutId
+            self.time = time
+            self.startTS = startTS
+        }
     }
 }
 
@@ -207,7 +223,7 @@ struct GetCompletedWorkoutsAndStatsRequest: Encodable {
 }
 
 struct GetCompletedWorkoutsAndStatsResponse: Decodable {
-    var completedWorkouts: [CompletedWorkout]
+    var workoutLog: [WorkoutLogItem]
     var stats: Stats
 }
 

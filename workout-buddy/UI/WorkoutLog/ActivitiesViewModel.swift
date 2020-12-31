@@ -17,16 +17,16 @@ extension Activities {
         // Misc
         let appState: AppState
         private let dateFormatter = DateFormatter()
-        var completedWorkouts: [CompletedWorkout]
+        var workoutLogItems: [WorkoutLogItem]
         
         init(appState: AppState) {
             self.appState = appState
-            self.completedWorkouts = appState.userData.workoutLog
+            self.workoutLogItems = appState.userData.workoutLog
             self.workoutLog = []
             var curWeek = Date().weekOfYear()
             var curWeekYear = Date().yearForWeekOfYear()
             var weekIdx = 0
-            self.completedWorkouts.reversed().forEach { workout in
+            self.workoutLogItems.reversed().forEach { workout in
                 (curWeek, curWeekYear, weekIdx) = self.workoutLog.addToLog(curWeek: curWeek, curWeekYear: curWeekYear, workout: workout, at: weekIdx)
             }
             // For new users
@@ -35,12 +35,12 @@ extension Activities {
             }
         }
         
-        func deleteWorkout(completedWorkout: CompletedWorkout, weekIdx: Int) {
-            self.appState.deleteWorkoutLogItem(completedWorkout: completedWorkout)
-            if let completedWorkoutsIdx = self.completedWorkouts.firstIndex(of: completedWorkout) {
-                self.completedWorkouts.remove(at: completedWorkoutsIdx)
+        func deleteWorkout(wokroutLogItem: WorkoutLogItem, weekIdx: Int) {
+            self.appState.deleteWorkoutLogItem(workoutLogItem: wokroutLogItem)
+            if let wlIdx = self.workoutLogItems.firstIndex(of: wokroutLogItem) {
+                self.workoutLogItems.remove(at: wlIdx)
             }
-            if let idxInWeek = self.workoutLog[weekIdx].completed.firstIndex(of: completedWorkout) {
+            if let idxInWeek = self.workoutLog[weekIdx].completed.firstIndex(of: wokroutLogItem) {
                 self.workoutLog[weekIdx].completed.remove(at: idxInWeek)
             }
         }

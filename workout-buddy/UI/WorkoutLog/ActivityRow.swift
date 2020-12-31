@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct ActivityRow: View {
-    var completedWorkout: CompletedWorkout
+    var workoutLogItem: WorkoutLogItem
     
     @State var dateStr = ""
     @State var workoutStats = WorkoutStats()
@@ -21,7 +21,7 @@ struct ActivityRow: View {
                 HStack {
                     HStack {
                         VStack(alignment: .leading) {
-                            Text(completedWorkout.workout.name)
+                            Text(workoutLogItem.workout.name)
                                 .font(.title)
                                 .padding(.bottom, 4)
                             Text("\(dateStr)")
@@ -33,7 +33,7 @@ struct ActivityRow: View {
 //                .background(Constants.Colors.appBackground)
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Session Length: " + completedWorkout.stringFormattedTime())
+                        Text("Session Length: " + workoutLogItem.stringFormattedTime())
                         Text("Exercises Completed: \(workoutStats.completedExercises.count)")
                         Text("Total Reps: \(workoutStats.repsCompleted)")
                         Text("Total Sets: \(workoutStats.setsCompleted)")
@@ -52,17 +52,17 @@ struct ActivityRow: View {
                 self.dateFormatter.locale = NSLocale.current
                 self.dateFormatter.dateFormat = "MMM-d, yyyy"
                 
-                let date = Date(timeIntervalSince1970: self.completedWorkout.startTS)
+                let date = Date(timeIntervalSince1970: self.workoutLogItem.startTS)
                 self.dateStr = self.dateFormatter.string(from: date)
                 
-                self.workoutStats = self.completedWorkout.getWorkoutStats()
+                self.workoutStats = self.workoutLogItem.getWorkoutStats()
             }
     }
 }
 
 struct ActivityRow_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityRow(completedWorkout: sampleWorkoutLog[0])
+        ActivityRow(workoutLogItem: sampleWorkoutLog[0])
         .previewLayout(.fixed(width: 300, height: 70))
     }
 }

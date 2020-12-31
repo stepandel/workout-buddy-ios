@@ -8,36 +8,57 @@
 
 import SwiftUI
 
-struct WorkoutLogItem: Codable {
+struct WorkoutLogItem: Hashable, Codable {
     var wlId: String
-    var workoutId: String
+    var workout: Workout
     var time: Int?
     var startTS: Double
     
-    init(wlId: String, workoutId: String, time: Int?, startTS: Double) {
-        self.wlId = wlId
-        self.workoutId = workoutId
-        self.time = time
-        self.startTS = startTS
-    }
-}
-
-struct ScheduledWorkout: Hashable, Codable {
-    var scheduleId: String
-    var workout: Workout
-    var timestamp: Double
-    
-    init(workout: Workout, timestamp: Double) {
-        self.scheduleId = UUID().uuidString
+    init(workout: Workout, startTS: Double, time: Int) {
+        self.wlId = UUID().uuidString
         self.workout = workout
-        self.timestamp = timestamp
+        self.startTS = startTS
+        self.time = time
+    }
+    
+    func stringFormattedTime() -> String {
+        if let time = self.time {
+            let hours = String(time / 3600)
+            let minutes = String(format: "%02d", (time % 3600) / 60 )
+            let seconds = String(format: "%02d", (time % 3600) % 60 )
+            
+            return hours + ":" + minutes + ":" + seconds
+        } else {
+            return ""
+        }
+    }
+    
+    func getWorkoutStats() -> WorkoutStats {
+        var workoutStats = WorkoutStats()
+        self.workout.rounds.forEach { round in
+            round.sets.forEach { sets in
+                sets.forEach { set in
+                    workoutStats.setsCompleted += 1
+                    if !workoutStats.completedExercises.contains(set.exId) {
+                        workoutStats.completedExercises.append(set.exId)
+                    }
+                    if let reps = set.reps, reps > 0 {
+                        workoutStats.repsCompleted += reps
+                    }
+                    if let weight = set.weight, weight > 0 {
+                        workoutStats.weightLifted += weight
+                    }
+                }
+            }
+        }
+        return workoutStats
     }
 }
 
 struct WorkoutWeek: Hashable, Identifiable {
     var id: Int
-    var completed: [CompletedWorkout]
-    var scheduled: [ScheduledWorkout]
+    var completed: [WorkoutLogItem]
+    var scheduled: [WorkoutLogItem]
     
     init(id: Int) {
         self.id = id
@@ -48,7 +69,7 @@ struct WorkoutWeek: Hashable, Identifiable {
 
 
 extension Array where Element == WorkoutWeek {
-    mutating func addToLog(curWeek: Int, curWeekYear: Int, workout: CompletedWorkout, at weekIdx: Int) -> (Int, Int, Int) {
+    mutating func addToLog(curWeek: Int, curWeekYear: Int, workout: WorkoutLogItem, at weekIdx: Int) -> (Int, Int, Int) {
         let workoutWeekNum = Date(timeIntervalSince1970: workout.startTS).weekOfYear()
         if curWeek == workoutWeekNum {
             if !self.indices.contains(weekIdx) {

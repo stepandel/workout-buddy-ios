@@ -27,8 +27,8 @@ struct Activities: View {
                             self.nonCompletedWorkutLogRow(title: "Rest Week", dateStr: nil)
                         }
                         
-                        ForEach(week.scheduled, id:\.scheduleId) { scheduledWorkout in
-                            self.nonCompletedWorkutLogRow(title: scheduledWorkout.workout.focus, dateStr: self.viewModel.getWeekDayStr(timestamp: scheduledWorkout.timestamp))
+                        ForEach(week.scheduled, id:\.wlId) { scheduledWorkout in
+                            self.nonCompletedWorkutLogRow(title: scheduledWorkout.workout.focus, dateStr: self.viewModel.getWeekDayStr(timestamp: scheduledWorkout.startTS))
                         }
                         
                         ForEach(week.completed, id:\.wlId) { completedWorkout in
@@ -48,7 +48,7 @@ struct Activities: View {
 // MARK: - Subviews
 
 extension Activities {
-    private func completedWorkoutLogRow(completedWorkout: CompletedWorkout) -> some View {
+    private func completedWorkoutLogRow(completedWorkout: WorkoutLogItem) -> some View {
         HStack {
             Image(systemName: "circle.fill")
                 .padding()

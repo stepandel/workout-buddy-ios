@@ -100,7 +100,7 @@ extension TrackWorkout {
             let workoutTime = Int(round(currentTime - self.appState.trackingData.startTime))
             
             // Save workout to log
-            let completedWorkout = CompletedWorkout(workout: self.appState.trackingData.workout, startTS: self.appState.trackingData.startTime, time: workoutTime)
+            let completedWorkout = WorkoutLogItem(workout: self.appState.trackingData.workout, startTS: self.appState.trackingData.startTime, time: workoutTime)
             print("Completed workout: \(completedWorkout)")
             self.appState.saveCompletedWorkout(completedWorkout: completedWorkout)
             

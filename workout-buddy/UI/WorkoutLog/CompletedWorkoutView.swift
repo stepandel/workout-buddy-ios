@@ -84,7 +84,7 @@ extension CompletedWorkoutView {
     private func alert() -> Alert {
         return Alert(title: Text("Are you sure you want to delete this workout?"), primaryButton: .default(Text("Yes"), action: {
             self.presentationMode.wrappedValue.dismiss()
-            self.viewModel.deleteWorkout(completedWorkout: self.appState.userData.workoutLog[workoutLogIdx], weekIdx: weekIdx)
+            self.viewModel.deleteWorkout(wokroutLogItem: self.appState.userData.workoutLog[workoutLogIdx], weekIdx: weekIdx)
         }), secondaryButton: .default(Text("No")))
     }
 }
@@ -93,7 +93,7 @@ extension CompletedWorkoutView {
 // MARK: - Subviews
 
 extension CompletedWorkoutView {
-    private func workoutView(completedWorkout: CompletedWorkout) -> some View {
+    private func workoutView(completedWorkout: WorkoutLogItem) -> some View {
         List {
             Section {
                 HStack {

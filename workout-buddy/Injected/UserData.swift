@@ -17,7 +17,7 @@ extension AppState {
         var workouts: [Workout] = []
         var exercises: [Exercise] = []
         var allExercises: [Exercise] = exercisesDB
-        var workoutLog: [CompletedWorkout] = []
+        var workoutLog: [WorkoutLogItem] = []
         var user: User
         var stats: Stats
         var weekEndTS: Double?

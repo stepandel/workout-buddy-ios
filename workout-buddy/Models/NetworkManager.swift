@@ -260,7 +260,7 @@ class NetworkManager {
     }
     
     
-    func getWorkoutLog(userId: String, completion: @escaping(([CompletedWorkout]) -> ())) {
+    func getWorkoutLog(userId: String, completion: @escaping(([WorkoutLogItem]) -> ())) {
         guard let url = URL(string: baseUrl + "getWorkoutLogForUser") else { return }
                
         var request = URLRequest(url: url)
@@ -283,7 +283,7 @@ class NetworkManager {
                     if let json = try? decoder.decode(GetWorkoutLogResponse.self, from: data) {
 //                        print(json)
                         DispatchQueue.main.async {
-                            completion(json.completedWorkouts)
+                            completion(json.workoutLog)
                         }
                     }
                 }
@@ -310,20 +310,20 @@ class NetworkManager {
         }
     }
     
-    func saveCompletedWorkout(completedWorkout: CompletedWorkout, userId: String) {
+    func saveWorkoutLogItem(workoutLogItem: WorkoutLogItem, userId: String) {
         guard let url = URL(string: baseUrl + "saveWorkoutLogItem") else { return }
                
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
-        let saveCompletedWorkoutRequest = SaveWorkoutLogItemRequest(completedWorkout: completedWorkout, userId: userId)
+        let saveWorkoutLogItemRequest = SaveWorkoutLogItemRequest(workoutLogItem: workoutLogItem, userId: userId)
         
         let jsonEncoder = JSONEncoder()
         
-        if let jsonData = try? jsonEncoder.encode(saveCompletedWorkoutRequest) {
+        if let jsonData = try? jsonEncoder.encode(saveWorkoutLogItemRequest) {
 //            print(jsonData)
             URLSession.shared.uploadTask(with: request, from: jsonData) { (data, res, err) in
-                print("Save Completed Workout Response: \(String(describing: res))")
+                print("Save WorkoutLogItem Response: \(String(describing: res))")
             }.resume()
         }
     }
@@ -395,7 +395,7 @@ class NetworkManager {
         }
     }
     
-    func getCompletedWorkoutsAndStatsForUser(userId: String, timezoneOffset: Int, completion: @escaping(([CompletedWorkout], Stats) -> ())) {
+    func getCompletedWorkoutsAndStatsForUser(userId: String, timezoneOffset: Int, completion: @escaping(([WorkoutLogItem], Stats) -> ())) {
         guard let url = URL(string: baseUrl + "getCompletedWorkoutsAndStatsForUser") else { return }
                
         var request = URLRequest(url: url)
@@ -418,7 +418,7 @@ class NetworkManager {
                     if let json = try? decoder.decode(GetCompletedWorkoutsAndStatsResponse.self, from: data) {
 //                        print(json)
                         DispatchQueue.main.async {
-                            completion(json.completedWorkouts, json.stats)
+                            completion(json.workoutLog, json.stats)
                         }
                     }
                 }

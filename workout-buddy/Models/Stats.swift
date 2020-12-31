@@ -23,9 +23,11 @@ struct Stats: Hashable, Codable {
         self.totalTimeWorkingout = 0
     }
     
-    mutating func addStatsFrom(workout: CompletedWorkout) {
+    mutating func addStatsFrom(workout: WorkoutLogItem) {
         self.totalWorkoutsCompleted += 1
-        self.totalTimeWorkingout += workout.time
+        if let time = workout.time {
+            self.totalTimeWorkingout += time
+        }
         workout.workout.rounds.forEach { round in
             round.sets.forEach { sets in
                 sets.forEach { set in
@@ -41,9 +43,11 @@ struct Stats: Hashable, Codable {
         }
     }
     
-    mutating func subtractStatsFrom(workout: CompletedWorkout) {
+    mutating func subtractStatsFrom(workout: WorkoutLogItem) {
         self.totalWorkoutsCompleted -= 1
-        self.totalTimeWorkingout -= workout.time
+        if let time = workout.time {
+            self.totalTimeWorkingout -= time
+        }
         workout.workout.rounds.forEach { round in
             round.sets.forEach { sets in
                 sets.forEach { set in

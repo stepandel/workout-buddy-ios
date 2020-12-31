@@ -219,8 +219,8 @@ extension AppState {
     }
     
     func getWorkoutLog() {
-        self.networkManger.getWorkoutLog(userId: self.userData.userId) { (completedWorkouts) in
-            self.userData.workoutLog = completedWorkouts
+        self.networkManger.getWorkoutLog(userId: self.userData.userId) { (workoutLogItems) in
+            self.userData.workoutLog = workoutLogItems
         }
     }
     
@@ -228,8 +228,8 @@ extension AppState {
         self.networkManger.saveWorkout(workout: workout, userId: self.userData.userId)
     }
     
-    func saveCompletedWorkout(completedWorkout: CompletedWorkout) {
-        self.networkManger.saveCompletedWorkout(completedWorkout: completedWorkout, userId: self.userData.userId)
+    func saveCompletedWorkout(completedWorkout: WorkoutLogItem) {
+        self.networkManger.saveWorkoutLogItem(workoutLogItem: completedWorkout, userId: self.userData.userId)
         self.userData.workoutLog.append(completedWorkout)
         
         // Update existing workout or create new one
@@ -270,18 +270,18 @@ extension AppState {
         }
     }
     
-    func deleteWorkoutLogItem(completedWorkout: CompletedWorkout) {
-        if let idx = self.userData.workoutLog.firstIndex(of: completedWorkout) {
+    func deleteWorkoutLogItem(workoutLogItem: WorkoutLogItem) {
+        if let idx = self.userData.workoutLog.firstIndex(of: workoutLogItem) {
             
             self.userData.workoutLog.remove(at: idx)
-            self.networkManger.deleteWorkoutFromLog(userId: self.userData.userId, wlId: completedWorkout.wlId)
+            self.networkManger.deleteWorkoutFromLog(userId: self.userData.userId, wlId: workoutLogItem.wlId)
             
             // Update stats
-            self.userData.stats.subtractStatsFrom(workout: completedWorkout)
+            self.userData.stats.subtractStatsFrom(workout: workoutLogItem)
             self.networkManger.saveStats(userId: self.userData.userId, stats: self.userData.stats)
             
             // Update weekly stats
-            self.updateTenWeekRollingStats(with: completedWorkout, subtract: true)
+            self.updateTenWeekRollingStats(with: workoutLogItem, subtract: true)
             self.recalculateExerciseStats()
             self.userData.checkIfWorkedOutToday()
         }
@@ -313,7 +313,7 @@ extension AppState {
     
     // MARK: - Stats
     
-    func updateTenWeekRollingStats(with workout: CompletedWorkout, subtract: Bool = false) {
+    func updateTenWeekRollingStats(with workout: WorkoutLogItem, subtract: Bool = false) {
         self.userData.weekEndTS = Date().endOfWeek()?.timeIntervalSince1970
         let weekInS = 604800.0
         
