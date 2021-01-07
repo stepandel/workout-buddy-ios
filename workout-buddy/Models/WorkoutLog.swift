@@ -115,6 +115,7 @@ extension Array where Element == WorkoutWeek {
             if weekIdx == 0 || weekIdx == 1 {
                 var lastWorkoutDay = 1
                 let today = Date().dayOfWeek()
+                let lastItemIdx = self[weekIdx].items.indices.last ?? 0
                 if let lastWorkoutDayIdx = self[weekIdx].items.indices.last {
                     lastWorkoutDay = Date(timeIntervalSince1970: self[weekIdx].items[lastWorkoutDayIdx][0].startTS).dayOfWeek()
                 }
@@ -122,12 +123,10 @@ extension Array where Element == WorkoutWeek {
                     lastWorkoutDay = lastWorkoutDay < today ? today - 1 : lastWorkoutDay
                 }
                 if lastWorkoutDay < 8 {
-                    let daysToFill = (lastWorkoutDay + 1)...8
-                    
-                    for i in daysToFill.reversed() {
+                    for i in (lastWorkoutDay + 1)...8 {
                         if let placeholderDate = Date().dateFrom(weekday: i, weekOfYear: curWeek, yearForWeekOfYear: curWeekYear) {
                             let placeholder = WorkoutLogItem(workout: Workout(), startTS: placeholderDate.timeIntervalSince1970, time: nil, placeholder: true)
-                            self[weekIdx].items.append([placeholder])
+                            self[weekIdx].items.insert([placeholder], at: lastItemIdx)
                         }
                     }
                 }
