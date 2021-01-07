@@ -23,15 +23,25 @@ extension Activities {
             self.appState = appState
             self.workoutLogItems = appState.userData.workoutLog
             self.workoutLog = []
-            var curWeek = Date().weekOfYear()
-            var curWeekYear = Date().yearForWeekOfYear()
-            var weekIdx = 0
-            self.workoutLogItems.reversed().forEach { workout in
-                (curWeek, curWeekYear, weekIdx) = self.workoutLog.addToLog(curWeek: curWeek, curWeekYear: curWeekYear, workout: workout, at: weekIdx)
-            }
-            // For new users
-            if self.workoutLog.isEmpty {
-                self.workoutLog.append(WorkoutWeek(id: 0))
+            if let nextWeekDate = Date().nextWeek() { // Start from next week
+                var curWeek = nextWeekDate.weekOfYear()
+                var curWeekYear = nextWeekDate.yearForWeekOfYear()
+                var weekIdx = 0
+                self.workoutLogItems.reversed().forEach { workout in
+                    
+                    // Skip workouts scheduled past next week
+                    if let nextWeek = Calendar.iso8601.date(byAdding: .weekOfYear, value: 1, to: Date()) {
+                        if let nextWeekSunday = nextWeek.endOfWeek() {
+                            if workout.startTS < nextWeekSunday.timeIntervalSince1970 {
+                                (curWeek, curWeekYear, weekIdx) = self.workoutLog.addToLog(curWeek: curWeek, curWeekYear: curWeekYear, workout: workout, at: weekIdx)
+                            }
+                        }
+                    }
+                }
+                // For new users
+                if self.workoutLog.isEmpty {
+                    self.workoutLog.append(WorkoutWeek(id: 0))
+                }
             }
         }
         
@@ -40,18 +50,23 @@ extension Activities {
             if let wlIdx = self.workoutLogItems.firstIndex(of: wokroutLogItem) {
                 self.workoutLogItems.remove(at: wlIdx)
             }
-            if let idxInWeek = self.workoutLog[weekIdx].completed.firstIndex(of: wokroutLogItem) {
-                self.workoutLog[weekIdx].completed.remove(at: idxInWeek)
+            if let (day, i) = self.workoutLog[weekIdx].items.indices(of: wokroutLogItem) {
+                self.workoutLog[weekIdx].items[day].remove(at: i)
             }
         }
         
         func weekStr(weekIdx: Int) -> String {
-            if weekIdx == 0 {
+            
+            if self.workoutLog[weekIdx].id == 0 {
+                return "Next Week"
+            }
+            
+            if self.workoutLog[weekIdx].id == 1 {
                 return "This Week"
             }
             
             let today = Date()
-            let weekDay = Calendar.gregorian.date(byAdding: .day, value: -weekIdx*7, to: today)
+            let weekDay = Calendar.gregorian.date(byAdding: .day, value: -(weekIdx-1)*7, to: today)
             
             if let startOfWeek = weekDay?.startOfWeek(), let endOfWeek = weekDay?.endOfWeek() {
                 return weekRange(startOfWeek: startOfWeek, endOfWeek: endOfWeek)

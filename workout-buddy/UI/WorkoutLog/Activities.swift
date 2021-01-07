@@ -18,22 +18,21 @@ struct Activities: View {
             List {
                 ForEach(viewModel.workoutLog, id: \.self) { week in
                     Section(header: Text(viewModel.weekStr(weekIdx: viewModel.workoutLog.firstIndex(of: week)!))) {
-                        
-                        if viewModel.workoutLog.firstIndex(of: week) == 0 && !appState.userData.didWorkoutToday {
-                            self.nonCompletedWorkutLogRow(title: "Nothing Scheduled", dateStr: "Today")
-                        }
-                        
-                        else if week.completed.isEmpty && week.scheduled.isEmpty {
+                        if week.id > 1 && week.items.isEmpty {
                             self.nonCompletedWorkutLogRow(title: "Rest Week", dateStr: nil)
                         }
                         
-                        ForEach(week.scheduled, id:\.wlId) { scheduledWorkout in
-                            self.nonCompletedWorkutLogRow(title: scheduledWorkout.workout.focus, dateStr: self.viewModel.getWeekDayStr(timestamp: scheduledWorkout.startTS))
-                        }
-                        
-                        ForEach(week.completed, id:\.wlId) { completedWorkout in
-                            NavigationLink(destination: CompletedWorkoutView(viewModel: viewModel, workoutLogIdx: self.appState.userData.workoutLog.firstIndex(of: completedWorkout)!, weekIdx: viewModel.workoutLog.firstIndex(of: week)!).environmentObject(self.appState)) {
-                                self.completedWorkoutLogRow(completedWorkout: completedWorkout)
+                        ForEach(week.items, id:\.self) { day in
+                            ForEach(day, id:\.wlId) { item in
+                                if item.placeholder != nil {
+                                    self.nonCompletedWorkutLogRow(title: "Nothing Scheduled", dateStr: self.viewModel.getWeekDayStr(timestamp: item.startTS))
+                                } else if item.time == nil {
+                                    self.nonCompletedWorkutLogRow(title: item.workout.focus, dateStr: self.viewModel.getWeekDayStr(timestamp: item.startTS))
+                                } else {
+                                    NavigationLink(destination: CompletedWorkoutView(viewModel: viewModel, workoutLogIdx: self.appState.userData.workoutLog.firstIndex(of: item)!, weekIdx: viewModel.workoutLog.firstIndex(of: week)!).environmentObject(self.appState)) {
+                                        self.completedWorkoutLogRow(completedWorkout: item)
+                                    }
+                                }
                             }
                         }
                     }

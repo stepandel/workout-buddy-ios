@@ -13,12 +13,14 @@ struct WorkoutLogItem: Hashable, Codable {
     var workout: Workout
     var time: Int?
     var startTS: Double
+    var placeholder: Bool?
     
-    init(workout: Workout, startTS: Double, time: Int) {
+    init(workout: Workout, startTS: Double, time: Int?, placeholder: Bool? = nil) {
         self.wlId = UUID().uuidString
         self.workout = workout
         self.startTS = startTS
         self.time = time
+        self.placeholder = placeholder
     }
     
     func stringFormattedTime() -> String {
@@ -57,13 +59,25 @@ struct WorkoutLogItem: Hashable, Codable {
 
 struct WorkoutWeek: Hashable, Identifiable {
     var id: Int
-    var completed: [WorkoutLogItem]
-    var scheduled: [WorkoutLogItem]
+    var items: [[WorkoutLogItem]]
     
     init(id: Int) {
         self.id = id
-        self.completed = []
-        self.scheduled = []
+        self.items = []
+    }
+}
+
+extension WorkoutWeek {
+    struct PlaceholderItem: Hashable, Identifiable {
+        var id: String
+        var title: String
+        var date: Date
+        
+        init(title: String, date: Date) {
+            self.id = UUID().uuidString
+            self.title = title
+            self.date = date
+        }
     }
 }
 
@@ -74,10 +88,21 @@ extension Array where Element == WorkoutWeek {
         if curWeek == workoutWeekNum {
             if !self.indices.contains(weekIdx) {
                 var newWeek = WorkoutWeek(id: weekIdx)
-                newWeek.completed = [workout]
+                newWeek.items = [[workout]]
                 self.append(newWeek)
             } else {
-                self[weekIdx].completed.append(workout)
+                
+                // check if prev workout is in the same day
+                self[weekIdx].items.indices.last.map{ i in
+                    let lastWorkoutDay = Date(timeIntervalSince1970: self[weekIdx].items[i][0].startTS).dayOfMonth()
+                    let thisWorkoutDay = Date(timeIntervalSince1970: workout.startTS).dayOfMonth()
+                    
+                    if lastWorkoutDay == thisWorkoutDay {
+                        self[weekIdx].items[i].append(workout)
+                    } else {
+                        self[weekIdx].items.append([workout])
+                    }
+                }
             }
             
             return (curWeek, curWeekYear, weekIdx)
@@ -86,6 +111,28 @@ extension Array where Element == WorkoutWeek {
             if !self.indices.contains(weekIdx) {
                 self.append(WorkoutWeek(id: weekIdx))
             }
+            
+            if weekIdx == 0 || weekIdx == 1 {
+                var lastWorkoutDay = 1
+                let today = Date().dayOfWeek()
+                if let lastWorkoutDayIdx = self[weekIdx].items.indices.last {
+                    lastWorkoutDay = Date(timeIntervalSince1970: self[weekIdx].items[lastWorkoutDayIdx][0].startTS).dayOfWeek()
+                }
+                if weekIdx == 1 {
+                    lastWorkoutDay = lastWorkoutDay < today ? today - 1 : lastWorkoutDay
+                }
+                if lastWorkoutDay < 8 {
+                    let daysToFill = (lastWorkoutDay + 1)...8
+                    
+                    for i in daysToFill.reversed() {
+                        if let placeholderDate = Date().dateFrom(weekday: i, weekOfYear: curWeek, yearForWeekOfYear: curWeekYear) {
+                            let placeholder = WorkoutLogItem(workout: Workout(), startTS: placeholderDate.timeIntervalSince1970, time: nil, placeholder: true)
+                            self[weekIdx].items.append([placeholder])
+                        }
+                    }
+                }
+            }
+            
             if curWeek == 1 {
                 let prevWeekYear = curWeekYear - 1
                 if let prevWeek = Date().lastWeekOfYear(for: prevWeekYear) {
