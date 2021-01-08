@@ -14,8 +14,7 @@ struct CompletedWorkoutView: View {
     @ObservedObject var viewModel: Activities.ViewModel
     @State var workoutLogIdx: Int
     @State var weekIdx: Int
-    
-    @State var dateStr = ""
+
     @State var isEditPresented = false
     @State var isShowingAlert = false
     
@@ -29,14 +28,7 @@ struct CompletedWorkoutView: View {
             .sheet(isPresented: self.$isEditPresented, content: {
                 EditWorkout(workout: self.appState.userData.workoutLog[workoutLogIdx].workout, interactor: .init(appState: self.appState, workout: self.$appState.userData.workoutLog[self.workoutLogIdx].workout, parentView: .edit)).environmentObject(self.appState)
             })
-            .onAppear {
-                self.dateFormatter.timeZone = TimeZone.current
-                self.dateFormatter.locale = NSLocale.current
-                self.dateFormatter.dateFormat = "MMM-d, yyyy"
-                
-                let date = Date(timeIntervalSince1970: self.appState.userData.workoutLog[workoutLogIdx].startTS)
-                self.dateStr = self.dateFormatter.string(from: date)
-            }.navigationBarTitle(Text("\(self.appState.userData.workoutLog[workoutLogIdx].workout.name)"))
+            .navigationBarTitle(Text("\(self.appState.userData.workoutLog[workoutLogIdx].workout.name)"))
             .navigationBarItems(trailing: trailingBarItemStack)
             .alert(isPresented: self.$isShowingAlert) {
                 self.alert()
@@ -97,7 +89,7 @@ extension CompletedWorkoutView {
         List {
             Section {
                 HStack {
-                    Text("Date: \(dateStr)")
+                    Text("Date: \(self.viewModel.getDateStr(timestamp: self.appState.userData.workoutLog[workoutLogIdx].startTS))")
                         .padding()
                     Spacer()
                 }

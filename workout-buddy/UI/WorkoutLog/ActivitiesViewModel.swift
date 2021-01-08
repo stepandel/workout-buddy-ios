@@ -83,5 +83,14 @@ extension Activities {
             let date = Date(timeIntervalSince1970: timestamp)
             return self.dateFormatter.string(from: date)
         }
+        
+        func getDateStr(timestamp: Double) -> String {
+            self.dateFormatter.timeZone = TimeZone.current
+            self.dateFormatter.locale = NSLocale.current
+            self.dateFormatter.dateFormat = "MMM-d, yyyy"
+            
+            let date = Date(timeIntervalSince1970: timestamp)
+            return self.dateFormatter.string(from: date)
+        }
     }
 }
